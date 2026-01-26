@@ -169,44 +169,72 @@ const Services = () => {
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <AnimatedSection key={service.title} animation="scaleIn" delay={index * 0.1}>
-                <GlassCard className="p-8 h-full group" gradient>
-                  {/* Icon */}
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} p-0.5 mb-6`}>
-                    <div className="w-full h-full bg-card rounded-2xl flex items-center justify-center">
-                      <service.icon className="w-8 h-8 text-cyan" />
+            {services.map((service, index) => {
+              // Unique animations for each service card
+              const animations = [
+                { initial: { opacity: 0, x: -100, rotateY: -20 }, animate: { opacity: 1, x: 0, rotateY: 0 } },
+                { initial: { opacity: 0, y: -80, scale: 0.7 }, animate: { opacity: 1, y: 0, scale: 1 } },
+                { initial: { opacity: 0, x: 100, rotateY: 20 }, animate: { opacity: 1, x: 0, rotateY: 0 } },
+                { initial: { opacity: 0, y: 80, rotateX: -20 }, animate: { opacity: 1, y: 0, rotateX: 0 } },
+                { initial: { opacity: 0, scale: 0.5, rotate: -15 }, animate: { opacity: 1, scale: 1, rotate: 0 } },
+                { initial: { opacity: 0, x: -80, y: 80 }, animate: { opacity: 1, x: 0, y: 0 } },
+              ];
+              
+              return (
+                <motion.div
+                  key={service.title}
+                  initial={animations[index].initial}
+                  whileInView={animations[index].animate}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.12,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  }}
+                  whileHover={{ y: -10 }}
+                  className="group"
+                >
+                  <div className="p-8 h-full bg-card rounded-xl border-2 border-border hover:border-cyan transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--cyan)/0.1)]">
+                    {/* Icon */}
+                    <motion.div 
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} p-0.5 mb-6`}
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <div className="w-full h-full bg-card rounded-2xl flex items-center justify-center">
+                        <service.icon className="w-8 h-8 text-cyan" />
+                      </div>
+                    </motion.div>
+
+                    {/* Content */}
+                    <h3 className="text-2xl font-poppins font-bold text-foreground mb-4">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Features */}
+                    <ul className="space-y-2 mb-6">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <CheckCircle className="w-4 h-4 text-cyan" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Learn More */}
+                    <div className="mt-auto pt-4 border-t border-border">
+                      <span className="inline-flex items-center gap-2 text-cyan font-semibold group-hover:gap-3 transition-all">
+                        Learn More
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
                     </div>
                   </div>
-
-                  {/* Content */}
-                  <h3 className="text-2xl font-poppins font-bold text-foreground mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Features */}
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CheckCircle className="w-4 h-4 text-cyan" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Learn More */}
-                  <div className="mt-auto pt-4 border-t border-border/50">
-                    <span className="inline-flex items-center gap-2 text-cyan font-semibold group-hover:gap-3 transition-all">
-                      Learn More
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </GlassCard>
-              </AnimatedSection>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

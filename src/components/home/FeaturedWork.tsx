@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 const projects = [
@@ -28,6 +28,22 @@ const projects = [
   },
 ];
 
+// Unique entrance animations for each project card
+const projectAnimations = [
+  { 
+    initial: { opacity: 0, x: -120, rotate: -5 }, 
+    animate: { opacity: 1, x: 0, rotate: 0 },
+  },
+  { 
+    initial: { opacity: 0, y: 100, scale: 0.85 }, 
+    animate: { opacity: 1, y: 0, scale: 1 },
+  },
+  { 
+    initial: { opacity: 0, x: 120, rotate: 5 }, 
+    animate: { opacity: 1, x: 0, rotate: 0 },
+  },
+];
+
 const FeaturedWork = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
@@ -38,7 +54,7 @@ const FeaturedWork = () => {
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-cyan/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-navy/20 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-navy/10 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -49,32 +65,25 @@ const FeaturedWork = () => {
         />
 
         <div ref={containerRef} className="mt-16">
-          {/* Stacked Cards that Fan Out */}
+          {/* Project Cards with Unique Animations */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ 
-                  opacity: 0, 
-                  y: 50,
-                  rotate: index === 0 ? -3 : index === 2 ? 3 : 0,
-                }}
-                animate={isInView ? { 
-                  opacity: 1, 
-                  y: 0,
-                  rotate: 0,
-                } : {}}
+                initial={projectAnimations[index].initial}
+                animate={isInView ? projectAnimations[index].animate : projectAnimations[index].initial}
                 transition={{
                   duration: 0.8,
                   delay: index * 0.2,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: "easeOut",
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                whileHover={{ y: -10 }}
                 className="relative group"
               >
                 <div className="cursor-pointer">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-border hover:border-cyan transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--cyan)/0.15)]">
                     {/* Image with Ken Burns Effect */}
                     <motion.img
                       src={project.image}
@@ -88,9 +97,9 @@ const FeaturedWork = () => {
 
                     {/* Overlay */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"
-                      initial={{ opacity: 0.6 }}
-                      animate={{ opacity: hoveredIndex === index ? 0.9 : 0.6 }}
+                      className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent"
+                      initial={{ opacity: 0.5 }}
+                      animate={{ opacity: hoveredIndex === index ? 0.85 : 0.5 }}
                     />
 
                     {/* Content Overlay */}
@@ -108,7 +117,7 @@ const FeaturedWork = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 + index * 0.1 }}
-                        className="text-2xl font-poppins font-bold text-foreground mb-2"
+                        className="text-2xl font-poppins font-bold text-white mb-2"
                       >
                         {project.title}
                       </motion.h3>
@@ -119,20 +128,11 @@ const FeaturedWork = () => {
                           opacity: hoveredIndex === index ? 1 : 0,
                           y: hoveredIndex === index ? 0 : 10,
                         }}
-                        className="text-muted-foreground text-sm mb-4"
+                        className="text-white/80 text-sm"
                       >
                         {project.description}
                       </motion.p>
-
                     </div>
-
-                    {/* Gradient Border Effect on Hover */}
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl border-2 border-cyan/0"
-                      animate={{
-                        borderColor: hoveredIndex === index ? "hsl(var(--cyan) / 0.5)" : "hsl(var(--cyan) / 0)",
-                      }}
-                    />
                   </div>
                 </div>
               </motion.div>
@@ -148,7 +148,7 @@ const FeaturedWork = () => {
           >
             <Link
               to="/portfolio"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-cyan text-primary-foreground rounded-lg font-semibold hover:shadow-[0_0_30px_hsl(var(--cyan)/0.5)] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-cyan text-primary-foreground rounded-lg font-semibold hover:shadow-[0_0_30px_hsl(var(--cyan)/0.4)] transition-all duration-300 border-2 border-cyan hover:bg-transparent hover:text-cyan"
             >
               View All Projects
               <ExternalLink className="w-5 h-5" />
