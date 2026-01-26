@@ -153,7 +153,7 @@ const Portfolio = () => {
                   onMouseLeave={() => setHoveredProject(null)}
                   className="group"
                 >
-                  <Link to={`/portfolio/${project.id}`}>
+                  <div className="cursor-pointer">
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                       {/* Image with Ken Burns */}
                       <motion.img
@@ -230,18 +230,6 @@ const Portfolio = () => {
                         </motion.div>
 
                         {/* View Button */}
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{
-                            opacity: hoveredProject === project.id ? 1 : 0,
-                            y: hoveredProject === project.id ? 0 : 20,
-                          }}
-                        >
-                          <span className="inline-flex items-center gap-2 text-cyan font-semibold text-sm">
-                            View Case Study
-                            <ArrowUpRight className="w-4 h-4" />
-                          </span>
-                        </motion.div>
                       </div>
 
                       {/* Border Glow */}
@@ -257,7 +245,7 @@ const Portfolio = () => {
                         }}
                       />
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>

@@ -31,12 +31,10 @@ const GlassCard = ({
     >
       <div className="relative z-10 h-full">{children}</div>
       
-      {/* Shimmer effect on hover */}
+      {/* Simple hover overlay */}
       {hover && (
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0"
-          whileHover={{ opacity: 1, x: ["-100%", "100%"] }}
-          transition={{ duration: 0.8 }}
+          className="absolute inset-0 bg-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         />
       )}
     </motion.div>
