@@ -11,7 +11,6 @@ import {
   ArrowRight
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 
 const services = [
   {
@@ -46,6 +45,16 @@ const services = [
   },
 ];
 
+// Unique animation variants for each card
+const cardAnimations = [
+  { initial: { opacity: 0, x: -100, rotateY: -15 }, animate: { opacity: 1, x: 0, rotateY: 0 } },
+  { initial: { opacity: 0, y: -80, scale: 0.8 }, animate: { opacity: 1, y: 0, scale: 1 } },
+  { initial: { opacity: 0, x: 100, rotateY: 15 }, animate: { opacity: 1, x: 0, rotateY: 0 } },
+  { initial: { opacity: 0, y: 80, rotateX: 15 }, animate: { opacity: 1, y: 0, rotateX: 0 } },
+  { initial: { opacity: 0, scale: 0.5, rotate: -10 }, animate: { opacity: 1, scale: 1, rotate: 0 } },
+  { initial: { opacity: 0, x: -60, y: 60 }, animate: { opacity: 1, x: 0, y: 0 } },
+];
+
 const ServicesPreview = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
@@ -53,7 +62,7 @@ const ServicesPreview = () => {
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <SectionHeading
@@ -66,20 +75,29 @@ const ServicesPreview = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={cardAnimations[index].initial}
+              animate={isInView ? cardAnimations[index].animate : cardAnimations[index].initial}
               transition={{
-                duration: 0.6,
-                delay: index * 0.1,
+                duration: 0.8,
+                delay: index * 0.15,
                 ease: [0.25, 0.1, 0.25, 1],
               }}
+              whileHover={{ 
+                y: -8, 
+                transition: { duration: 0.3 } 
+              }}
+              className="group"
             >
-              <GlassCard className="p-6 h-full group" gradient>
+              <div className="p-6 h-full bg-card rounded-xl border-2 border-border hover:border-cyan transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--cyan)/0.1)]">
                 <div className="flex flex-col h-full">
                   {/* Icon */}
-                  <div className="w-14 h-14 rounded-xl bg-cyan/10 flex items-center justify-center mb-4 group-hover:bg-cyan/20 transition-colors duration-300">
+                  <motion.div 
+                    className="w-14 h-14 rounded-xl bg-cyan/10 flex items-center justify-center mb-4 border border-cyan/20"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <service.icon className="w-7 h-7 text-cyan" />
-                  </div>
+                  </motion.div>
 
                   {/* Content */}
                   <h3 className="text-xl font-poppins font-semibold text-foreground mb-3">
@@ -90,23 +108,17 @@ const ServicesPreview = () => {
                   </p>
 
                   {/* Learn More Link */}
-                  <div className="mt-4 pt-4 border-t border-border/50">
+                  <div className="mt-4 pt-4 border-t border-border">
                     <Link
                       to="/services"
-                      className="inline-flex items-center gap-2 text-sm text-cyan hover:text-cyan-glow transition-colors group/link"
+                      className="inline-flex items-center gap-2 text-sm text-cyan hover:gap-3 transition-all"
                     >
                       Learn more
-                      <motion.span
-                        className="inline-block"
-                        initial={{ x: 0 }}
-                        whileHover={{ x: 5 }}
-                      >
-                        <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                      </motion.span>
+                      <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -115,12 +127,12 @@ const ServicesPreview = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 1.2 }}
           className="mt-12 text-center"
         >
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-lg border-2 border-cyan/30 text-cyan hover:bg-cyan hover:text-primary-foreground transition-all duration-300 font-semibold"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-lg border-2 border-cyan text-cyan hover:bg-cyan hover:text-primary-foreground transition-all duration-300 font-semibold"
           >
             View All Services
             <ArrowRight className="w-5 h-5" />

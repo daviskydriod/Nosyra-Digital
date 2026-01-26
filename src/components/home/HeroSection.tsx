@@ -144,30 +144,11 @@ const HeroSection = () => {
             </GradientButton>
           </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2"
-            >
-              <motion.div
-                animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-1 h-2 bg-cyan rounded-full"
-              />
-            </motion.div>
-          </motion.div>
         </div>
       </div>
 
-      {/* Ticker */}
-      <div className="absolute bottom-0 left-0 right-0 py-4 bg-gradient-to-r from-navy/50 via-transparent to-navy/50 backdrop-blur-sm border-t border-border/30">
+      {/* Ticker - positioned below with proper spacing */}
+      <div className="absolute bottom-0 left-0 right-0 py-4 bg-card/80 backdrop-blur-sm border-t border-border">
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-8 whitespace-nowrap"
@@ -177,7 +158,7 @@ const HeroSection = () => {
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex gap-8">
                 {["DIGITAL AGENCY", "WEB DESIGN", "BRANDING", "SOCIAL MEDIA", "E-COMMERCE", "MOBILE OPTIMIZATION"].map((text) => (
-                  <span key={text} className="text-muted-foreground/50 font-medium text-sm tracking-widest flex items-center gap-8">
+                  <span key={text} className="text-muted-foreground font-medium text-sm tracking-widest flex items-center gap-8">
                     {text} <span className="text-cyan">•</span>
                   </span>
                 ))}
