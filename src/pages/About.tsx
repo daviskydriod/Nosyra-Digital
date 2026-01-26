@@ -17,34 +17,9 @@ import {
 
 const timeline = [
   {
-    year: "2019",
+    year: "2025",
     title: "The Beginning",
     description: "Nosyra Digital was founded with a vision to help businesses establish a powerful online presence.",
-  },
-  {
-    year: "2020",
-    title: "Rapid Growth",
-    description: "Expanded our services and team, delivering 50+ successful projects during a challenging year.",
-  },
-  {
-    year: "2021",
-    title: "Award Recognition",
-    description: "Received our first industry awards for outstanding web design and digital marketing.",
-  },
-  {
-    year: "2022",
-    title: "E-Commerce Focus",
-    description: "Launched specialized e-commerce solutions, helping businesses thrive in the digital marketplace.",
-  },
-  {
-    year: "2023",
-    title: "Regional Expansion",
-    description: "Extended our reach across West Africa, serving clients in multiple countries.",
-  },
-  {
-    year: "2024",
-    title: "Innovation Leader",
-    description: "Pioneering AI-powered solutions and cutting-edge design technologies.",
   },
 ];
 

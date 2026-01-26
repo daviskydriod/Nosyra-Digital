@@ -73,7 +73,7 @@ const FeaturedWork = () => {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="relative group"
               >
-                <Link to={`/portfolio/${project.id}`}>
+                <div className="cursor-pointer">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                     {/* Image with Ken Burns Effect */}
                     <motion.img
@@ -124,18 +124,6 @@ const FeaturedWork = () => {
                         {project.description}
                       </motion.p>
 
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ 
-                          opacity: hoveredIndex === index ? 1 : 0,
-                          y: hoveredIndex === index ? 0 : 20,
-                        }}
-                      >
-                        <span className="inline-flex items-center gap-2 text-cyan font-semibold text-sm">
-                          View Case Study
-                          <ArrowUpRight className="w-4 h-4" />
-                        </span>
-                      </motion.div>
                     </div>
 
                     {/* Gradient Border Effect on Hover */}
@@ -146,7 +134,7 @@ const FeaturedWork = () => {
                       }}
                     />
                   </div>
-                </Link>
+                </div>
               </motion.div>
             ))}
           </div>
