@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import GradientButton from "@/components/ui/GradientButton";
 import { useTypewriter } from "@/hooks/useTypewriter";
-import logo from "@/assets/nosyra-logo.png";
 
 const HeroSection = () => {
   const { displayText: subheadline } = useTypewriter(
@@ -14,7 +13,7 @@ const HeroSection = () => {
   const headlineWords = ["Build", "Your", "Online", "Presence", "Your", "Way"];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex flex-col overflow-hidden pt-20">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-mesh" />
       
@@ -61,94 +60,78 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Logo Animation */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="mb-8"
-          >
-            <motion.img
-              src={logo}
-              alt="Nosyra Digital"
-              className="h-16 md:h-20 w-auto mx-auto"
-              animate={{ 
-                filter: ["drop-shadow(0 0 20px hsl(var(--cyan)/0.3))", "drop-shadow(0 0 40px hsl(var(--cyan)/0.6))", "drop-shadow(0 0 20px hsl(var(--cyan)/0.3))"]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-          </motion.div>
+      {/* Main Content - Centered */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Main Headline with Staggered Animation */}
+            <div className="mb-6 overflow-hidden">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-poppins font-bold leading-tight">
+                {headlineWords.map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.3 + index * 0.1,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className={`inline-block mr-3 md:mr-5 ${
+                      word === "Your" || word === "Way" ? "text-gradient" : "text-foreground"
+                    }`}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </h1>
+            </div>
 
-          {/* Main Headline with Staggered Animation */}
-          <div className="mb-6 overflow-hidden">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-poppins font-bold leading-tight">
-              {headlineWords.map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.3 + index * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  className={`inline-block mr-3 md:mr-5 ${
-                    word === "Your" || word === "Way" ? "text-gradient" : "text-foreground"
-                  }`}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h1>
+            {/* Typewriter Subheadline */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto h-16"
+            >
+              {subheadline}
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="inline-block w-0.5 h-5 bg-cyan ml-1 align-middle"
+              />
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8, duration: 0.6 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            >
+              <GradientButton
+                href="/contact"
+                size="lg"
+                icon={<ArrowRight className="w-5 h-5" />}
+              >
+                Start Your Project
+              </GradientButton>
+              
+              <GradientButton
+                href="/portfolio"
+                variant="outline"
+                size="lg"
+                icon={<Play className="w-5 h-5" />}
+              >
+                View Our Work
+              </GradientButton>
+            </motion.div>
           </div>
-
-          {/* Typewriter Subheadline */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto h-16"
-          >
-            {subheadline}
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-              className="inline-block w-0.5 h-5 bg-cyan ml-1 align-middle"
-            />
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <GradientButton
-              href="/contact"
-              size="lg"
-              icon={<ArrowRight className="w-5 h-5" />}
-            >
-              Start Your Project
-            </GradientButton>
-            
-            <GradientButton
-              href="/portfolio"
-              variant="outline"
-              size="lg"
-              icon={<Play className="w-5 h-5" />}
-            >
-              View Our Work
-            </GradientButton>
-          </motion.div>
-
         </div>
       </div>
 
-      {/* Ticker - positioned below with proper spacing */}
-      <div className="absolute bottom-0 left-0 right-0 py-4 bg-card/80 backdrop-blur-sm border-t border-border">
+      {/* Ticker - positioned at bottom with proper spacing */}
+      <div className="relative z-10 py-4 bg-card/80 backdrop-blur-sm border-t border-border mt-auto">
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-8 whitespace-nowrap"
