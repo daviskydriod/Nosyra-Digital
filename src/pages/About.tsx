@@ -15,6 +15,9 @@ import {
   ArrowRight
 } from "lucide-react";
 
+// Import logo
+import nosyraLogo from "@/assets/nosyra-logo.png";
+
 const timeline = [
   {
     year: "2025",
@@ -113,7 +116,7 @@ const About = () => {
               </motion.div>
             </div>
 
-            {/* Right - Abstract Shape */}
+            {/* Right - Logo with Abstract Shape */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -131,8 +134,20 @@ const About = () => {
                   animate={{ rotate: [0, -5, 0, 5, 0] }}
                   transition={{ duration: 8, repeat: Infinity }}
                 />
-                <div className="absolute inset-16 glass rounded-3xl flex items-center justify-center">
-                  <span className="text-6xl font-poppins font-bold text-gradient">ND</span>
+                <div className="absolute inset-16 glass rounded-3xl flex items-center justify-center p-8">
+                  <motion.img
+                    src={nosyraLogo}
+                    alt="Nosyra Digital Logo"
+                    className="w-full h-full object-contain"
+                    animate={{ 
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
                 </div>
               </div>
             </motion.div>
@@ -250,8 +265,8 @@ const About = () => {
               <div className="relative">
                 <div className="aspect-square rounded-3xl overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-                    alt="Team collaboration"
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
+                    alt="Modern cityscape buildings"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
