@@ -273,15 +273,7 @@ const About = () => {
                 </div>
                 
                 {/* Floating Stats Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl"
-                >
-                  <div className="text-3xl font-poppins font-bold text-gradient mb-1">150+</div>
-                  <div className="text-muted-foreground">Successful Projects</div>
-                </motion.div>
+ 
               </div>
             </AnimatedSection>
           </div>
