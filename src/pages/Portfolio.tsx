@@ -4,58 +4,42 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GradientButton from "@/components/ui/GradientButton";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ExternalLink } from "lucide-react";
 
-const categories = ["All", "Websites", "E-Commerce", "Branding", "Social Media"];
+// Import local images
+import ecoHero from "@/assets/eco-hero.png";
+import lianHero from "@/assets/lian-hero.png";
+import catglobalHero from "@/assets/catglobal-hero.png";
+
+const categories = ["All", "Web Design", "E-Commerce", "Corporate Website"];
 
 const projects = [
   {
     id: 1,
-    title: "TechFlow SaaS Platform",
-    category: "Websites",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    description: "A modern SaaS dashboard with seamless UX and powerful analytics features.",
-    tags: ["React", "Node.js", "Dashboard"],
+    title: "Eko Connect Concierge",
+    category: "Web Design",
+    image: ecoHero,
+    description: "Professional concierge services platform with seamless booking and customer management.",
+    tags: ["React", "Booking System", "Customer Portal"],
+    link: "https://www.ekoconnectconcierge.com.ng/",
   },
   {
     id: 2,
-    title: "Luxe Fashion Store",
+    title: "Liana Flowers",
     category: "E-Commerce",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
-    description: "Premium fashion e-commerce experience with smooth checkout flow.",
-    tags: ["Shopify", "Custom Theme", "Payment"],
+    image: lianHero,
+    description: "Premium flower delivery service with elegant design and smooth checkout experience.",
+    tags: ["E-Commerce", "Payment Integration", "Product Catalog"],
+    link: "https://www.liananaflowers.com.ng",
   },
   {
     id: 3,
-    title: "GreenLife Organics",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
-    description: "Complete brand identity for a sustainable organic products company.",
-    tags: ["Logo", "Brand Guide", "Packaging"],
-  },
-  {
-    id: 4,
-    title: "FinanceHub App",
-    category: "Websites",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    description: "Financial management platform with real-time analytics and reporting.",
-    tags: ["Fintech", "Dashboard", "Charts"],
-  },
-  {
-    id: 5,
-    title: "Urban Eats Delivery",
-    category: "E-Commerce",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
-    description: "Food delivery platform connecting local restaurants with customers.",
-    tags: ["Food Tech", "Mobile", "Payments"],
-  },
-  {
-    id: 6,
-    title: "Wellness Studio Social",
-    category: "Social Media",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80",
-    description: "Complete social media kit for a premium wellness and yoga studio.",
-    tags: ["Instagram", "Templates", "Content"],
+    title: "CAT Global",
+    category: "Corporate Website",
+    image: catglobalHero,
+    description: "Modern corporate website showcasing professional services and company expertise.",
+    tags: ["Corporate", "Professional", "Responsive"],
+    link: "https://www.cat-ag.com/",
   },
 ];
 
@@ -153,8 +137,14 @@ const Portfolio = () => {
                   onMouseLeave={() => setHoveredProject(null)}
                   className="group"
                 >
-                  <div className="cursor-pointer">
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="cursor-pointer block"
+                  >
+                    {/* Image Container */}
+                    <div className="relative aspect-[4/3] rounded-t-2xl overflow-hidden">
                       {/* Image with Ken Burns */}
                       <motion.img
                         src={project.image}
@@ -174,78 +164,86 @@ const Portfolio = () => {
                         transition={{ duration: 0.8 }}
                       />
 
-                      {/* Overlay */}
+                      {/* Light Overlay on Hover */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"
-                        initial={{ opacity: 0.4 }}
-                        animate={{ opacity: hoveredProject === project.id ? 0.9 : 0.4 }}
+                        className="absolute inset-0 bg-cyan/10"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
                       />
-
-                      {/* Content */}
-                      <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                        <motion.span
-                          className="text-sm text-cyan font-medium mb-2"
-                          initial={{ y: 10, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ delay: 0.1 }}
-                        >
-                          {project.category}
-                        </motion.span>
-
-                        <motion.h3
-                          className="text-xl font-poppins font-bold text-foreground mb-2"
-                          initial={{ x: -20, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          transition={{ delay: 0.15 }}
-                        >
-                          {project.title}
-                        </motion.h3>
-
-                        <motion.p
-                          className="text-muted-foreground text-sm mb-4 line-clamp-2"
-                          initial={{ opacity: 0 }}
-                          animate={{ 
-                            opacity: hoveredProject === project.id ? 1 : 0,
-                          }}
-                        >
-                          {project.description}
-                        </motion.p>
-
-                        {/* Tags */}
-                        <motion.div
-                          className="flex flex-wrap gap-2 mb-4"
-                          initial={{ opacity: 0 }}
-                          animate={{ 
-                            opacity: hoveredProject === project.id ? 1 : 0,
-                          }}
-                        >
-                          {project.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-2 py-1 text-xs bg-cyan/10 text-cyan rounded-full"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </motion.div>
-
-                        {/* View Button */}
-                      </div>
 
                       {/* Border Glow */}
                       <motion.div
-                        className="absolute inset-0 rounded-2xl border-2"
+                        className="absolute inset-0 rounded-t-2xl border-2"
                         animate={{
                           borderColor: hoveredProject === project.id 
                             ? "hsl(var(--cyan) / 0.5)" 
                             : "transparent",
-                          boxShadow: hoveredProject === project.id 
-                            ? "0 0 30px hsl(var(--cyan) / 0.2)" 
-                            : "none",
                         }}
                       />
                     </div>
-                  </div>
+
+                    {/* Text Content Below Image */}
+                    <div className="bg-card border-2 border-t-0 border-border group-hover:border-cyan rounded-b-2xl p-6 transition-all duration-300 group-hover:shadow-[0_0_40px_hsl(var(--cyan)/0.15)]">
+                      <motion.span
+                        className="text-sm text-cyan font-medium mb-2 block"
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        {project.category}
+                      </motion.span>
+
+                      <motion.h3
+                        className="text-xl font-poppins font-bold text-foreground mb-3 group-hover:text-cyan transition-colors duration-300"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.15 }}
+                      >
+                        {project.title}
+                      </motion.h3>
+
+                      <motion.p
+                        className="text-muted-foreground text-sm mb-4 leading-relaxed"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {project.description}
+                      </motion.p>
+
+                      {/* Tags */}
+                      <motion.div
+                        className="flex flex-wrap gap-2 mb-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.25 }}
+                      >
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 text-xs bg-cyan/10 text-cyan rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </motion.div>
+
+                      {/* Visit Link */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ 
+                          opacity: hoveredProject === project.id ? 1 : 0,
+                          x: hoveredProject === project.id ? 0 : -10,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="flex items-center gap-2 text-cyan font-medium text-sm"
+                      >
+                        Visit Site
+                        <ExternalLink className="w-4 h-4" />
+                      </motion.div>
+                    </div>
+                  </a>
                 </motion.div>
               ))}
             </AnimatePresence>
