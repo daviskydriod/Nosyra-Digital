@@ -4,27 +4,35 @@ import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
+// Import local images
+import ecoHero from "@/assets/eco-hero.png";
+import lianHero from "@/assets/lian-hero.png";
+import catglobalHero from "@/assets/catglobal-hero.png";
+
 const projects = [
   {
     id: 1,
-    title: "TechFlow SaaS Platform",
+    title: "Eko Connect Concierge",
     category: "Web Design",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    description: "A modern SaaS dashboard with seamless UX and powerful analytics.",
+    image: ecoHero,
+    description: "Professional concierge services platform with seamless booking and customer management.",
+    link: "https://www.ekoconnectconcierge.com.ng/",
   },
   {
     id: 2,
-    title: "Luxe Fashion Store",
+    title: "Liana Flowers",
     category: "E-Commerce",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
-    description: "Premium fashion e-commerce experience with smooth checkout flow.",
+    image: lianHero,
+    description: "Premium flower delivery service with elegant design and smooth checkout experience.",
+    link: "https://www.liananaflowers.com.ng",
   },
   {
     id: 3,
-    title: "GreenLife Organics",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
-    description: "Complete brand identity for a sustainable organic products company.",
+    title: "CAT Global",
+    category: "Corporate Website",
+    image: catglobalHero,
+    description: "Modern corporate website showcasing professional services and company expertise.",
+    link: "https://www.cat-ag.com/",
   },
 ];
 
@@ -82,7 +90,12 @@ const FeaturedWork = () => {
                 whileHover={{ y: -10 }}
                 className="relative group"
               >
-                <div className="cursor-pointer">
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="cursor-pointer block"
+                >
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-border hover:border-cyan transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--cyan)/0.15)]">
                     {/* Image with Ken Burns Effect */}
                     <motion.img
@@ -134,7 +147,7 @@ const FeaturedWork = () => {
                       </motion.p>
                     </div>
                   </div>
-                </div>
+                </a>
               </motion.div>
             ))}
           </div>
