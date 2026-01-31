@@ -96,7 +96,8 @@ const FeaturedWork = () => {
                   rel="noopener noreferrer"
                   className="cursor-pointer block"
                 >
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-border hover:border-cyan transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--cyan)/0.15)]">
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] rounded-t-2xl overflow-hidden border-2 border-border group-hover:border-cyan transition-all duration-300">
                     {/* Image with Ken Burns Effect */}
                     <motion.img
                       src={project.image}
@@ -108,44 +109,57 @@ const FeaturedWork = () => {
                       transition={{ duration: 0.6 }}
                     />
 
-                    {/* Overlay */}
+                    {/* Light Overlay on Hover */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent"
-                      initial={{ opacity: 0.5 }}
-                      animate={{ opacity: hoveredIndex === index ? 0.85 : 0.5 }}
+                      className="absolute inset-0 bg-cyan/10"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
                     />
+                  </div>
 
-                    {/* Content Overlay */}
-                    <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                      <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 + index * 0.1 }}
-                        className="text-sm text-cyan font-medium mb-2"
-                      >
-                        {project.category}
-                      </motion.span>
-                      
-                      <motion.h3
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.4 + index * 0.1 }}
-                        className="text-2xl font-poppins font-bold text-white mb-2"
-                      >
-                        {project.title}
-                      </motion.h3>
+                  {/* Text Content Below Image */}
+                  <div className="bg-card border-2 border-t-0 border-border group-hover:border-cyan rounded-b-2xl p-6 transition-all duration-300 group-hover:shadow-[0_0_40px_hsl(var(--cyan)/0.15)]">
+                    <motion.span
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="text-sm text-cyan font-medium mb-2 block"
+                    >
+                      {project.category}
+                    </motion.span>
+                    
+                    <motion.h3
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                      className="text-2xl font-poppins font-bold text-foreground mb-3 group-hover:text-cyan transition-colors duration-300"
+                    >
+                      {project.title}
+                    </motion.h3>
 
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                          opacity: hoveredIndex === index ? 1 : 0,
-                          y: hoveredIndex === index ? 0 : 10,
-                        }}
-                        className="text-white/80 text-sm"
-                      >
-                        {project.description}
-                      </motion.p>
-                    </div>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                      className="text-muted-foreground text-sm leading-relaxed"
+                    >
+                      {project.description}
+                    </motion.p>
+
+                    {/* Visit Link */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: hoveredIndex === index ? 1 : 0,
+                        x: hoveredIndex === index ? 0 : -10,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 flex items-center gap-2 text-cyan font-medium text-sm"
+                    >
+                      Visit Site
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.div>
                   </div>
                 </a>
               </motion.div>
