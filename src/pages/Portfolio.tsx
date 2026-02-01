@@ -10,8 +10,12 @@ import { ArrowUpRight, ArrowRight, ExternalLink } from "lucide-react";
 import ecoHero from "@/assets/eco-hero.png";
 import lianHero from "@/assets/lian-hero.png";
 import catglobalHero from "@/assets/catglobal-hero.png";
+import vikHero from "@/assets/vik-hero.png";
+import gtHero from "@/assets/gt-hero.png";
+import urhuHero from "@/assets/urhu-hero.png";
+import honHero from "@/assets/hon-hero.png";
 
-const categories = ["All", "Web Design", "E-Commerce", "Corporate Website"];
+const categories = ["All", "Web Design", "E-Commerce", "Corporate Website", "Tech Solutions"];
 
 const projects = [
   {
@@ -40,6 +44,42 @@ const projects = [
     description: "Modern corporate website showcasing professional services and company expertise.",
     tags: ["Corporate", "Professional", "Responsive"],
     link: "https://www.cat-ag.com/",
+  },
+  {
+    id: 4,
+    title: "Viktrotech",
+    category: "Tech Solutions",
+    image: vikHero,
+    description: "Innovative technology solutions platform with cutting-edge digital services and expertise.",
+    tags: ["Tech", "Innovation", "Digital Solutions"],
+    link: "https://www.viktrotech.com/",
+  },
+  {
+    id: 5,
+    title: "GT Green Petrochemical",
+    category: "Corporate Website",
+    image: gtHero,
+    description: "Professional petrochemical company website showcasing industry leadership and sustainability.",
+    tags: ["Corporate", "Industrial", "Sustainability"],
+    link: "https://www.gtgreenpetrochemical.com.ng/",
+  },
+  {
+    id: 6,
+    title: "Uruhu Solutions",
+    category: "Web Design",
+    image: urhuHero,
+    description: "Comprehensive business solutions platform with modern design and client-focused approach.",
+    tags: ["Business Solutions", "Consulting", "Modern Design"],
+    link: "https://uruhusolutions.com.ng/",
+  },
+  {
+    id: 7,
+    title: "Honters Cruise",
+    category: "E-Commerce",
+    image: honHero,
+    description: "Premium cruise booking platform with seamless reservation system and travel packages.",
+    tags: ["Travel", "Booking System", "E-Commerce"],
+    link: "https://www.honterscruise.com.ng/",
   },
 ];
 
