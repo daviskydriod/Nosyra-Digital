@@ -5,6 +5,8 @@ import FeaturedWork from "@/components/home/FeaturedWork";
 import StatsCounter from "@/components/home/StatsCounter";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
+import { Toaster } from "@/components/ui/toaster";
+
 
 const Index = () => {
   return (
@@ -13,6 +15,8 @@ const Index = () => {
       <ServicesPreview />
       <FeaturedWork />
       <CTASection />
+      <Toaster />
+
     </Layout>
   );
 };
