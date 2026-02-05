@@ -1,4 +1,4 @@
-// src/components/admin/PostEditor.tsx
+// src/components/admin/PostEditor.tsx (FIXED)
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../../lib/api';
@@ -59,25 +59,36 @@ const PostEditor: React.FC = () => {
     
     try {
       setLoading(true);
-      const response = await api.getPost(parseInt(id));
-      if (response.success) {
-        const post = response.data;
-        setFormData({
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt || '',
-          content: post.content,
-          category_id: post.category_id.toString(),
-          featured_image: post.featured_image || '',
-          status: post.status || 'draft',
-          meta_title: post.meta_title || post.title,
-          meta_description: post.meta_description || post.excerpt || '',
-          meta_keywords: post.meta_keywords || '',
-          tags: post.tags?.map((t: any) => typeof t === 'string' ? t : t.name) || []
-        });
+      
+      // ✅ FIXED: Get all posts and find the one by ID
+      const response = await api.getPostsWithPagination({ status: 'published', limit: 1000 });
+      
+      if (response.success && response.data.posts) {
+        const post = response.data.posts.find(p => p.id === parseInt(id));
+        
+        if (post) {
+          setFormData({
+            title: post.title || '',
+            slug: post.slug || '',
+            excerpt: post.excerpt || '',
+            content: post.content || '',
+            category_id: post.category_id?.toString() || '',
+            featured_image: post.featured_image || '',
+            status: (post.status as 'draft' | 'published') || 'draft',
+            meta_title: post.meta_title || post.title || '',
+            meta_description: post.meta_description || post.excerpt || '',
+            meta_keywords: post.meta_keywords || '',
+            tags: post.tags?.map((t: any) => typeof t === 'string' ? t : t.name) || []
+          });
+        } else {
+          console.error('Post not found');
+          alert('Post not found');
+          navigate('/admin/posts');
+        }
       }
     } catch (err) {
       console.error('Failed to load post:', err);
+      alert('Failed to load post');
     } finally {
       setLoading(false);
     }
@@ -96,17 +107,14 @@ const PostEditor: React.FC = () => {
 
     try {
       setUploading(true);
-      // If your API has an uploadImage method, use it
-      // Otherwise, use a placeholder URL or direct URL input
       const response = await api.uploadImage(file);
       
-      if (response.success) {
+      if (response.success && response.data?.url) {
         setFormData(prev => ({ ...prev, featured_image: response.data.url }));
       }
     } catch (err) {
       console.error('Failed to upload image:', err);
-      // Fallback: let user enter URL manually
-      alert('Image upload not configured. Please enter image URL manually.');
+      alert('Image upload failed. Please enter image URL manually.');
     } finally {
       setUploading(false);
     }
@@ -139,30 +147,58 @@ const PostEditor: React.FC = () => {
 
     try {
       setSaving(true);
+      
+      // ✅ FIXED: Generate slug properly
       const slug = formData.slug || generateSlug(formData.title);
       
-      const postData = {
-        ...formData,
-        slug,
-        category_id: formData.category_id ? parseInt(formData.category_id) : null,
-        meta_title: formData.meta_title || formData.title,
-        meta_description: formData.meta_description || formData.excerpt
-      };
+      // ✅ FIXED: Create FormData (your PHP expects this)
+      const postFormData = new FormData();
+      postFormData.append('title', formData.title);
+      postFormData.append('slug', slug);
+      postFormData.append('content', formData.content);
+      postFormData.append('excerpt', formData.excerpt || formData.content.substring(0, 200));
+      postFormData.append('status', formData.status);
+      
+      if (formData.category_id) {
+        postFormData.append('category_id', formData.category_id);
+      }
+      
+      if (formData.featured_image) {
+        postFormData.append('featured_image', formData.featured_image);
+      }
+      
+      // SEO fields
+      postFormData.append('meta_title', formData.meta_title || formData.title);
+      postFormData.append('meta_description', formData.meta_description || formData.excerpt);
+      postFormData.append('meta_keywords', formData.meta_keywords);
+      
+      // Tags
+      if (formData.tags.length > 0) {
+        postFormData.append('tags', JSON.stringify(formData.tags));
+      }
+
+      console.log('Submitting post with slug:', slug);
 
       if (isEditMode && id) {
-        const response = await api.updatePost(parseInt(id), postData);
+        const response = await api.updatePost(parseInt(id), postFormData);
         if (response.success) {
+          alert('Post updated successfully!');
           navigate('/admin/posts');
+        } else {
+          throw new Error(response.message || 'Failed to update post');
         }
       } else {
-        const response = await api.createPost(postData);
+        const response = await api.createPost(postFormData);
         if (response.success) {
+          alert('Post created successfully!');
           navigate('/admin/posts');
+        } else {
+          throw new Error(response.message || 'Failed to create post');
         }
       }
     } catch (err: any) {
       alert(err.message || 'Failed to save post');
-      console.error(err);
+      console.error('Save error:', err);
     } finally {
       setSaving(false);
     }
@@ -288,7 +324,15 @@ const PostEditor: React.FC = () => {
                   type="text"
                   required
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  onChange={(e) => {
+                    const newTitle = e.target.value;
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      title: newTitle,
+                      // Auto-generate slug if slug is empty
+                      slug: prev.slug ? prev.slug : generateSlug(newTitle)
+                    }));
+                  }}
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-lg font-medium"
                   placeholder="Enter an engaging title"
                 />
@@ -307,7 +351,7 @@ const PostEditor: React.FC = () => {
                   placeholder="auto-generated-from-title"
                 />
                 <p className="mt-2 text-xs text-slate-500">
-                  Leave empty to auto-generate from title
+                  Current slug: <span className="font-mono text-blue-600">{formData.slug || generateSlug(formData.title) || 'will-be-generated'}</span>
                 </p>
               </div>
 
