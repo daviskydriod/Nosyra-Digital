@@ -1,4 +1,4 @@
-// src/lib/api.ts (UPDATED to match your PHP response structure)
+// src/lib/api.ts (FIXED - with both public and admin methods)
 const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
@@ -38,14 +38,16 @@ interface Category {
   post_count?: number;
 }
 
+interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  pages: number;
+}
+
 interface PostsResponse {
   posts: Post[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    pages: number;
-  };
+  pagination: Pagination;
 }
 
 class ApiClient {
@@ -133,7 +135,7 @@ class ApiClient {
   // ------------------------
 
   /**
-   * Get all blog posts
+   * Get all blog posts (PUBLIC - returns just posts array)
    * @param params - Optional filters (page, category, search)
    */
   async getPosts(params?: { 
@@ -156,7 +158,7 @@ class ApiClient {
       const response = await this.request<PostsResponse>(`?${query.toString()}`);
       
       // YOUR PHP RETURNS: { success: true, data: { posts: [...], pagination: {...} } }
-      // Convert to the format expected by frontend: { success: true, data: [...] }
+      // For PUBLIC use, extract just the posts array
       if (response.success && response.data) {
         return {
           success: true,
@@ -174,6 +176,61 @@ class ApiClient {
       return {
         success: false,
         data: [],
+        error: error.message
+      };
+    }
+  }
+
+  /**
+   * Get all blog posts with pagination (ADMIN - returns full response)
+   * @param params - Optional filters (page, category, search)
+   */
+  async getPostsWithPagination(params?: { 
+    page?: number; 
+    category?: string; 
+    search?: string;
+    limit?: number;
+    status?: 'published' | 'draft';
+  }): Promise<ApiResponse<PostsResponse>> {
+    try {
+      const query = new URLSearchParams();
+      query.append('action', 'getPosts');
+      
+      if (params?.page) query.append('page', params.page.toString());
+      if (params?.category) query.append('category', params.category);
+      if (params?.search) query.append('search', params.search);
+      if (params?.limit) query.append('limit', params.limit.toString());
+      if (params?.status) query.append('status', params.status);
+
+      const response = await this.request<PostsResponse>(`?${query.toString()}`);
+      
+      // For ADMIN use, return the full response with pagination
+      if (response.success && !response.data) {
+        response.data = {
+          posts: [],
+          pagination: {
+            page: 1,
+            limit: 10,
+            total: 0,
+            pages: 0
+          }
+        };
+      }
+      
+      return response;
+    } catch (error: any) {
+      console.error('getPostsWithPagination error:', error);
+      return {
+        success: false,
+        data: {
+          posts: [],
+          pagination: {
+            page: 1,
+            limit: 10,
+            total: 0,
+            pages: 0
+          }
+        },
         error: error.message
       };
     }
