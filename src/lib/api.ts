@@ -32,9 +32,13 @@ class ApiClient {
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
     const headers: HeadersInit = {
-      'Content-Type': 'application/json',
       ...options.headers,
     };
+
+    // Only set JSON content type if body is JSON
+    if (!(options.body instanceof FormData)) {
+      headers['Content-Type'] = 'application/json';
+    }
 
     if (this.token) {
       headers['Authorization'] = `Bearer ${this.token}`;
@@ -44,7 +48,7 @@ class ApiClient {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         ...options,
         headers,
-        credentials: 'include', // sends cookies if any
+        credentials: 'include', // send cookies/sessions
       });
 
       const data = await response.json();
@@ -60,7 +64,9 @@ class ApiClient {
     }
   }
 
+  // ------------------------
   // Public endpoints
+  // ------------------------
   async getPosts(params?: { page?: number; category?: string; search?: string }) {
     const queryParams = new URLSearchParams();
     if (params?.page) queryParams.append('page', params.page.toString());
@@ -84,23 +90,24 @@ class ApiClient {
     return this.request(`/categories/${slug}/posts${query}`);
   }
 
+  // ------------------------
   // Admin endpoints
+  // ------------------------
   async login(username: string, password: string) {
-    // point to ?action=login
     return this.request(`?action=login`, {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
   }
 
-  async createPost(postData: any) {
+  async createPost(postData: { title: string; content: string }) {
     return this.request(`?action=createPost`, {
       method: 'POST',
       body: JSON.stringify(postData),
     });
   }
 
-  async updatePost(id: number, postData: any) {
+  async updatePost(id: number, postData: { title: string; content: string }) {
     return this.request(`?action=updatePost&id=${id}`, {
       method: 'PUT',
       body: JSON.stringify(postData),
@@ -118,14 +125,12 @@ class ApiClient {
     formData.append('image', file);
 
     const headers: HeadersInit = {};
-    if (this.token) {
-      headers['Authorization'] = `Bearer ${this.token}`;
-    }
+    if (this.token) headers['Authorization'] = `Bearer ${this.token}`;
 
     const response = await fetch(`${this.baseUrl}?action=uploadImage`, {
       method: 'POST',
-      headers,
       body: formData,
+      headers,
       credentials: 'include',
     });
 
