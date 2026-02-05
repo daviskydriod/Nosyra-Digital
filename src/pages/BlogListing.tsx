@@ -126,24 +126,7 @@ const BlogListing: React.FC = () => {
               Stay updated with the latest trends, tips, and insights in digital marketing, web development, and design.
             </motion.p>
 
-            {/* Search Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="max-w-2xl mx-auto"
-            >
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search articles..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-card/50 backdrop-blur-sm border border-cyan/20 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-cyan/50 transition-all"
-                />
-              </div>
-            </motion.div>
+         
           </div>
         </div>
       </section>
