@@ -1,12 +1,22 @@
-// src/components/admin/Dashboard.tsx
+// src/components/admin/Dashboard.tsx (FIXED)
 
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import api from '../../lib/api';
 
+interface User {
+  id: number;
+  username: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 interface AuthContextType {
-  user: any;
+  user: User | null;
+  token: string | null;
   isAuthenticated: boolean;
+  setAuth: (auth: { user: User; token: string }) => void; // ← ADDED THIS
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
 }
@@ -20,42 +30,76 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
-    const userData = localStorage.getItem('user_data');
+    const storedToken = localStorage.getItem('auth_token');
+    const userData = localStorage.getItem('auth_user') || localStorage.getItem('user_data');
     
-    if (token && userData) {
-      setUser(JSON.parse(userData));
-      setIsAuthenticated(true);
-      api.setToken(token);
+    if (storedToken && userData) {
+      try {
+        const parsedUser = JSON.parse(userData);
+        setUser(parsedUser);
+        setToken(storedToken);
+        setIsAuthenticated(true);
+        api.setToken(storedToken);
+        console.log('Auth restored from localStorage:', parsedUser.username);
+      } catch (error) {
+        console.error('Failed to parse stored user data:', error);
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_user');
+        localStorage.removeItem('user_data');
+      }
     }
   }, []);
+
+  // ← NEW: Direct setAuth function for Login component
+  const setAuth = (auth: { user: User; token: string }) => {
+    console.log('setAuth called:', auth.user.username);
+    setUser(auth.user);
+    setToken(auth.token);
+    setIsAuthenticated(true);
+    api.setToken(auth.token);
+    localStorage.setItem('auth_token', auth.token);
+    localStorage.setItem('auth_user', JSON.stringify(auth.user));
+    localStorage.setItem('user_data', JSON.stringify(auth.user)); // Backward compatibility
+  };
 
   const login = async (username: string, password: string) => {
     const response = await api.login(username, password);
     
-    if (response.success) {
-      setUser(response.data.user);
-      setIsAuthenticated(true);
-      api.setToken(response.data.token);
-      localStorage.setItem('user_data', JSON.stringify(response.data.user));
+    if (response.success && response.data) {
+      setAuth({
+        user: response.data.user,
+        token: response.data.token
+      });
     } else {
       throw new Error(response.message || 'Login failed');
     }
   };
 
   const logout = () => {
+    console.log('Logging out...');
     setUser(null);
+    setToken(null);
     setIsAuthenticated(false);
     api.clearToken();
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_user');
     localStorage.removeItem('user_data');
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      token,
+      isAuthenticated, 
+      setAuth,  // ← ADDED TO PROVIDER VALUE
+      login, 
+      logout 
+    }}>
       {children}
     </AuthContext.Provider>
   );
