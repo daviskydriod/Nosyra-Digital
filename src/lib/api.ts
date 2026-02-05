@@ -1,4 +1,4 @@
-// src/lib/api.ts (UPDATED FOR BLOG VIEWING)
+// src/lib/api.ts (UPDATED to match your PHP response structure)
 const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
@@ -36,6 +36,16 @@ interface Category {
   slug: string;
   description?: string;
   post_count?: number;
+}
+
+interface PostsResponse {
+  posts: Post[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
 }
 
 class ApiClient {
@@ -142,16 +152,23 @@ class ApiClient {
       if (params?.search) query.append('search', params.search);
       if (params?.limit) query.append('limit', params.limit.toString());
       if (params?.status) query.append('status', params.status);
-      else query.append('status', 'published'); // Default to published only
 
-      const response = await this.request<Post[]>(`?${query.toString()}`);
+      const response = await this.request<PostsResponse>(`?${query.toString()}`);
       
-      // Ensure we return an array
-      if (response.success && !response.data) {
-        response.data = [];
+      // YOUR PHP RETURNS: { success: true, data: { posts: [...], pagination: {...} } }
+      // Convert to the format expected by frontend: { success: true, data: [...] }
+      if (response.success && response.data) {
+        return {
+          success: true,
+          data: response.data.posts || []
+        };
       }
       
-      return response;
+      return {
+        success: false,
+        data: [],
+        error: response.error || 'Failed to fetch posts'
+      };
     } catch (error: any) {
       console.error('getPosts error:', error);
       return {
@@ -173,7 +190,6 @@ class ApiClient {
       const response = await this.request<Post>(`?action=getPost&slug=${encodeURIComponent(slug)}`);
       
       if (response.success && response.data) {
-        // Increment view count (optional - your backend might handle this)
         console.log('Post loaded successfully:', response.data.title);
       }
       
