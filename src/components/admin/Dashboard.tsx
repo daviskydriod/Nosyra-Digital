@@ -1,4 +1,4 @@
-// src/components/admin/Dashboard.tsx
+// src/components/admin/Dashboard.tsx (FIXED)
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import api from '../../lib/api';
@@ -132,19 +132,44 @@ const Dashboard: React.FC = () => {
   const loadDashboardData = async () => {
     try {
       setLoading(true);
-      const response = await api.getPosts({ page: 1, limit: 5 });
-      if (response.success) {
-        const posts = response.data.posts;
+      
+      // ✅ FIXED: Use getPostsWithPagination() instead of getPosts()
+      const response = await api.getPostsWithPagination({ page: 1, limit: 5 });
+      
+      console.log('Dashboard data response:', response);
+      
+      if (response.success && response.data) {
+        const posts = response.data.posts || [];
+        const pagination = response.data.pagination || { total: 0 };
+        
         setRecentPosts(posts);
         setStats({
-          totalPosts: response.data.pagination.total,
-          publishedPosts: response.data.pagination.total,
+          totalPosts: pagination.total,
+          publishedPosts: pagination.total,
           draftPosts: 0,
           totalViews: posts.reduce((sum: number, post: any) => sum + (post.views || 0), 0)
+        });
+      } else {
+        console.error('Failed to load dashboard data:', response.error || response.message);
+        // Set empty state on failure
+        setRecentPosts([]);
+        setStats({
+          totalPosts: 0,
+          publishedPosts: 0,
+          draftPosts: 0,
+          totalViews: 0
         });
       }
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
+      // Set empty state on error
+      setRecentPosts([]);
+      setStats({
+        totalPosts: 0,
+        publishedPosts: 0,
+        draftPosts: 0,
+        totalViews: 0
+      });
     } finally {
       setLoading(false);
     }
