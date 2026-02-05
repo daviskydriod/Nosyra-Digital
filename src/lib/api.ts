@@ -1,4 +1,4 @@
-// src/lib/api.ts
+// src/lib/api.ts (FIXED VERSION)
 const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
@@ -31,7 +31,9 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    const headers: HeadersInit = { ...options.headers };
+    const headers: HeadersInit = {
+      ...options.headers,
+    };
 
     // Only set JSON content type if body is NOT FormData
     if (options.body && !(options.body instanceof FormData)) {
@@ -43,18 +45,31 @@ class ApiClient {
     }
 
     try {
-      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      const url = `${this.baseUrl}${endpoint}`;
+      console.log('API Request:', { url, method: options.method || 'GET', headers });
+
+      const response = await fetch(url, {
         ...options,
         headers,
-        credentials: 'include', // include cookies/session
+        credentials: 'include',
       });
 
-      // Safely parse JSON (handles empty body, e.g. preflight)
+      console.log('API Response Status:', response.status);
+
+      // Safely parse JSON
       const text = await response.text();
-      const data = text ? JSON.parse(text) : {};
+      console.log('API Response Body:', text);
+
+      let data: ApiResponse<T>;
+      try {
+        data = text ? JSON.parse(text) : { success: false, message: 'Empty response' };
+      } catch (parseError) {
+        console.error('JSON Parse Error:', parseError);
+        throw new Error('Invalid response from server');
+      }
 
       if (!response.ok) {
-        throw new Error(data.message || 'Request failed');
+        throw new Error(data.message || `Request failed with status ${response.status}`);
       }
 
       return data;
@@ -65,7 +80,7 @@ class ApiClient {
   }
 
   // ------------------------
-  // Public endpoints
+  // Public endpoints (if you have them)
   // ------------------------
   async getPosts(params?: { page?: number; category?: string; search?: string }) {
     const query = new URLSearchParams();
@@ -73,76 +88,114 @@ class ApiClient {
     if (params?.category) query.append('category', params.category);
     if (params?.search) query.append('search', params.search);
 
-    return this.request(`/posts${query.toString() ? `?${query.toString()}` : ''}`);
+    const endpoint = query.toString() ? `?action=getPosts&${query.toString()}` : '?action=getPosts';
+    return this.request(endpoint);
   }
 
   async getPostBySlug(slug: string) {
-    return this.request(`/posts/${slug}`);
+    return this.request(`?action=getPost&slug=${slug}`);
   }
 
   async getCategories() {
-    return this.request('/categories');
+    return this.request('?action=getCategories');
   }
 
   async getCategoryPosts(slug: string, page?: number) {
-    const query = page ? `?page=${page}` : '';
-    return this.request(`/categories/${slug}/posts${query}`);
+    const query = page ? `&page=${page}` : '';
+    return this.request(`?action=getCategoryPosts&slug=${slug}${query}`);
   }
 
   // ------------------------
   // Admin endpoints
   // ------------------------
-  async login(username: string, password: string) {
-    return this.request(`?action=login`, {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-    });
+  async login(username: string, password: string): Promise<ApiResponse> {
+    try {
+      console.log('Attempting login for:', username);
+      
+      const response = await this.request<{ token: string; user: any }>('?action=login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+      });
+
+      console.log('Login response:', response);
+
+      if (response.success && response.data?.token) {
+        this.setToken(response.data.token);
+      }
+
+      return response;
+    } catch (error: any) {
+      console.error('Login error:', error);
+      throw error;
+    }
   }
 
-  async createPost(postData: { title: string; content: string }) {
-    return this.request(`?action=createPost`, {
+  async createPost(postData: { title: string; content: string }): Promise<ApiResponse> {
+    return this.request('?action=createPost', {
       method: 'POST',
       body: JSON.stringify(postData),
     });
   }
 
-  async updatePost(id: number, postData: { title: string; content: string }) {
+  async updatePost(id: number, postData: { title: string; content: string }): Promise<ApiResponse> {
     return this.request(`?action=updatePost&id=${id}`, {
       method: 'PUT',
       body: JSON.stringify(postData),
     });
   }
 
-  async deletePost(id: number) {
+  async deletePost(id: number): Promise<ApiResponse> {
     return this.request(`?action=deletePost&id=${id}`, {
       method: 'DELETE',
     });
   }
 
-  async uploadImage(file: File) {
+  async uploadImage(file: File): Promise<ApiResponse> {
     const formData = new FormData();
     formData.append('image', file);
 
     const headers: HeadersInit = {};
-    if (this.token) headers['Authorization'] = `Bearer ${this.token}`;
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
 
-    const response = await fetch(`${this.baseUrl}?action=uploadImage`, {
-      method: 'POST',
-      body: formData,
-      headers,
-      credentials: 'include',
-    });
+    try {
+      const response = await fetch(`${this.baseUrl}?action=uploadImage`, {
+        method: 'POST',
+        body: formData,
+        headers,
+        credentials: 'include',
+      });
 
-    // Safely parse JSON
-    const text = await response.text();
-    return text ? JSON.parse(text) : {};
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : { success: false, message: 'Empty response' };
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Upload failed');
+      }
+
+      return data;
+    } catch (error: any) {
+      console.error('Upload error:', error);
+      throw error;
+    }
   }
 
-  async createCategory(name: string, description?: string) {
-    return this.request(`?action=createCategory`, {
+  async createCategory(name: string, description?: string): Promise<ApiResponse> {
+    return this.request('?action=createCategory', {
       method: 'POST',
       body: JSON.stringify({ name, description }),
     });
+  }
+
+  // Helper method to check if user is logged in
+  isAuthenticated(): boolean {
+    return !!this.token;
+  }
+
+  // Helper method to get current token
+  getToken(): string | null {
+    return this.token;
   }
 }
 
