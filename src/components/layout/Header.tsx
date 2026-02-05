@@ -10,6 +10,7 @@ const navItems = [
   { name: "About", path: "/about" },
   { name: "Services", path: "/services" },
   { name: "Portfolio", path: "/portfolio" },
+  { name: "Blog", path: "/blog" }, // ✅ added
   { name: "Contact", path: "/contact" },
 ];
 
@@ -22,8 +23,9 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
     };
@@ -67,11 +69,7 @@ const Header = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navItems.map((item, index) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="relative group"
-                >
+                <Link key={item.path} to={item.path} className="relative group">
                   <motion.span
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -86,7 +84,9 @@ const Header = () => {
                   </motion.span>
                   <span
                     className={`absolute -bottom-1 left-0 h-0.5 bg-cyan transition-all duration-300 ${
-                      location.pathname === item.path ? "w-full" : "w-0 group-hover:w-full"
+                      location.pathname === item.path
+                        ? "w-full"
+                        : "w-0 group-hover:w-full"
                     }`}
                   />
                 </Link>
@@ -96,9 +96,7 @@ const Header = () => {
             {/* CTA Button */}
             <div className="hidden lg:block">
               <Link to="/contact">
-                <Button
-                  className="relative overflow-hidden bg-cyan text-primary-foreground hover:bg-cyan-glow px-6 py-2 font-semibold transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--cyan)/0.5)]"
-                >
+                <Button className="relative overflow-hidden bg-cyan text-primary-foreground hover:bg-cyan-glow px-6 py-2 font-semibold transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--cyan)/0.5)]">
                   <span className="relative z-10">Get Started</span>
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -152,6 +150,7 @@ const Header = () => {
                     </Link>
                   </motion.div>
                 ))}
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
