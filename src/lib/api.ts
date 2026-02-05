@@ -1,6 +1,6 @@
 // src/lib/api.ts
 
-const API_BASE_URL = 'https://blog.www.nosyradigital.com.ng/blog';
+const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog';
 
 interface ApiResponse<T = any> {
   success: boolean;
