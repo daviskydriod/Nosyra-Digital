@@ -8,7 +8,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Preloader from "@/components/ui/Preloader";
 
-// Main Pages
+// Public Pages
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -23,6 +23,8 @@ import BlogPost from "./components/BlogPost";
 // Admin
 import Login from "./components/admin/Login";
 import Dashboard from "./components/admin/Dashboard";
+import Posts from "./components/admin/Posts";
+import Categories from "./components/admin/Categories";
 import PostEditor from "./components/admin/PostEditor";
 import { AuthProvider, ProtectedRoute } from "./components/admin/Dashboard";
 
@@ -43,18 +45,18 @@ const App = () => {
           <BrowserRouter>
             <AuthProvider>
               <Routes>
-                {/* Public Website */}
+                {/* ================= PUBLIC WEBSITE ================= */}
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/contact" element={<Contact />} />
 
-                {/* Blog */}
+                {/* ================= BLOG ================= */}
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
 
-                {/* Admin */}
+                {/* ================= ADMIN ================= */}
                 <Route path="/admin/login" element={<Login />} />
 
                 <Route
@@ -62,6 +64,15 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/posts"
+                  element={
+                    <ProtectedRoute>
+                      <Posts />
                     </ProtectedRoute>
                   }
                 />
@@ -84,7 +95,16 @@ const App = () => {
                   }
                 />
 
-                {/* 404 */}
+                <Route
+                  path="/admin/categories"
+                  element={
+                    <ProtectedRoute>
+                      <Categories />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* ================= 404 ================= */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AuthProvider>
