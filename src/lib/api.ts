@@ -31,12 +31,10 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    const headers: HeadersInit = {
-      ...options.headers,
-    };
+    const headers: HeadersInit = { ...options.headers };
 
-    // Only set JSON content type if body is JSON
-    if (!(options.body instanceof FormData)) {
+    // Only set JSON content type if body is NOT FormData
+    if (options.body && !(options.body instanceof FormData)) {
       headers['Content-Type'] = 'application/json';
     }
 
@@ -48,17 +46,19 @@ class ApiClient {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         ...options,
         headers,
-        credentials: 'include', // send cookies/sessions
+        credentials: 'include', // include cookies/session
       });
 
-      const data = await response.json();
+      // Safely parse JSON (handles empty body, e.g. preflight)
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : {};
 
       if (!response.ok) {
         throw new Error(data.message || 'Request failed');
       }
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error('API Error:', error);
       throw error;
     }
@@ -68,13 +68,12 @@ class ApiClient {
   // Public endpoints
   // ------------------------
   async getPosts(params?: { page?: number; category?: string; search?: string }) {
-    const queryParams = new URLSearchParams();
-    if (params?.page) queryParams.append('page', params.page.toString());
-    if (params?.category) queryParams.append('category', params.category);
-    if (params?.search) queryParams.append('search', params.search);
+    const query = new URLSearchParams();
+    if (params?.page) query.append('page', params.page.toString());
+    if (params?.category) query.append('category', params.category);
+    if (params?.search) query.append('search', params.search);
 
-    const query = queryParams.toString();
-    return this.request(`/posts${query ? `?${query}` : ''}`);
+    return this.request(`/posts${query.toString() ? `?${query.toString()}` : ''}`);
   }
 
   async getPostBySlug(slug: string) {
@@ -134,7 +133,9 @@ class ApiClient {
       credentials: 'include',
     });
 
-    return response.json();
+    // Safely parse JSON
+    const text = await response.text();
+    return text ? JSON.parse(text) : {};
   }
 
   async createCategory(name: string, description?: string) {
