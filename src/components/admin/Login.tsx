@@ -2,15 +2,13 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './Dashboard';
+import { useAuth } from './Dashboard'; // your auth context
+import { api } from '../../lib/api'; // make sure path is correct
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useAuth();
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  });
+  const { setAuth, isAuthenticated } = useAuth();
+  const [formData, setFormData] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -32,9 +30,24 @@ const Login: React.FC = () => {
 
     try {
       setLoading(true);
-      await login(formData.username, formData.password);
-      navigate('/admin');
+
+      // Call PHP API
+      const response = await api.login(formData.username, formData.password);
+
+      if (response.success && response.data?.token) {
+        // Store token in auth context
+        api.setToken(response.data.token);
+        setAuth({
+          user: response.data.user,
+          token: response.data.token,
+        });
+
+        navigate('/admin');
+      } else {
+        setError(response.message || 'Login failed. Please check your credentials.');
+      }
     } catch (err: any) {
+      // Network or unexpected errors
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
@@ -64,7 +77,9 @@ const Login: React.FC = () => {
               <input
                 type="text"
                 value={formData.username}
-                onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, username: e.target.value }))
+                }
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your username"
                 autoComplete="username"
@@ -79,7 +94,9 @@ const Login: React.FC = () => {
               <input
                 type="password"
                 value={formData.password}
-                onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, password: e.target.value }))
+                }
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your password"
                 autoComplete="current-password"
