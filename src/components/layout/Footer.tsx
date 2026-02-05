@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { 
-  Facebook, 
-  Twitter, 
-  Instagram, 
-  Linkedin, 
-  Mail, 
-  Phone, 
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
   MapPin,
   ArrowUp,
-  Send
+  Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,7 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = async (e) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
@@ -49,7 +49,7 @@ const Footer = () => {
       });
 
       setEmail("");
-    } catch (error) {
+    } catch {
       toast({
         title: "Something went wrong",
         description: "Please try again later.",
@@ -76,7 +76,7 @@ const Footer = () => {
     resources: [
       { name: "Portfolio", path: "/portfolio" },
       { name: "Case Studies", path: "/portfolio" },
-      { name: "Blog", path: "/" },
+      { name: "Blog", path: "/blog" }, // ✅ fixed
       { name: "FAQ", path: "/contact" },
     ],
   };
@@ -96,12 +96,11 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        
         {/* Newsletter */}
         <div className="py-12 border-b border-border">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-2xl font-poppins font-bold text-foreground mb-2">
+              <h3 className="text-2xl font-poppins font-bold mb-2">
                 Stay Updated
               </h3>
               <p className="text-muted-foreground">
@@ -109,7 +108,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <form 
+            <form
               onSubmit={handleSubscribe}
               className="flex w-full lg:w-auto gap-3"
             >
@@ -121,10 +120,10 @@ const Footer = () => {
                 required
                 className="bg-muted/50 border-border focus:border-cyan w-full lg:w-72"
               />
-              <Button 
+              <Button
                 type="submit"
                 disabled={loading}
-                className="bg-cyan text-primary-foreground hover:bg-cyan-glow px-6 shrink-0"
+                className="bg-cyan text-primary-foreground hover:bg-cyan-glow px-6"
               >
                 {loading ? "..." : <Send className="w-4 h-4" />}
               </Button>
@@ -136,27 +135,24 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Main Content */}
+        {/* Main Footer */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-          
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block mb-6">
-              <img
-                src={logo}
-                alt="Nosyra Digital"
-                className="h-12 w-auto hover:drop-shadow-[0_0_15px_hsl(var(--cyan)/0.5)] transition-all duration-300"
-              />
+              <img src={logo} alt="Nosyra Digital" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              We craft exceptional digital experiences that help businesses thrive in the modern world. Your vision, our expertise.
+              We craft exceptional digital experiences that help businesses
+              thrive in the modern world.
             </p>
+
             <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:bg-cyan hover:text-primary-foreground transition-all duration-300"
+                  className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center hover:bg-cyan hover:text-white"
                 >
                   <social.icon className="w-5 h-5" />
                 </motion.a>
@@ -167,7 +163,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             {footerLinks.company.map((link) => (
-              <Link key={link.name} to={link.path} className="block text-muted-foreground hover:text-cyan">
+              <Link key={link.name} to={link.path} className="block hover:text-cyan">
                 {link.name}
               </Link>
             ))}
@@ -176,7 +172,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
             {footerLinks.services.map((link) => (
-              <Link key={link.name} to={link.path} className="block text-muted-foreground hover:text-cyan">
+              <Link key={link.name} to={link.path} className="block hover:text-cyan">
                 {link.name}
               </Link>
             ))}
@@ -184,14 +180,14 @@ const Footer = () => {
 
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
-            <div className="space-y-3 text-muted-foreground">
-              <div className="flex items-center gap-2">
+            <div className="space-y-3">
+              <div className="flex gap-2">
                 <MapPin className="w-4 h-4 text-cyan" /> Lagos, Nigeria
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex gap-2">
                 <Phone className="w-4 h-4 text-cyan" /> +234 705 846 6586
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex gap-2">
                 <Mail className="w-4 h-4 text-cyan" /> info@nosyradigital.com.ng
               </div>
             </div>
