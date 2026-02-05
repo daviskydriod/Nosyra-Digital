@@ -2,7 +2,6 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,9 +15,10 @@ import Portfolio from "./pages/Portfolio";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-// Blog
-import BlogList from "./components/BlogList";
-import BlogPost from "./components/BlogPost";
+// Blog - Updated Components
+import BlogListing from "./pages/BlogListing";
+import BlogPost from "./pages/BlogPost";
+import BlogCategory from "./pages/BlogCategory";
 
 // Admin
 import Login from "./components/admin/Login";
@@ -38,10 +38,8 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
-
           <Toaster />
           <Sonner />
-
           <BrowserRouter>
             <AuthProvider>
               <Routes>
@@ -53,12 +51,12 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
 
                 {/* ================= BLOG ================= */}
-                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blog" element={<BlogListing />} />
+                <Route path="/blog/category/:slug" element={<BlogCategory />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
 
                 {/* ================= ADMIN ================= */}
                 <Route path="/admin/login" element={<Login />} />
-
                 <Route
                   path="/admin"
                   element={
@@ -67,7 +65,6 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/admin/posts"
                   element={
@@ -76,7 +73,6 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/admin/posts/new"
                   element={
@@ -85,7 +81,6 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/admin/posts/edit/:id"
                   element={
@@ -94,7 +89,6 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/admin/categories"
                   element={
