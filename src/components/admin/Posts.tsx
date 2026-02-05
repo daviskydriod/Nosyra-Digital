@@ -35,7 +35,7 @@ const Posts: React.FC = () => {
   const loadPosts = async () => {
     try {
       setLoading(true);
-      const response = await api.getPosts({ 
+      const response = await api.getPostsWithPagination({ 
         page: currentPage, 
         search: searchTerm || undefined 
       });
