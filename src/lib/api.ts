@@ -1,6 +1,5 @@
 // src/lib/api.ts
-
-const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog';
+const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
   success: boolean;
@@ -45,7 +44,7 @@ class ApiClient {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         ...options,
         headers,
-        credentials: 'include',
+        credentials: 'include', // sends cookies if any
       });
 
       const data = await response.json();
@@ -62,11 +61,7 @@ class ApiClient {
   }
 
   // Public endpoints
-  async getPosts(params?: {
-    page?: number;
-    category?: string;
-    search?: string;
-  }) {
+  async getPosts(params?: { page?: number; category?: string; search?: string }) {
     const queryParams = new URLSearchParams();
     if (params?.page) queryParams.append('page', params.page.toString());
     if (params?.category) queryParams.append('category', params.category);
@@ -91,28 +86,29 @@ class ApiClient {
 
   // Admin endpoints
   async login(username: string, password: string) {
-    return this.request('/admin/login', {
+    // point to ?action=login
+    return this.request(`?action=login`, {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
   }
 
   async createPost(postData: any) {
-    return this.request('/admin/posts', {
+    return this.request(`?action=createPost`, {
       method: 'POST',
       body: JSON.stringify(postData),
     });
   }
 
   async updatePost(id: number, postData: any) {
-    return this.request(`/admin/posts/${id}`, {
+    return this.request(`?action=updatePost&id=${id}`, {
       method: 'PUT',
       body: JSON.stringify(postData),
     });
   }
 
   async deletePost(id: number) {
-    return this.request(`/admin/posts/${id}`, {
+    return this.request(`?action=deletePost&id=${id}`, {
       method: 'DELETE',
     });
   }
@@ -126,7 +122,7 @@ class ApiClient {
       headers['Authorization'] = `Bearer ${this.token}`;
     }
 
-    const response = await fetch(`${this.baseUrl}/admin/upload`, {
+    const response = await fetch(`${this.baseUrl}?action=uploadImage`, {
       method: 'POST',
       headers,
       body: formData,
@@ -137,7 +133,7 @@ class ApiClient {
   }
 
   async createCategory(name: string, description?: string) {
-    return this.request('/admin/categories', {
+    return this.request(`?action=createCategory`, {
       method: 'POST',
       body: JSON.stringify({ name, description }),
     });
