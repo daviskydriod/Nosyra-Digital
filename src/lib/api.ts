@@ -1,5 +1,5 @@
 // src/lib/api.ts
-const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/routes/auth.php';
+const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
   success: boolean;
