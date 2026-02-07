@@ -285,34 +285,7 @@ const BlogListing: React.FC = () => {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <AnimatedSection>
-            <GlassCard className="max-w-3xl mx-auto p-12 text-center" gradient>
-              <TrendingUp className="w-12 h-12 text-cyan mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-poppins font-bold mb-4">
-                Never Miss an <span className="text-gradient">Update</span>
-              </h2>
-              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                Subscribe to our newsletter and get the latest articles, insights, and tips delivered directly to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 bg-background/50 border border-cyan/20 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-cyan/50 transition-all"
-                />
-                <button className="px-6 py-3 bg-gradient-to-r from-cyan to-navy text-white rounded-lg font-medium hover:shadow-lg hover:shadow-cyan/50 transition-all duration-300 hover:scale-105">
-                  Subscribe
-                </button>
-              </div>
-            </GlassCard>
-          </AnimatedSection>
-        </div>
-      </section>
+
     </Layout>
   );
 };
