@@ -58,16 +58,20 @@ const ProjectDetail = () => {
             alt={project.title}
             className="w-full h-full object-cover"
           />
-          {/* Dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
+          {/* Top overlay — darkens behind the fixed nav */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/40 to-transparent" />
+          {/* Bottom overlay — ensures text area is always readable */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-transparent" />
+          {/* Global dimmer */}
+          <div className="absolute inset-0 bg-background/30" />
         </motion.div>
 
-        {/* Back link */}
-        <div className="absolute top-28 left-0 right-0 z-20">
+        {/* Back link — clears the fixed header (~64px tall) */}
+        <div className="absolute top-0 left-0 right-0 z-20 pt-24">
           <div className="container mx-auto px-4 lg:px-8">
             <Link
               to="/portfolio"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-cyan transition-colors duration-200 group"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-cyan transition-colors duration-200"
             >
               <motion.span
                 className="inline-flex"
@@ -83,14 +87,14 @@ const ProjectDetail = () => {
 
         {/* Hero content */}
         <motion.div
-          className="relative z-10 container mx-auto px-4 lg:px-8 pb-16 lg:pb-24"
+          className="relative z-10 container mx-auto px-4 lg:px-8 pb-20 lg:pb-28"
           style={{ opacity: heroOpacity }}
         >
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="inline-block px-4 py-1.5 mb-5 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20 uppercase tracking-widest"
+            className="inline-block px-4 py-1.5 mb-5 text-sm font-medium text-cyan bg-cyan/15 rounded-full border border-cyan/30 uppercase tracking-widest"
           >
             {project.category}
           </motion.span>
@@ -99,7 +103,7 @@ const ProjectDetail = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-foreground mb-6 leading-[1.05] max-w-4xl"
+            className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-white mb-6 leading-[1.05] max-w-4xl drop-shadow-lg"
           >
             {project.title}
           </motion.h1>
@@ -108,7 +112,7 @@ const ProjectDetail = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed"
+            className="text-lg lg:text-xl text-white/75 max-w-2xl mb-8 leading-relaxed"
           >
             {project.description}
           </motion.p>
@@ -120,16 +124,16 @@ const ProjectDetail = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-wrap gap-3 mb-10"
           >
-            <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
+            <span className="px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-sm text-white/80 backdrop-blur-sm">
               📅 {project.year}
             </span>
-            <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
+            <span className="px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-sm text-white/80 backdrop-blur-sm">
               ⏱ {project.duration}
             </span>
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 bg-cyan/10 border border-cyan/20 rounded-full text-sm text-cyan"
+                className="px-4 py-1.5 bg-cyan/20 border border-cyan/40 rounded-full text-sm text-cyan backdrop-blur-sm"
               >
                 {tag}
               </span>
