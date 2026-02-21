@@ -1,6 +1,6 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import GradientButton from "@/components/ui/GradientButton";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -9,16 +9,6 @@ import { projects } from "@/data/projectsData";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroImageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const projectIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[projectIndex];
@@ -46,32 +36,26 @@ const ProjectDetail = () => {
 
   return (
     <Layout>
-      {/* ── HERO ── */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen flex flex-col justify-end overflow-hidden"
-      >
-        {/* Parallax image */}
-        <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          {/* Top overlay — darkens behind the fixed nav */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/40 to-transparent" />
-          {/* Bottom overlay — ensures text area is always readable */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-transparent" />
-          {/* Global dimmer */}
-          <div className="absolute inset-0 bg-background/30" />
-        </motion.div>
 
-        {/* Back link — clears the fixed header (~64px tall) */}
-        <div className="absolute top-0 left-0 right-0 z-20 pt-24">
-          <div className="container mx-auto px-4 lg:px-8">
+      {/* ── HERO — clean, no image ── */}
+      <section className="relative overflow-hidden pt-36 pb-20 lg:pb-24">
+        {/* Backgrounds */}
+        <div className="absolute inset-0 bg-gradient-mesh" />
+        <div className="absolute -top-20 left-1/4 w-[600px] h-[600px] bg-cyan/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan/4 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+
+          {/* Back link */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mb-10"
+          >
             <Link
               to="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-cyan transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-cyan transition-colors duration-200"
             >
               <motion.span
                 className="inline-flex"
@@ -82,84 +66,106 @@ const ProjectDetail = () => {
               </motion.span>
               All Projects
             </Link>
-          </div>
-        </div>
+          </motion.div>
 
-        {/* Hero content */}
-        <motion.div
-          className="relative z-10 container mx-auto px-4 lg:px-8 pb-20 lg:pb-28"
-          style={{ opacity: heroOpacity }}
-        >
+          {/* Category badge */}
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="inline-block px-4 py-1.5 mb-5 text-sm font-medium text-cyan bg-cyan/15 rounded-full border border-cyan/30 uppercase tracking-widest"
+            transition={{ delay: 0.05, duration: 0.45 }}
+            className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20 uppercase tracking-widest"
           >
             {project.category}
           </motion.span>
 
+          {/* Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-white mb-6 leading-[1.05] max-w-4xl drop-shadow-lg"
+            transition={{ delay: 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-foreground mb-6 leading-[1.05] max-w-4xl"
           >
             {project.title}
           </motion.h1>
 
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-lg lg:text-xl text-white/75 max-w-2xl mb-8 leading-relaxed"
+            transition={{ delay: 0.22, duration: 0.5 }}
+            className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
           >
             {project.description}
           </motion.p>
 
-          {/* Meta pills */}
+          {/* Meta pills + CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-3 mb-10"
+            transition={{ delay: 0.32, duration: 0.5 }}
+            className="flex flex-wrap items-center gap-3"
           >
-            <span className="px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-sm text-white/80 backdrop-blur-sm">
+            <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
               📅 {project.year}
             </span>
-            <span className="px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-sm text-white/80 backdrop-blur-sm">
+            <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
               ⏱ {project.duration}
             </span>
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 bg-cyan/20 border border-cyan/40 rounded-full text-sm text-cyan backdrop-blur-sm"
+                className="px-4 py-1.5 bg-cyan/10 border border-cyan/20 rounded-full text-sm text-cyan"
               >
                 {tag}
               </span>
             ))}
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-cyan text-primary-foreground font-semibold rounded-full shadow-[0_0_28px_hsl(var(--cyan)/0.35)] hover:shadow-[0_0_45px_hsl(var(--cyan)/0.55)] hover:scale-105 transition-all duration-300 text-sm"
+            >
+              Visit Live Site
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </motion.div>
+        </div>
+      </section>
 
-          <motion.a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-cyan text-primary-foreground font-semibold rounded-full shadow-[0_0_30px_hsl(var(--cyan)/0.4)] hover:shadow-[0_0_50px_hsl(var(--cyan)/0.6)] hover:scale-105 transition-all duration-300"
+      {/* ── PROJECT SCREENSHOT ── */}
+      <section className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-2xl overflow-hidden border border-border/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
           >
-            Visit Live Site
-            <ExternalLink className="w-4 h-4" />
-          </motion.a>
-        </motion.div>
+            {/* Browser bar decoration */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-muted/80 border-b border-border/50">
+              <span className="w-3 h-3 rounded-full bg-red-400/70" />
+              <span className="w-3 h-3 rounded-full bg-yellow-400/70" />
+              <span className="w-3 h-3 rounded-full bg-green-400/70" />
+              <div className="ml-3 flex-1 h-6 bg-background/60 rounded-md flex items-center px-3">
+                <span className="text-xs text-muted-foreground/50 font-mono truncate">
+                  {project.link}
+                </span>
+              </div>
+            </div>
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full object-cover"
+            />
+          </motion.div>
+        </div>
       </section>
 
       {/* ── OVERVIEW ── */}
       <section className="py-20 lg:py-28 relative">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
-            {/* Left: full description */}
             <div className="lg:col-span-2">
               <AnimatedSection>
                 <span className="text-xs font-mono text-cyan uppercase tracking-[0.2em] mb-4 block">
@@ -174,7 +180,6 @@ const ProjectDetail = () => {
               </AnimatedSection>
             </div>
 
-            {/* Right: services */}
             <div>
               <AnimatedSection>
                 <span className="text-xs font-mono text-cyan uppercase tracking-[0.2em] mb-4 block">
@@ -206,7 +211,6 @@ const ProjectDetail = () => {
         <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Challenge */}
             <AnimatedSection>
               <div className="p-8 lg:p-10 rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm h-full">
                 <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6">
@@ -222,7 +226,6 @@ const ProjectDetail = () => {
               </div>
             </AnimatedSection>
 
-            {/* Solution */}
             <AnimatedSection>
               <div className="p-8 lg:p-10 rounded-2xl border border-cyan/20 bg-cyan/[0.03] backdrop-blur-sm h-full">
                 <div className="w-10 h-10 rounded-xl bg-cyan/10 border border-cyan/20 flex items-center justify-center mb-6">
@@ -271,11 +274,10 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* ── NEXT / PREV NAVIGATION ── */}
+      {/* ── PREV / NEXT ── */}
       <section className="py-16 border-t border-border/40">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col sm:flex-row items-stretch gap-4 sm:gap-0">
-            {/* Prev */}
             {prevProject ? (
               <Link
                 to={`/portfolio/${prevProject.slug}`}
@@ -301,10 +303,8 @@ const ProjectDetail = () => {
               <div className="flex-1" />
             )}
 
-            {/* Divider */}
             <div className="hidden sm:block w-px bg-border/40" />
 
-            {/* Next */}
             {nextProject ? (
               <Link
                 to={`/portfolio/${nextProject.slug}`}
@@ -355,6 +355,7 @@ const ProjectDetail = () => {
           </AnimatedSection>
         </div>
       </section>
+
     </Layout>
   );
 };
