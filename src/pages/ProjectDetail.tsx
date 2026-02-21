@@ -132,33 +132,111 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* ── PROJECT SCREENSHOT ── */}
+      {/* ── PROJECT SCREENSHOT + DETAILS ── */}
       <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-2xl overflow-hidden border border-border/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
-          >
-            {/* Browser bar decoration */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-muted/80 border-b border-border/50">
-              <span className="w-3 h-3 rounded-full bg-red-400/70" />
-              <span className="w-3 h-3 rounded-full bg-yellow-400/70" />
-              <span className="w-3 h-3 rounded-full bg-green-400/70" />
-              <div className="ml-3 flex-1 h-6 bg-background/60 rounded-md flex items-center px-3">
-                <span className="text-xs text-muted-foreground/50 font-mono truncate">
-                  {project.link}
-                </span>
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+
+            {/* Image — takes up most of the width */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full lg:flex-1 relative rounded-2xl overflow-hidden border border-border/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
+            >
+              {/* Browser bar */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-muted/80 border-b border-border/50">
+                <span className="w-3 h-3 rounded-full bg-red-400/70" />
+                <span className="w-3 h-3 rounded-full bg-yellow-400/70" />
+                <span className="w-3 h-3 rounded-full bg-green-400/70" />
+                <div className="ml-3 flex-1 h-6 bg-background/60 rounded-md flex items-center px-3">
+                  <span className="text-xs text-muted-foreground/50 font-mono truncate">
+                    {project.link}
+                  </span>
+                </div>
               </div>
-            </div>
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full object-cover"
-            />
-          </motion.div>
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full object-cover max-h-[480px]"
+              />
+            </motion.div>
+
+            {/* Details column */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full lg:w-64 xl:w-72 shrink-0 flex flex-col gap-6"
+            >
+              {/* Project name */}
+              <div className="p-5 rounded-2xl border border-border/50 bg-card">
+                <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-2 block">
+                  Project
+                </span>
+                <p className="font-poppins font-bold text-foreground text-base leading-snug">
+                  {project.title}
+                </p>
+              </div>
+
+              {/* Category */}
+              <div className="p-5 rounded-2xl border border-border/50 bg-card">
+                <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-2 block">
+                  Category
+                </span>
+                <p className="text-foreground font-medium">{project.category}</p>
+              </div>
+
+              {/* Year & Duration */}
+              <div className="p-5 rounded-2xl border border-border/50 bg-card">
+                <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">
+                  Timeline
+                </span>
+                <div className="flex flex-col gap-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Year</span>
+                    <span className="text-foreground font-medium">{project.year}</span>
+                  </div>
+                  <div className="w-full h-px bg-border/40" />
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Duration</span>
+                    <span className="text-foreground font-medium">{project.duration}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tags */}
+              <div className="p-5 rounded-2xl border border-border/50 bg-card">
+                <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">
+                  Tech & Stack
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-xs bg-cyan/10 border border-cyan/20 text-cyan rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live link */}
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-cyan text-primary-foreground font-semibold rounded-xl shadow-[0_0_24px_hsl(var(--cyan)/0.3)] hover:shadow-[0_0_40px_hsl(var(--cyan)/0.5)] hover:scale-105 transition-all duration-300 text-sm"
+              >
+                Visit Live Site
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
