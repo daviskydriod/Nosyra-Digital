@@ -6,20 +6,18 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Preloader from "@/components/ui/Preloader";
-
 // Public Pages
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
+import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-
 // Blog - Updated Components
 import BlogListing from "./pages/BlogListing";
 import BlogPost from "./pages/BlogPost";
 import BlogCategory from "./pages/BlogCategory";
-
 // Admin
 import Login from "./components/admin/Login";
 import Dashboard from "./components/admin/Dashboard";
@@ -48,6 +46,7 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/portfolio/:slug" element={<ProjectDetail />} />
                 <Route path="/contact" element={<Contact />} />
 
                 {/* ================= BLOG ================= */}
