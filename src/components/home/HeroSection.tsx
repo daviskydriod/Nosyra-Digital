@@ -119,26 +119,6 @@ const HeroSection = () => {
               </GradientButton>
             </motion.div>
 
-            {/* Brand Names */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.1 }}
-              className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
-            >
-              <span className="text-xs text-muted-foreground/50 uppercase tracking-widest font-mono w-full mb-1">
-                Brands we've worked with
-              </span>
-              {["Eko Connect", "Liana Flowers", "CAT Global", "GT Green", "Honters Cruise"].map((brand) => (
-                <span
-                  key={brand}
-                  className="text-base md:text-lg text-muted-foreground/60 font-poppins font-bold tracking-wide hover:text-cyan transition-colors"
-                >
-                  {brand}
-                </span>
-              ))}
-            </motion.div>
-
           </div>
         </div>
       </div>
