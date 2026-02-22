@@ -44,7 +44,7 @@ export const projects = [
   challenge:
     "Flowers are highly time-sensitive products. The platform needed to handle perishable inventory, same-day delivery slots, and emotionally driven purchase decisions  all while looking stunning on mobile.",
   solution:
-    "We designed an emotion-first shopping experience with rich imagery and a clean, simple checkout flow. Orders are confirmed through WhatsApp for a personal touch, with bank transfer as the payment method — keeping things accessible and trusted for Nigerian customers. The mobile-first approach ensured the majority of customers on phones had an experience as polished as desktop.",
+    "We designed an emotion-first shopping experience with rich imagery and a clean, simple checkout flow. Orders are confirmed through WhatsApp for a personal touch, with bank transfer as the payment method keeping things accessible and trusted for Nigerian customers. The mobile-first approach ensured the majority of customers on phones had an experience as polished as desktop.",
   results: [
     "Average order value increased after launch",
     "Strong mobile conversion driven by familiar checkout flow",
@@ -86,8 +86,8 @@ export const projects = [
   description: "Nigeria's premier bio-sewage and waste management company delivering innovative biological sewer treatment systems for homes and businesses.", 
   fullDescription: "Viktrotech needed a digital presence that clearly communicated their specialized expertise in bio-sewage systems to a broad audience from homeowners to commercial developers and NGOs. We built a platform that positions them as Nigeria's leading waste management innovator, showcasing their unique ability to design and install biological sewer treatment systems in both dry and waterlogged areas.", 
   tags: ["Waste Management", "Bio-Sewage", "Environmental Solutions"], 
-  challenge: "Translating a highly technical and niche service — biological sewage treatment systems  into a compelling digital experience that resonates with both individual homeowners and large commercial clients, while building trust in an industry where credibility is everything.", 
-  solution: "We structured the site around the environments Viktrotech serves — domestic, commercial, waterlogged, and dry areas  making it easy for any visitor to immediately see themselves in the solution. Clean visual storytelling and outcome-focused copy replaced technical jargon, highlighting environmental impact and reliability.", 
+  challenge: "Translating a highly technical and niche service  biological sewage treatment systems  into a compelling digital experience that resonates with both individual homeowners and large commercial clients, while building trust in an industry where credibility is everything.", 
+  solution: "We structured the site around the environments Viktrotech serves  domestic, commercial, waterlogged, and dry areas  making it easy for any visitor to immediately see themselves in the solution. Clean visual storytelling and outcome-focused copy replaced technical jargon, highlighting environmental impact and reliability.", 
   results: [ 
     "Significant increase in qualified leads from commercial clients", 
     "Time-on-site increased by 55%", 
@@ -105,7 +105,7 @@ export const projects = [
     link: "https://www.gtgreenpetrochemical.com.ng/",
     description: "Professional petrochemical company website showcasing industry leadership and sustainability.",
     fullDescription:
-      "GT Green Petrochemical operates in one of Nigeria's most competitive industries. We built a website that positioned them as a modern, sustainability-focused leader moving away from the typically dated aesthetic of the sector toward a clean, confident digital identity that appeals to international partners and investors.",
+      "GT Green Petrochemical operates in one of Nigeria's most competitive industries. We built a website that positioned them as a modern, sustainability focused leader moving away from the typically dated aesthetic of the sector toward a clean, confident digital identity that appeals to international partners and investors.",
     tags: ["Corporate", "Industrial", "Sustainability"],
     challenge:
       "The petrochemical industry has a reputation for outdated web presence. The client wanted to stand out while still appearing credible and established to large institutional partners.",
