@@ -13,8 +13,8 @@ const HeroSection = () => {
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX / innerWidth - 0.5) * 16);
-      mouseY.set((e.clientY / innerHeight - 0.5) * 16);
+      mouseX.set((e.clientX / innerWidth - 0.5) * 14);
+      mouseY.set((e.clientY / innerHeight - 0.5) * 14);
     };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
@@ -26,16 +26,10 @@ const HeroSection = () => {
     1600
   );
 
-  const lines = [
-    { text: "Websites", accent: false },
-    { text: "That Actually", accent: false },
-    { text: "Work.", accent: true },
-  ];
-
   return (
     <section className="relative h-screen max-h-screen flex flex-col overflow-hidden bg-background">
 
-      {/* Top thin rule */}
+      {/* Top rule */}
       <motion.div
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent z-10"
         initial={{ scaleX: 0 }}
@@ -43,113 +37,160 @@ const HeroSection = () => {
         transition={{ delay: 0.2, duration: 1.2 }}
       />
 
-      {/* Subtle grid */}
+      {/* Grid */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(hsl(var(--cyan)/0.025) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(var(--cyan)/0.025) 1px, transparent 1px)
+              linear-gradient(hsl(var(--cyan)/0.02) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(var(--cyan)/0.02) 1px, transparent 1px)
             `,
             backgroundSize: "80px 80px",
             x: smoothX,
             y: smoothY,
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_30%,hsl(var(--background))_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_65%_at_50%_50%,transparent_25%,hsl(var(--background))_100%)]" />
       </div>
 
-      {/* Ambient orb */}
+      {/* Orb */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
         <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.07, 0.14, 0.07] }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.06, 0.12, 0.06] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[500px] h-[500px] rounded-full bg-cyan/20 blur-[120px]"
+          className="w-[450px] h-[450px] rounded-full bg-cyan/20 blur-[110px]"
         />
       </div>
 
-      {/* ── CONTENT ── */}
+      {/* ── SPLIT LAYOUT — left big text, right subtitle+CTA ── */}
       <div className="relative z-10 flex flex-col h-full pt-20">
 
-        {/* Top label */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex items-center justify-between px-6 lg:px-12 pt-5"
-        >
-          <div className="flex items-center gap-3">
-            <motion.span
-              className="w-1.5 h-1.5 rounded-full bg-cyan"
-              animate={{ opacity: [1, 0.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-            <span className="text-xs text-muted-foreground/50 tracking-[0.28em] uppercase font-medium">
-              Nigeria's Premier Digital Agency
-            </span>
-          </div>
-          <span className="hidden md:block text-xs text-muted-foreground/30 tracking-[0.2em] uppercase font-medium">
-            Est. 2024
-          </span>
-        </motion.div>
+        {/* Main split — takes all space */}
+        <div className="flex-1 flex items-center px-6 lg:px-14 gap-8 lg:gap-16">
 
-        {/* BIG headline — centered, takes available space */}
-        <div className="flex-1 flex flex-col items-center justify-center px-6 lg:px-12 py-4">
-          <div className="text-center w-full">
-            {lines.map((line, lineIdx) => (
-              <div key={lineIdx} className="overflow-hidden">
-                <motion.h1
-                  initial={{ y: "110%", opacity: 0 }}
+          {/* LEFT — giant stacked text */}
+          <div className="flex-1">
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.15 }}
+              className="flex items-center gap-2.5 mb-8"
+            >
+              <motion.span
+                className="w-1.5 h-1.5 rounded-full bg-cyan shrink-0"
+                animate={{ opacity: [1, 0.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+              <span className="text-[10px] text-muted-foreground/40 tracking-[0.3em] uppercase font-medium">
+                Digital Agency · Lagos
+              </span>
+            </motion.div>
+
+            {/* Headline lines */}
+            {[
+              { text: "We Build", accent: false },
+              { text: "Websites", accent: false },
+              { text: "That Work.", accent: true },
+            ].map((line, i) => (
+              <div key={i} className="overflow-hidden">
+                <motion.p
+                  initial={{ y: "105%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
                   transition={{
-                    delay: 0.35 + lineIdx * 0.13,
+                    delay: 0.3 + i * 0.12,
                     type: "spring",
-                    stiffness: 65,
+                    stiffness: 70,
                     damping: 14,
                   }}
-                  className={`block font-poppins font-black tracking-tight leading-[0.92]
-                    text-[clamp(3.2rem,9.5vw,8.5rem)]
+                  className={`font-poppins font-black tracking-tight leading-[0.9] block
+                    text-[clamp(2.8rem,7vw,7.5rem)]
                     ${line.accent
-                      ? "bg-gradient-to-r from-cyan via-cyan/75 to-cyan/40 bg-clip-text text-transparent"
+                      ? "bg-gradient-to-r from-cyan via-cyan/70 to-cyan/35 bg-clip-text text-transparent"
                       : "text-foreground"
                     }`}
                 >
                   {line.text}
-                </motion.h1>
+                </motion.p>
               </div>
             ))}
           </div>
+
+          {/* Vertical divider */}
+          <motion.div
+            className="hidden lg:block w-px self-stretch bg-border/20"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            style={{ originY: 0 }}
+          />
+
+          {/* RIGHT — subtitle + CTA stacked vertically, centered */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9, type: "spring", stiffness: 70 }}
+            className="hidden lg:flex flex-col justify-center gap-10 w-72 xl:w-80"
+          >
+            {/* Subtitle */}
+            <div>
+              <motion.div
+                className="w-6 h-px bg-cyan mb-5"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                style={{ originX: 0 }}
+              />
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {subheadline}
+                <motion.span
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                  className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
+                />
+              </p>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col gap-3">
+              <GradientButton
+                href="/contact"
+                size="lg"
+                icon={<ArrowRight className="w-5 h-5" />}
+              >
+                Start Your Project
+              </GradientButton>
+
+              <motion.a
+                href="/portfolio"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border/35 text-muted-foreground text-sm font-medium hover:border-cyan/40 hover:text-foreground transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                View Our Work
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ArrowUpRight className="w-4 h-4 group-hover:text-cyan transition-colors" />
+                </motion.span>
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Bottom row — pulled up with pb so it's clearly visible */}
+        {/* Mobile bottom — subtitle + CTA (shows only on small screens) */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, type: "spring", stiffness: 70 }}
-          className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 px-6 lg:px-12 pb-14"
+          transition={{ delay: 1.0 }}
+          className="lg:hidden flex flex-col gap-6 px-6 pb-10"
         >
-          {/* LEFT — subtitle */}
-          <div className="max-w-xs">
-            <motion.div
-              className="w-8 h-px bg-cyan mb-4"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
-              style={{ originX: 0 }}
-            />
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              {subheadline}
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
-              />
-            </p>
-          </div>
-
-          {/* RIGHT — CTAs only */}
-          <div className="flex flex-col sm:flex-row items-start lg:items-center gap-3">
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+            {subheadline}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
             <GradientButton
               href="/contact"
               size="lg"
@@ -157,25 +198,17 @@ const HeroSection = () => {
             >
               Start Your Project
             </GradientButton>
-
             <motion.a
               href="/portfolio"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border/40 text-muted-foreground text-sm font-medium hover:border-cyan/40 hover:text-foreground transition-all"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border/35 text-muted-foreground text-sm font-medium hover:border-cyan/40 hover:text-foreground transition-all"
+              whileHover={{ scale: 1.02 }}
             >
-              View Our Work
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ArrowUpRight className="w-4 h-4 group-hover:text-cyan transition-colors" />
-              </motion.span>
+              View Our Work <ArrowUpRight className="w-4 h-4" />
             </motion.a>
           </div>
         </motion.div>
 
-        {/* Ticker — pinned at very bottom */}
+        {/* Ticker */}
         <div className="border-t border-border/10 py-3">
           <div className="overflow-hidden">
             <motion.div
@@ -197,10 +230,10 @@ const HeroSection = () => {
                   ].map((text) => (
                     <span
                       key={text}
-                      className="text-muted-foreground/20 font-medium text-[10px] tracking-[0.3em] flex items-center gap-12"
+                      className="text-muted-foreground/18 font-medium text-[10px] tracking-[0.3em] flex items-center gap-12"
                     >
                       {text}
-                      <span className="text-cyan/25">·</span>
+                      <span className="text-cyan/20">·</span>
                     </span>
                   ))}
                 </div>
