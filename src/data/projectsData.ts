@@ -16,7 +16,7 @@ export const projects = [
     link: "https://www.ekoconnectconcierge.com.ng/",
     description: "Professional concierge services platform with seamless booking and customer management.",
     fullDescription:
-      "Eko Connect Concierge is a premium digital platform designed to bridge the gap between discerning clients and world-class concierge services in Lagos, Nigeria. The platform offers an intuitive interface for booking a wide range of lifestyle services — from airport transfers and event planning to personal shopping and luxury experiences. We engineered a robust customer management portal allowing both clients and service agents to track requests in real-time, communicate seamlessly, and manage bookings end-to-end.",
+      "Eko Connect Concierge is a premium digital platform designed to bridge the gap between discerning clients and world-class concierge services in Lagos, Nigeria. The platform offers an intuitive interface for booking a wide range of lifestyle services  from airport transfers and event planning to personal shopping and luxury experiences. We engineered a robust customer management portal allowing both clients and service agents to track requests in real-time, communicate seamlessly, and manage bookings end-to-end.",
     tags: ["React", "Booking System", "Customer Portal"],
     challenge:
       "The client needed to digitise a previously phone-based concierge operation while maintaining the personalised, high-touch feel their clients expected. The challenge was balancing automation efficiency with a luxury brand experience.",
@@ -27,34 +27,32 @@ export const projects = [
       "3× faster service request turnaround",
       "200+ clients onboarded within the first month",
     ],
-    year: "2024",
-    duration: "8 weeks",
+    year: "2026",
     services: ["UI/UX Design", "Frontend Development", "Backend Integration", "QA Testing"],
   },
   {
-    id: 2,
-    slug: "liana-flowers",
-    title: "Liana Flowers",
-    category: "E-Commerce",
-    image: lianHero,
-    link: "https://www.liananaflowers.com.ng",
-    description: "Premium flower delivery service with elegant design and smooth checkout experience.",
-    fullDescription:
-      "Liana Flowers is a premium floral brand delivering handcrafted arrangements across Nigeria. We created a full e-commerce experience that mirrors the elegance of the brand — from a beautifully curated product catalogue to a smooth checkout flow. The site integrates local payment gateways and a real-time delivery scheduling system, enabling customers to send love and celebration effortlessly.",
-    tags: ["E-Commerce", "Payment Integration", "Product Catalog"],
-    challenge:
-      "Flowers are highly time-sensitive products. The platform needed to handle perishable inventory, same-day delivery slots, and emotionally driven purchase decisions — all while looking stunning on mobile.",
-    solution:
-      "We designed an emotion-first shopping experience with rich imagery, a smart delivery scheduler, and Paystack integration for frictionless payments. The mobile-first approach ensured the majority of customers on phones had an experience as polished as desktop.",
-    results: [
-      "Average order value increased by 40% post-launch",
-      "Mobile conversion rate of 4.2%",
-      "Cart abandonment reduced by 28%",
-    ],
-    year: "2024",
-    duration: "6 weeks",
-    services: ["E-Commerce Strategy", "UI/UX Design", "Payment Integration", "SEO Setup"],
-  },
+  id: 2,
+  slug: "liana-flowers",
+  title: "Liana Flowers",
+  category: "E-Commerce",
+  image: lianHero,
+  link: "https://www.liananaflowers.com.ng",
+  description: "Premium flower delivery service with elegant design and a simple, seamless checkout experience.",
+  fullDescription:
+    "Liana Flowers is a premium floral brand delivering handcrafted arrangements across Nigeria. We created a full e-commerce experience that mirrors the elegance of the brand  from a beautifully curated product catalogue to a straightforward checkout flow. Customers complete their orders via WhatsApp and bank transfer, keeping the process personal, familiar, and friction-free.",
+  tags: ["E-Commerce", "WhatsApp Integration", "Product Catalog"],
+  challenge:
+    "Flowers are highly time-sensitive products. The platform needed to handle perishable inventory, same-day delivery slots, and emotionally driven purchase decisions  all while looking stunning on mobile.",
+  solution:
+    "We designed an emotion-first shopping experience with rich imagery and a clean, simple checkout flow. Orders are confirmed through WhatsApp for a personal touch, with bank transfer as the payment method — keeping things accessible and trusted for Nigerian customers. The mobile-first approach ensured the majority of customers on phones had an experience as polished as desktop.",
+  results: [
+    "Average order value increased after launch",
+    "Strong mobile conversion driven by familiar checkout flow",
+    "Reduced drop-off with a simple, low-friction WhatsApp order process",
+  ],
+  year: "2026",
+  services: ["E-Commerce Strategy", "UI/UX Design", "WhatsApp Checkout Integration", "SEO Setup"],
+},
   {
     id: 3,
     slug: "cat-global",
@@ -69,40 +67,35 @@ export const projects = [
     challenge:
       "The client had outdated brand collateral and needed a site that could serve enterprise clients and government partners across multiple regions.",
     solution:
-      "We built a modular, CMS-driven site with a scalable design system. The content hierarchy was restructured to prioritise key service pillars. Performance was a primary concern — the site loads in under 1.5 seconds on 3G connections.",
+      "We built a modular, CMS-driven site with a scalable design system. The content hierarchy was restructured to prioritise key service pillars. Performance was a primary concern  the site loads in under 1.5 seconds on 3G connections.",
     results: [
       "Bounce rate dropped from 72% to 38%",
       "RFP enquiries increased by 90% in 3 months",
       "Average session duration doubled",
     ],
-    year: "2024",
-    duration: "10 weeks",
+    year: "2026",
     services: ["Brand Strategy", "Web Design", "CMS Integration", "Performance Optimisation"],
   },
-  {
-    id: 4,
-    slug: "viktrotech",
-    title: "Viktrotech",
-    category: "Tech Solutions",
-    image: vikHero,
-    link: "https://www.viktrotech.com/",
-    description: "Innovative technology solutions platform with cutting-edge digital services and expertise.",
-    fullDescription:
-      "Viktrotech needed a platform that communicated innovation and technical depth to enterprise clients. We built a forward-looking digital presence that showcases their suite of IT services, from cloud infrastructure to software development — positioning them as a serious player in Nigeria's growing tech ecosystem.",
-    tags: ["Tech", "Innovation", "Digital Solutions"],
-    challenge:
-      "Communicating complex technical services to non-technical decision makers without oversimplifying, while still demonstrating deep expertise to technical buyers.",
-    solution:
-      "We structured the site around outcomes rather than technical jargon, using case study formats and visual data storytelling to convey impact. A dynamic services architecture allows them to easily add new offerings.",
-    results: [
-      "Enterprise lead quality improved significantly",
-      "Time-on-site increased by 55%",
-      "New service pages rank on page 1 for key terms",
-    ],
-    year: "2024",
-    duration: "7 weeks",
-    services: ["Web Design", "Content Strategy", "SEO", "Frontend Development"],
-  },
+  { 
+  id: 4, 
+  slug: "viktrotech", 
+  title: "Viktrotech", 
+  category: "Waste Management", 
+  image: vikHero, 
+  link: "https://www.viktrotech.com/", 
+  description: "Nigeria's premier bio-sewage and waste management company delivering innovative biological sewer treatment systems for homes and businesses.", 
+  fullDescription: "Viktrotech needed a digital presence that clearly communicated their specialized expertise in bio-sewage systems to a broad audience from homeowners to commercial developers and NGOs. We built a platform that positions them as Nigeria's leading waste management innovator, showcasing their unique ability to design and install biological sewer treatment systems in both dry and waterlogged areas.", 
+  tags: ["Waste Management", "Bio-Sewage", "Environmental Solutions"], 
+  challenge: "Translating a highly technical and niche service — biological sewage treatment systems  into a compelling digital experience that resonates with both individual homeowners and large commercial clients, while building trust in an industry where credibility is everything.", 
+  solution: "We structured the site around the environments Viktrotech serves — domestic, commercial, waterlogged, and dry areas  making it easy for any visitor to immediately see themselves in the solution. Clean visual storytelling and outcome-focused copy replaced technical jargon, highlighting environmental impact and reliability.", 
+  results: [ 
+    "Significant increase in qualified leads from commercial clients", 
+    "Time-on-site increased by 55%", 
+    "Key service pages rank on page 1 for waste management terms in Nigeria", 
+  ], 
+  year: "2026",
+  services: ["Web Design", "Content Strategy", "SEO"], 
+},
   {
     id: 5,
     slug: "gt-green-petrochemical",
@@ -112,7 +105,7 @@ export const projects = [
     link: "https://www.gtgreenpetrochemical.com.ng/",
     description: "Professional petrochemical company website showcasing industry leadership and sustainability.",
     fullDescription:
-      "GT Green Petrochemical operates in one of Nigeria's most competitive industries. We built a website that positioned them as a modern, sustainability-focused leader — moving away from the typically dated aesthetic of the sector toward a clean, confident digital identity that appeals to international partners and investors.",
+      "GT Green Petrochemical operates in one of Nigeria's most competitive industries. We built a website that positioned them as a modern, sustainability-focused leader moving away from the typically dated aesthetic of the sector toward a clean, confident digital identity that appeals to international partners and investors.",
     tags: ["Corporate", "Industrial", "Sustainability"],
     challenge:
       "The petrochemical industry has a reputation for outdated web presence. The client wanted to stand out while still appearing credible and established to large institutional partners.",
@@ -123,8 +116,7 @@ export const projects = [
       "Media coverage increased after relaunch",
       "Site passes Core Web Vitals with green scores",
     ],
-    year: "2024",
-    duration: "9 weeks",
+    year: "2026",
     services: ["Brand Positioning", "Web Design", "Content Writing", "Technical SEO"],
   },
   {
@@ -147,8 +139,7 @@ export const projects = [
       "Qualified lead rate improved by 45%",
       "Pages per session increased to 4.7 average",
     ],
-    year: "2024",
-    duration: "6 weeks",
+    year: "2026",
     services: ["UX Strategy", "Web Design", "Copywriting", "Analytics Setup"],
   },
   {
@@ -160,20 +151,19 @@ export const projects = [
     link: "https://www.honterscruise.com.ng/",
     description: "Premium cruise booking platform with seamless reservation system and travel packages.",
     fullDescription:
-      "Honters Cruise is a premium travel brand offering curated cruise packages and travel experiences. We built a booking-first platform that makes discovering and reserving dream vacations as pleasurable as the trips themselves — immersive visuals, clear package structures, and a streamlined reservation flow.",
+      "Honters Cruise is a premium travel brand offering curated cruise packages and travel experiences. We built a booking-first platform that makes discovering and reserving dream vacations as pleasurable as the trips themselves immersive visuals, clear package structures, and a streamlined reservation flow.",
     tags: ["Travel", "Booking System", "E-Commerce"],
     challenge:
-      "Travel is an aspiration-driven purchase. The site needed to inspire and sell simultaneously — creating emotional desire while also handling the practical complexity of a multi-variable booking system.",
+      "Travel is an aspiration-driven purchase. The site needed to inspire and sell simultaneously  creating emotional desire while also handling the practical complexity of a multi-variable booking system.",
     solution:
-      "We led with cinematic imagery and destination storytelling, then transitioned into a clean booking funnel that reduces friction at each step. Package comparisons and availability calendars were built to handle complex inventory logic.",
+      "We led with cinematic imagery and destination storytelling, then transitioned into a clean booking funnel that reduces friction at each step.",
     results: [
       "Booking completion rate of 68% from package view",
       "Revenue per visitor 2× industry benchmark",
       "Customer support tickets reduced by 40% via self-service FAQs",
     ],
-    year: "2024",
-    duration: "8 weeks",
-    services: ["E-Commerce Design", "Booking System", "Payment Integration", "UI Animation"],
+    year: "2026",
+    services: ["Booking System"],
   },
 ];
 
