@@ -19,7 +19,7 @@ const ProjectRow = ({ project, index }: { project: (typeof projects)[0]; index: 
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link to={`/portfolio/${project.slug}`}>
         <div
@@ -48,13 +48,12 @@ const ProjectRow = ({ project, index }: { project: (typeof projects)[0]; index: 
                 alt={project.title}
                 className="w-full h-full object-cover"
                 animate={{ scale: hovered ? 1.08 : 1 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ ease: [0.22, 1, 0.36, 1] }}
               />
               {/* Cyan tint on hover */}
               <motion.div
                 className="absolute inset-0 bg-cyan/20"
                 animate={{ opacity: hovered ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
               />
             </div>
 
@@ -68,7 +67,6 @@ const ProjectRow = ({ project, index }: { project: (typeof projects)[0]; index: 
                   <motion.h3
                     className="text-2xl lg:text-3xl font-poppins font-bold text-foreground leading-tight"
                     animate={{ x: hovered ? 6 : 0 }}
-                    transition={{ duration: 0.3 }}
                   >
                     {project.title}
                   </motion.h3>
@@ -86,7 +84,6 @@ const ProjectRow = ({ project, index }: { project: (typeof projects)[0]; index: 
                     rotate: hovered ? 45 : 0,
                     scale: hovered ? 1.1 : 1,
                   }}
-                  transition={{ duration: 0.3 }}
                 >
                   <ArrowUpRight className="w-4 h-4" />
                 </motion.div>
@@ -165,7 +162,7 @@ const Portfolio = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl"
           >
-            A curated collection of work we're proud of  businesses transformed, brands elevated, and digital experiences that convert.
+            A curated collection of work we're proud of — businesses transformed, brands elevated, and digital experiences that convert.
           </motion.p>
         </div>
       </section>
@@ -206,7 +203,6 @@ const Portfolio = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
             >
               {filteredProjects.map((project, index) => (
                 <ProjectRow key={project.id} project={project} index={index} />
