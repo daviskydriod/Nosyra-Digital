@@ -165,7 +165,7 @@ const Portfolio = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl"
           >
-            A curated collection of work we're proud of — businesses transformed, brands elevated, and digital experiences that convert.
+            A curated collection of work we're proud of  businesses transformed, brands elevated, and digital experiences that convert.
           </motion.p>
         </div>
       </section>
