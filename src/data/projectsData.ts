@@ -5,6 +5,8 @@ import vikHero from "@/assets/vik-hero.png";
 import gtHero from "@/assets/gt-hero.png";
 import urhuHero from "@/assets/urhu-hero.png";
 import honHero from "@/assets/hon-hero.png";
+import thmHero from "@/assets/thm-hero.png"; // ← swap with your actual filename when ready
+
 
 export const projects = [
   {
@@ -166,6 +168,29 @@ export const projects = [
     ],
     year: "2026",
     services: ["Booking System"],
+  },
+  {
+    id: 8,
+    slug: "thm-wellness-company",
+    title: "THM Wellness Company",
+    category: "Wellness & Health",
+    image: thmHero, // ← replace with actual asset when ready
+    link: "https://www.thmwellnessco.com.ng/",
+    description: "Holistic wellness platform offering counseling, therapy, life coaching, and healing services to clients online and globally.",
+    fullDescription:
+      "THM Wellness Company is a holistic wellness brand dedicated to providing solutions to life's complex problems. We built a warm, trust-driven digital presence that clearly communicates their full suite of services  from counseling and therapy to wellness workshops, healing seminars, public speaking, and life coaching. The platform serves clients online and globally, making professional wellness support accessible to everyone, anywhere in the world.",
+    tags: ["Wellness", "Health", "Life Coaching"],
+    challenge:
+      "Wellness is a deeply personal space. The platform needed to feel safe, approachable, and credible all at once  converting visitors who may be in vulnerable moments into confident first-time clients, while also communicating professional authority.",
+    solution:
+      "We led with empathetic, human-first design  soft visuals, clear service pathways, and trust signals woven throughout. Each service was given its own clear destination, and booking touchpoints were made as frictionless as possible to lower the barrier for someone taking that first step.",
+    results: [
+      "Launched February 2026  early sessions booked within the first weeks of going live",
+      "Global reach confirmed with inquiries from clients outside Nigeria",
+      "Service pages driving strong organic visibility for wellness-related searches",
+    ],
+    year: "2026",
+    services: ["Web Design", "Content Strategy", "SEO", "UI/UX Design"],
   },
 ];
 
