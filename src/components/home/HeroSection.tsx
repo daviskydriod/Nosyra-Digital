@@ -4,69 +4,73 @@ import { useEffect, useRef, useState } from "react";
 import GradientButton from "@/components/ui/GradientButton";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
-// Magnetic button hook
+const UNSPLASH_IMAGE =
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=90&auto=format&fit=crop";
+
+const brands = [
+  "Eko Connect",
+  "Liana Flowers",
+  "CAT Global",
+  "GT Green",
+  "Honters Cruise",
+  "Viktrotech",
+  "THM Wellness",
+];
+
 const useMagnetic = () => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 150, damping: 15 });
-  const springY = useSpring(y, { stiffness: 150, damping: 15 });
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.3);
-    y.set((e.clientY - centerY) * 0.3);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const springX = useSpring(x, { stiffness: 120, damping: 18 });
+  const springY = useSpring(y, { stiffness: 120, damping: 18 });
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.addEventListener("mousemove", handleMouseMove);
-    el.addEventListener("mouseleave", handleMouseLeave);
+    const move = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      x.set((e.clientX - (rect.left + rect.width / 2)) * 0.25);
+      y.set((e.clientY - (rect.top + rect.height / 2)) * 0.25);
+    };
+    const leave = () => {
+      x.set(0);
+      y.set(0);
+    };
+    el.addEventListener("mousemove", move);
+    el.addEventListener("mouseleave", leave);
     return () => {
-      el.removeEventListener("mousemove", handleMouseMove);
-      el.removeEventListener("mouseleave", handleMouseLeave);
+      el.removeEventListener("mousemove", move);
+      el.removeEventListener("mouseleave", leave);
     };
   }, []);
 
   return { ref, springX, springY };
 };
 
-const UNSPLASH_IMAGE = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop";
-
-const brands = ["Eko Connect", "Liana Flowers", "CAT Global", "GT Green", "Honters Cruise", "Viktrotech", "THM Wellness"];
-
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
-  const imageY = useTransform(scrollY, [0, 600], [0, 120]);
-  const imageOpacity = useTransform(scrollY, [0, 400], [1, 0.3]);
-  const textY = useTransform(scrollY, [0, 400], [0, -60]);
-  const magnetic = useMagnetic();
+  const imageY = useTransform(scrollY, [0, 600], [0, 130]);
+  const imageOpacity = useTransform(scrollY, [0, 500], [1, 0.2]);
+  const contentY = useTransform(scrollY, [0, 400], [0, -50]);
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(mouseX, { stiffness: 80, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 80, damping: 20 });
+  const smoothX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const magnetic = useMagnetic();
 
   useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
+    const handle = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX / innerWidth - 0.5) * 30);
-      mouseY.set((e.clientY / innerHeight - 0.5) * 30);
-      setMousePos({ x: e.clientX, y: e.clientY });
+      mouseX.set((e.clientX / innerWidth - 0.5) * 25);
+      mouseY.set((e.clientY / innerHeight - 0.5) * 25);
+      setCursorPos({ x: e.clientX, y: e.clientY });
     };
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
+    window.addEventListener("mousemove", handle);
+    return () => window.removeEventListener("mousemove", handle);
   }, []);
 
   const { displayText: subheadline } = useTypewriter(
@@ -89,163 +93,165 @@ const HeroSection = () => {
       ref={containerRef}
       className="relative min-h-screen flex flex-col overflow-hidden pt-20 bg-background"
     >
-      {/* Custom cursor glow */}
+      {/* Cursor glow */}
       <motion.div
-        className="fixed w-64 h-64 rounded-full pointer-events-none z-0 mix-blend-screen"
+        className="fixed pointer-events-none z-50 mix-blend-screen"
         style={{
-          background: "radial-gradient(circle, hsl(var(--cyan)/0.15) 0%, transparent 70%)",
-          left: mousePos.x - 128,
-          top: mousePos.y - 128,
-          x: smoothMouseX,
-          y: smoothMouseY,
+          width: 340,
+          height: 340,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, hsl(var(--cyan)/0.1) 0%, transparent 70%)",
+          left: cursorPos.x - 170,
+          top: cursorPos.y - 170,
+          x: smoothX,
+          y: smoothY,
         }}
       />
 
-      {/* Full bleed image with parallax */}
+      {/* Parallax background image */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute inset-0"
-          style={{ y: imageY, opacity: imageOpacity }}
-        >
+        <motion.div className="absolute inset-0" style={{ y: imageY, opacity: imageOpacity }}>
           <img
             src={UNSPLASH_IMAGE}
             alt="Digital workspace"
             className="w-full h-full object-cover object-center scale-110"
           />
-          {/* Multi-layer overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/75 to-background/98" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/90" />
-          {/* Cyan tint overlay */}
-          <div className="absolute inset-0 bg-cyan/5 mix-blend-screen" />
+          {/* Heavy overlay for text clarity */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/97 via-background/88 to-background/99" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/96 via-background/65 to-background/96" />
+          <div className="absolute inset-0 bg-cyan/[0.025] mix-blend-screen" />
         </motion.div>
       </div>
 
-      {/* Animated grid */}
+      {/* Perspective grid */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(hsl(var(--cyan)/0.04) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--cyan)/0.04) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-            x: smoothMouseX,
-            y: smoothMouseY,
+            backgroundImage: `
+              linear-gradient(hsl(var(--cyan)/0.03) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(var(--cyan)/0.03) 1px, transparent 1px)
+            `,
+            backgroundSize: "72px 72px",
+            x: smoothX,
+            y: smoothY,
           }}
         />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_50%,transparent_35%,hsl(var(--background))_100%)]" />
       </div>
 
-      {/* Animated orbs */}
+      {/* Ambient orbs + particles */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2], x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-cyan/10 rounded-full blur-[80px]"
+          animate={{ scale: [1, 1.3, 1], opacity: [0.12, 0.25, 0.12], x: [0, 45, 0], y: [0, -25, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 -left-32 w-[700px] h-[700px] bg-cyan/10 rounded-full blur-[110px]"
         />
         <motion.div
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.15, 0.3, 0.15], x: [0, -20, 0], y: [0, 30, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-40 -right-20 w-[700px] h-[700px] bg-cyan/8 rounded-full blur-[100px]"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.08, 0.18, 0.08], x: [0, -30, 0], y: [0, 40, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-40 -right-32 w-[800px] h-[800px] bg-cyan/8 rounded-full blur-[130px]"
         />
 
-        {/* Floating particles */}
-        {[...Array(12)].map((_, i) => (
+        {[...Array(14)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full"
             style={{
-              width: i % 3 === 0 ? 4 : i % 3 === 1 ? 2 : 6,
-              height: i % 3 === 0 ? 4 : i % 3 === 1 ? 2 : 6,
-              background: `hsl(var(--cyan)/${0.2 + (i % 4) * 0.15})`,
-              top: `${8 + i * 7.5}%`,
-              left: `${5 + i * 8}%`,
+              width: [3, 2, 5, 2, 4][i % 5],
+              height: [3, 2, 5, 2, 4][i % 5],
+              background: `hsl(var(--cyan)/${0.12 + (i % 5) * 0.08})`,
+              top: `${6 + i * 6.5}%`,
+              left: `${4 + i * 6.8}%`,
             }}
             animate={{
-              y: [0, -(20 + i * 5), 0],
-              x: [0, i % 2 === 0 ? 15 : -15, 0],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.5, 1],
+              y: [0, -(18 + i * 6), 0],
+              x: [0, i % 2 === 0 ? 12 : -12, 0],
+              opacity: [0.1, 0.6, 0.1],
+              scale: [1, 1.8, 1],
             }}
             transition={{
-              duration: 5 + i * 0.8,
+              duration: 5 + i * 0.7,
               repeat: Infinity,
-              delay: i * 0.4,
+              delay: i * 0.35,
               ease: "easeInOut",
             }}
           />
         ))}
 
-        {/* Diagonal lines accent */}
-        {[...Array(5)].map((_, i) => (
+        {[...Array(4)].map((_, i) => (
           <motion.div
-            key={`line-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-cyan/20 to-transparent"
-            style={{ top: `${15 + i * 18}%`, left: 0, right: 0 }}
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: [0, 0.5, 0] }}
+            key={`scan-${i}`}
+            className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/12 to-transparent"
+            style={{ top: `${20 + i * 20}%` }}
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: [0, 0.5, 0], scaleX: [0, 1, 1] }}
             transition={{
-              duration: 3,
-              delay: 2 + i * 0.6,
+              duration: 2.5,
+              delay: 2.5 + i * 0.8,
               repeat: Infinity,
-              repeatDelay: 4,
+              repeatDelay: 6,
             }}
           />
         ))}
       </div>
 
-      {/* Main content */}
+      {/* ── MAIN CONTENT ── */}
       <motion.div
         className="flex-1 flex items-center justify-center relative z-10"
-        style={{ y: textY }}
+        style={{ y: contentY }}
       >
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-[1fr_360px] xl:grid-cols-[1fr_400px] gap-16 items-center">
 
-            {/* Split layout */}
-            <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-center">
+              {/* LEFT */}
               <div>
-                {/* Eyebrow badge */}
+                {/* Eyebrow */}
                 <motion.div
-                  initial={{ opacity: 0, x: -40 }}
+                  initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-                  className="inline-flex items-center gap-2 mb-8"
+                  transition={{ delay: 0.2, type: "spring", stiffness: 90 }}
+                  className="inline-flex items-center gap-3 mb-10"
                 >
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
                   >
                     <Sparkles className="w-4 h-4 text-cyan" />
                   </motion.div>
-                  <span className="text-cyan text-sm font-medium tracking-[0.2em] uppercase">
-                    Nigeria's Digital Agency
+                  <span className="text-cyan text-xs font-semibold tracking-[0.25em] uppercase">
+                    Nigeria's Premier Digital Agency
                   </span>
                   <motion.div
-                    className="h-px bg-gradient-to-r from-cyan/60 to-transparent"
+                    className="h-px bg-gradient-to-r from-cyan/50 to-transparent"
                     initial={{ width: 0 }}
-                    animate={{ width: 80 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
+                    animate={{ width: 70 }}
+                    transition={{ delay: 0.7, duration: 1 }}
                   />
                 </motion.div>
 
                 {/* Headline */}
                 <div className="mb-8 overflow-hidden">
-                  <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-poppins font-black leading-[1.0] tracking-tight">
-                    {words.map((word, index) => (
+                  <h1 className="text-5xl md:text-[3.8rem] lg:text-[5rem] xl:text-[5.5rem] font-poppins font-black leading-[1.0] tracking-tight">
+                    {words.map((word, i) => (
                       <motion.span
-                        key={index}
-                        initial={{ opacity: 0, y: 80, skewY: 5 }}
+                        key={i}
+                        initial={{ opacity: 0, y: 90, skewY: 6 }}
                         animate={{ opacity: 1, y: 0, skewY: 0 }}
                         transition={{
-                          delay: 0.4 + index * 0.12,
+                          delay: 0.35 + i * 0.11,
                           type: "spring",
-                          stiffness: 80,
-                          damping: 14,
+                          stiffness: 75,
+                          damping: 13,
                         }}
+                        whileHover={{ scale: 1.04, skewX: -1.5 }}
                         className={`inline-block mr-4 md:mr-5 ${
                           word.gradient
-                            ? "bg-gradient-to-r from-cyan via-cyan/80 to-cyan/60 bg-clip-text text-transparent"
+                            ? "bg-gradient-to-br from-cyan via-cyan/80 to-cyan/50 bg-clip-text text-transparent"
                             : "text-foreground"
                         }`}
-                        whileHover={{ scale: 1.05, skewX: -2 }}
                       >
                         {word.text}
                       </motion.span>
@@ -254,28 +260,26 @@ const HeroSection = () => {
                 </div>
 
                 {/* Typewriter */}
-                <motion.div
+                <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 1.4 }}
-                  className="mb-10"
+                  transition={{ delay: 1.3 }}
+                  className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed mb-10 h-14"
                 >
-                  <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed h-14">
-                    {subheadline}
-                    <motion.span
-                      animate={{ opacity: [1, 0, 1] }}
-                      transition={{ duration: 0.7, repeat: Infinity }}
-                      className="inline-block w-0.5 h-5 bg-cyan ml-1 align-middle"
-                    />
-                  </p>
-                </motion.div>
+                  {subheadline}
+                  <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.75, repeat: Infinity }}
+                    className="inline-block w-0.5 h-[1.1em] bg-cyan ml-1 align-middle"
+                  />
+                </motion.p>
 
                 {/* CTAs */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 28 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.9, type: "spring", stiffness: 80 }}
-                  className="flex flex-col sm:flex-row items-start gap-4 mb-14"
+                  transition={{ delay: 1.85, type: "spring", stiffness: 80 }}
+                  className="flex flex-col sm:flex-row items-start gap-4 mb-16"
                 >
                   <GradientButton
                     href="/contact"
@@ -287,35 +291,35 @@ const HeroSection = () => {
 
                   <motion.a
                     href="/portfolio"
-                    className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-border/60 text-foreground font-medium text-sm hover:border-cyan/50 transition-all"
+                    className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-border/50 text-foreground/80 font-medium text-sm hover:border-cyan/40 hover:text-foreground transition-all"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
                     View Our Work
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
+                      transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <ArrowUpRight className="w-4 h-4 group-hover:text-cyan transition-colors" />
                     </motion.span>
                   </motion.a>
                 </motion.div>
 
-                {/* Brand names */}
+                {/* Brand names — very dimmed so headline stays dominant */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 2.3 }}
-                  className="flex flex-wrap items-center gap-x-6 gap-y-2"
+                  transition={{ delay: 2.2 }}
+                  className="flex flex-wrap items-center gap-x-5 gap-y-2"
                 >
                   {brands.map((brand, i) => (
                     <motion.span
                       key={brand}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2.4 + i * 0.07 }}
+                      transition={{ delay: 2.3 + i * 0.06 }}
                       whileHover={{ color: "hsl(var(--cyan))", y: -2 }}
-                      className="text-sm text-muted-foreground/50 font-poppins font-semibold tracking-wide cursor-default transition-colors"
+                      className="text-[11px] text-muted-foreground/25 font-poppins font-semibold tracking-widest uppercase cursor-default transition-all"
                     >
                       {brand}
                     </motion.span>
@@ -323,114 +327,132 @@ const HeroSection = () => {
                 </motion.div>
               </div>
 
-              {/* Right side — floating image card */}
+              {/* RIGHT — Premium floating card */}
               <motion.div
                 ref={magnetic.ref}
                 className="hidden lg:block relative"
-                initial={{ opacity: 0, x: 60 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, type: "spring", stiffness: 60 }}
+                initial={{ opacity: 0, x: 70, scale: 0.94 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ delay: 0.9, type: "spring", stiffness: 55, damping: 16 }}
                 style={{ x: magnetic.springX, y: magnetic.springY }}
               >
-                <div className="relative w-72 xl:w-80">
-                  {/* Glow behind card */}
-                  <motion.div
-                    animate={{ opacity: [0.4, 0.7, 0.4] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute inset-0 bg-cyan/20 rounded-3xl blur-2xl scale-110"
+                {/* Outer glow */}
+                <motion.div
+                  animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.06, 1] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-cyan/12 rounded-[2rem] blur-3xl"
+                />
+
+                {/* Card */}
+                <motion.div
+                  className="relative rounded-[2rem] overflow-hidden border border-cyan/15 shadow-[0_40px_100px_hsl(var(--background)/0.9)]"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 180, damping: 18 }}
+                >
+                  <img
+                    src={UNSPLASH_IMAGE}
+                    alt="Premium digital workspace"
+                    className="w-full h-[430px] object-cover object-center"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan/4 to-transparent mix-blend-screen" />
 
-                  {/* Card */}
-                  <motion.div
-                    className="relative rounded-3xl overflow-hidden border border-cyan/20 shadow-2xl"
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                  >
-                    <img
-                      src={UNSPLASH_IMAGE}
-                      alt="Digital workspace"
-                      className="w-full h-96 object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
-
-                    {/* Floating stat card */}
+                  {/* Card bottom content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
                     <motion.div
-                      className="absolute bottom-4 left-4 right-4 bg-background/80 backdrop-blur-md rounded-2xl p-4 border border-border/40"
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 1.2 }}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.4 }}
+                      className="inline-flex items-center gap-2 bg-background/70 backdrop-blur-md border border-cyan/20 rounded-full px-3 py-1.5 mb-3"
                     >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Projects Delivered</p>
-                          <motion.p
-                            className="text-2xl font-poppins font-black text-foreground"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.5 }}
-                          >
-                            <motion.span
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ delay: 1.6 }}
-                            >
-                              7+
-                            </motion.span>
-                          </motion.p>
-                        </div>
-                        <motion.div
-                          className="w-10 h-10 rounded-full bg-cyan/20 border border-cyan/30 flex items-center justify-center"
-                          animate={{ rotate: [0, 360] }}
-                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                        >
-                          <Sparkles className="w-4 h-4 text-cyan" />
-                        </motion.div>
-                      </div>
-
-                      {/* Mini bar chart */}
-                      <div className="flex items-end gap-1 mt-3 h-8">
-                        {[40, 65, 50, 80, 60, 90, 75].map((h, i) => (
-                          <motion.div
-                            key={i}
-                            className="flex-1 bg-cyan/30 rounded-sm"
-                            initial={{ scaleY: 0 }}
-                            animate={{ scaleY: 1 }}
-                            transition={{ delay: 1.8 + i * 0.08, type: "spring" }}
-                            style={{ height: `${h}%`, originY: 1 }}
-                          />
-                        ))}
-                      </div>
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
+                      <span className="text-xs text-cyan font-medium tracking-wide">
+                        Available for Projects
+                      </span>
                     </motion.div>
-                  </motion.div>
 
-                  {/* Floating badge top right */}
-                  <motion.div
-                    className="absolute -top-4 -right-4 bg-cyan text-background text-xs font-bold px-3 py-1.5 rounded-full shadow-lg"
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    🇳🇬 Nigeria
-                  </motion.div>
-                </div>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.6 }}
+                      className="text-foreground font-poppins font-bold text-lg leading-tight"
+                    >
+                      Nosyra Digital
+                    </motion.p>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.75 }}
+                      className="text-muted-foreground text-xs mt-0.5"
+                    >
+                      Lagos, Nigeria · Global Reach
+                    </motion.p>
+                  </div>
+                </motion.div>
+
+                {/* Floating badge — top right */}
+                <motion.div
+                  className="absolute -top-5 -right-5 bg-cyan text-background text-[11px] font-bold px-3.5 py-2 rounded-2xl shadow-xl shadow-cyan/30 flex items-center gap-1.5"
+                  animate={{ y: [0, -7, 0], rotate: [0, 2, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  🇳🇬 Made in Nigeria
+                </motion.div>
+
+                {/* Floating mini card — bottom left */}
+                <motion.div
+                  className="absolute -bottom-5 -left-5 bg-background/90 backdrop-blur-xl border border-border/40 rounded-2xl px-4 py-3 shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.5, type: "spring" }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-cyan/15 border border-cyan/25 flex items-center justify-center shrink-0">
+                      <Sparkles className="w-3.5 h-3.5 text-cyan" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-muted-foreground/50 leading-none mb-0.5">
+                        Delivering
+                      </p>
+                      <p className="text-xs font-bold text-foreground leading-none">
+                        Premium Websites
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
+
             </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Ticker */}
-      <div className="relative z-10 mt-auto py-4 bg-card/60 backdrop-blur-sm border-t border-border/30">
+      {/* ── TICKER ── */}
+      <div className="relative z-10 mt-auto py-4 bg-card/50 backdrop-blur-md border-t border-border/20">
         <div className="overflow-hidden">
           <motion.div
-            className="flex gap-8 whitespace-nowrap"
+            className="flex gap-10 whitespace-nowrap"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
           >
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex gap-8">
-                {["DIGITAL AGENCY", "WEB DESIGN", "BRANDING", "SOCIAL MEDIA", "E-COMMERCE", "MOBILE OPTIMIZATION", "SEO", "UI/UX DESIGN"].map((text) => (
-                  <span key={text} className="text-muted-foreground/60 font-medium text-xs tracking-[0.25em] flex items-center gap-8">
-                    {text} <span className="text-cyan">•</span>
+              <div key={i} className="flex gap-10">
+                {[
+                  "DIGITAL AGENCY",
+                  "WEB DESIGN",
+                  "BRANDING",
+                  "SOCIAL MEDIA",
+                  "E-COMMERCE",
+                  "MOBILE OPTIMIZATION",
+                  "SEO",
+                  "UI/UX DESIGN",
+                ].map((text) => (
+                  <span
+                    key={text}
+                    className="text-muted-foreground/35 font-medium text-[11px] tracking-[0.28em] flex items-center gap-10"
+                  >
+                    {text} <span className="text-cyan/50">◆</span>
                   </span>
                 ))}
               </div>
