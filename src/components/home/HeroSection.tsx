@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 import GradientButton from "@/components/ui/GradientButton";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
@@ -17,19 +17,19 @@ const brands = [
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
-  const contentY = useTransform(scrollY, [0, 500], [0, -80]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const contentY = useTransform(scrollY, [0, 500], [0, -70]);
+  const contentOpacity = useTransform(scrollY, [0, 350], [1, 0]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const smoothX = useSpring(mouseX, { stiffness: 40, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 40, damping: 20 });
 
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX / innerWidth - 0.5) * 20);
-      mouseY.set((e.clientY / innerHeight - 0.5) * 20);
+      mouseX.set((e.clientX / innerWidth - 0.5) * 18);
+      mouseY.set((e.clientY / innerHeight - 0.5) * 18);
     };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
@@ -52,87 +52,92 @@ const HeroSection = () => {
       ref={containerRef}
       className="relative min-h-screen flex flex-col overflow-hidden bg-background"
     >
-      {/* Subtle noise texture overlay */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundSize: "128px 128px",
-        }}
-      />
+      {/* Subtle grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(hsl(var(--cyan)/0.025) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(var(--cyan)/0.025) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+            x: smoothX,
+            y: smoothY,
+          }}
+        />
+        {/* Radial vignette over grid so edges fade out */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_30%,hsl(var(--background))_100%)]" />
+      </div>
 
-      {/* Single large orb — very subtle */}
+      {/* Single ambient orb — centered, very subtle */}
       <motion.div
-        className="absolute pointer-events-none z-0"
-        style={{
-          width: 800,
-          height: 800,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, hsl(var(--cyan)/0.06) 0%, transparent 70%)",
-          top: "50%",
-          left: "50%",
-          x: "-50%",
-          y: "-50%",
-        }}
-        animate={{ scale: [1, 1.08, 1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
+        className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center"
+        style={{ x: smoothX, y: smoothY }}
+      >
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.08, 0.16, 0.08] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[600px] h-[600px] rounded-full bg-cyan/20 blur-[120px]"
+        />
+      </motion.div>
 
-      {/* Thin horizontal rule — top accent */}
+      {/* Top thin rule */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent z-10"
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent z-10"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ delay: 0.3, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: 0.2, duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      {/* ── MAIN CONTENT ── */}
+      {/* ── MAIN CONTENT — centered ── */}
       <motion.div
-        className="flex-1 flex flex-col justify-center relative z-10 pt-32 pb-16"
-        style={{ y: contentY, opacity }}
+        className="flex-1 flex flex-col items-center justify-center relative z-10 pt-28 pb-16 text-center"
+        style={{ y: contentY, opacity: contentOpacity }}
       >
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center">
 
-          {/* Top label row */}
+          {/* Eyebrow */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-between mb-16 lg:mb-20"
+            transition={{ delay: 0.15 }}
+            className="flex items-center gap-3 mb-12"
           >
-            <div className="flex items-center gap-3">
-              <motion.span
-                className="w-1.5 h-1.5 rounded-full bg-cyan"
-                animate={{ opacity: [1, 0.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-              <span className="text-xs text-muted-foreground/60 tracking-[0.3em] uppercase font-medium">
-                Digital Agency · Lagos, Nigeria
-              </span>
-            </div>
-            <span className="hidden md:block text-xs text-muted-foreground/40 tracking-[0.2em] uppercase font-medium">
-              Est. 2024
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-cyan"
+              animate={{ opacity: [1, 0.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+            <span className="text-xs text-muted-foreground/50 tracking-[0.3em] uppercase font-medium">
+              Nigeria's Premier Digital Agency
             </span>
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-cyan"
+              animate={{ opacity: [0.2, 1, 0.2] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
           </motion.div>
 
-          {/* BIG headline */}
-          <div className="mb-12 lg:mb-16">
+          {/* BIG centered headline */}
+          <div className="mb-10">
             {lines.map((line, lineIdx) => (
               <div key={lineIdx} className="overflow-hidden">
                 <motion.h1
                   initial={{ y: "110%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
                   transition={{
-                    delay: 0.4 + lineIdx * 0.15,
+                    delay: 0.35 + lineIdx * 0.14,
                     type: "spring",
                     stiffness: 65,
                     damping: 14,
                   }}
-                  className={`text-[clamp(3.5rem,10vw,9rem)] font-poppins font-black leading-[0.95] tracking-tight block ${
-                    line.accent
-                      ? "bg-gradient-to-r from-cyan via-cyan/70 to-cyan/40 bg-clip-text text-transparent"
+                  className={`block font-poppins font-black leading-[0.92] tracking-tight
+                    text-[clamp(3.8rem,11vw,10rem)]
+                    ${line.accent
+                      ? "bg-gradient-to-r from-cyan via-cyan/75 to-cyan/40 bg-clip-text text-transparent"
                       : "text-foreground"
-                  }`}
+                    }`}
                 >
                   {line.text}
                 </motion.h1>
@@ -140,91 +145,86 @@ const HeroSection = () => {
             ))}
           </div>
 
-          {/* Bottom row — subheadline + CTA side by side */}
+          {/* Thin divider */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            className="w-12 h-px bg-cyan mb-8"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 1.0, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          {/* Subheadline */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, type: "spring", stiffness: 70 }}
-            className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 lg:gap-20"
+            transition={{ delay: 1.05 }}
+            className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg mb-12"
           >
-            {/* Left — subheadline */}
-            <div className="max-w-md">
-              {/* Thin rule */}
-              <motion.div
-                className="w-12 h-px bg-cyan mb-6"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 1.1, duration: 0.6 }}
-                style={{ originX: 0 }}
-              />
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                {subheadline}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
-                />
-              </p>
-            </div>
+            {subheadline}
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 0.8, repeat: Infinity }}
+              className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
+            />
+          </motion.p>
 
-            {/* Right — CTA + brands */}
-            <div className="flex flex-col gap-8 lg:items-end">
-              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-start lg:items-end gap-4">
-                <GradientButton
-                  href="/contact"
-                  size="lg"
-                  icon={<ArrowRight className="w-5 h-5" />}
-                >
-                  Start Your Project
-                </GradientButton>
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3, type: "spring", stiffness: 80 }}
+            className="flex flex-col sm:flex-row items-center gap-4 mb-16"
+          >
+            <GradientButton
+              href="/contact"
+              size="lg"
+              icon={<ArrowRight className="w-5 h-5" />}
+            >
+              Start Your Project
+            </GradientButton>
 
-                <motion.a
-                  href="/portfolio"
-                  className="group inline-flex items-center gap-2 text-sm text-muted-foreground/60 hover:text-foreground transition-colors font-medium tracking-wide"
-                  whileHover={{ x: 4 }}
-                >
-                  View Our Work
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="text-cyan"
-                  >
-                    →
-                  </motion.span>
-                </motion.a>
-              </div>
+            <motion.a
+              href="/portfolio"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-border/40 text-muted-foreground text-sm font-medium hover:border-cyan/40 hover:text-foreground transition-all"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              View Our Work
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ArrowUpRight className="w-4 h-4 group-hover:text-cyan transition-colors" />
+              </motion.span>
+            </motion.a>
+          </motion.div>
 
-              {/* Brand names — very dim */}
-              <div className="flex flex-wrap gap-x-4 gap-y-1 lg:justify-end">
-                {brands.map((brand, i) => (
-                  <motion.span
-                    key={brand}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.4 + i * 0.07 }}
-                    whileHover={{ color: "hsl(var(--cyan))" }}
-                    className="text-[10px] text-muted-foreground/20 font-semibold tracking-widest uppercase cursor-default transition-colors"
-                  >
-                    {brand}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
+          {/* Brand names — centered, ultra dim */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.7 }}
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+          >
+            {brands.map((brand, i) => (
+              <motion.span
+                key={brand}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.8 + i * 0.06 }}
+                whileHover={{ color: "hsl(var(--cyan))", y: -2 }}
+                className="text-[10px] text-muted-foreground/20 font-semibold tracking-widest uppercase cursor-default transition-all"
+              >
+                {brand}
+              </motion.span>
+            ))}
           </motion.div>
 
         </div>
       </motion.div>
 
-      {/* Thin bottom rule */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/40 to-transparent z-10"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-      />
-
       {/* ── TICKER ── */}
-      <div className="relative z-10 py-4 border-t border-border/15">
+      <div className="relative z-10 py-3.5 border-t border-border/10">
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-12 whitespace-nowrap"
@@ -245,10 +245,10 @@ const HeroSection = () => {
                 ].map((text) => (
                   <span
                     key={text}
-                    className="text-muted-foreground/25 font-medium text-[10px] tracking-[0.3em] flex items-center gap-12"
+                    className="text-muted-foreground/20 font-medium text-[10px] tracking-[0.3em] flex items-center gap-12"
                   >
                     {text}
-                    <span className="text-cyan/40 text-xs">·</span>
+                    <span className="text-cyan/30">·</span>
                   </span>
                 ))}
               </div>
