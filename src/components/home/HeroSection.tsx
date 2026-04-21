@@ -1,8 +1,40 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Briefcase, Zap } from "lucide-react";
 import { useEffect } from "react";
 import GradientButton from "@/components/ui/GradientButton";
 import { useTypewriter } from "@/hooks/useTypewriter";
+import heroImage from "@/assets/hero-main.png";
+// ─────────────────────────────────────────────────────────────────────────────
+
+const floatingCards = [
+  {
+    id: "projects",
+    icon: Briefcase,
+    value: "50+",
+    label: "Projects Delivered",
+    position: "top-[8%] -left-[10%]",
+    delay: 1.0,
+    floatDuration: 3.8,
+  },
+  {
+    id: "countries",
+    icon: Globe,
+    value: "3",
+    label: "Countries · Worldwide Reach",
+    position: "bottom-[22%] -left-[12%]",
+    delay: 1.2,
+    floatDuration: 4.2,
+  },
+  {
+    id: "turnaround",
+    icon: Zap,
+    value: "14-Day",
+    label: "Avg. Turnaround",
+    position: "top-[35%] -right-[8%]",
+    delay: 1.4,
+    floatDuration: 3.5,
+  },
+];
 
 const HeroSection = () => {
   const mouseX = useMotionValue(0);
@@ -21,13 +53,13 @@ const HeroSection = () => {
   }, []);
 
   const { displayText: subheadline } = useTypewriter(
-    "We build websites that grow your business and convert visitors into customers.",
-    30,
+    "We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, Usa, United Kingdom and anywhere else in the world.",
+    28,
     1600
   );
 
   return (
-    <section className="relative h-screen max-h-screen flex flex-col overflow-hidden bg-background">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-background">
 
       {/* Top rule */}
       <motion.div
@@ -37,7 +69,7 @@ const HeroSection = () => {
         transition={{ delay: 0.2, duration: 1.2 }}
       />
 
-      {/* Grid */}
+      {/* Grid background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
           className="absolute inset-0"
@@ -57,20 +89,21 @@ const HeroSection = () => {
       {/* Orb */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
         <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.06, 0.12, 0.06] }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[450px] h-[450px] rounded-full bg-cyan/20 blur-[110px]"
+          className="w-[500px] h-[500px] rounded-full bg-cyan/20 blur-[120px]"
         />
       </div>
 
-      {/* ── SPLIT LAYOUT — left big text, right subtitle+CTA ── */}
-      <div className="relative z-10 flex flex-col h-full pt-20">
+      {/* ── MAIN CONTENT ── */}
+      <div className="relative z-10 flex flex-col flex-1 pt-24 pb-0">
 
-        {/* Main split — takes all space */}
-        <div className="flex-1 flex items-center px-6 lg:px-14 gap-8 lg:gap-16">
+        {/* Split layout */}
+        <div className="flex-1 flex items-center container mx-auto px-6 lg:px-14 gap-8 lg:gap-16">
 
-          {/* LEFT — giant stacked text */}
-          <div className="flex-1">
+          {/* LEFT — Text column */}
+          <div className="flex-1 flex flex-col justify-center max-w-xl">
+
             {/* Eyebrow */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -83,29 +116,30 @@ const HeroSection = () => {
                 animate={{ opacity: [1, 0.2, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              <span className="text-[10px] text-muted-foreground/40 tracking-[0.3em] uppercase font-medium">
-                Digital Agency · Lagos
+              <span className="text-[10px] text-muted-foreground/50 tracking-[0.3em] uppercase font-medium">
+                Digital Agency · Global
               </span>
             </motion.div>
 
-            {/* Headline lines */}
+            {/* Headline */}
             {[
-              { text: "We Build", accent: false },
-              { text: "Websites", accent: false },
-              { text: "That Work.", accent: true },
+              { text: "Your Gateway", accent: false },
+              { text: "to a", accent: false },
+              { text: "World-Class", accent: true },
+              { text: "Web Presence.", accent: false },
             ].map((line, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.p
                   initial={{ y: "105%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
                   transition={{
-                    delay: 0.3 + i * 0.12,
+                    delay: 0.3 + i * 0.1,
                     type: "spring",
                     stiffness: 70,
                     damping: 14,
                   }}
-                  className={`font-poppins font-black tracking-tight leading-[0.9] block
-                    text-[clamp(2.8rem,7vw,7.5rem)]
+                  className={`font-poppins font-black tracking-tight leading-[0.92] block
+                    text-[clamp(2.2rem,5.2vw,5.5rem)]
                     ${line.accent
                       ? "bg-gradient-to-r from-cyan via-cyan/70 to-cyan/35 bg-clip-text text-transparent"
                       : "text-foreground"
@@ -115,45 +149,51 @@ const HeroSection = () => {
                 </motion.p>
               </div>
             ))}
-          </div>
 
-          {/* Vertical divider */}
-          <motion.div
-            className="hidden lg:block w-px self-stretch bg-border/20"
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            style={{ originY: 0 }}
-          />
+            {/* Divider */}
+            <motion.div
+              className="w-8 h-px bg-cyan mt-8 mb-6"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+              style={{ originX: 0 }}
+            />
 
-          {/* RIGHT — subtitle + CTA stacked vertically, centered */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.9, type: "spring", stiffness: 70 }}
-            className="hidden lg:flex flex-col justify-center gap-10 w-72 xl:w-80"
-          >
             {/* Subtitle */}
-            <div>
-              <motion.div
-                className="w-6 h-px bg-cyan mb-5"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-                style={{ originX: 0 }}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.0 }}
+              className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md"
+            >
+              {subheadline}
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
               />
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {subheadline}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
-                />
-              </p>
-            </div>
+            </motion.p>
+
+            {/* International badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.05 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan/10 border border-cyan/20 mb-8 w-fit"
+            >
+              <Globe className="w-3.5 h-3.5 text-cyan" />
+              <span className="text-[11px] text-cyan font-medium tracking-wide">
+                International · We Serve the Whole World
+              </span>
+            </motion.div>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.15 }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
               <GradientButton
                 href="/contact"
                 size="lg"
@@ -176,31 +216,89 @@ const HeroSection = () => {
                   <ArrowUpRight className="w-4 h-4 group-hover:text-cyan transition-colors" />
                 </motion.span>
               </motion.a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT — Hero image + floating cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6, type: "spring", stiffness: 60, damping: 18 }}
+            className="hidden lg:block relative w-[440px] xl:w-[500px] shrink-0"
+          >
+            {/* Image frame */}
+            <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden ">
+              <img src={heroImage} alt="Nosyra Digital" className="w-full h-full object-cover" />
+              <div className="w-full h-full bg-gradient-to-br from-cyan/8 via-background to-[#1A2A4A]/30 flex items-center justify-center">
+                <div className="text-center text-muted-foreground/25 select-none">
+                  <div className="text-[64px] mb-3">🖼</div>
+                  <p className="text-[10px] tracking-widest uppercase font-medium leading-relaxed">
+                    Add hero-main.png<br />to src/assets/
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom overlay */}
+              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background/70 to-transparent pointer-events-none" />
             </div>
+
+            {/* Floating stat cards */}
+            {floatingCards.map((card) => (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, scale: 0.75, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: card.delay, type: "spring", stiffness: 100, damping: 15 }}
+                className={`absolute ${card.position} z-20`}
+              >
+                <motion.div
+                  animate={{ y: [0, -7, 0] }}
+                  transition={{
+                    duration: card.floatDuration,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-card/95 backdrop-blur-md border border-border/60 shadow-2xl shadow-black/30 min-w-[165px]"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-cyan/15 flex items-center justify-center shrink-0 border border-cyan/25">
+                    <card.icon className="text-cyan" style={{ width: 17, height: 17 }} />
+                  </div>
+                  <div>
+                    <p className="text-[15px] font-poppins font-bold text-foreground leading-none">{card.value}</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{card.label}</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+
+            {/* Background glow */}
+            <div className="absolute -inset-10 bg-cyan/5 rounded-full blur-3xl -z-10" />
           </motion.div>
         </div>
 
-        {/* Mobile bottom — subtitle + CTA (shows only on small screens) */}
+        {/* Mobile content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="lg:hidden flex flex-col gap-6 px-6 pb-10"
+          className="lg:hidden flex flex-col gap-5 container mx-auto px-6 pb-10"
         >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan/10 border border-cyan/20 w-fit">
+            <Globe className="w-3.5 h-3.5 text-cyan" />
+            <span className="text-[11px] text-cyan font-medium tracking-wide">
+              International · We Serve the Whole World
+            </span>
+          </div>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-            {subheadline}
+            We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada , Usa , United Kingdom and anywhere else in the world.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <GradientButton
-              href="/contact"
-              size="lg"
-              icon={<ArrowRight className="w-5 h-5" />}
-            >
+            <GradientButton href="/contact" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
               Start Your Project
             </GradientButton>
             <motion.a
               href="/portfolio"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border/35 text-muted-foreground text-sm font-medium hover:border-cyan/40 hover:text-foreground transition-all"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border/35 text-muted-foreground text-sm font-medium"
               whileHover={{ scale: 1.02 }}
             >
               View Our Work <ArrowUpRight className="w-4 h-4" />
@@ -219,14 +317,15 @@ const HeroSection = () => {
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex gap-12">
                   {[
-                    "DIGITAL AGENCY",
+                    "NIGERIA",
+                    "GHANA",
+                    "CANADA",
                     "WEB DESIGN",
-                    "BRANDING",
-                    "SOCIAL MEDIA",
                     "E-COMMERCE",
-                    "MOBILE OPTIMIZATION",
-                    "SEO",
+                    "INTERNATIONAL",
                     "UI/UX DESIGN",
+                    "DIGITAL AGENCY",
+                    "WORLDWIDE",
                   ].map((text) => (
                     <span
                       key={text}

@@ -6,7 +6,12 @@ import gtHero from "@/assets/gt-hero.png";
 import urhuHero from "@/assets/urhu-hero.png";
 import honHero from "@/assets/hon-hero.png";
 import thmHero from "@/assets/thm-hero.png"; // ← swap with your actual filename when ready
-
+import zunanyaHero from "@/assets/zunanya-hero.png";
+import swanilitaHero from "@/assets/swanilita-hero.png";
+import maybeenHero from "@/assets/maybeen-hero.png";
+import handygidiHero from "@/assets/handygidi-hero.png";
+import micdebHero from "@/assets/micdeb-hero.png";
+import joyaboHero from "@/assets/joyabo-hero.png";
 
 export const projects = [
   {
@@ -191,6 +196,139 @@ export const projects = [
     ],
     year: "2026",
     services: ["Web Design", "Content Strategy", "SEO", "UI/UX Design"],
+  },
+  {
+    id: 9,
+    slug: "zunanyas-luxury",
+    title: "Zunanya's Luxury",
+    category: "E-Commerce",
+    image: zunanyaHero,
+    link: "https://zunanyasluxury.com.ng",
+    description: "Premium fashion, fragrance, and art platform offering curated elegance and authentic luxury products.",
+    fullDescription:
+      "Zunanya's Luxury is a premium digital platform redefining luxury for modern Nigerians, offering fashion, fragrance (perfumes, reed diffusers, scented candles, car diffusers), and art (handcrafted gypsum artworks with scent infusion). The platform emphasizes curated elegance, authentic products, fast nationwide delivery, easy returns, and dedicated WhatsApp support, providing a high-touch customer experience.",
+    tags: ["Luxury", "Fashion", "Fragrance", "Art", "E-Commerce"],
+    challenge:
+      "To digitize a luxury brand experience across diverse product categories while maintaining exclusivity and high-touch customer service, ensuring the online presence reflects the brand's premium quality.",
+    solution:
+      "Developed a platform with a refined design, showcasing premium products through visual storytelling and clear categorization. Integrated seamless customer support via WhatsApp and optimized for a luxurious user journey.",
+    results: [
+      "Strong client testimonials and positive brand perception.",
+      "Featured in prominent lifestyle publications like Vogue Africa, Guardian Style, and ThisDay Style.",
+    ],
+    year: "2026",
+    services: ["Web Design", "E-Commerce Development", "Brand Strategy", "UI/UX Design"],
+  },
+  {
+    id: 10,
+    slug: "swanilita-studio",
+    title: "Swanilita Studio",
+    category: "Beauty & Wellness",
+    image: swanilitaHero,
+    link: "https://swanilitastudio.com.ng",
+    description: "Kaduna's premier piercing studio offering professional piercing services and premium jewelry.",
+    fullDescription:
+      "Swanilita Studio is a professional piercing studio and premium jewelry retailer in Kaduna, Nigeria. Specializing in various piercing types including Conch, Daith, Tragus, Earlobe, Mid Helix, and Catflap, the studio emphasizes artistry, hygiene, and a personalized experience. The platform provides an elegant showcase for services and jewelry, alongside an easy online booking system.",
+    tags: ["Piercing", "Jewelry", "Studio", "Beauty", "Booking System"],
+    challenge:
+      "To establish a premium brand identity in a niche market, ensuring trust and professionalism in body art, and providing a seamless online booking and shopping experience for clients.",
+    solution:
+      "Created an elegant website showcasing detailed piercing services, high-quality jewelry collections, and an intuitive online booking system. The design emphasizes hygiene, artistry, and integrates customer testimonials to build trust.",
+    results: [
+      "Successfully positioned as Kaduna's premier piercing studio.",
+      "Enhanced online presence with clear service offerings and streamlined appointment scheduling.",
+    ],
+    year: "2026",
+    services: ["Web Design", "Booking System Integration", "E-Commerce Development", "UI/UX Design"],
+  },
+  {
+    id: 11,
+    slug: "mayben-engineering",
+    title: "Mayben Engineering",
+    category: "Agricultural Machinery",
+    image: maybeenHero,
+    link: "https://maybenengineering.com/",
+    description: "Ghanaian company specializing in precision-fabricated agricultural machinery, including automated feed mixing machines.",
+    fullDescription:
+      "Mayben Engineering, based in Kumasi, Ghana, specializes in precision-fabricated agricultural machinery for African farmers. They offer a range of products including automated feed mixing machines, grinding mills, cereal dryers, toasters, and conveyors. Their solutions address the challenges of manual feed mixing by providing efficient, consistent, and labor-saving equipment, with a focus on durability and on-site support.",
+    tags: ["Agricultural Machinery", "Feed Mills", "Ghana", "Engineering", "Automation"],
+    challenge:
+      "To provide African farmers with durable, efficient, and easy-to-operate agricultural machinery that addresses the inefficiencies and inconsistencies of manual feed preparation, while building trust and offering comprehensive support.",
+    solution:
+      "Developed a range of automated machines for cleaning, grinding, and mixing feed, along with other essential agricultural equipment. The company emphasizes local fabrication, on-site installation, operator training, and a 12-month warranty with ongoing technical support.",
+    results: [
+      "Significant reduction in feed preparation time and labor costs for farmers.",
+      "Increased production capacity and consistent feed quality, leading to healthier livestock and improved profits.",
+      "Strong customer testimonials highlighting ease of operation, durability, and excellent support.",
+    ],
+    year: "2026",
+    services: ["Product Design", "Manufacturing", "Web Design", "Customer Support"],
+  },
+  {
+    id: 12,
+    slug: "handygidi-training-centre",
+    title: "HandyGidi Training Centre",
+    category: "Education & Training",
+    image: handygidiHero,
+    link: "https://handygiditrainingcentre.com",
+    description: "Abuja's practical digital & business skills academy offering hands-on training for career development.",
+    fullDescription:
+      "HandyGidi Training Centre is Abuja's leading hands-on digital and business skills academy, dedicated to equipping individuals with practical, job-ready skills. They offer a diverse range of courses including Computer Appreciation, AI & Data Analysis, Social Media Management, Graphic Design, Web Design, and Digital Marketing. The center focuses on transforming learners through practical application and real-world experience, ensuring high employability.",
+    tags: ["Education", "Training", "Digital Skills", "Business Skills", "Abuja"],
+    challenge:
+      "To effectively showcase a broad range of practical courses and attract students seeking career-oriented digital and business skills training in a competitive market.",
+    solution:
+      "Designed an engaging and informative website that highlights their diverse course offerings, success stories, and unique teaching methodology. Integrated clear calls-to-action for course exploration and enrollment, along with student testimonials.",
+    results: [
+      "Increased student inquiries and enrollments across various digital and business skill courses.",
+      "Established a strong online presence as a reputable training center in Abuja.",
+    ],
+    year: "2026",
+    services: ["Web Design", "Content Strategy", "Course Management System Integration", "UI/UX Design"],
+  },
+  {
+    id: 13,
+    slug: "micdeb-global-motors",
+    title: "MicDeb Global Motors",
+    category: "Automotive",
+    image: micdebHero,
+    link: "https://micdebglobalmotors.com.ng",
+    description: "Lagos-based car importer specializing in brand new and pre-owned German, American, and Dubai spec vehicles.",
+    fullDescription:
+      "MicDeb Global Motors is a premier car importer in Lagos, Nigeria, offering a wide selection of brand new and pre-owned vehicles. They specialize in sourcing high-quality German, American, and Dubai specification cars, including luxury brands like Mercedes-Benz, BMW, Porsche, Audi, Range Rover, Rolls-Royce, and Bentley, as well as popular models from Lexus, Toyota, Honda, Ford, Chevrolet, Dodge, and Volkswagen. The company prides itself on a seamless import process and exceptional customer service.",
+    tags: ["Automotive", "Car Import", "Luxury Cars", "Lagos", "E-Commerce"],
+    challenge:
+      "To create a sophisticated online platform that effectively showcases a diverse inventory of luxury and premium vehicles, builds trust with potential buyers, and streamlines the car purchasing process.",
+    solution:
+      "Developed a visually rich website with a comprehensive inventory display, detailed vehicle specifications, and clear calls-to-action for inquiries and pre-orders. The design emphasizes luxury, reliability, and a customer-centric approach.",
+    results: [
+      "Enhanced online visibility for their extensive vehicle inventory.",
+      "Improved customer engagement through a professional and easy-to-navigate platform for car browsing and inquiries.",
+    ],
+    year: "2026",
+    services: ["Web Design", "Inventory Management System", "E-Commerce Development", "UI/UX Design"],
+  },
+  {
+    id: 14,
+    slug: "joyabo-edu-consult",
+    title: "Joyabo Edu Consult",
+    category: "Education Consulting",
+    image: joyaboHero,
+    link: "https://joyaboeduconsult.com",
+    description: "Ghanaian educational consultancy connecting individuals to global work, study, and travel opportunities.",
+    fullDescription:
+      "Joyabo Edu Consult is a Ghanaian educational consultancy dedicated to connecting ambitious individuals to global opportunities in education and employment. They offer comprehensive services including work abroad programs (full-time employment in Europe & Canada), study & work programs (enrollment in top universities with legal work rights), and fast-track travel services (visa assistance, travel planning, documentation support). The consultancy aims to provide a gateway to international experiences and career development.",
+    tags: ["Education", "Consulting", "Ghana", "Study Abroad", "Work Abroad", "Travel"],
+    challenge:
+      "To clearly communicate a wide range of complex international education, work, and travel services to a diverse audience, building trust and simplifying the application process.",
+    solution:
+      "Designed an intuitive and informative website that categorizes their services, provides clear application guidance, and highlights success stories. The platform emphasizes reliability, global reach, and personalized consultation.",
+    results: [
+      "Increased inquiries and successful placements for global work, study, and travel programs.",
+      "Established a credible online presence as a trusted educational consultancy in Ghana.",
+    ],
+    year: "2026",
+    services: ["Web Design", "Content Strategy", "Application Management System", "UI/UX Design"],
   },
 ];
 
