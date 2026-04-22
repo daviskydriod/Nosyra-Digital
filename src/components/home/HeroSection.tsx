@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import GradientButton from "@/components/ui/GradientButton";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import heroImage from "@/assets/hero-main.png";
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 const floatingCards = [
@@ -53,7 +54,7 @@ const HeroSection = () => {
   }, []);
 
   const { displayText: subheadline } = useTypewriter(
-    "We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, Usa, United Kingdom and anywhere else in the world.",
+    "We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom and anywhere else in the world.",
     28,
     1600
   );
@@ -159,19 +160,24 @@ const HeroSection = () => {
               style={{ originX: 0 }}
             />
 
-            {/* Subtitle */}
+            {/* Subtitle — desktop: typewriter / mobile: static */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.0 }}
               className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md"
             >
-              {subheadline}
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
-              />
+              <span className="hidden lg:inline">
+                {subheadline}
+                <motion.span
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                  className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
+                />
+              </span>
+              <span className="lg:hidden">
+                We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom and anywhere else in the world.
+              </span>
             </motion.p>
 
             {/* International badge */}
@@ -187,7 +193,7 @@ const HeroSection = () => {
               </span>
             </motion.div>
 
-            {/* CTAs */}
+            {/* CTAs — single set, always visible */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -217,9 +223,10 @@ const HeroSection = () => {
                 </motion.span>
               </motion.a>
             </motion.div>
+
           </div>
 
-          {/* RIGHT — Hero image + floating cards */}
+          {/* RIGHT — Hero image + floating cards (desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -227,17 +234,12 @@ const HeroSection = () => {
             className="hidden lg:block relative w-[440px] xl:w-[500px] shrink-0"
           >
             {/* Image frame */}
-            <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden ">
-              <img src={heroImage} alt="Nosyra Digital" className="w-full h-full object-cover" />
-              <div className="w-full h-full bg-gradient-to-br from-cyan/8 via-background to-[#1A2A4A]/30 flex items-center justify-center">
-                <div className="text-center text-muted-foreground/25 select-none">
-                  <div className="text-[64px] mb-3">🖼</div>
-                  <p className="text-[10px] tracking-widest uppercase font-medium leading-relaxed">
-                    Add hero-main.png<br />to src/assets/
-                  </p>
-                </div>
-              </div>
-
+            <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden">
+              <img
+                src={heroImage}
+                alt="Nosyra Digital"
+                className="w-full h-full object-cover"
+              />
               {/* Bottom overlay */}
               <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background/70 to-transparent pointer-events-none" />
             </div>
@@ -275,36 +277,6 @@ const HeroSection = () => {
             <div className="absolute -inset-10 bg-cyan/5 rounded-full blur-3xl -z-10" />
           </motion.div>
         </div>
-
-        {/* Mobile content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
-          className="lg:hidden flex flex-col gap-5 container mx-auto px-6 pb-10"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan/10 border border-cyan/20 w-fit">
-            <Globe className="w-3.5 h-3.5 text-cyan" />
-            <span className="text-[11px] text-cyan font-medium tracking-wide">
-              International · We Serve the Whole World
-            </span>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-            We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada , Usa , United Kingdom and anywhere else in the world.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <GradientButton href="/contact" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-              Start Your Project
-            </GradientButton>
-            <motion.a
-              href="/portfolio"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border/35 text-muted-foreground text-sm font-medium"
-              whileHover={{ scale: 1.02 }}
-            >
-              View Our Work <ArrowUpRight className="w-4 h-4" />
-            </motion.a>
-          </div>
-        </motion.div>
 
         {/* Ticker */}
         <div className="border-t border-border/10 py-3">
