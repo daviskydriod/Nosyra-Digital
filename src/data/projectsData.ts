@@ -405,12 +405,12 @@ export const projects = [
     link: "https://joyaboeduconsult.com",
     description: "Strategic social media content designed to build trust and drive inquiries for a Ghanaian educational consultancy.",
     fullDescription:
-      "We created a cohesive social media content system for Joyabo Montessori Educational Consult & Travel Services, positioning them as the go-to authority for international study, work, and travel placements. Every post was crafted to educate, inspire, and convert — moving followers from awareness to direct inquiry.",
+      "We created a cohesive social media content system for Joyabo Montessori Educational Consult & Travel Services, positioning them as the go-to authority for international study, work, and travel placements. Every post was crafted to educate, inspire, and convert  moving followers from awareness to direct inquiry.",
     tags: ["Social Media", "Content Design", "Education", "Ghana"],
     challenge:
       "Building credibility and generating quality inquiries in a market flooded with untrustworthy visa and travel consultancies. The content needed to communicate professionalism and proven results instantly.",
     solution:
-      "We developed a branded content framework — consistent typography, colour palette, and tone — with a mix of testimonial posts, service explainers, and urgency-driven CTAs tailored for Instagram and Facebook.",
+      "We developed a branded content framework  consistent typography, colour palette, and tone  with a mix of testimonial posts, service explainers, and urgency-driven CTAs tailored for Instagram and Facebook.",
     results: [
       "Consistent brand voice established across all social platforms.",
       "Engagement and direct message inquiries increased following content rollout.",
@@ -436,7 +436,7 @@ export const projects = [
       "For Eko Connect Concierge, we produced social media content that mirrors the exclusivity of their service offering. Each post communicates speed, professionalism, and the high-touch experience that sets them apart in the Lagos concierge market — from airport transfers to bespoke event management.",
     tags: ["Social Media", "Content Design", "Luxury", "Lagos"],
     challenge:
-      "Conveying a premium, trust-heavy service on social media — where attention spans are short and competitors are loud — without compromising the brand's refined identity.",
+      "Conveying a premium, trust-heavy service on social media  where attention spans are short and competitors are loud  without compromising the brand's refined identity.",
     solution:
       "We designed content around visual restraint and confident messaging. Clean layouts, muted luxury tones, and sharp copy made each post feel elevated rather than promotional.",
     results: [
@@ -466,7 +466,7 @@ export const projects = [
     challenge:
       "Agricultural machinery is not a naturally visual or exciting product category for social media. The content had to simplify complexity, communicate ROI, and cut through in feeds dominated by consumer brands.",
     solution:
-      "We led with outcome-first messaging — showing what life looks like after buying the machine — paired with clean product visuals and real customer outcomes. Posts were structured to educate and convert farm-owning decision makers.",
+      "We led with outcome-first messaging  showing what life looks like after buying the machine  paired with clean product visuals and real customer outcomes. Posts were structured to educate and convert farm-owning decision makers.",
     results: [
       "Product visibility significantly increased among target farming communities.",
       "Direct WhatsApp inquiries traced back to social media posts.",
@@ -489,12 +489,12 @@ export const projects = [
     link: "#",
     description: "Aspirational resort social media content crafted to inspire getaways and drive direct bookings.",
     fullDescription:
-      "Pearl Paradise Resort needed content that sold an experience, not just a room. We built a social media presence that captured the feeling of escape — warm visuals, evocative copy, and strategic posting cadence designed to turn followers into guests. Every piece of content was crafted to make scrollers stop, dream, and book.",
+      "Pearl Paradise Resort needed content that sold an experience, not just a room. We built a social media presence that captured the feeling of escape  warm visuals, evocative copy, and strategic posting cadence designed to turn followers into guests. Every piece of content was crafted to make scrollers stop, dream, and book.",
     tags: ["Social Media", "Content Design", "Hospitality", "Resort"],
     challenge:
       "The hospitality space on social media is saturated. Standing out required a distinct visual identity and storytelling approach that went beyond generic 'beautiful room' photography.",
     solution:
-      "We created a content system built around the guest experience journey — from discovery and dreaming to arrival and checkout — matching each content type to the right stage of the customer decision process.",
+      "We created a content system built around the guest experience journey  from discovery and dreaming to arrival and checkout  matching each content type to the right stage of the customer decision process.",
     results: [
       "Brand aesthetic cohesively established across Instagram and Facebook.",
       "Direct booking inquiries attributed to social media content.",
@@ -517,12 +517,12 @@ export const projects = [
     link: "#",
     description: "Vibrant, appetite-driven social media content that builds brand love and drives sales for a food brand.",
     fullDescription:
-      "Teabeaz Foods required social media content that made people hungry — instantly. We crafted a visual content system that combined bold food photography direction with punchy, flavour-forward copy. The content was built to perform on Instagram and Facebook, driving both brand awareness and repeat purchase behaviour.",
+      "Teabeaz Foods required social media content that made people hungry  instantly. We crafted a visual content system that combined bold food photography direction with punchy, flavour-forward copy. The content was built to perform on Instagram and Facebook, driving both brand awareness and repeat purchase behaviour.",
     tags: ["Social Media", "Content Design", "Food & Beverage", "FMCG"],
     challenge:
       "Food brand content lives and dies by appetite appeal. With a crowded FMCG social space, Teabeaz needed a distinct visual language and voice that felt fresh, craveable, and true to the brand.",
     solution:
-      "We built a content calendar around key consumption moments — morning, snack time, and social occasions — pairing vibrant visuals with short, punchy captions that spoke directly to the target audience's daily life.",
+      "We built a content calendar around key consumption moments  morning, snack time, and social occasions  pairing vibrant visuals with short, punchy captions that spoke directly to the target audience's daily life.",
     results: [
       "Recognisable brand aesthetic established within the first content cycle.",
       "Post saves and shares above average — key signals of strong content resonance.",
@@ -545,12 +545,12 @@ export const projects = [
     link: "https://zunanyasluxury.com.ng",
     description: "Curated luxury social media content that drives desire and positions Zunanya's as Nigeria's premium lifestyle brand.",
     fullDescription:
-      "We created an elevated social media content system for Zunanya's Luxury — a Nigerian luxury lifestyle brand spanning fashion, fragrance, and art. Every post was designed to feel like a page from a high-end editorial, communicating the brand's premium positioning while driving direct sales through Instagram and Facebook.",
+      "We created an elevated social media content system for Zunanya's Luxury  a Nigerian luxury lifestyle brand spanning fashion, fragrance, and art. Every post was designed to feel like a page from a high-end editorial, communicating the brand's premium positioning while driving direct sales through Instagram and Facebook.",
     tags: ["Social Media", "Content Design", "Luxury", "Fashion", "Nigeria"],
     challenge:
-      "Luxury brands on social media must walk a fine line — too promotional and they lose prestige, too editorial and they lose conversions. Zunanya's needed content that did both flawlessly.",
+      "Luxury brands on social media must walk a fine line  too promotional and they lose prestige, too editorial and they lose conversions. Zunanya's needed content that did both flawlessly.",
     solution:
-      "We developed a dual-track content system: aspirational editorial posts for brand building, and product-led posts with clear purchase CTAs — all unified by a consistent luxury visual language.",
+      "We developed a dual-track content system: aspirational editorial posts for brand building, and product-led posts with clear purchase CTAs  all unified by a consistent luxury visual language.",
     results: [
       "Brand perceived as a premium lifestyle authority in the Nigerian market.",
       "DM inquiries and website traffic driven directly from social content.",
@@ -573,7 +573,7 @@ export const projects = [
     link: "#",
     description: "Professional B2B social media content positioning Mandari as the trusted supplier for construction professionals.",
     fullDescription:
-      "Mandari Construction Supplies needed a social media presence that spoke directly to contractors, developers, and procurement managers. We built a content system focused on product quality, reliability, and availability — making it easy for construction professionals to choose Mandari with confidence.",
+      "Mandari Construction Supplies needed a social media presence that spoke directly to contractors, developers, and procurement managers. We built a content system focused on product quality, reliability, and availability  making it easy for construction professionals to choose Mandari with confidence.",
     tags: ["Social Media", "Content Design", "Construction", "B2B"],
     challenge:
       "Construction supplies is a traditionally offline, relationship-driven industry. Creating social media content that felt relevant and valuable to a B2B professional audience required a different approach from consumer-facing brands.",
@@ -601,12 +601,12 @@ export const projects = [
     link: "https://www.thmwellnessco.com.ng/",
     description: "Empathetic, trust-building social media content that nurtures audiences toward booking their first wellness session.",
     fullDescription:
-      "We developed a social media content system for THM Wellness Company designed around empathy and trust. Wellness audiences require a softer, more considered approach — content needed to meet people where they are emotionally, offer genuine value, and gently guide them toward taking the step of booking a session.",
+      "We developed a social media content system for THM Wellness Company designed around empathy and trust. Wellness audiences require a softer, more considered approach  content needed to meet people where they are emotionally, offer genuine value, and gently guide them toward taking the step of booking a session.",
     tags: ["Social Media", "Content Design", "Wellness", "Health"],
     challenge:
-      "Mental health and wellness content must avoid feeling preachy or clinical. The challenge was creating content that felt genuinely supportive without being generic — content that actually resonated with people going through real challenges.",
+      "Mental health and wellness content must avoid feeling preachy or clinical. The challenge was creating content that felt genuinely supportive without being generic  content that actually resonated with people going through real challenges.",
     solution:
-      "We built a content calendar around emotional relevance — timely posts tied to real-life stressors, value-led educational content, and gentle CTAs that reduced the perceived barrier to booking. Visuals were warm, human, and carefully considered.",
+      "We built a content calendar around emotional relevance timely posts tied to real-life stressors, value-led educational content, and gentle CTAs that reduced the perceived barrier to booking. Visuals were warm, human, and carefully considered.",
     results: [
       "Engaged, loyal community growing around the brand's social presence.",
       "Session bookings attributed to social media content touchpoints.",
