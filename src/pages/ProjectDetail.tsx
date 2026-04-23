@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import GradientButton from "@/components/ui/GradientButton";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -11,13 +11,14 @@ import {
   CheckCircle2,
   Instagram,
   Facebook,
-  LayoutGrid,
   Sparkles,
+  LayoutGrid,
+  Globe,
 } from "lucide-react";
 import { projects } from "@/data/projectsData";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// WEB PROJECT DETAIL
+// WEB PROJECT DETAIL  (unchanged layout)
 // ─────────────────────────────────────────────────────────────────────────────
 const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
   <>
@@ -28,16 +29,8 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan/4 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-10"
-        >
-          <Link
-            to="/portfolio"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-cyan transition-colors duration-200"
-          >
+        <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="mb-10">
+          <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-cyan transition-colors duration-200">
             <motion.span className="inline-flex" whileHover={{ x: -3 }} transition={{ duration: 0.2 }}>
               <ArrowLeft className="w-4 h-4" />
             </motion.span>
@@ -45,58 +38,31 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
           </Link>
         </motion.div>
 
-        <motion.span
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20 uppercase tracking-widest"
-        >
+        <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
+          className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20 uppercase tracking-widest">
           {project.category}
         </motion.span>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-foreground mb-6 leading-[1.05] max-w-4xl"
-        >
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-foreground mb-6 leading-[1.05] max-w-4xl">
           {project.title}
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.22 }}
-          className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
-        >
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }}
+          className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
           {project.description}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.32 }}
-          className="flex flex-wrap items-center gap-3"
-        >
-          <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
-            📅 {project.year}
-          </span>
-          <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
-            ⏱ {(project as any).duration}
-          </span>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32 }}
+          className="flex flex-wrap items-center gap-3">
+          <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">📅 {project.year}</span>
+          <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">⏱ {(project as any).duration}</span>
           {project.tags.map((tag) => (
-            <span key={tag} className="px-4 py-1.5 bg-cyan/10 border border-cyan/20 rounded-full text-sm text-cyan">
-              {tag}
-            </span>
+            <span key={tag} className="px-4 py-1.5 bg-cyan/10 border border-cyan/20 rounded-full text-sm text-cyan">{tag}</span>
           ))}
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-cyan text-primary-foreground font-semibold rounded-full shadow-[0_0_28px_hsl(var(--cyan)/0.35)] hover:shadow-[0_0_45px_hsl(var(--cyan)/0.55)] hover:scale-105 transition-all duration-300 text-sm"
-          >
-            Visit Live Site
-            <ExternalLink className="w-4 h-4" />
+          <a href={project.link} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 bg-cyan text-primary-foreground font-semibold rounded-full shadow-[0_0_28px_hsl(var(--cyan)/0.35)] hover:shadow-[0_0_45px_hsl(var(--cyan)/0.55)] hover:scale-105 transition-all duration-300 text-sm">
+            Visit Live Site <ExternalLink className="w-4 h-4" />
           </a>
         </motion.div>
       </div>
@@ -106,41 +72,32 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
     <section className="py-12 lg:py-16">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+          <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full lg:flex-1 relative rounded-2xl overflow-hidden border border-border/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
-          >
+            className="w-full lg:flex-1 relative rounded-2xl overflow-hidden border border-border/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]">
             <div className="flex items-center gap-2 px-4 py-3 bg-muted/80 border-b border-border/50">
               <span className="w-3 h-3 rounded-full bg-red-400/70" />
               <span className="w-3 h-3 rounded-full bg-yellow-400/70" />
               <span className="w-3 h-3 rounded-full bg-green-400/70" />
               <div className="ml-3 flex-1 h-6 bg-background/60 rounded-md flex items-center px-3">
-                <span className="text-xs text-muted-foreground/50 font-mono truncate">
-                  {project.link}
-                </span>
+                <span className="text-xs text-muted-foreground/50 font-mono truncate">{project.link}</span>
               </div>
             </div>
             <img src={project.image} alt={project.title} className="w-full object-cover max-h-[480px]" />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full lg:w-64 xl:w-72 shrink-0 flex flex-col gap-6"
-          >
-            <div className="p-5 rounded-2xl border border-border/50 bg-card">
-              <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-2 block">Project</span>
-              <p className="font-poppins font-bold text-foreground text-base leading-snug">{project.title}</p>
-            </div>
-            <div className="p-5 rounded-2xl border border-border/50 bg-card">
-              <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-2 block">Category</span>
-              <p className="text-foreground font-medium">{project.category}</p>
-            </div>
+            className="w-full lg:w-64 xl:w-72 shrink-0 flex flex-col gap-6">
+            {[
+              { label: "Project", value: project.title },
+              { label: "Category", value: project.category },
+            ].map(({ label, value }) => (
+              <div key={label} className="p-5 rounded-2xl border border-border/50 bg-card">
+                <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-2 block">{label}</span>
+                <p className="font-poppins font-bold text-foreground text-base leading-snug">{value}</p>
+              </div>
+            ))}
             <div className="p-5 rounded-2xl border border-border/50 bg-card">
               <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">Timeline</span>
               <div className="flex flex-col gap-2">
@@ -159,20 +116,13 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
               <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">Tech & Stack</span>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 text-xs bg-cyan/10 border border-cyan/20 text-cyan rounded-full">
-                    {tag}
-                  </span>
+                  <span key={tag} className="px-3 py-1 text-xs bg-cyan/10 border border-cyan/20 text-cyan rounded-full">{tag}</span>
                 ))}
               </div>
             </div>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-cyan text-primary-foreground font-semibold rounded-xl shadow-[0_0_24px_hsl(var(--cyan)/0.3)] hover:shadow-[0_0_40px_hsl(var(--cyan)/0.5)] hover:scale-105 transition-all duration-300 text-sm"
-            >
-              Visit Live Site
-              <ExternalLink className="w-4 h-4" />
+            <a href={project.link} target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-cyan text-primary-foreground font-semibold rounded-xl shadow-[0_0_24px_hsl(var(--cyan)/0.3)] hover:shadow-[0_0_40px_hsl(var(--cyan)/0.5)] hover:scale-105 transition-all duration-300 text-sm">
+              Visit Live Site <ExternalLink className="w-4 h-4" />
             </a>
           </motion.div>
         </div>
@@ -182,227 +132,365 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SOCIAL MEDIA PROJECT DETAIL
+// SOCIAL PROJECT DETAIL  — editorial magazine layout
 // ─────────────────────────────────────────────────────────────────────────────
-const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => {
-  const gallery = (project as any).gallery ?? [project.image];
-  const [activeImg, setActiveImg] = useState(0);
 
-  const platformIcons: Record<string, React.ReactNode> = {
-    Instagram: <Instagram className="w-3.5 h-3.5" />,
-    Facebook: <Facebook className="w-3.5 h-3.5" />,
-  };
+// Single large design reveal card — SQUARE, uncropped
+const DesignSlide = ({
+  img,
+  index,
+  total,
+  projectTitle,
+}: {
+  img: string;
+  index: number;
+  total: number;
+  projectTitle: string;
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="relative"
+    >
+      {/* Issue-number label (editorial style) */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-3">
+          <span className="text-[11px] font-mono text-muted-foreground/40 uppercase tracking-[0.25em]">
+            Design
+          </span>
+          <span className="font-poppins font-black text-5xl lg:text-7xl leading-none text-foreground/[0.06] select-none">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
+        <div className="flex-1 h-px bg-border/30" />
+        <span className="text-[11px] font-mono text-muted-foreground/40 uppercase tracking-[0.2em]">
+          of {String(total).padStart(2, "0")}
+        </span>
+      </div>
+
+      {/* ── SQUARE container — image fits fully inside, no cropping ── */}
+      <div
+        className="relative w-full rounded-3xl bg-muted/30 border border-border/40 overflow-hidden flex items-center justify-center group"
+        style={{ aspectRatio: "1 / 1" }}
+      >
+        <img
+          src={img}
+          alt={`${projectTitle} — Design ${index + 1}`}
+          className="w-full h-full object-contain"
+        />
+
+        {/* Bottom caption bar */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center justify-between bg-gradient-to-t from-black/50 to-transparent">
+          <div className="flex items-center gap-2">
+            <div
+              className="w-6 h-6 rounded-full flex items-center justify-center shadow-lg"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--cyan)), hsl(var(--cyan)/0.6))",
+              }}
+            >
+              <Instagram className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-white/80 text-sm font-medium">{projectTitle}</span>
+          </div>
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm border border-white/10">
+            <Sparkles className="w-3 h-3 text-cyan" style={{ color: "hsl(var(--cyan))" }} />
+            <span className="text-white/70 text-xs font-medium">Nosyra Digital</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => {
+  // ── Slice gallery to max 3 designs ──
+  const rawGallery: string[] = (project as any).gallery ?? [project.image];
+  const gallery = rawGallery.slice(0, 3);
+
+  const platforms: string[] = (project as any).platforms ?? [];
+  const postsDelivered: string = (project as any).postsDelivered ?? "";
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const heroBgY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
 
   return (
     <>
-      {/* HERO — editorial, gradient-heavy */}
-      <section className="relative overflow-hidden pt-36 pb-20 lg:pb-28">
-        {/* Warm gradient blobs */}
-        <div className="absolute inset-0 bg-gradient-mesh" />
-        <div className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-pink-500/8 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-orange-400/6 rounded-full blur-[140px] pointer-events-none" />
+      {/* ── HERO — full editorial, asymmetric ───────────────────────────────── */}
+      <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden pt-24">
 
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mb-10"
-          >
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-pink-400 transition-colors duration-200"
-            >
-              <motion.span className="inline-flex" whileHover={{ x: -3 }} transition={{ duration: 0.2 }}>
-                <ArrowLeft className="w-4 h-4" />
-              </motion.span>
-              All Projects
-            </Link>
-          </motion.div>
+        {/* Parallax background image */}
+        <motion.div
+          style={{ y: heroBgY }}
+          className="absolute inset-0 scale-110 origin-top"
+        >
+          <img
+            src={gallery[0]}
+            alt=""
+            className="w-full h-full object-cover"
+          />
 
-          {/* Social badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="flex items-center gap-2 mb-6"
-          >
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm font-semibold bg-gradient-to-r from-pink-500/20 to-orange-400/20 border border-pink-500/30 text-pink-400 rounded-full uppercase tracking-widest">
-              <LayoutGrid className="w-3.5 h-3.5" /> Social Media Design
-            </span>
-          </motion.div>
+          {/* Primary dark overlay — keeps hero very dark */}
+          <div className="absolute inset-0 bg-black/90" />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-poppins font-black text-foreground mb-6 leading-[1.05] max-w-4xl"
-          >
-            {project.title}
-          </motion.h1>
+          {/* Subtle cyan glow top-left — brand flavour */}
+          <div
+            className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none opacity-15"
+            style={{ background: "hsl(var(--cyan))" }}
+          />
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.22 }}
-            className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
-          >
-            {project.description}
-          </motion.p>
+          {/* Bottom fade to pure black — avoids white/light bleed */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent" />
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.32 }}
-            className="flex flex-wrap items-center gap-3"
-          >
-            <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">
-              📅 {project.year}
-            </span>
-            {(project as any).postsDelivered && (
-              <span className="px-4 py-1.5 bg-pink-500/10 border border-pink-500/20 rounded-full text-sm text-pink-400 font-medium">
-                ✦ {(project as any).postsDelivered}
-              </span>
-            )}
-            {((project as any).platforms ?? []).map((p: string) => (
-              <span
-                key={p}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground"
-              >
-                {platformIcons[p]}
-                {p}
-              </span>
-            ))}
-            {project.tags.map((tag) => (
-              <span key={tag} className="px-4 py-1.5 bg-pink-500/10 border border-pink-500/20 rounded-full text-sm text-pink-400">
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+        {/* Back link — top left */}
+        <div className="absolute top-8 left-0 right-0 z-20">
+          <div className="container mx-auto px-4 lg:px-8">
+            <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
+              <Link to="/portfolio"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200">
+                <motion.span className="inline-flex" whileHover={{ x: -3 }} transition={{ duration: 0.2 }}>
+                  <ArrowLeft className="w-4 h-4" />
+                </motion.span>
+                All Projects
+              </Link>
+            </motion.div>
+          </div>
         </div>
-      </section>
 
-      {/* GALLERY + DETAILS */}
-      <section className="py-12 lg:py-16">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Hero content — sits at bottom */}
+        <div className="container mx-auto px-4 lg:px-8 relative z-10 pb-16 lg:pb-20">
+          <div className="max-w-5xl">
 
-            {/* Gallery viewer */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full lg:flex-1"
-            >
-              {/* Main image */}
-              <div className="relative rounded-2xl overflow-hidden border border-border/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] bg-muted aspect-square sm:aspect-[4/3]">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeImg}
-                    src={gallery[activeImg]}
-                    alt={`${project.title} post ${activeImg + 1}`}
-                    className="w-full h-full object-cover"
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </AnimatePresence>
-
-                {/* Instagram-style frame badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
-                  <div className="w-4 h-4 rounded-full bg-gradient-to-br from-pink-500 via-rose-500 to-orange-400 flex items-center justify-center">
-                    <Instagram className="w-2.5 h-2.5 text-white" />
-                  </div>
-                  <span className="text-white text-xs font-medium">{activeImg + 1} / {gallery.length}</span>
-                </div>
-
-                {/* Sparkle watermark */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
-                  <Sparkles className="w-3 h-3 text-pink-400" />
-                  <span className="text-white/70 text-xs">Nosyra Digital</span>
-                </div>
+            {/* Type badge */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="flex items-center gap-3 mb-8">
+              <div
+                className="flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md border"
+                style={{
+                  background: "hsl(var(--cyan)/0.15)",
+                  borderColor: "hsl(var(--cyan)/0.3)",
+                }}
+              >
+                <LayoutGrid className="w-3.5 h-3.5" style={{ color: "hsl(var(--cyan))" }} />
+                <span className="text-white/90 text-xs font-semibold uppercase tracking-widest">Social Media Design</span>
               </div>
-
-              {/* Thumbnail strip */}
-              <div className="flex gap-3 mt-4">
-                {gallery.map((img: string, i: number) => (
-                  <motion.button
-                    key={i}
-                    onClick={() => setActiveImg(i)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`relative flex-1 aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                      activeImg === i
-                        ? "border-pink-500 shadow-[0_0_16px_rgba(236,72,153,0.4)]"
-                        : "border-border/40 opacity-60 hover:opacity-100"
-                    }`}
-                  >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
-                  </motion.button>
+              <div className="flex gap-2">
+                {platforms.map((p) => (
+                  <div key={p} className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                    {p === "Instagram" && <Instagram className="w-3.5 h-3.5" style={{ color: "hsl(var(--cyan))" }} />}
+                    {p === "Facebook" && <Facebook className="w-3.5 h-3.5 text-blue-400" />}
+                    <span className="text-white/80 text-xs">{p}</span>
+                  </div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Details sidebar */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full lg:w-64 xl:w-72 shrink-0 flex flex-col gap-6"
+            {/* Title — massive, white */}
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="font-poppins font-black text-white leading-[0.95] mb-6 drop-shadow-2xl"
+              style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
             >
-              <div className="p-5 rounded-2xl border border-border/50 bg-card">
-                <span className="text-xs font-mono text-pink-400 uppercase tracking-[0.18em] mb-2 block">Client</span>
-                <p className="font-poppins font-bold text-foreground text-base leading-snug">{project.title}</p>
-              </div>
+              {project.title}
+            </motion.h1>
 
-              <div className="p-5 rounded-2xl border border-border/50 bg-card">
-                <span className="text-xs font-mono text-pink-400 uppercase tracking-[0.18em] mb-3 block">Deliverables</span>
-                <div className="flex flex-col gap-2">
-                  {(project as any).postsDelivered && (
-                    <>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Posts</span>
-                        <span className="text-foreground font-medium">{(project as any).postsDelivered}</span>
-                      </div>
-                      <div className="w-full h-px bg-border/40" />
-                    </>
-                  )}
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Year</span>
-                    <span className="text-foreground font-medium">{project.year}</span>
-                  </div>
-                  <div className="w-full h-px bg-border/40" />
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Engagement</span>
-                    <span className="text-foreground font-medium">{(project as any).duration}</span>
-                  </div>
+            {/* Description + meta row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-12"
+            >
+              <p className="text-white/75 text-lg leading-relaxed max-w-xl drop-shadow-md">
+                {project.description}
+              </p>
+
+              {/* Meta pills cluster */}
+              <div className="flex flex-wrap gap-3 lg:ml-auto lg:shrink-0">
+                <div className="px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-center">
+                  <div className="text-white font-poppins font-black text-xl">{gallery.length}</div>
+                  <div className="text-white/50 text-[10px] uppercase tracking-wider mt-0.5">Designs</div>
                 </div>
-              </div>
-
-              <div className="p-5 rounded-2xl border border-border/50 bg-card">
-                <span className="text-xs font-mono text-pink-400 uppercase tracking-[0.18em] mb-3 block">Platforms</span>
-                <div className="flex flex-col gap-2">
-                  {((project as any).platforms ?? []).map((p: string) => (
-                    <div key={p} className="flex items-center gap-2 text-sm text-foreground font-medium">
-                      {platformIcons[p]}
-                      {p}
+                {postsDelivered && (
+                  <div
+                    className="px-4 py-2 rounded-xl backdrop-blur-md border text-center"
+                    style={{
+                      background: "hsl(var(--cyan)/0.2)",
+                      borderColor: "hsl(var(--cyan)/0.4)",
+                    }}
+                  >
+                    <div className="font-poppins font-black text-xl" style={{ color: "hsl(var(--cyan))" }}>
+                      {postsDelivered.replace(/[^0-9+]/g, "") || postsDelivered}
                     </div>
-                  ))}
+                    <div className="text-white/60 text-[10px] uppercase tracking-wider mt-0.5">Posts</div>
+                  </div>
+                )}
+                <div className="px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-center">
+                  <div className="text-white font-poppins font-black text-xl">{project.year}</div>
+                  <div className="text-white/50 text-[10px] uppercase tracking-wider mt-0.5">Year</div>
                 </div>
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-              <div className="p-5 rounded-2xl border border-pink-500/20 bg-pink-500/[0.03]">
-                <span className="text-xs font-mono text-pink-400 uppercase tracking-[0.18em] mb-3 block">Content Tags</span>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-xs bg-pink-500/10 border border-pink-500/20 text-pink-400 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
+      {/* ── DESIGNS SHOWCASE — 3 designs, square, uncropped ─────────────────── */}
+      <section className="py-20 lg:py-28 relative">
+        {/* Section header */}
+        <div className="container mx-auto px-4 lg:px-8 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-6"
+          >
+            <div>
+              <span
+                className="text-xs font-mono uppercase tracking-[0.25em] block mb-2"
+                style={{ color: "hsl(var(--cyan))" }}
+              >
+                Content Kit
+              </span>
+              <h2 className="font-poppins font-black text-foreground text-3xl lg:text-4xl">
+                The Full Designs
+              </h2>
+            </div>
+            <div className="flex-1 h-px bg-border/30" />
+            <span className="text-xs font-mono text-muted-foreground/40 uppercase tracking-widest shrink-0">
+              {gallery.length} pieces
+            </span>
+          </motion.div>
+        </div>
+
+        {/* Design slides — 3 boxes in one row */}
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {gallery.map((img, i) => (
+              <DesignSlide
+                key={i}
+                img={img}
+                index={i}
+                total={gallery.length}
+                projectTitle={project.title}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SIDEBAR INFO — after all designs ─────────────────────────────────── */}
+      <section className="py-16 border-t border-border/30 bg-muted/10">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-4 gap-6">
+            {/* Client */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 }}
+              className="p-6 rounded-2xl border border-border/50 bg-card"
+            >
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.2em] block mb-3"
+                style={{ color: "hsl(var(--cyan))" }}
+              >
+                Client
+              </span>
+              <p className="font-poppins font-bold text-foreground text-lg leading-tight">{project.title}</p>
+            </motion.div>
+
+            {/* Platforms */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-6 rounded-2xl border border-border/50 bg-card"
+            >
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.2em] block mb-3"
+                style={{ color: "hsl(var(--cyan))" }}
+              >
+                Platforms
+              </span>
+              <div className="flex flex-col gap-2">
+                {platforms.map((p) => (
+                  <div key={p} className="flex items-center gap-2 text-sm text-foreground font-medium">
+                    {p === "Instagram" && <Instagram className="w-4 h-4" style={{ color: "hsl(var(--cyan))" }} />}
+                    {p === "Facebook" && <Facebook className="w-4 h-4 text-blue-400" />}
+                    {p}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Deliverables */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              className="p-6 rounded-2xl border border-border/50 bg-card"
+            >
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.2em] block mb-3"
+                style={{ color: "hsl(var(--cyan))" }}
+              >
+                Deliverables
+              </span>
+              <div className="flex flex-col gap-2 text-sm">
+                {postsDelivered && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Posts</span>
+                    <span className="text-foreground font-semibold">{postsDelivered}</span>
+                  </div>
+                )}
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Year</span>
+                  <span className="text-foreground font-semibold">{project.year}</span>
                 </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Engagement</span>
+                  <span className="text-foreground font-semibold">{(project as any).duration}</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Services */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="p-6 rounded-2xl border bg-card"
+              style={{
+                borderColor: "hsl(var(--cyan)/0.2)",
+                background: "hsl(var(--cyan)/0.03)",
+              }}
+            >
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.2em] block mb-3"
+                style={{ color: "hsl(var(--cyan))" }}
+              >
+                Services
+              </span>
+              <div className="flex flex-col gap-2">
+                {project.services.map((s) => (
+                  <div key={s} className="flex items-center gap-2 text-sm text-foreground">
+                    <span
+                      className="w-1 h-1 rounded-full shrink-0"
+                      style={{ background: "hsl(var(--cyan))" }}
+                    />
+                    {s}
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -410,68 +498,69 @@ const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => 
       </section>
     </>
   );
-
-  function platformIcons(p: string) {
-    const icons: Record<string, React.ReactNode> = {
-      Instagram: <Instagram className="w-4 h-4 text-pink-400" />,
-      Facebook: <Facebook className="w-4 h-4 text-blue-400" />,
-    };
-    return icons[p] ?? null;
-  }
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SHARED SECTIONS (Challenge / Solution / Results / Prev-Next / CTA)
+// SHARED: Overview / Challenge+Solution / Results
 // ─────────────────────────────────────────────────────────────────────────────
-const SharedSections = ({
+const SharedBody = ({
   project,
-  prevProject,
-  nextProject,
   isSocial,
 }: {
   project: (typeof projects)[0];
-  prevProject: (typeof projects)[0] | null;
-  nextProject: (typeof projects)[0] | null;
   isSocial: boolean;
 }) => {
-  const accent = isSocial ? "text-pink-400" : "text-cyan";
-  const accentBg = isSocial ? "bg-pink-500/10 border-pink-500/20" : "bg-cyan/10 border-cyan/20";
-  const accentText = isSocial ? "text-pink-400" : "text-cyan";
-  const hoverBorder = isSocial ? "hover:border-pink-500/30 hover:shadow-[0_0_40px_rgba(236,72,153,0.08)]" : "hover:border-cyan/30 hover:shadow-[0_0_40px_hsl(var(--cyan)/0.08)]";
+  const accent = isSocial ? undefined : "text-cyan";
+  const accentStyle = isSocial ? { color: "hsl(var(--cyan))" } : undefined;
+  const dot = isSocial ? undefined : "bg-cyan";
+  const dotStyle = isSocial ? { background: "hsl(var(--cyan))" } : undefined;
+  const solutionBorderStyle = isSocial
+    ? { borderColor: "hsl(var(--cyan)/0.2)", background: "hsl(var(--cyan)/0.03)" }
+    : undefined;
+  const solutionBorder = isSocial ? "" : "border-cyan/20 bg-cyan/[0.03]";
+  const solutionLabelStyle = isSocial ? { color: "hsl(var(--cyan)/0.7)" } : undefined;
+  const solutionLabel = isSocial ? "" : "text-cyan/70";
+  const cardHover = isSocial
+    ? "hover:shadow-[0_0_40px_hsl(var(--cyan)/0.08)]"
+    : "hover:border-cyan/30 hover:shadow-[0_0_40px_hsl(var(--cyan)/0.08)]";
+  const checkStyle = isSocial ? { color: "hsl(var(--cyan))" } : undefined;
+  const checkColor = isSocial ? "" : "text-cyan";
 
   return (
     <>
       {/* OVERVIEW */}
-      <section className="py-20 lg:py-28 relative">
+      <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-2">
               <AnimatedSection>
-                <span className={`text-xs font-mono ${accent} uppercase tracking-[0.2em] mb-4 block`}>Overview</span>
-                <h2 className="text-3xl lg:text-4xl font-poppins font-bold text-foreground mb-6 leading-tight">
-                  About the Project
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-base lg:text-lg">
-                  {project.fullDescription}
-                </p>
+                <span
+                  className={`text-xs font-mono uppercase tracking-[0.2em] mb-4 block ${accent ?? ""}`}
+                  style={accentStyle}
+                >
+                  Overview
+                </span>
+                <h2 className="text-3xl lg:text-4xl font-poppins font-bold text-foreground mb-6 leading-tight">About the Project</h2>
+                <p className="text-muted-foreground leading-relaxed text-base lg:text-lg">{project.fullDescription}</p>
               </AnimatedSection>
             </div>
             <div>
               <AnimatedSection>
-                <span className={`text-xs font-mono ${accent} uppercase tracking-[0.2em] mb-4 block`}>
+                <span
+                  className={`text-xs font-mono uppercase tracking-[0.2em] mb-4 block ${accent ?? ""}`}
+                  style={accentStyle}
+                >
                   Services Delivered
                 </span>
                 <ul className="space-y-3">
                   {project.services.map((service, i) => (
-                    <motion.li
-                      key={service}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.08 }}
-                      className="flex items-center gap-3 text-foreground font-medium"
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${isSocial ? "bg-pink-400" : "bg-cyan"} shrink-0`} />
+                    <motion.li key={service} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                      className="flex items-center gap-3 text-foreground font-medium">
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${dot ?? ""} shrink-0`}
+                        style={dotStyle}
+                      />
                       {service}
                     </motion.li>
                   ))}
@@ -492,20 +581,28 @@ const SharedSections = ({
                 <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6">
                   <span className="text-lg">⚡</span>
                 </div>
-                <span className="text-xs font-mono text-muted-foreground/60 uppercase tracking-[0.2em] mb-3 block">
-                  The Challenge
-                </span>
+                <span className="text-xs font-mono text-muted-foreground/60 uppercase tracking-[0.2em] mb-3 block">The Challenge</span>
                 <h3 className="text-xl font-poppins font-bold text-foreground mb-4">What We Were Up Against</h3>
                 <p className="text-muted-foreground leading-relaxed">{project.challenge}</p>
               </div>
             </AnimatedSection>
-
             <AnimatedSection>
-              <div className={`p-8 lg:p-10 rounded-2xl border ${isSocial ? "border-pink-500/20 bg-pink-500/[0.03]" : "border-cyan/20 bg-cyan/[0.03]"} backdrop-blur-sm h-full`}>
-                <div className={`w-10 h-10 rounded-xl ${accentBg} flex items-center justify-center mb-6`}>
+              <div
+                className={`p-8 lg:p-10 rounded-2xl border ${solutionBorder} backdrop-blur-sm h-full`}
+                style={solutionBorderStyle}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl border flex items-center justify-center mb-6"
+                  style={isSocial
+                    ? { background: "hsl(var(--cyan)/0.1)", borderColor: "hsl(var(--cyan)/0.2)" }
+                    : undefined}
+                >
                   <span className="text-lg">💡</span>
                 </div>
-                <span className={`text-xs font-mono ${isSocial ? "text-pink-400/70" : "text-cyan/70"} uppercase tracking-[0.2em] mb-3 block`}>
+                <span
+                  className={`text-xs font-mono ${solutionLabel} uppercase tracking-[0.2em] mb-3 block`}
+                  style={solutionLabelStyle}
+                >
                   Our Solution
                 </span>
                 <h3 className="text-xl font-poppins font-bold text-foreground mb-4">How We Solved It</h3>
@@ -520,104 +617,100 @@ const SharedSections = ({
       <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <AnimatedSection>
-            <span className={`text-xs font-mono ${accent} uppercase tracking-[0.2em] mb-4 block text-center`}>
+            <span
+              className={`text-xs font-mono uppercase tracking-[0.2em] mb-4 block text-center ${accent ?? ""}`}
+              style={accentStyle}
+            >
               Results
             </span>
-            <h2 className="text-3xl lg:text-4xl font-poppins font-bold text-foreground mb-12 text-center leading-tight">
-              What We Achieved
-            </h2>
+            <h2 className="text-3xl lg:text-4xl font-poppins font-bold text-foreground mb-12 text-center leading-tight">What We Achieved</h2>
           </AnimatedSection>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.results.map((result, i) => (
-              <motion.div
-                key={result}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className={`group p-6 rounded-2xl border border-border/50 bg-card ${hoverBorder} transition-all duration-300`}
-              >
-                <CheckCircle2 className={`w-6 h-6 ${accentText} mb-4 group-hover:scale-110 transition-transform duration-300`} />
+              <motion.div key={result} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }} transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className={`group p-6 rounded-2xl border border-border/50 bg-card ${cardHover} transition-all duration-300`}>
+                <CheckCircle2
+                  className={`w-6 h-6 mb-4 group-hover:scale-110 transition-transform duration-300 ${checkColor}`}
+                  style={checkStyle}
+                />
                 <p className="text-foreground font-semibold leading-snug">{result}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+    </>
+  );
+};
 
-      {/* PREV / NEXT */}
+// ─────────────────────────────────────────────────────────────────────────────
+// SHARED: Prev / Next + CTA
+// ─────────────────────────────────────────────────────────────────────────────
+const SharedNav = ({
+  prevProject,
+  nextProject,
+  isSocial,
+}: {
+  prevProject: (typeof projects)[0] | null;
+  nextProject: (typeof projects)[0] | null;
+  isSocial: boolean;
+}) => {
+  return (
+    <>
       <section className="py-16 border-t border-border/40">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col sm:flex-row items-stretch gap-4 sm:gap-0">
             {prevProject ? (
-              <Link
-                to={`/portfolio/${prevProject.slug}`}
-                className={`group flex-1 flex items-center gap-4 p-6 rounded-2xl sm:rounded-r-none border border-border/50 ${isSocial ? "hover:border-pink-500/30 hover:bg-muted/30" : "hover:border-cyan/30 hover:bg-muted/30"} transition-all duration-300`}
-              >
-                <motion.span
-                  className={`text-muted-foreground ${isSocial ? "group-hover:text-pink-400" : "group-hover:text-cyan"} transition-colors`}
-                  whileHover={{ x: -4 }}
-                  transition={{ duration: 0.2 }}
-                >
+              <Link to={`/portfolio/${prevProject.slug}`}
+                className="group flex-1 flex items-center gap-4 p-6 rounded-2xl sm:rounded-r-none border border-border/50 hover:border-cyan/30 hover:bg-muted/30 transition-all duration-300">
+                <motion.span className="text-muted-foreground group-hover:text-cyan transition-colors" whileHover={{ x: -4 }} transition={{ duration: 0.2 }}>
                   <ArrowLeft className="w-5 h-5" />
                 </motion.span>
                 <div>
                   <span className="text-xs text-muted-foreground/60 uppercase tracking-widest block mb-1">Previous</span>
-                  <span className={`font-poppins font-bold text-foreground ${isSocial ? "group-hover:text-pink-400" : "group-hover:text-cyan"} transition-colors`}>
-                    {prevProject.title}
-                  </span>
+                  <span className="font-poppins font-bold text-foreground group-hover:text-cyan transition-colors">{prevProject.title}</span>
                 </div>
               </Link>
-            ) : (
-              <div className="flex-1" />
-            )}
+            ) : <div className="flex-1" />}
 
             <div className="hidden sm:block w-px bg-border/40" />
 
             {nextProject ? (
-              <Link
-                to={`/portfolio/${nextProject.slug}`}
-                className={`group flex-1 flex items-center justify-end gap-4 p-6 rounded-2xl sm:rounded-l-none border border-border/50 ${isSocial ? "hover:border-pink-500/30 hover:bg-muted/30" : "hover:border-cyan/30 hover:bg-muted/30"} transition-all duration-300 text-right`}
-              >
+              <Link to={`/portfolio/${nextProject.slug}`}
+                className="group flex-1 flex items-center justify-end gap-4 p-6 rounded-2xl sm:rounded-l-none border border-border/50 hover:border-cyan/30 hover:bg-muted/30 transition-all duration-300 text-right">
                 <div>
                   <span className="text-xs text-muted-foreground/60 uppercase tracking-widest block mb-1">Next</span>
-                  <span className={`font-poppins font-bold text-foreground ${isSocial ? "group-hover:text-pink-400" : "group-hover:text-cyan"} transition-colors`}>
-                    {nextProject.title}
-                  </span>
+                  <span className="font-poppins font-bold text-foreground group-hover:text-cyan transition-colors">{nextProject.title}</span>
                 </div>
-                <motion.span
-                  className={`text-muted-foreground ${isSocial ? "group-hover:text-pink-400" : "group-hover:text-cyan"} transition-colors`}
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <motion.span className="text-muted-foreground group-hover:text-cyan transition-colors" whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
                   <ArrowRight className="w-5 h-5" />
                 </motion.span>
               </Link>
-            ) : (
-              <div className="flex-1" />
-            )}
+            ) : <div className="flex-1" />}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
         {isSocial && (
           <>
-            <div className="absolute -top-20 left-1/4 w-[500px] h-[500px] bg-pink-500/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-400/5 rounded-full blur-[100px] pointer-events-none" />
+            <div
+              className="absolute -top-20 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-10"
+              style={{ background: "hsl(var(--cyan))" }}
+            />
+            <div
+              className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none opacity-5"
+              style={{ background: "hsl(var(--cyan))" }}
+            />
           </>
         )}
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-6">
               Ready to Build Something{" "}
-              <span className={isSocial ? "bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-transparent" : "text-gradient"}>
-                Like This
-              </span>
-              ?
+              <span className="text-gradient">Like This</span>?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Let's bring your vision to life with the same care and precision.
@@ -633,19 +726,16 @@ const SharedSections = ({
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ROOT COMPONENT
+// ROOT
 // ─────────────────────────────────────────────────────────────────────────────
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-
   const projectIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[projectIndex];
   const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
   const nextProject = projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
   if (!project) {
     return (
@@ -653,9 +743,7 @@ const ProjectDetail = () => {
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl font-poppins font-bold mb-4">Project Not Found</h1>
-            <Link to="/portfolio" className="text-cyan hover:underline">
-              ← Back to Portfolio
-            </Link>
+            <Link to="/portfolio" className="text-cyan hover:underline">← Back to Portfolio</Link>
           </div>
         </div>
       </Layout>
@@ -666,18 +754,9 @@ const ProjectDetail = () => {
 
   return (
     <Layout>
-      {isSocial ? (
-        <SocialProjectDetail project={project} />
-      ) : (
-        <WebProjectDetail project={project} />
-      )}
-
-      <SharedSections
-        project={project}
-        prevProject={prevProject}
-        nextProject={nextProject}
-        isSocial={isSocial}
-      />
+      {isSocial ? <SocialProjectDetail project={project} /> : <WebProjectDetail project={project} />}
+      <SharedBody project={project} isSocial={isSocial} />
+      <SharedNav prevProject={prevProject} nextProject={nextProject} isSocial={isSocial} />
     </Layout>
   );
 };
