@@ -2,30 +2,36 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Preloader from "@/components/ui/Preloader";
+
 // Public Pages
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
-Import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage";
 import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-// Blog - Updated Components
+
+// Blog
 import BlogListing from "./pages/BlogListing";
 import BlogPost from "./pages/BlogPost";
 import BlogCategory from "./pages/BlogCategory";
+
 // Admin
 import Login from "./components/admin/Login";
 import Dashboard from "./components/admin/Dashboard";
 import Posts from "./components/admin/Posts";
 import Categories from "./components/admin/Categories";
 import PostEditor from "./components/admin/PostEditor";
-import { AuthProvider, ProtectedRoute } from "./components/admin/Dashboard";
+
+// Import these from the correct file
+import { AuthProvider, ProtectedRoute } from "./components/admin/AuthProvider";
 
 const queryClient = new QueryClient();
 
@@ -36,13 +42,18 @@ const App = () => {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+          {isLoading && (
+            <Preloader onComplete={() => setIsLoading(false)} />
+          )}
+
           <Toaster />
           <Sonner />
+
           <BrowserRouter>
             <AuthProvider>
               <Routes>
-                {/* ================= PUBLIC WEBSITE ================= */}
+
+                {/* PUBLIC */}
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
@@ -51,13 +62,17 @@ const App = () => {
                 <Route path="/portfolio/:slug" element={<ProjectDetail />} />
                 <Route path="/contact" element={<Contact />} />
 
-                {/* ================= BLOG ================= */}
+                {/* BLOG */}
                 <Route path="/blog" element={<BlogListing />} />
-                <Route path="/blog/category/:slug" element={<BlogCategory />} />
+                <Route
+                  path="/blog/category/:slug"
+                  element={<BlogCategory />}
+                />
                 <Route path="/blog/:slug" element={<BlogPost />} />
 
-                {/* ================= ADMIN ================= */}
+                {/* ADMIN */}
                 <Route path="/admin/login" element={<Login />} />
+
                 <Route
                   path="/admin"
                   element={
@@ -66,6 +81,7 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+
                 <Route
                   path="/admin/posts"
                   element={
@@ -74,6 +90,7 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+
                 <Route
                   path="/admin/posts/new"
                   element={
@@ -82,6 +99,7 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+
                 <Route
                   path="/admin/posts/edit/:id"
                   element={
@@ -90,6 +108,7 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+
                 <Route
                   path="/admin/categories"
                   element={
@@ -99,8 +118,9 @@ const App = () => {
                   }
                 />
 
-                {/* ================= 404 ================= */}
+                {/* 404 */}
                 <Route path="*" element={<NotFound />} />
+
               </Routes>
             </AuthProvider>
           </BrowserRouter>
