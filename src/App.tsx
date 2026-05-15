@@ -30,9 +30,6 @@ import Posts from "./components/admin/Posts";
 import Categories from "./components/admin/Categories";
 import PostEditor from "./components/admin/PostEditor";
 
-// Import these from the correct file
-import { AuthProvider, ProtectedRoute } from "./components/admin/AuthProvider";
-
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -50,79 +47,43 @@ const App = () => {
           <Sonner />
 
           <BrowserRouter>
-            <AuthProvider>
-              <Routes>
+            <Routes>
 
-                {/* PUBLIC */}
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/landingpage" element={<LandingPage />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/portfolio/:slug" element={<ProjectDetail />} />
-                <Route path="/contact" element={<Contact />} />
+              {/* PUBLIC */}
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/landingpage" element={<LandingPage />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+              <Route path="/contact" element={<Contact />} />
 
-                {/* BLOG */}
-                <Route path="/blog" element={<BlogListing />} />
-                <Route
-                  path="/blog/category/:slug"
-                  element={<BlogCategory />}
-                />
-                <Route path="/blog/:slug" element={<BlogPost />} />
+              {/* BLOG */}
+              <Route path="/blog" element={<BlogListing />} />
+              <Route
+                path="/blog/category/:slug"
+                element={<BlogCategory />}
+              />
+              <Route path="/blog/:slug" element={<BlogPost />} />
 
-                {/* ADMIN */}
-                <Route path="/admin/login" element={<Login />} />
+              {/* ADMIN */}
+              <Route path="/admin/login" element={<Login />} />
+              <Route path="/admin" element={<Dashboard />} />
+              <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/posts/new" element={<PostEditor />} />
+              <Route
+                path="/admin/posts/edit/:id"
+                element={<PostEditor />}
+              />
+              <Route
+                path="/admin/categories"
+                element={<Categories />}
+              />
 
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
+              {/* 404 */}
+              <Route path="*" element={<NotFound />} />
 
-                <Route
-                  path="/admin/posts"
-                  element={
-                    <ProtectedRoute>
-                      <Posts />
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="/admin/posts/new"
-                  element={
-                    <ProtectedRoute>
-                      <PostEditor />
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="/admin/posts/edit/:id"
-                  element={
-                    <ProtectedRoute>
-                      <PostEditor />
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="/admin/categories"
-                  element={
-                    <ProtectedRoute>
-                      <Categories />
-                    </ProtectedRoute>
-                  }
-                />
-
-                {/* 404 */}
-                <Route path="*" element={<NotFound />} />
-
-              </Routes>
-            </AuthProvider>
+            </Routes>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
