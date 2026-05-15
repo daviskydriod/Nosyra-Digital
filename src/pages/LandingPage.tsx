@@ -30,7 +30,6 @@ import review4 from "@/assets/reviews/review4.jpg";
 import website1 from "@/assets/websites/website1.jpg";
 import website2 from "@/assets/websites/website2.jpg";
 import website3 from "@/assets/websites/website3.jpg";
-import website4 from "@/assets/websites/website4.jpg";
 
 // ─────────────────────────────────────────────────────
 // CONSTANTS
@@ -225,7 +224,6 @@ const recentWork = [
   { img: website1, name: "Client Website 1", industry: "E-Commerce" },
   { img: website2, name: "Client Website 2", industry: "Services" },
   { img: website3, name: "Client Website 3", industry: "Hospitality" },
-  { img: website4, name: "Client Website 4", industry: "Fashion" },
 ];
 
 const faqs = [
@@ -600,30 +598,36 @@ const LandingPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          <div className="grid md:grid-cols-3 gap-10 mb-10">
             {recentWork.map((site, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="overflow-hidden rounded-2xl border border-blue-600/20 bg-card group"
+                transition={{ delay: i * 0.1 }}
+                className="flex flex-col gap-4"
               >
-                <div className="relative overflow-hidden aspect-video">
+                {/* Image — standalone, no card */}
+                <motion.div
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden rounded-2xl border border-blue-600/20 shadow-lg group"
+                  style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.3)" }}
+                >
                   <img
                     src={site.img}
                     alt={site.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white font-bold text-sm">{site.industry}</span>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="font-bold text-foreground">{site.name}</p>
-                  <p className="text-sm text-muted-foreground">{site.industry}</p>
+                </motion.div>
+
+                {/* Info card — separated below image */}
+                <div className="px-1">
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-600/10 border border-blue-600/20 text-blue-400 mb-2">
+                    {site.industry}
+                  </span>
+                  <p className="font-bold text-foreground text-lg">{site.name}</p>
                 </div>
               </motion.div>
             ))}
