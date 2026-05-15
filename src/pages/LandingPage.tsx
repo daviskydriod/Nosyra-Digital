@@ -1,4 +1,3 @@
-```tsx
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -429,4 +428,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-```
