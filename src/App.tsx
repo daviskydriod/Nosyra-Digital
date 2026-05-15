@@ -10,6 +10,7 @@ import Preloader from "@/components/ui/Preloader";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
+Import LandingPage from "./pages/LandingPage";
 import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
