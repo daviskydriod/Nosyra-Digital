@@ -16,10 +16,14 @@ import {
   CheckCircle,
 } from "lucide-react";
 
+
 // REVIEW IMAGES
 import review1 from "@/assets/reviews/review1.jpg";
 import review2 from "@/assets/reviews/review2.jpg";
 import review3 from "@/assets/reviews/review3.jpg";
+import review4 from "@/assets/reviews/review4.jpg";
+```
+
 
 // ─────────────────────────────────────────────────────
 // CONSTANTS
@@ -312,34 +316,38 @@ const LandingPage = () => {
       </section>
 
       {/* REVIEWS */}
-      <section className="py-24 px-4">
-        <div className="max-w-6xl mx-auto">
+<section className="py-24 px-4">
+  <div className="max-w-7xl mx-auto">
 
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-black mb-4">
-              Client Reviews
-            </h2>
-          </div>
+    <div className="text-center mb-12">
+      <h2 className="text-4xl font-black mb-4">
+        Client Reviews
+      </h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[review1, review2, review3].map(
-              (img, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ y: -5 }}
-                  className="overflow-hidden rounded-2xl border border-blue-600/20"
-                >
-                  <img
-                    src={img}
-                    alt={`review-${i}`}
-                    className="w-full h-auto object-cover"
-                  />
-                </motion.div>
-              )
-            )}
-          </div>
-        </div>
-      </section>
+      <p className="text-muted-foreground">
+        Real screenshots from happy clients
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[review1, review2, review3, review4].map(
+        (img, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ y: -6 }}
+            className="overflow-hidden rounded-2xl border border-blue-600/20 bg-card"
+          >
+            <img
+              src={img}
+              alt={`review-${i + 1}`}
+              className="w-full h-auto object-cover"
+            />
+          </motion.div>
+        )
+      )}
+    </div>
+  </div>
+</section>
 
       {/* GUARANTEE */}
       <section className="py-20 px-4">
