@@ -39,12 +39,58 @@ const OFFER_CLOSE_DATE = "June 30";
 const SLOTS_LEFT = 3;
 const PORTFOLIO_URL = "https://www.nosyradigital.com.ng/portfolio";
 const DEADLINE_KEY = "nosyra_offer_deadline";
-const OFFER_DURATION_MS = 3 * 24 * 60 * 60 * 1000; // 3 days persistent
+const OFFER_DURATION_MS = 3 * 24 * 60 * 60 * 1000;
+const PIXEL_ID = "1369955984947748";
 
 const WA_OFFER = encodeURIComponent(
   "Hi Nosyra Digital! I saw the ₦80,000 website package and I'm interested. Please let me know how to get started."
 );
 const WA_OFFER_URL = `https://wa.me/${WA_NUMBER}?text=${WA_OFFER}`;
+
+// ─────────────────────────────────────────────────────
+// META PIXEL HELPERS
+// ─────────────────────────────────────────────────────
+declare global {
+  interface Window {
+    fbq: (...args: any[]) => void;
+    _fbq: any;
+  }
+}
+
+function initPixel() {
+  if (typeof window === "undefined") return;
+  if (window.fbq) return;
+
+  const fbq: any = function (...args: any[]) {
+    fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args);
+  };
+  if (!window._fbq) window._fbq = fbq;
+  fbq.push = fbq;
+  fbq.loaded = true;
+  fbq.version = "2.0";
+  fbq.queue = [];
+  window.fbq = fbq;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://connect.facebook.net/en_US/fbevents.js";
+  document.head.appendChild(script);
+
+  window.fbq("init", PIXEL_ID);
+  window.fbq("track", "PageView");
+}
+
+function trackLead() {
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "Lead");
+  }
+}
+
+function trackViewContent() {
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "ViewContent");
+  }
+}
 
 // ─────────────────────────────────────────────────────
 // PERSISTENT COUNTDOWN
@@ -160,7 +206,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 // ─────────────────────────────────────────────────────
-// WA BUTTON
+// WA BUTTON — fires Lead pixel event on click
 // ─────────────────────────────────────────────────────
 function WAButton({
   href,
@@ -176,6 +222,7 @@ function WAButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={trackLead}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       className={`inline-flex items-center gap-3 rounded-full font-black text-white ${
@@ -217,7 +264,6 @@ const valueItems = [
     value: "₦30,000",
     num: "03",
   },
-
 ];
 
 const recentWork = [
@@ -262,8 +308,30 @@ const faqs = [
 // ─────────────────────────────────────────────────────
 const LandingPage = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const offerRef = useRef<HTMLDivElement>(null);
   const [showSticky, setShowSticky] = useState(false);
 
+  // Init Meta Pixel on mount
+  useEffect(() => {
+    initPixel();
+  }, []);
+
+  // Track ViewContent when offer section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          trackViewContent();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (offerRef.current) observer.observe(offerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Show sticky CTA after hero scrolls out
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setShowSticky(!entry.isIntersecting),
@@ -307,6 +375,7 @@ const LandingPage = () => {
               href={WA_OFFER_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackLead}
               className="flex items-center justify-center gap-2 w-full py-4 rounded-full font-black text-white text-base"
               style={{
                 background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
@@ -324,7 +393,6 @@ const LandingPage = () => {
         ref={heroRef}
         className="min-h-screen flex items-center justify-center px-4 pt-32 pb-20 relative overflow-hidden"
       >
-        {/* Background glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -349,7 +417,6 @@ const LandingPage = () => {
             50+ Nigerian Businesses Trust Nosyra Digital
           </motion.div>
 
-          {/* Attention line */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -359,7 +426,6 @@ const LandingPage = () => {
             Attention: Lagos · Abuja · Port Harcourt Business Owners
           </motion.p>
 
-          {/* PAIN HOOK HEADLINE */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -378,7 +444,7 @@ const LandingPage = () => {
             className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
             While you're losing sales, we'll build you a professional website,
-            brand identity, and marketing campaign — all for one unbeatable price.
+            brand identity, and marketing assets — all for one unbeatable price.
           </motion.p>
 
           <motion.div
@@ -398,7 +464,6 @@ const LandingPage = () => {
             </a>
           </motion.div>
 
-          {/* Trust signals */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -418,7 +483,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ── PAIN SECTION ── */}
+      {/* ── PAIN ── */}
       <section className="py-24 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -494,7 +559,7 @@ const LandingPage = () => {
       </section>
 
       {/* ── OFFER / VALUE STACK ── */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4" ref={offerRef}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-600 font-bold text-sm mb-6">
@@ -509,7 +574,7 @@ const LandingPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
             {valueItems.map((item, i) => (
               <motion.div
                 key={i}
@@ -608,11 +673,11 @@ const LandingPage = () => {
                 transition={{ delay: i * 0.1 }}
                 className="flex flex-col gap-4"
               >
-                {/* Image — standalone, no card */}
+                {/* Image — standalone */}
                 <motion.div
                   whileHover={{ y: -6, scale: 1.01 }}
                   transition={{ duration: 0.3 }}
-                  className="overflow-hidden rounded-2xl border border-blue-600/20 shadow-lg group"
+                  className="overflow-hidden rounded-2xl border border-blue-600/20 group"
                   style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.3)" }}
                 >
                   <img
@@ -622,7 +687,7 @@ const LandingPage = () => {
                   />
                 </motion.div>
 
-                {/* Info card — separated below image */}
+                {/* Info — separated below */}
                 <div className="px-1">
                   <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-600/10 border border-blue-600/20 text-blue-400 mb-2">
                     {site.industry}
