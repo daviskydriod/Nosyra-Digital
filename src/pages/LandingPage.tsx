@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 
 import {
   Globe,
-  Megaphone,
   Palette,
   Shield,
   Clock,
@@ -32,7 +31,6 @@ import website1 from "@/assets/websites/website1.jpg";
 import website2 from "@/assets/websites/website2.jpg";
 import website3 from "@/assets/websites/website3.jpg";
 import website4 from "@/assets/websites/website4.jpg";
-import website5 from "@/assets/websites/website5.jpg";
 
 // ─────────────────────────────────────────────────────
 // CONSTANTS
@@ -220,13 +218,7 @@ const valueItems = [
     value: "₦30,000",
     num: "03",
   },
-  {
-    icon: Megaphone,
-    title: "1 Week Meta Ads Campaign",
-    desc: "Targeted Facebook & Instagram ads set up and managed to drive real traffic to your new website.",
-    value: "₦60,000",
-    num: "04",
-  },
+
 ];
 
 const recentWork = [
@@ -234,7 +226,6 @@ const recentWork = [
   { img: website2, name: "Client Website 2", industry: "Services" },
   { img: website3, name: "Client Website 3", industry: "Hospitality" },
   { img: website4, name: "Client Website 4", industry: "Fashion" },
-  { img: website5, name: "Client Website 5", industry: "Real Estate" },
 ];
 
 const faqs = [
@@ -552,7 +543,6 @@ const LandingPage = () => {
                 ["Custom Website", "₦120,000"],
                 ["Logo & Brand Identity", "₦35,000"],
                 ["5 Social Media Flyers", "₦30,000"],
-                ["1 Week Meta Ads", "₦60,000"],
               ].map(([label, val], i) => (
                 <div key={i} className="flex justify-between text-muted-foreground">
                   <span>{label}</span>
@@ -561,7 +551,7 @@ const LandingPage = () => {
               ))}
               <div className="border-t border-border pt-3 flex justify-between font-black text-lg">
                 <span>Total Market Value</span>
-                <span className="line-through opacity-50">₦245,000+</span>
+                <span className="line-through opacity-50">₦185,000+</span>
               </div>
             </div>
           </div>
@@ -578,7 +568,7 @@ const LandingPage = () => {
             <p className="text-7xl md:text-8xl font-black mb-2 text-blue-500">₦80,000</p>
             <p className="text-muted-foreground mb-8">
               Save over{" "}
-              <span className="text-foreground font-bold">₦165,000</span> — but only{" "}
+              <span className="text-foreground font-bold">₦105,000</span> — but only{" "}
               {SLOTS_LEFT} slots remain
             </p>
             <WAButton href={WA_OFFER_URL} label="CLAIM MY SLOT NOW" large />
