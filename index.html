@@ -1,123 +1,92 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-NG">
   <head>
     <meta charset="UTF-8" />
 
+    <!-- Viewport / Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="/favicon.ico"
-    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    <!-- Responsive -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#ffffff" />
 
-    <!-- SEO -->
-    <title>
-      Nosyra Digital – Web Design & Digital Solutions
-    </title>
-
+    <!-- Primary SEO -->
+    <title>Nosyra Digital – Web Design &amp; Digital Solutions</title>
     <meta
       name="description"
       content="Nosyra Digital is a web design and digital solutions agency helping brands grow online with modern websites, branding, and automation."
     />
-
-    <meta
-      name="author"
-      content="Nosyra Digital"
-    />
+    <meta name="author" content="Nosyra Digital" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nosyradigital.com.ng" />
 
     <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nosyradigital.com.ng" />
+    <meta property="og:site_name" content="Nosyra Digital" />
+    <meta property="og:locale" content="en_NG" />
     <meta
       property="og:title"
-      content="Nosyra Digital – Web Design & Digital Solutions"
+      content="Nosyra Digital – Web Design &amp; Digital Solutions"
     />
-
     <meta
       property="og:description"
       content="We build high-converting websites and digital systems for businesses in Nigeria and globally."
     />
-
-    <meta
-      property="og:type"
-      content="website"
-    />
-
-    <meta
-      property="og:url"
-      content="https://nosyradigital.com.ng"
-    />
-
     <meta
       property="og:image"
-      content="/og-image.png"
+      content="https://nosyradigital.com.ng/og-image.png"
     />
 
-    <!-- Twitter -->
-    <meta
-      name="twitter:card"
-      content="summary_large_image"
-    />
-
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Nosyra Digital – Web Design & Digital Solutions"
+      content="Nosyra Digital – Web Design &amp; Digital Solutions"
     />
-
     <meta
       name="twitter:description"
       content="Web design, branding, and automation services for growing businesses."
     />
-
     <meta
       name="twitter:image"
-      content="/og-image.png"
+      content="https://nosyradigital.com.ng/og-image.png"
     />
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics — defer so it never blocks rendering -->
     <script
       async
+      defer
       src="https://www.googletagmanager.com/gtag/js?id=G-C45E8MJGKP"
     ></script>
-
     <script>
       window.dataLayer = window.dataLayer || [];
-
       function gtag() {
         dataLayer.push(arguments);
       }
-
       gtag("js", new Date());
-
       gtag("config", "G-C45E8MJGKP");
     </script>
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel — load asynchronously, non-blocking -->
     <script>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
-
         n = f.fbq = function () {
           n.callMethod
             ? n.callMethod.apply(n, arguments)
             : n.queue.push(arguments);
         };
-
         if (!f._fbq) f._fbq = n;
-
         n.push = n;
         n.loaded = true;
         n.version = "2.0";
         n.queue = [];
-
         t = b.createElement(e);
         t.async = true;
         t.src = v;
-
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(
@@ -126,24 +95,27 @@
         "script",
         "https://connect.facebook.net/en_US/fbevents.js"
       );
-
       fbq("init", "1369955984947748");
       fbq("track", "PageView");
     </script>
-
-    <noscript>
-      <img src="https://www.facebook.com/tr?id=1369955984947748&ev=PageView&noscript=1" height="1" width="1" style="display:none" />
-    </noscript>
-    <!-- End Meta Pixel Code -->
   </head>
 
   <body>
-    <div id="root"></div>
+    <!--
+      Meta Pixel noscript fallback must be placed immediately after <body>,
+      NOT inside <head>. This is required by Meta's implementation spec.
+    -->
+    <noscript>
+      <img
+        src="https://www.facebook.com/tr?id=1369955984947748&ev=PageView&noscript=1"
+        height="1"
+        width="1"
+        style="display: none"
+        alt=""
+      />
+    </noscript>
 
-    <script
-      type="module"
-      src="/src/main.tsx"
-    ></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-```
