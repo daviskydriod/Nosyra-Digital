@@ -15,6 +15,7 @@ import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
 // Blog
 import BlogListing from "./pages/BlogListing";
@@ -52,6 +53,7 @@ const App = () => {
               <Route path="/portfolio/:slug" element={<ProjectDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               {/* BLOG */}
               <Route path="/blog" element={<BlogListing />} />
               <Route path="/blog/category/:slug" element={<BlogCategory />} />
