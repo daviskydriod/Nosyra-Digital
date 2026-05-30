@@ -45,7 +45,7 @@ const Footer = () => {
 
       toast({
         title: "Subscribed 🎉",
-        description: "You’ve been added to our newsletter.",
+        description: "You've been added to our newsletter.",
       });
 
       setEmail("");
@@ -76,7 +76,7 @@ const Footer = () => {
     resources: [
       { name: "Portfolio", path: "/portfolio" },
       { name: "Case Studies", path: "/portfolio" },
-      { name: "Blog", path: "/blog" }, // ✅ fixed
+      { name: "Blog", path: "/blog" },
       { name: "FAQ", path: "/contact" },
     ],
   };
@@ -162,40 +162,58 @@ const Footer = () => {
 
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
-            {footerLinks.company.map((link) => (
-              <Link key={link.name} to={link.path} className="block hover:text-cyan">
-                {link.name}
-              </Link>
-            ))}
+            <ul className="space-y-2">
+              {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.path} className="text-muted-foreground hover:text-cyan transition-colors text-sm">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
-            {footerLinks.services.map((link) => (
-              <Link key={link.name} to={link.path} className="block hover:text-cyan">
-                {link.name}
-              </Link>
-            ))}
+            <ul className="space-y-2">
+              {footerLinks.services.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.path} className="text-muted-foreground hover:text-cyan transition-colors text-sm">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
-            <div className="space-y-3">
-              <div className="flex gap-2">
-                <MapPin className="w-4 h-4 text-cyan" /> Lagos, Nigeria
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div className="flex gap-2 items-start">
+                <MapPin className="w-4 h-4 text-cyan shrink-0 mt-0.5" />
+                <span>Lagos, Nigeria</span>
               </div>
-              <div className="flex gap-2">
-                <Phone className="w-4 h-4 text-cyan" /> +234 705 846 6586
+              <div className="flex gap-2 items-start">
+                <Phone className="w-4 h-4 text-cyan shrink-0 mt-0.5" />
+                <span>+234 705 846 6586</span>
               </div>
-              <div className="flex gap-2">
-                <Mail className="w-4 h-4 text-cyan" /> info@nosyradigital.com.ng
+              <div className="flex gap-2 items-start">
+                <Mail className="w-4 h-4 text-cyan shrink-0 mt-0.5" />
+                <span>info@nosyradigital.com.ng</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="py-6 border-t border-border text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Nosyra Digital. All rights reserved.
+        {/* Bottom bar */}
+        <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} Nosyra Digital. All rights reserved.</p>
+          <Link
+            to="/privacy-policy"
+            className="hover:text-cyan transition-colors underline underline-offset-4"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </div>
 
