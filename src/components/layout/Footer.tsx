@@ -208,12 +208,20 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Nosyra Digital. All rights reserved.</p>
-          <Link
-            to="/privacy-policy"
-            className="hover:text-cyan transition-colors underline underline-offset-4"
-          >
-            Privacy Policy
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-cyan transition-colors underline underline-offset-4"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms-and-conditions"
+              className="hover:text-cyan transition-colors underline underline-offset-4"
+            >
+              Terms & Conditions
+            </Link>
+          </div>
         </div>
       </div>
 
