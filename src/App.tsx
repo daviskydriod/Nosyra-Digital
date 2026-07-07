@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import LandingPage from "./pages/LandingPage";
+import WebDesignLanding from "./pages/WebDesignLanding";
 import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
@@ -52,6 +53,9 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/landingpage" element={<LandingPage />} />
+              {/* Dedicated ad-traffic landing page — no shared Layout/navbar,
+                  single CTA (quote form), built for paid campaigns. */}
+              <Route path="/web-design" element={<WebDesignLanding />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/portfolio/:slug" element={<ProjectDetail />} />
               <Route path="/pricing" element={<Pricing />} />
