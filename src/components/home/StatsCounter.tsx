@@ -3,30 +3,32 @@ import { useRef } from "react";
 import { Briefcase, Users, Award, Clock } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 
+// NOTE: keep these numbers real and update as they change — do not inflate.
+// This section is off by default in Index.tsx until you're ready to turn it on.
 const stats = [
   {
     icon: Briefcase,
-    value: 150,
+    value: 50,
     suffix: "+",
-    label: "Projects Completed",
+    label: "Projects Delivered",
   },
   {
     icon: Users,
-    value: 80,
-    suffix: "+",
-    label: "Happy Clients",
+    value: 4,
+    suffix: "",
+    label: "Countries Served",
   },
   {
     icon: Clock,
-    value: 5,
-    suffix: "+",
-    label: "Years Experience",
+    value: 14,
+    suffix: "-Day",
+    label: "Avg. Turnaround",
   },
   {
     icon: Award,
-    value: 12,
-    suffix: "",
-    label: "Awards Won",
+    value: 4.7,
+    suffix: "★",
+    label: "Google Review Rating",
   },
 ];
 

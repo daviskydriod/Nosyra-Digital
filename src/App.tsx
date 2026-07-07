@@ -14,6 +14,9 @@ import LandingPage from "./pages/LandingPage";
 import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
+import Pricing from "./pages/Pricing";
+import FAQ from "./pages/FAQ";
+import Process from "./pages/Process";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
@@ -23,7 +26,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogCategory from "./pages/BlogCategory";
 // Admin
 import Login from "./components/admin/Login";
-import Dashboard from "./components/admin/Dashboard";
+import Dashboard, { AuthProvider, ProtectedRoute } from "./components/admin/Dashboard";
 import Posts from "./components/admin/Posts";
 import Categories from "./components/admin/Categories";
 import PostEditor from "./components/admin/PostEditor";
@@ -51,6 +54,9 @@ const App = () => {
               <Route path="/landingpage" element={<LandingPage />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/process" element={<Process />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
@@ -58,13 +64,67 @@ const App = () => {
               <Route path="/blog" element={<BlogListing />} />
               <Route path="/blog/category/:slug" element={<BlogCategory />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
-              {/* ADMIN */}
-              <Route path="/admin/login" element={<Login />} />
-              <Route path="/admin" element={<Dashboard />} />
-              <Route path="/admin/posts" element={<Posts />} />
-              <Route path="/admin/posts/new" element={<PostEditor />} />
-              <Route path="/admin/posts/edit/:id" element={<PostEditor />} />
-              <Route path="/admin/categories" element={<Categories />} />
+              {/* ADMIN — wrapped in AuthProvider + ProtectedRoute so the dashboard
+                  and content tools require a logged-in session. Login itself stays
+                  inside AuthProvider (not ProtectedRoute) so useAuth() works there too. */}
+              <Route
+                path="/admin/login"
+                element={
+                  <AuthProvider>
+                    <Login />
+                  </AuthProvider>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <AuthProvider>
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  </AuthProvider>
+                }
+              />
+              <Route
+                path="/admin/posts"
+                element={
+                  <AuthProvider>
+                    <ProtectedRoute>
+                      <Posts />
+                    </ProtectedRoute>
+                  </AuthProvider>
+                }
+              />
+              <Route
+                path="/admin/posts/new"
+                element={
+                  <AuthProvider>
+                    <ProtectedRoute>
+                      <PostEditor />
+                    </ProtectedRoute>
+                  </AuthProvider>
+                }
+              />
+              <Route
+                path="/admin/posts/edit/:id"
+                element={
+                  <AuthProvider>
+                    <ProtectedRoute>
+                      <PostEditor />
+                    </ProtectedRoute>
+                  </AuthProvider>
+                }
+              />
+              <Route
+                path="/admin/categories"
+                element={
+                  <AuthProvider>
+                    <ProtectedRoute>
+                      <Categories />
+                    </ProtectedRoute>
+                  </AuthProvider>
+                }
+              />
               {/* 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>

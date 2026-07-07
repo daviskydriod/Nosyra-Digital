@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 // Import logo
+import founderPhoto from "@/assets/founder-photo.jpg";
 import nosyraLogo from "@/assets/nosyra-logo.png";
 
 const timeline = [
@@ -61,7 +62,7 @@ const values = [
 
 const benefits = [
   "Tailored strategies for your unique business goals",
-  "Dedicated team of experienced professionals",
+  "Direct communication  no middlemen between you and your build",
   "Cutting-edge technology and modern design trends",
   "Transparent pricing with no hidden fees",
   "24/7 support and maintenance services",
@@ -102,7 +103,7 @@ const About = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8 leading-relaxed"
               >
-                A passionate team of digital creators, strategists, and innovators dedicated to transforming businesses through exceptional digital experiences. We believe in the power of design and technology to change the world.
+                Founder-led digital studio building websites, e-commerce platforms, and digital systems for businesses across Nigeria, Ghana, the UK, and Canada. When you work with Nosyra Digital, you work directly with the person building your project  no account managers, no relay, no delay in translation.
               </motion.p>
 
               <motion.div
@@ -241,9 +242,10 @@ const About = () => {
                 Why Choose <span className="text-gradient">Nosyra Digital</span>?
               </h2>
               <p className="text-muted-foreground text-lg mb-8">
-                We're not just another digital agency. We're your partners in growth, committed to delivering results that matter.
+                Every project is built hands-on, end-to-end  design, development, and deployment  by someone who's shipped 50+ live sites for clients across four countries.
               </p>
-              
+
+
               <ul className="space-y-4">
                 {benefits.map((benefit, index) => (
                   <motion.li
@@ -263,17 +265,24 @@ const About = () => {
 
             <AnimatedSection animation="fadeRight">
               <div className="relative">
-                <div className="aspect-square rounded-3xl overflow-hidden">
+                <div className="aspect-square rounded-3xl overflow-hidden relative">
                   <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
-                    alt="Modern cityscape buildings"
+                    src={founderPhoto}
+                    alt="Obi Chinonso David - Founder & Lead Developer"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+
+                  {/* Name & Title Caption */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h4 className="font-poppins font-bold text-2xl text-foreground mb-1">
+                      Obi Chinonso David
+                    </h4>
+                    <p className="text-cyan font-medium">
+                      Founder & Lead Developer
+                    </p>
+                  </div>
                 </div>
-                
-                {/* Floating Stats Card */}
- 
               </div>
             </AnimatedSection>
           </div>

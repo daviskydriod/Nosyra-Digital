@@ -58,14 +58,14 @@ const contactMethods = [
   },
   {
     title: "Call Us",
-    description: "Speak directly with our team",
+    description: "Speak directly with the founder",
     action: "+234 705 846 6586",
     icon: Phone,
     color: "from-navy/20 to-navy/5"
   },
   {
     title: "Visit Us",
-    description: "Located in the heart of Lagos",
+    description: "Based in Lagos — working with clients across Nigeria, Ghana, the UK, and Canada",
     action: "Lagos, Nigeria",
     icon: MapPin,
     color: "from-cyan/15 to-navy/10"
@@ -192,6 +192,9 @@ const Contact = () => {
                       <span className="text-xs sm:text-sm text-cyan font-medium">Open Now</span>
                     </div>
                   </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-3">
+                    Response within 24 hours regardless of time zone — Time zones are never a blocker.
+                  </p>
                 </GlassCard>
               </div>
             </AnimatedSection>

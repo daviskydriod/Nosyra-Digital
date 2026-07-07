@@ -24,14 +24,14 @@ const services = [
   {
     icon: Globe,
     title: "Custom Website Design",
-    description: "Stunning, responsive websites tailored to your brand identity and business goals. We create digital experiences that captivate and convert.",
+    description: "Custom-coded websites  no page builders, no templates. Built in React and optimized for speed, mobile, and search from day one.",
     features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Custom CMS"],
     color: "from-cyan to-blue-500",
   },
   {
     icon: ShoppingCart,
     title: "E-Commerce Stores",
-    description: "Powerful online stores that turn visitors into customers. Complete with secure payments, inventory management, and seamless checkout.",
+    description: "Full e-commerce builds with local and international payment gateways (Paystack, Moneris) wired in, product and inventory management, and checkout flows tested end-to-end.",
     features: ["Payment Integration", "Inventory Management", "Order Tracking", "Analytics Dashboard"],
     color: "from-emerald-400 to-cyan",
   },
@@ -45,7 +45,7 @@ const services = [
   {
     icon: Megaphone,
     title: "Digital Marketing",
-    description: "Strategic campaigns that drive traffic, leads, and conversions. From SEO to social media, we help you reach your target audience.",
+    description: "Targeted Facebook/Instagram ad strategy and organic content systems  built from real campaign data, not guesswork.",
     features: ["SEO Strategy", "Social Media Ads", "Email Marketing", "Content Strategy"],
     color: "from-orange-400 to-cyan",
   },
@@ -76,19 +76,19 @@ const process = [
     step: 2,
     icon: PenTool,
     title: "Design",
-    description: "Our designers create stunning visuals that align with your brand identity.",
+    description: "I design every visual myself, aligned to your brand from the first draft.",
   },
   {
     step: 3,
     icon: Code,
     title: "Development",
-    description: "We build your project using the latest technologies and best practices.",
+    description: "I build using React/TypeScript and modern deployment pipelines  the same stack used for VSL, Xpola, and THM Wellness.",
   },
   {
     step: 4,
     icon: Rocket,
     title: "Launch",
-    description: "We deploy your project and provide ongoing support to ensure success.",
+    description: "I deploy, test, and stay reachable for support after launch  not handed off to a separate team.",
   },
 ];
 
@@ -160,7 +160,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            From concept to launch, we provide comprehensive digital services designed to elevate your brand and accelerate your business growth.
+            From a 74-day custom build for Wood Coffee Furniture Works to multi-currency e-commerce for Xpola Services  six core services, one person handling every stage, so nothing gets lost in handoff.
           </motion.p>
         </div>
       </section>

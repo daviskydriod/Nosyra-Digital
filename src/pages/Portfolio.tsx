@@ -301,29 +301,10 @@ const Portfolio = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl"
           >
-            Websites that convert and social content that stops the scroll — businesses built and brands elevated.
+            Websites that convert and social content that stops the scroll  businesses built and brands elevated.
           </motion.p>
 
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex gap-8 mt-8"
-          >
-            {[
-              { label: "Web Projects", value: webProjects.length, color: "text-cyan" },
-              { label: "Social Kits", value: socialProjects.length, color: "text-pink-400" },
-              { label: "Total Projects", value: projects.length, color: "text-foreground" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className={`text-3xl font-poppins font-black ${stat.color}`}>
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
+         
         </div>
       </section>
 

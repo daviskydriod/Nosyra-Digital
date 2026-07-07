@@ -222,7 +222,7 @@ const FeaturedWork = () => {
         <SectionHeading
           badge="Our Portfolio"
           title="Featured Work"
-          subtitle="Websites that convert, social content that engages — a look at what we've been building."
+          subtitle="Websites that convert, social content that engages a look at what we've been building."
         />
 
         <div ref={containerRef} className="mt-16">

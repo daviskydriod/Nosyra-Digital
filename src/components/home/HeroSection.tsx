@@ -20,8 +20,8 @@ const floatingCards = [
   {
     id: "countries",
     icon: Globe,
-    value: "3",
-    label: "Countries · Worldwide Reach",
+    value: "4",
+    label: "Countries Served",
     position: "bottom-[22%] -left-[12%]",
     delay: 1.2,
     floatDuration: 4.2,
@@ -54,7 +54,7 @@ const HeroSection = () => {
   }, []);
 
   const { displayText: subheadline } = useTypewriter(
-    "We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom and anywhere else in the world.",
+    "I design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom and anywhere else in the world you're building from.",
     28,
     1600
   );
@@ -118,16 +118,16 @@ const HeroSection = () => {
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
               <span className="text-[10px] text-muted-foreground/50 tracking-[0.3em] uppercase font-medium">
-                Digital Agency · Global
+                Digital Studio · Nigeria to the World
               </span>
             </motion.div>
 
             {/* Headline */}
             {[
               { text: "Your Gateway", accent: false },
-              { text: "to a", accent: false },
-              { text: "World-Class", accent: true },
-              { text: "Web Presence.", accent: false },
+              { text: "to Websites", accent: false },
+              { text: "That Actually", accent: true },
+              { text: "Convert.", accent: false },
             ].map((line, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.p
@@ -176,7 +176,7 @@ const HeroSection = () => {
                 />
               </span>
               <span className="lg:hidden">
-                We design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom and anywhere else in the world.
+                I design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom — and anywhere else in the world you're building from.
               </span>
             </motion.p>
 
@@ -189,7 +189,7 @@ const HeroSection = () => {
             >
               <Globe className="w-3.5 h-3.5 text-cyan" />
               <span className="text-[11px] text-cyan font-medium tracking-wide">
-                International · We Serve the Whole World
+                International · Serving Clients Worldwide
               </span>
             </motion.div>
 
@@ -291,12 +291,14 @@ const HeroSection = () => {
                   {[
                     "NIGERIA",
                     "GHANA",
+                    "UK",
                     "CANADA",
+                    "USA",
                     "WEB DESIGN",
                     "E-COMMERCE",
                     "INTERNATIONAL",
                     "UI/UX DESIGN",
-                    "DIGITAL AGENCY",
+                    "DIGITAL STUDIO",
                     "WORLDWIDE",
                   ].map((text) => (
                     <span

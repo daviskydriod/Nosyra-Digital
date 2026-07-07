@@ -291,7 +291,7 @@ const BlogPost: React.FC = () => {
                       {post.author_name || 'Nosyra Digital'}
                     </h3>
                     <p className="text-muted-foreground">
-                      Digital marketing expert passionate about helping businesses grow their online presence through innovative strategies and creative solutions.
+                      Founder of Nosyra Digital. Building and shipping websites, e-commerce platforms, and digital systems for clients across Nigeria, Ghana, the UK, and Canada.
                     </p>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 // src/lib/api.ts (FIXED - with both public and admin methods)
-const API_BASE_URL = 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
   success: boolean;
