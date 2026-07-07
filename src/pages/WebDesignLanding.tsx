@@ -219,14 +219,6 @@ const WebDesignLanding = () => {
 
       {/* Portfolio */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-card/30 via-background to-card/30" />
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <SectionHeading
-            badge="Our Work"
-            title="Recent Projects"
-            subtitle="A look at websites we've designed and built for real clients."
-          />
-        </div>
         <FeaturedWork />
       </section>
 
