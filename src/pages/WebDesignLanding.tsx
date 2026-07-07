@@ -81,6 +81,8 @@ const packages = [
   },
 ];
 
+const WEB3FORMS_ACCESS_KEY = "26a41e87-ee33-4b8a-ba0f-ee28956ae4a9";
+
 const WebDesignLanding = () => {
   const [form, setForm] = useState({
     name: "",
@@ -90,6 +92,8 @@ const WebDesignLanding = () => {
     needs: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -97,13 +101,41 @@ const WebDesignLanding = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Wire this up to your form handler of choice
-    // (e.g. Formspree, EmailJS, or a backend endpoint).
-    // For now this just confirms submission in the UI.
-    console.log("Landing page lead submitted:", form);
-    setSubmitted(true);
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New Free Quote Request — Nosyra Digital",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          business: form.business,
+          needs: form.needs,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong sending your request. Please try again or reach us directly.");
+      }
+    } catch {
+      setError("Something went wrong sending your request. Please try again or reach us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -324,9 +356,17 @@ const WebDesignLanding = () => {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-cyan focus:outline-none text-foreground resize-none"
                   />
-                  <GradientButton className="w-full justify-center" size="lg">
-                    Get My Free Quote
-                  </GradientButton>
+                  {error && (
+                    <p className="text-sm text-destructive text-center">{error}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-cyan to-blue-500 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Sending..." : "Get My Free Quote"}
+                  </button>
                 </form>
               )}
             </GlassCard>
