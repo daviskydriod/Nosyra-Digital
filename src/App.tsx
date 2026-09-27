@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Preloader from "@/components/ui/Preloader";
+import Dashboard, { AuthProvider, ProtectedRoute } from "./components/admin/Dashboard";
 // Public Pages
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -21,16 +22,14 @@ import Process from "./pages/Process";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
-// Blog
-import BlogListing from "./pages/BlogListing";
-import BlogPost from "./pages/BlogPost";
-import BlogCategory from "./pages/BlogCategory";
-// Admin
-import Login from "./components/admin/Login";
-import Dashboard, { AuthProvider, ProtectedRoute } from "./components/admin/Dashboard";
-import Posts from "./components/admin/Posts";
-import Categories from "./components/admin/Categories";
-import PostEditor from "./components/admin/PostEditor";
+// Blog and admin code is loaded only when those routes are visited.
+const BlogListing = lazy(() => import("./pages/BlogListing"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const BlogCategory = lazy(() => import("./pages/BlogCategory"));
+const Login = lazy(() => import("./components/admin/Login"));
+const Posts = lazy(() => import("./components/admin/Posts"));
+const Categories = lazy(() => import("./components/admin/Categories"));
+const PostEditor = lazy(() => import("./components/admin/PostEditor"));
 
 const queryClient = new QueryClient();
 
@@ -47,7 +46,8 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Routes>
+              <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">Loading…</div>}>
+                <Routes>
               {/* PUBLIC */}
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
@@ -131,7 +131,8 @@ const App = () => {
               />
               {/* 404 */}
               <Route path="*" element={<NotFound />} />
-            </Routes>
+                </Routes>
+              </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>

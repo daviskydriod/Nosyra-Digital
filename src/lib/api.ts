@@ -88,26 +88,25 @@ class ApiClient {
 
     try {
       const url = `${this.baseUrl}${endpoint}`;
-      console.log('API Request:', { url, method: options.method || 'GET' });
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 15_000);
 
       const response = await fetch(url, {
         ...options,
         headers,
+        signal: options.signal ?? controller.signal,
         credentials: 'include',
       });
-
-      console.log('API Response Status:', response.status);
+      window.clearTimeout(timeout);
 
       // Safely parse JSON
       const text = await response.text();
-      console.log('API Response Body:', text.substring(0, 200) + '...'); // Log first 200 chars
 
       let data: ApiResponse<T>;
       try {
         data = text ? JSON.parse(text) : { success: false, message: 'Empty response' };
       } catch (parseError) {
-        console.error('JSON Parse Error:', parseError);
-        console.error('Response text:', text);
+        if (import.meta.env.DEV) console.error('JSON Parse Error:', parseError);
         return {
           success: false,
           error: 'Invalid response from server',
@@ -120,12 +119,15 @@ class ApiClient {
       }
 
       return data;
-    } catch (error: any) {
-      console.error('API Error:', error);
+    } catch (error: unknown) {
+      if (import.meta.env.DEV) console.error('API Error:', error);
+      const message = error instanceof Error
+        ? (error.name === 'AbortError' ? 'Request timed out' : error.message)
+        : 'Network error';
       return {
         success: false,
-        error: error.message || 'Network error',
-        message: error.message || 'Failed to connect to server'
+        error: message,
+        message
       };
     }
   }
@@ -413,22 +415,17 @@ class ApiClient {
 
   async login(username: string, password: string): Promise<ApiResponse> {
     try {
-      console.log('Attempting login for:', username);
-      
       const response = await this.request<{ token: string; user: any }>('?action=login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
       });
-
-      console.log('Login response:', response);
 
       if (response.success && response.data?.token) {
         this.setToken(response.data.token);
       }
 
       return response;
-    } catch (error: any) {
-      console.error('Login error:', error);
+    } catch (error: unknown) {
       throw error;
     }
   }

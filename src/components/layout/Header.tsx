@@ -113,6 +113,10 @@ const Header = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 text-foreground hover:text-cyan transition-colors"
+              type="button"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -129,6 +133,10 @@ const Header = () => {
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-40 lg:hidden"
+            id="mobile-navigation"
+            role="dialog"
+            aria-label="Mobile navigation"
+            aria-modal="true"
           >
             <div className="absolute inset-0 bg-background/95 backdrop-blur-xl">
               <div className="flex flex-col items-center justify-center h-full gap-8">
