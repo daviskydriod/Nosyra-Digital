@@ -247,7 +247,7 @@ const Services = () => {
           <SectionHeading
             badge="Our Process"
             title="How we create value"
-            subtitle="A streamlined process designed to deliver exceptional results efficiently."
+            subtitle="A focused process from first brief to launch."
           />
 
           <div className="mt-16 relative">
@@ -292,7 +292,7 @@ const Services = () => {
           <SectionHeading
             badge="Tech Stack"
             title="The tools serve the outcome"
-            subtitle="We leverage the latest tools and technologies to build exceptional digital products."
+            subtitle="The stack stays practical, fast, and fit for the job."
           />
 
           <div className="mt-12 overflow-hidden">

@@ -104,7 +104,7 @@ const Footer = () => {
                 Stay Updated
               </h3>
               <p className="text-muted-foreground">
-                Subscribe to our newsletter for the latest updates and insights.
+                Useful digital insights, occasionally.
               </p>
             </div>
 
@@ -131,7 +131,7 @@ const Footer = () => {
           </div>
 
           <p className="text-xs text-muted-foreground mt-2">
-            No spam. Only useful updates from Nosyra Digital.
+            No spam. Just useful ideas.
           </p>
         </div>
 

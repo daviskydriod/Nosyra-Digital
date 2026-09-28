@@ -15,14 +15,15 @@ import GlassCard from '@/components/ui/GlassCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import api from '../lib/api';
 import { Post } from '../types/blog';
+import { STATIC_CATEGORIES, STATIC_POSTS } from '@/data/staticPosts';
 
 const BlogListing: React.FC = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [featuredPost, setFeaturedPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<Post[]>(STATIC_POSTS);
+  const [featuredPost, setFeaturedPost] = useState<Post | null>(STATIC_POSTS[0]);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState(STATIC_CATEGORIES);
 
   useEffect(() => {
     loadPosts();
@@ -31,18 +32,14 @@ const BlogListing: React.FC = () => {
 
   const loadPosts = async () => {
     try {
-      setLoading(true);
       const response = await api.getPosts();
       
-      if (response.success) {
+      if (response.success && response.data && response.data.length > 0) {
         setPosts(response.data);
-        // Set the first post as featured
-        if (response.data.length > 0) {
-          setFeaturedPost(response.data[0]);
-        }
+        setFeaturedPost(response.data[0]);
       }
     } catch (err) {
-      console.error('Failed to load posts:', err);
+      // Keep the local editorial set available when the API is unavailable.
     } finally {
       setLoading(false);
     }
@@ -51,11 +48,11 @@ const BlogListing: React.FC = () => {
   const loadCategories = async () => {
     try {
       const response = await api.getCategories();
-      if (response.success) {
+      if (response.success && response.data && response.data.length > 0) {
         setCategories(response.data);
       }
     } catch (err) {
-      console.error('Failed to load categories:', err);
+      // Keep the local categories available when the API is unavailable.
     }
   };
 
@@ -78,7 +75,7 @@ const BlogListing: React.FC = () => {
   // Separate featured post from regular posts
   const regularPosts = filteredPosts.filter(post => post.id !== featuredPost?.id);
 
-  if (loading) {
+  if (loading && posts.length === 0) {
     return (
       <Layout>
         <div className="flex items-center justify-center min-h-screen">
@@ -123,7 +120,7 @@ const BlogListing: React.FC = () => {
               transition={{ delay: 0.2 }}
               className="text-lg text-muted-foreground mb-8 leading-relaxed"
             >
-              Stay updated with the latest trends, tips, and insights in digital marketing, web development, and design.
+              Practical notes on strategy, web design, and digital growth.
             </motion.p>
 
          
@@ -227,7 +224,7 @@ const BlogListing: React.FC = () => {
           <SectionHeading
             badge="Latest Posts"
             title={searchTerm ? "Search Results" : "Recent Articles"}
-            subtitle={searchTerm ? `Found ${regularPosts.length} articles` : "Explore our latest insights and updates"}
+            subtitle={searchTerm ? `Found ${regularPosts.length} articles` : "Ideas for building better digital experiences."}
           />
 
           {regularPosts.length === 0 ? (

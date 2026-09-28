@@ -13,12 +13,14 @@ import GlassCard from '@/components/ui/GlassCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import api from '../lib/api';
 import { Post } from '../types/blog';
+import { STATIC_CATEGORIES, STATIC_POSTS } from '@/data/staticPosts';
 
 const BlogCategory: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [category, setCategory] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const initialCategory = slug ? STATIC_CATEGORIES.find((item) => item.slug === slug) : undefined;
+  const [posts, setPosts] = useState<Post[]>(slug ? STATIC_POSTS.filter((item) => item.category_slug === slug) : []);
+  const [category, setCategory] = useState<any>(initialCategory ?? null);
+  const [loading, setLoading] = useState(!initialCategory);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -29,18 +31,24 @@ const BlogCategory: React.FC = () => {
 
   const loadCategoryPosts = async (categorySlug: string) => {
     try {
-      setLoading(true);
       const response = await api.getPostsByCategory(categorySlug);
       
-      if (response.success) {
+      if (response.success && response.data) {
         setPosts(response.data.posts);
         setCategory(response.data.category);
       } else {
-        setError('Category not found');
+        const fallback = STATIC_CATEGORIES.find((item) => item.slug === categorySlug);
+        if (fallback) {
+          setCategory(fallback);
+          setPosts(STATIC_POSTS.filter((item) => item.category_slug === categorySlug));
+        } else setError('Category not found');
       }
     } catch (err) {
-      setError('Failed to load category posts');
-      console.error(err);
+      const fallback = STATIC_CATEGORIES.find((item) => item.slug === categorySlug);
+      if (fallback) {
+        setCategory(fallback);
+        setPosts(STATIC_POSTS.filter((item) => item.category_slug === categorySlug));
+      } else setError('Failed to load category posts');
     } finally {
       setLoading(false);
     }

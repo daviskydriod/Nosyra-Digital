@@ -16,11 +16,12 @@ import GlassCard from '@/components/ui/GlassCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import api from '../lib/api';
 import { Post } from '../types/blog';
+import { STATIC_POST_BY_SLUG } from '@/data/staticPosts';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState<Post | null>(() => (slug ? STATIC_POST_BY_SLUG.get(slug) ?? null : null));
+  const [loading, setLoading] = useState(() => !slug || !STATIC_POST_BY_SLUG.has(slug));
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,14 +35,17 @@ const BlogPost: React.FC = () => {
       setLoading(true);
       const response = await api.getPostBySlug(slug);
       
-      if (response.success) {
+      if (response.success && response.data) {
         setPost(response.data);
       } else {
-        setError('Post not found');
+        const fallback = STATIC_POST_BY_SLUG.get(slug);
+        if (fallback) setPost(fallback);
+        else setError('Post not found');
       }
     } catch (err) {
-      setError('Failed to load post');
-      console.error(err);
+      const fallback = STATIC_POST_BY_SLUG.get(slug);
+      if (fallback) setPost(fallback);
+      else setError('Failed to load post');
     } finally {
       setLoading(false);
     }
@@ -291,7 +295,7 @@ const BlogPost: React.FC = () => {
                       {post.author_name || 'Nosyra Digital'}
                     </h3>
                     <p className="text-muted-foreground">
-                      Founder of Nosyra Digital. Building and shipping websites, e-commerce platforms, and digital systems for clients across Nigeria, Ghana, the UK, and Canada.
+                      Founder of Nosyra Digital, building websites and digital systems for ambitious businesses worldwide.
                     </p>
                   </div>
                 </div>
