@@ -83,6 +83,16 @@ const Contact = () => {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  const handleBriefSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const subject = encodeURIComponent(`Project enquiry from ${data.get("name")}`);
+    const body = encodeURIComponent(
+      `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nCompany: ${data.get("company")}\nNeed: ${data.get("need")}\nLaunch window: ${data.get("timeline")}\nInvestment range: ${data.get("budget")}\nWebsite: ${data.get("website") || "Not provided"}`
+    );
+    window.location.href = `mailto:info@nosyradigital.com.ng?subject=${subject}&body=${body}`;
+  };
+
   return (
     <Layout>
       {/* Hero */}
@@ -236,6 +246,52 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Project brief */}
+      <section className="py-16 sm:py-20 bg-card/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan font-semibold mb-4">Start with the brief</p>
+            <h2 className="text-3xl sm:text-4xl font-poppins font-bold mb-4">Tell us what needs to change.</h2>
+            <p className="text-muted-foreground">Share a few details and we’ll review them before recommending the right next step. We reply within one business day.</p>
+          </div>
+          <form onSubmit={handleBriefSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl">
+            {[
+              ["name", "Name", "text"],
+              ["email", "Work email", "email"],
+              ["company", "Company / organisation", "text"],
+              ["website", "Current website (optional)", "url"],
+            ].map(([name, label, type]) => (
+              <label key={name} className="space-y-2 text-sm font-medium">
+                {label}
+                <input name={name} type={type} required={name !== "website"} className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground" />
+              </label>
+            ))}
+            <label className="space-y-2 text-sm font-medium">
+              What do you need help with?
+              <select name="need" required className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground">
+                <option value="">Choose one</option><option>Website or redesign</option><option>E-commerce</option><option>Booking or client portal</option><option>Brand and digital strategy</option><option>Growth and optimisation</option>
+              </select>
+            </label>
+            <label className="space-y-2 text-sm font-medium">
+              Desired launch window
+              <select name="timeline" required className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground">
+                <option value="">Choose one</option><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Exploring</option>
+              </select>
+            </label>
+            <label className="space-y-2 text-sm font-medium md:col-span-2">
+              Approximate investment range
+              <select name="budget" required className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground">
+                <option value="">Choose one</option><option>Under $500</option><option>$500–$1,500</option><option>$1,500–$5,000</option><option>$5,000+</option><option>Not sure yet</option>
+              </select>
+            </label>
+            <div className="md:col-span-2 flex items-center justify-between gap-4 flex-wrap">
+              <p className="text-xs text-muted-foreground">Your details are used only to respond to this enquiry.</p>
+              <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-3 font-semibold text-primary-foreground hover:bg-cyan-glow transition-colors">Send project brief <ArrowRight className="w-4 h-4" /></button>
+            </div>
+          </form>
+        </div>
+      </section>
+
       {/* Contact Methods Section */}
       <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card/50" />
@@ -289,10 +345,10 @@ const Contact = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-4 sm:mb-6 px-2">
-              Ready to Start Your <span className="text-gradient">Digital Journey</span>?
+              Have a <span className="text-gradient">complex digital problem</span>?
             </h2>
             <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Don't wait any longer. Let's discuss how we can bring your vision to life.
+              Tell us what needs to change. We’ll recommend the right next step for your business.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <motion.a
@@ -301,7 +357,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-cyan text-primary-foreground rounded-lg font-semibold text-sm sm:text-base hover:shadow-[0_0_30px_hsl(var(--cyan)/0.4)] transition-all duration-300 w-full sm:w-auto"
               >
-                Send Us an Email
+                Start a Project Conversation
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.a>
               <motion.a

@@ -18,8 +18,8 @@ const Pricing = () => {
         <div className="container mx-auto relative z-10">
           <SectionHeading
             badge="Pricing"
-            title="Transparent Pricing, No Surprises"
-            subtitle="Simple packages for businesses in Nigeria and abroad. Currency accepted: NGN · USD · GBP."
+            title="Clear starting points for different levels of digital ambition."
+            subtitle="Choose the right engagement path for your business. Final scope is shaped around your goals, content, integrations, and launch timeline."
           />
 
           {/* Currency toggle */}
@@ -52,7 +52,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* Pricing grid */}
+      {/* Engagement paths */}
       <section className="pb-24 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
@@ -71,7 +71,7 @@ const Pricing = () => {
       {/* Add-ons */}
       <section className="pb-24 px-4">
         <div className="container mx-auto max-w-3xl">
-          <SectionHeading title="Add-Ons" align="center" className="mb-10" />
+          <SectionHeading title="Extend the system after launch" align="center" className="mb-10" />
           <div className="space-y-3">
             {addOns.map((addon) => (
               <div
@@ -96,8 +96,7 @@ const Pricing = () => {
           viewport={{ once: true }}
           className="text-muted-foreground max-w-xl mx-auto"
         >
-          Need something that doesn't fit neatly into a
-          package? Get a custom quote  no obligation.
+          Need a commerce platform, booking flow, client portal, or multi-market system? We scope complex work after a focused discovery conversation.
         </motion.p>
       </section>
     </Layout>

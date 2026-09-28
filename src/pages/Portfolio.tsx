@@ -279,7 +279,7 @@ const Portfolio = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20"
           >
-            Our Work
+              Selected Work
           </motion.span>
 
           <motion.h1
@@ -292,7 +292,7 @@ const Portfolio = () => {
               Selected
             </span>
             <br />
-            <span className="text-foreground">Projects</span>
+              <span className="text-foreground">Built to move businesses forward.</span>
           </motion.h1>
 
           <motion.p
@@ -301,7 +301,7 @@ const Portfolio = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-xl"
           >
-            Websites that convert and social content that stops the scroll  businesses built and brands elevated.
+            Websites, commerce platforms, and digital systems designed around real business problems.
           </motion.p>
 
          

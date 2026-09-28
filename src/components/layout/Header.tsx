@@ -6,13 +6,11 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/nosyra-logo.png";
 
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
+  { name: "Work", path: "/portfolio" },
   { name: "Services", path: "/services" },
-  { name: "Portfolio", path: "/portfolio" },
+  { name: "About", path: "/about" },
+  { name: "Insights", path: "/blog" },
   { name: "Pricing", path: "/pricing" },
-  { name: "FAQ", path: "/faq" },
-  { name: "Contact", path: "/contact" },
 ];
 
 const Header = () => {
@@ -98,7 +96,7 @@ const Header = () => {
             <div className="hidden lg:block">
               <Link to="/contact">
                 <Button className="relative overflow-hidden bg-cyan text-primary-foreground hover:bg-cyan-glow px-6 py-2 font-semibold transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--cyan)/0.5)]">
-                  <span className="relative z-10">Get Started</span>
+                  <span className="relative z-10">Start a Project</span>
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                     initial={{ x: "-100%" }}
@@ -167,7 +165,7 @@ const Header = () => {
                 >
                   <Link to="/contact">
                     <Button className="bg-cyan text-primary-foreground hover:bg-cyan-glow px-8 py-3 text-lg font-semibold">
-                      Get Started
+                      Start a Project
                     </Button>
                   </Link>
                 </motion.div>

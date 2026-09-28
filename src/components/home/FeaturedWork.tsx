@@ -220,9 +220,9 @@ const FeaturedWork = () => {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <SectionHeading
-          badge="Our Portfolio"
-          title="Featured Work"
-          subtitle="Websites that convert, social content that engages a look at what we've been building."
+          badge="Selected work"
+          title="Digital experiences built to move businesses forward."
+          subtitle="A selection of websites, commerce platforms, and digital systems designed around real business problems."
         />
 
         <div ref={containerRef} className="mt-16">

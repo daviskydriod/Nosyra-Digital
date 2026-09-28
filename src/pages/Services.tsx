@@ -142,7 +142,7 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20"
           >
-            Our Services
+            Our Capabilities
           </motion.span>
           
           <motion.h1
@@ -151,7 +151,7 @@ const Services = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-poppins font-bold mb-6 max-w-4xl mx-auto"
           >
-            Digital Solutions That <span className="text-gradient">Drive Growth</span>
+            Digital systems that make your business <span className="text-gradient">easier to choose.</span>
           </motion.h1>
           
           <motion.p
@@ -160,7 +160,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            From a 74-day custom build for Wood Coffee Furniture Works to multi-currency e-commerce for Xpola Services  six core services, one person handling every stage, so nothing gets lost in handoff.
+            From focused marketing websites to multi-market commerce and client portals, we bring strategy, design, and engineering into one accountable process—so nothing gets lost in handoff.
           </motion.p>
         </div>
       </section>
@@ -246,7 +246,7 @@ const Services = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <SectionHeading
             badge="Our Process"
-            title="How We Work"
+            title="How we create value"
             subtitle="A streamlined process designed to deliver exceptional results efficiently."
           />
 
@@ -291,7 +291,7 @@ const Services = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <SectionHeading
             badge="Tech Stack"
-            title="Technologies We Use"
+            title="The tools serve the outcome"
             subtitle="We leverage the latest tools and technologies to build exceptional digital products."
           />
 
@@ -326,7 +326,7 @@ const Services = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-6">
-              Ready to Start Your <span className="text-gradient">Project</span>?
+              Have a <span className="text-gradient">complex digital problem</span>?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Let's discuss how we can help bring your vision to life.

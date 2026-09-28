@@ -2,7 +2,6 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Globe, Briefcase, Zap } from "lucide-react";
 import { useEffect } from "react";
 import GradientButton from "@/components/ui/GradientButton";
-import { useTypewriter } from "@/hooks/useTypewriter";
 import heroImage from "@/assets/hero-main.png";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -52,12 +51,6 @@ const HeroSection = () => {
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
   }, []);
-
-  const { displayText: subheadline } = useTypewriter(
-    "I design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom and anywhere else in the world you're building from.",
-    28,
-    1600
-  );
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-background">
@@ -118,16 +111,15 @@ const HeroSection = () => {
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
               <span className="text-[10px] text-muted-foreground/50 tracking-[0.3em] uppercase font-medium">
-                Digital Studio · Nigeria to the World
+                Digital Studio · Africa + Global
               </span>
             </motion.div>
 
             {/* Headline */}
             {[
-              { text: "Your Gateway", accent: false },
-              { text: "to Websites", accent: false },
-              { text: "That Actually", accent: true },
-              { text: "Convert.", accent: false },
+              { text: "Digital experiences", accent: false },
+              { text: "that move ambitious", accent: false },
+              { text: "businesses forward.", accent: true },
             ].map((line, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.p
@@ -160,24 +152,14 @@ const HeroSection = () => {
               style={{ originX: 0 }}
             />
 
-            {/* Subtitle — desktop: typewriter / mobile: static */}
+              {/* Core proposition — always rendered as real text for clarity and SEO */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.0 }}
               className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md"
             >
-              <span className="hidden lg:inline">
-                {subheadline}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block w-0.5 h-[1em] bg-cyan ml-1 align-middle"
-                />
-              </span>
-              <span className="lg:hidden">
-                I design and build high-converting websites for ambitious businesses in Nigeria, Ghana, Canada, USA, United Kingdom — and anywhere else in the world you're building from.
-              </span>
+              Nosyra Digital combines strategy, design, and engineering to turn complex offers into clear, credible, high-performing websites and digital products for customers in Africa and around the world.
             </motion.p>
 
             {/* International badge */}
@@ -189,7 +171,7 @@ const HeroSection = () => {
             >
               <Globe className="w-3.5 h-3.5 text-cyan" />
               <span className="text-[11px] text-cyan font-medium tracking-wide">
-                International · Serving Clients Worldwide
+                Senior-led delivery · Working worldwide
               </span>
             </motion.div>
 
@@ -205,7 +187,7 @@ const HeroSection = () => {
                 size="lg"
                 icon={<ArrowRight className="w-5 h-5" />}
               >
-                Start Your Project
+                Book a Project Call
               </GradientButton>
 
               <motion.a
@@ -214,7 +196,7 @@ const HeroSection = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
               >
-                View Our Work
+                Explore the Work
                 <motion.span
                   animate={{ x: [0, 4, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}

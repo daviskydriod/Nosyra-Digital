@@ -142,8 +142,8 @@ const Footer = () => {
               <img src={logo} alt="Nosyra Digital" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              We craft exceptional digital experiences that help businesses
-              thrive in the modern world.
+              A senior-led digital studio from Lagos, building clear, credible
+              digital experiences for ambitious businesses worldwide.
             </p>
 
             <div className="flex gap-4">
