@@ -1,8 +1,6 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GradientButton from "@/components/ui/GradientButton";
 import { 
@@ -99,14 +97,6 @@ const technologies = [
 ];
 
 const Services = () => {
-  const processRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: processRef,
-    offset: ["start end", "end start"],
-  });
-
-  const progressWidth = useTransform(scrollYProgress, [0.2, 0.8], ["0%", "100%"]);
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -168,69 +158,44 @@ const Services = () => {
       {/* Services Grid */}
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan">What we do</p>
+              <h2 className="max-w-xl text-3xl font-poppins font-bold md:text-4xl">One studio for the whole digital system.</h2>
+            </div>
+            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Choose the capability you need now. We bring the right pieces together as the work grows.</p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12">
             {services.map((service, index) => {
-              // Unique animations for each service card
-              const animations = [
-                { initial: { opacity: 0, x: -100, rotateY: -20 }, animate: { opacity: 1, x: 0, rotateY: 0 } },
-                { initial: { opacity: 0, y: -80, scale: 0.7 }, animate: { opacity: 1, y: 0, scale: 1 } },
-                { initial: { opacity: 0, x: 100, rotateY: 20 }, animate: { opacity: 1, x: 0, rotateY: 0 } },
-                { initial: { opacity: 0, y: 80, rotateX: -20 }, animate: { opacity: 1, y: 0, rotateX: 0 } },
-                { initial: { opacity: 0, scale: 0.5, rotate: -15 }, animate: { opacity: 1, scale: 1, rotate: 0 } },
-                { initial: { opacity: 0, x: -80, y: 80 }, animate: { opacity: 1, x: 0, y: 0 } },
-              ];
-              
               return (
                 <motion.div
                   key={service.title}
-                  initial={animations[index].initial}
-                  whileInView={animations[index].animate}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{
-                    duration: 0.8,
-                    delay: index * 0.12,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  whileHover={{ y: -10 }}
-                  className="group"
+                  transition={{ duration: 0.55, delay: index * 0.06 }}
+                  whileHover={{ y: -5 }}
+                  className={`group ${index === 0 ? "lg:col-span-7" : index === 1 ? "lg:col-span-5" : "lg:col-span-4"}`}
                 >
-                  <div className="p-8 h-full bg-card rounded-xl border-2 border-border hover:border-cyan transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--cyan)/0.1)]">
-                    {/* Icon */}
-                    <motion.div 
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} p-0.5 mb-6`}
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <div className="w-full h-full bg-card rounded-2xl flex items-center justify-center">
-                        <service.icon className="w-8 h-8 text-cyan" />
+                  <div className="relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl border border-border/60 bg-card p-7 transition-all duration-300 hover:border-cyan/60 hover:shadow-[0_18px_55px_hsl(var(--cyan)/0.09)] md:p-8">
+                    <div className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br ${service.color} opacity-10 blur-3xl`} />
+                    <div className="relative mb-10 flex items-center justify-between">
+                      <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color} bg-opacity-10`}>
+                        <service.icon className="h-6 w-6 text-cyan" />
                       </div>
-                    </motion.div>
-
-                    {/* Content */}
-                    <h3 className="text-2xl font-poppins font-bold text-foreground mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-6">
-                      {service.description}
-                    </p>
-
-                    {/* Features */}
-                    <ul className="space-y-2 mb-6">
+                    </div>
+                    <h3 className="relative mb-3 text-2xl font-poppins font-bold text-foreground">{service.title}</h3>
+                    <p className="relative mb-7 max-w-xl text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+                    <ul className="relative mt-auto grid grid-cols-2 gap-x-4 gap-y-2">
                       {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle className="w-4 h-4 text-cyan" />
-                          {feature}
+                        <li key={feature} className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <CheckCircle className="h-3.5 w-3.5 text-cyan" />
+                          <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
-
-                    {/* Learn More */}
-                    <div className="mt-auto pt-4 border-t border-border">
-                      <span className="inline-flex items-center gap-2 text-cyan font-semibold group-hover:gap-3 transition-all">
-                        Learn More
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
                   </div>
                 </motion.div>
               );
@@ -240,47 +205,38 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 relative overflow-hidden" ref={processRef}>
-        <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card/50" />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <SectionHeading
-            badge="Our Process"
-            title="How we create value"
-            subtitle="A focused process from first brief to launch."
-          />
-
-          <div className="mt-16 relative">
-            {/* Progress Line */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-border rounded-full -translate-y-1/2">
-              <motion.div
-                className="h-full bg-gradient-to-r from-cyan to-primary rounded-full"
-                style={{ width: progressWidth }}
-              />
+      <section className="relative overflow-hidden border-y border-border/40 bg-card/30 py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan/[0.06] via-transparent to-primary/[0.08]" />
+        <div className="container relative z-10 mx-auto px-4 lg:px-8">
+          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-cyan">Our process</p>
+              <h2 className="max-w-md text-4xl font-poppins font-bold leading-tight md:text-5xl">Clarity at every stage.</h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">A calm, accountable path from the first conversation to a digital system your team can use with confidence.</p>
+              <div className="mt-8 flex items-center gap-3 text-sm font-semibold text-foreground"><span className="h-px w-10 bg-cyan" /> Strategy before screens</div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {process.map((item, index) => (
-                <AnimatedSection key={item.title} animation="fadeUp" delay={index * 0.15}>
-                  <div className="relative">
-                    {/* Step Number */}
-                    <motion.div
-                      className="w-16 h-16 mx-auto mb-6 rounded-full bg-cyan/10 border-2 border-cyan flex items-center justify-center relative z-10"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <item.icon className="w-8 h-8 text-cyan" />
-                    </motion.div>
-
-                    <div className="text-center">
-                      <span className="text-sm text-cyan font-semibold">Step {item.step}</span>
-                      <h3 className="text-xl font-poppins font-bold text-foreground mt-2 mb-3">
-                        {item.title}
-                      </h3>
-                      <p className="text-muted-foreground">{item.description}</p>
+            <div className="relative">
+              <div className="absolute bottom-8 left-[22px] top-8 w-px bg-gradient-to-b from-cyan via-border to-transparent md:left-[27px]" />
+              <div className="space-y-5">
+                {process.map((item, index) => (
+                  <motion.article
+                    key={item.title}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.55, delay: index * 0.1 }}
+                    className="group relative flex gap-5 rounded-2xl border border-border/60 bg-background/80 p-5 transition-all duration-300 hover:border-cyan/60 hover:bg-background md:gap-7 md:p-7"
+                  >
+                    <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-cyan/40 bg-background text-cyan shadow-[0_0_0_8px_hsl(var(--background))] md:h-14 md:w-14"><item.icon className="h-5 w-5 md:h-6 md:w-6" /></div>
+                    <div className="min-w-0 pt-1">
+                      <div className="mb-2 flex flex-wrap items-center gap-3"><span className="font-mono text-xs text-cyan">0{item.step}</span><span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Stage</span></div>
+                      <h3 className="text-xl font-poppins font-bold text-foreground md:text-2xl">{item.title}</h3>
+                      <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">{item.description}</p>
                     </div>
-                  </div>
-                </AnimatedSection>
-              ))}
+                  </motion.article>
+                ))}
+              </div>
             </div>
           </div>
         </div>
