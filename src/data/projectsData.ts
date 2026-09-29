@@ -12,6 +12,10 @@ import maybeenHero from "@/assets/maybeen-hero.png";
 import handygidiHero from "@/assets/handygidi-hero.png";
 import micdebHero from "@/assets/micdeb-hero.png";
 import joyaboHero from "@/assets/joyabo-hero.png";
+import africaTomorrowPreview from "@/assets/portfolio-sites/africa-tomorrow-og.png";
+import easeGracePreview from "@/assets/portfolio-sites/ease-grace.webp";
+import woodCoffiePreview from "@/assets/portfolio-sites/wood-coffie.webp";
+import samanadePreview from "@/assets/portfolio-sites/samanade-crd.webp";
 
 // ── Social Media Assets ──────────────────────────────────────────────────────
 import joyaboSm1 from "@/assets/Joyabo (1).jpeg";
@@ -391,6 +395,79 @@ export const projects = [
     year: "2026",
     duration: "4 weeks",
     services: ["Web Design", "Content Strategy", "Application Management System", "UI/UX Design"],
+  },
+
+  {
+    id: 22,
+    type: "web" as const,
+    slug: "africa-tomorrow",
+    title: "Africa Tomorrow",
+    category: "Education & AI",
+    image: africaTomorrowPreview,
+    link: "https://africantomorrow.com/",
+    description: "A bold learning platform helping Africa’s next generation build practical AI skills.",
+    fullDescription: "Africa Tomorrow needed a clear platform for its AI learning mission. We shaped the experience around the learner journey: understand the opportunity, explore the programme, and take the next step.",
+    tags: ["Education", "AI", "Ghana", "Web Design"],
+    challenge: "Make a new learning initiative feel credible, useful, and easy to join.",
+    solution: "A focused landing experience with strong programme messaging, clear calls to action, and a future-facing visual direction.",
+    results: ["Clearer programme positioning", "Stronger first impression for learners and partners"],
+    year: "2026",
+    duration: "4 weeks",
+    services: ["Strategy", "Web Design", "Development", "Content Structure"],
+  },
+  {
+    id: 23,
+    type: "web" as const,
+    slug: "ease-n-grace-autos",
+    title: "Ease n Grace Autos",
+    category: "Automotive",
+    image: easeGracePreview,
+    link: "https://easengrace.com/",
+    description: "A polished Ghanaian mobility platform for reliable car hire and airport transfers.",
+    fullDescription: "Ease n Grace Autos needed a simple digital route from travel intent to booking. We positioned the service around reliability, clear vehicle choices, and easy contact.",
+    tags: ["Automotive", "Car Hire", "Ghana", "Booking"],
+    challenge: "Turn a service people often book by phone into a more confident online decision.",
+    solution: "A clean service structure with direct booking actions and trust-led messaging for airport and everyday travel.",
+    results: ["Clearer offer presentation", "A more credible booking entry point"],
+    year: "2026",
+    duration: "4 weeks",
+    services: ["UX Strategy", "Web Design", "Development"],
+  },
+  {
+    id: 24,
+    type: "web" as const,
+    slug: "wood-coffie-furniture-works",
+    title: "Wood Coffie Furniture Works",
+    category: "Furniture & Interiors",
+    image: woodCoffiePreview,
+    link: "https://www.woodcoffiefurnitureworks.com/",
+    description: "A premium Ghanaian furniture site built to showcase custom craft and considered spaces.",
+    fullDescription: "Wood Coffie Furniture Works needed its online presence to communicate the quality behind its furniture. The experience gives the craft, materials, and finished spaces more room to speak.",
+    tags: ["Furniture", "Ghana", "Craft", "Web Design"],
+    challenge: "Make a physical product and custom service feel premium before the first conversation.",
+    solution: "A visual-first structure that gives the work priority and makes custom enquiries simple.",
+    results: ["Stronger premium positioning", "Clearer path to custom enquiries"],
+    year: "2026",
+    duration: "4 weeks",
+    services: ["Art Direction", "Web Design", "Development"],
+  },
+  {
+    id: 25,
+    type: "web" as const,
+    slug: "samanade-crd",
+    title: "Samanade C.R.D Enterprise",
+    category: "Construction & Interiors",
+    image: samanadePreview,
+    link: "https://www.samanadecrd.com/",
+    description: "A complete construction and fabrication showcase for a growing Ghanaian enterprise.",
+    fullDescription: "Samanade C.R.D brings construction, drafting, fabrication, interiors, and rentals together. The website turns that broad capability into a clear route through services, work, and contact.",
+    tags: ["Construction", "Architecture", "Ghana", "Fabrication"],
+    challenge: "Present many connected services without making the business feel scattered.",
+    solution: "A service-led structure with direct contact actions, project context, and a strong visual introduction.",
+    results: ["A clearer service architecture", "More professional digital presence for new enquiries"],
+    year: "2026",
+    duration: "5 weeks",
+    services: ["Information Architecture", "Web Design", "Development", "Content Structure"],
   },
 
   // ── SOCIAL MEDIA PROJECTS ──────────────────────────────────────────────────

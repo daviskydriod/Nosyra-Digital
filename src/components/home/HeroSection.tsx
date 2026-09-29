@@ -159,7 +159,7 @@ const HeroSection = () => {
               transition={{ delay: 1.0 }}
               className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md"
             >
-              Nosyra Digital combines strategy, design, and engineering to turn complex offers into clear, credible, high-performing websites and digital products for customers in Africa and around the world.
+              Strategy, design, and engineering for clear, credible digital experiences.
             </motion.p>
 
             {/* International badge */}

@@ -203,7 +203,7 @@ const Contact = () => {
                     </div>
                   </div>
                   <p className="text-xs sm:text-sm text-muted-foreground mt-3">
-                    Response within 24 hours regardless of time zone — Time zones are never a blocker.
+                    We reply within 24 hours.
                   </p>
                 </GlassCard>
               </div>
@@ -252,7 +252,7 @@ const Contact = () => {
           <div className="max-w-3xl mb-10">
             <p className="text-xs uppercase tracking-[0.28em] text-cyan font-semibold mb-4">Start with the brief</p>
             <h2 className="text-3xl sm:text-4xl font-poppins font-bold mb-4">Tell us what needs to change.</h2>
-            <p className="text-muted-foreground">Share a few details and we’ll review them before recommending the right next step. We reply within one business day.</p>
+            <p className="text-muted-foreground">Share the essentials. We’ll recommend the right next step.</p>
           </div>
           <form onSubmit={handleBriefSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl">
             {[
@@ -312,7 +312,7 @@ const Contact = () => {
               transition={{ delay: 0.1 }}
               className="text-muted-foreground text-base sm:text-lg px-4"
             >
-              We're here to help in whichever way suits you best
+              Choose how to start
             </motion.p>
           </div>
 

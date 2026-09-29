@@ -18,8 +18,8 @@ const Pricing = () => {
         <div className="container mx-auto relative z-10">
           <SectionHeading
             badge="Pricing"
-            title="Clear starting points for different levels of digital ambition."
-            subtitle="Choose the right engagement path for your business. Final scope is shaped around your goals, content, integrations, and launch timeline."
+            title="Premium digital work, clearly scoped."
+            subtitle="Starting points for websites, commerce, and digital platforms. Final fees follow scope and complexity."
           />
 
           {/* Currency toggle */}
@@ -96,7 +96,7 @@ const Pricing = () => {
           viewport={{ once: true }}
           className="text-muted-foreground max-w-xl mx-auto"
         >
-          Need a commerce platform, booking flow, client portal, or multi-market system? We scope complex work after a focused discovery conversation.
+          Complex platform or multi-market project? Start with a strategy call.
         </motion.p>
       </section>
     </Layout>

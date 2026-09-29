@@ -1,12 +1,11 @@
-// src/data/pricing.ts
-// Central pricing data — edit amounts here only, both pages/components read from this file.
+// Central pricing data. Prices are starting points and final scope is confirmed after discovery.
 
 export interface PricingTier {
   id: string;
   name: string;
-  usd: number | null; // null = "Custom quote"
+  usd: number | null;
   ngn: number | null;
-  period?: string; // e.g. "/mo" for retainers, omit for one-time
+  period?: string;
   description: string;
   features: string[];
   highlighted?: boolean;
@@ -16,74 +15,48 @@ export interface PricingTier {
 export const pricingTiers: PricingTier[] = [
   {
     id: "starter",
-    name: "Starter",
-    usd: 150,
-    ngn: 150000,
-    description: "A clean, professional site for businesses just getting online.",
-    features: [
-      "1–5 custom pages",
-      "Mobile-responsive design",
-      "Contact form",
-      "1 round of revisions",
-      "5–10 working days delivery",
-    ],
-    ctaLabel: "Start with Starter",
+    name: "Launch",
+    usd: 1500,
+    ngn: 2500000,
+    description: "A focused, conversion-ready website for a serious business.",
+    features: ["Up to 6 custom pages", "Strategy and sitemap", "Mobile-first custom design", "Lead capture and analytics", "Technical SEO foundation", "2 revision rounds", "3–5 week delivery"],
+    ctaLabel: "Plan a Launch Site",
   },
   {
     id: "business",
-    name: "Business",
-    usd: 250,
-    ngn: 250000,
-    description: "For growing businesses that need more pages and an admin dashboard.",
-    features: [
-      "Up to 10 custom pages",
-      "Admin dashboard for content updates",
-      "Blog setup",
-      "On-page SEO setup",
-      "2 rounds of revisions",
-    ],
+    name: "Growth",
+    usd: 4000,
+    ngn: 6500000,
+    description: "A complete digital presence built to support growth.",
+    features: ["Up to 12 custom pages", "Messaging and content direction", "Custom CMS or blog", "SEO-ready service architecture", "Analytics and conversion setup", "3 revision rounds", "5–8 week delivery"],
     highlighted: true,
-    ctaLabel: "Choose Business",
+    ctaLabel: "Choose Growth",
   },
   {
     id: "ecommerce",
-    name: "E-Commerce",
-    usd: 500,
-    ngn: 500000,
-    description: "A full online store, ready to take payments from day one.",
-    features: [
-      "Full product catalog & inventory management",
-      "Payment gateway integration (Paystack / Moneris)",
-      "Wishlist & customer accounts",
-      "Order tracking dashboard",
-      "3 rounds of revisions",
-    ],
-    ctaLabel: "Build My Store",
+    name: "Commerce",
+    usd: 8500,
+    ngn: 14000000,
+    description: "A premium commerce or booking experience with the systems behind it.",
+    features: ["Custom product or booking flows", "Payments and third-party integrations", "Customer or order dashboard", "Mobile conversion optimisation", "QA, launch, and handover", "3 revision rounds", "8–12 week delivery"],
+    ctaLabel: "Build a Commerce System",
   },
   {
     id: "custom",
-    name: "Custom / Enterprise",
+    name: "Platform",
     usd: null,
     ngn: null,
-    description: "Multi-market platforms, custom admin systems, or anything bespoke.",
-    features: [
-      "Custom admin & API systems",
-      "Multi-currency, multi-market builds",
-      "Ongoing support & maintenance options",
-      "Scoped after a discovery call",
-    ],
-    ctaLabel: "Get a Custom Quote",
+    description: "For multi-market platforms, portals, and complex digital products.",
+    features: ["Discovery and technical planning", "Custom product or admin systems", "Multi-currency and multi-market support", "Ongoing optimisation options", "Scoped after a strategy call"],
+    ctaLabel: "Discuss a Platform",
   },
 ];
 
-export interface AddOn {
-  name: string;
-  usd: string;
-  ngn: string;
-}
+export interface AddOn { name: string; usd: string; ngn: string; }
 
 export const addOns: AddOn[] = [
-  { name: "Social Media Management (monthly)", usd: "From $150/mo", ngn: "From ₦200,000/mo" },
-  { name: "UGC-Style Ad Video", usd: "From $80", ngn: "From ₦100,000" },
-  { name: "Logo & Brand Identity", usd: "From $120", ngn: "From ₦150,000" },
+  { name: "Growth and optimisation retainer", usd: "From $1,500/mo", ngn: "From ₦2,500,000/mo" },
+  { name: "Brand strategy and identity", usd: "From $2,500", ngn: "From ₦4,000,000" },
+  { name: "Content and SEO system", usd: "From $1,200", ngn: "From ₦2,000,000" },
+  { name: "Custom integration or dashboard", usd: "From $2,000", ngn: "From ₦3,500,000" },
 ];

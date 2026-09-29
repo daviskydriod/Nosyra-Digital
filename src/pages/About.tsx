@@ -103,7 +103,7 @@ const About = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8 leading-relaxed"
               >
-                Founder-led digital studio building websites, e-commerce platforms, and digital systems for businesses across Nigeria, Ghana, the UK, and Canada. When you work with Nosyra Digital, you work directly with the person building your project  no account managers, no relay, no delay in translation.
+                Founder-led studio building websites and digital systems for ambitious businesses worldwide. You work directly with the person building your project.
               </motion.p>
 
               <motion.div
@@ -242,7 +242,7 @@ const About = () => {
                 Why Choose <span className="text-gradient">Nosyra Digital</span>?
               </h2>
               <p className="text-muted-foreground text-lg mb-8">
-                Every project is built hands-on, end-to-end  design, development, and deployment  by someone who's shipped 50+ live sites for clients across four countries.
+                Every project is handled end-to-end by an experienced builder.
               </p>
 
 

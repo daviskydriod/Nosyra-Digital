@@ -1,118 +1,39 @@
 import type { Category, Post } from "@/types/blog";
-import heroImage from "@/assets/hero-main.png";
-import ecoImage from "@/assets/eco-hero.png";
-import lianImage from "@/assets/lian-hero.png";
-import catImage from "@/assets/catglobal-hero.png";
-import vikImage from "@/assets/vik-hero.png";
-import gtImage from "@/assets/gt-hero.png";
+import strategyImage from "@/assets/blog/strategy.jpg";
+import ecommerceImage from "@/assets/blog/ecommerce.jpg";
+import mobileImage from "@/assets/blog/mobile.jpg";
+import growthImage from "@/assets/blog/growth.jpg";
+import analyticsImage from "@/assets/blog/analytics.jpg";
+import digitalStrategyImage from "@/assets/blog/digital-strategy.jpg";
 
 const date = "2026-09-20T09:00:00.000Z";
 
-const post = (
-  id: number,
-  title: string,
-  slug: string,
-  excerpt: string,
-  categoryName: string,
-  categorySlug: string,
-  image: string,
-  content: string,
-  tags: string[]
-): Post => ({
-  id,
-  title,
-  slug,
-  excerpt,
-  content,
-  featured_image: image,
-  category_id: id,
-  category_name: categoryName,
-  category_slug: categorySlug,
-  author_name: "Nosyra Digital",
-  status: "published",
-  views: 0,
-  meta_title: `${title} | Nosyra Digital`,
-  meta_description: excerpt,
-  meta_keywords: tags.join(", "),
-  created_at: date,
-  updated_at: date,
-  published_at: date,
+const post = (id: number, title: string, slug: string, excerpt: string, categoryName: string, categorySlug: string, image: string, content: string, tags: string[]): Post => ({
+  id, title, slug, excerpt, content, featured_image: image, category_id: id, category_name: categoryName, category_slug: categorySlug,
+  author_name: "Nosyra Digital", status: "published", views: 0, meta_title: `${title} | Nosyra Digital`, meta_description: excerpt,
+  meta_keywords: tags.join(", "), created_at: date, updated_at: date, published_at: date,
   tags: tags.map((name, index) => ({ id: id * 10 + index, name, slug: name.toLowerCase().replace(/\s+/g, "-") })),
 });
 
 export const STATIC_CATEGORIES: Category[] = [
-  { id: 1, name: "Strategy", slug: "strategy", description: "Clearer decisions before design and development.", post_count: 2, created_at: date },
-  { id: 2, name: "Web Design", slug: "web-design", description: "Better digital experiences for real businesses.", post_count: 2, created_at: date },
-  { id: 3, name: "Growth", slug: "growth", description: "Practical ways to improve performance after launch.", post_count: 2, created_at: date },
+  { id: 1, name: "Strategy", slug: "strategy", description: "Sharper decisions before design.", post_count: 2, created_at: date },
+  { id: 2, name: "Web Design", slug: "web-design", description: "Better digital experiences.", post_count: 2, created_at: date },
+  { id: 3, name: "Growth", slug: "growth", description: "Practical post-launch improvement.", post_count: 2, created_at: date },
 ];
 
 export const STATIC_POSTS: Post[] = [
-  post(
-    1,
-    "When your business has outgrown its website",
-    "when-your-business-has-outgrown-its-website",
-    "Five signs your website is slowing down trust, leads, and growth—and what to fix first.",
-    "Strategy",
-    "strategy",
-    heroImage,
-    `<h2>The website is often the first symptom</h2><p>A website can look polished and still create friction. If customers keep asking the same questions, your team is manually explaining the offer, or good traffic is not turning into enquiries, the problem may be structure rather than visibility.</p><h2>Start with the customer journey</h2><p>Before changing colours or adding features, map what a new visitor needs to understand, believe, and do. A stronger website makes the offer clearer, reduces uncertainty, and gives every important audience a direct next step.</p><h2>Fix the highest-friction pages first</h2><p>Prioritise the homepage, key service pages, proof, and contact flow. Small changes to these pages often create more value than a large redesign with no clear business goal.</p>`,
-    ["Website strategy", "Conversion", "Growth"]
-  ),
-  post(
-    2,
-    "A practical homepage structure for a growing business",
-    "practical-homepage-structure-for-growing-business",
-    "A simple homepage framework that helps visitors understand your offer and take the next step.",
-    "Web Design",
-    "web-design",
-    catImage,
-    `<h2>Make the first screen do one job</h2><p>The opening section should answer three questions quickly: who is this for, what problem does it solve, and what should I do next?</p><h2>Use proof before a long service list</h2><p>Show a relevant result, client, project, or specific capability early. Proof gives the visitor a reason to keep reading.</p><h2>Build a clear path</h2><p>Follow the hero with selected work, focused services, your process, and a clear project conversation. A homepage does not need to say everything; it needs to make the next decision easy.</p>`,
-    ["Homepage design", "UX", "Copywriting"]
-  ),
-  post(
-    3,
-    "What makes an e-commerce experience feel trustworthy",
-    "what-makes-ecommerce-experience-trustworthy",
-    "Trust is built through small details: product clarity, familiar payments, delivery information, and a calm checkout.",
-    "Web Design",
-    "web-design",
-    lianImage,
-    `<h2>Good commerce removes uncertainty</h2><p>Customers want to know what they are buying, when it will arrive, what it costs, and what happens if something goes wrong.</p><h2>Design for the buying context</h2><p>For many African businesses, mobile and messaging are central to the purchase. A strong store can combine a focused product page with familiar payment or WhatsApp support without making the process feel improvised.</p><h2>Keep checkout focused</h2><p>Reduce distractions, state the next step clearly, and repeat the information that matters: price, delivery, payment, and confirmation.</p>`,
-    ["E-commerce", "Mobile commerce", "Trust"]
-  ),
-  post(
-    4,
-    "Why case studies should explain decisions, not just deliverables",
-    "case-studies-should-explain-decisions",
-    "A strong case study shows the problem, the decision, the work, and the business change—not just a gallery of screens.",
-    "Strategy",
-    "strategy",
-    ecoImage,
-    `<h2>A project gallery is not a case study</h2><p>Screenshots show what was made. Case studies explain why it was made and what changed for the client.</p><h2>Use a simple narrative</h2><p>Start with the business challenge. Explain the chosen approach. Show the important work. Finish with a verified result or a careful early indicator.</p><h2>Be precise about evidence</h2><p>Use real metrics when they are available. When a project is new, say so. Honest launch signals are more credible than invented percentages.</p>`,
-    ["Case studies", "Portfolio", "Proof"]
-  ),
-  post(
-    5,
-    "Performance is part of the brand experience",
-    "performance-is-part-of-brand-experience",
-    "Fast pages feel more considered. A practical checklist for protecting mobile performance as a site grows.",
-    "Growth",
-    "growth",
-    vikImage,
-    `<h2>Speed changes perception</h2><p>A slow website makes a capable business feel less reliable. Performance is not only a technical score; it shapes trust before a visitor reads the copy.</p><h2>Start with the largest assets</h2><p>Resize hero images, use responsive formats, reserve image dimensions, and avoid loading every portfolio asset on the first view.</p><h2>Measure real users</h2><p>Test on mobile networks and review field data after launch. Lab tests are useful for diagnosis, but real visitors show where the experience actually breaks.</p>`,
-    ["Performance", "Mobile", "Core Web Vitals"]
-  ),
-  post(
-    6,
-    "The first 30 days after launching a new website",
-    "first-30-days-after-launching-new-website",
-    "Launch is the start of learning. Use the first month to find friction, improve content, and turn the new site into a working system.",
-    "Growth",
-    "growth",
-    gtImage,
-    `<h2>Watch behaviour, not vanity numbers</h2><p>Track project enquiries, contact starts, completed forms, phone clicks, WhatsApp clicks, and the pages that help people decide.</p><h2>Review real questions</h2><p>Support messages and sales calls reveal what the website still fails to explain. Turn repeated questions into clearer page content.</p><h2>Keep a short improvement list</h2><p>Every month, choose a few high-impact changes rather than redesigning everything. A website becomes valuable when the team keeps learning from it.</p>`,
-    ["Website growth", "Analytics", "Optimisation"]
-  ),
+  post(1, "When your business has outgrown its website", "when-your-business-has-outgrown-its-website", "Five signs your website is slowing trust, leads, and growth.", "Strategy", "strategy", strategyImage,
+    `<h2>The warning signs</h2><p>A website may look fine and still create friction. Repeated questions, manual explanations, and weak enquiries usually point to a structure problem.</p><h2>Start with the journey</h2><p>Map what visitors need to understand, trust, and do. Then fix the homepage, service pages, proof, and contact flow first.</p><h2>The goal</h2><p>Make the offer easier to understand and the next step easier to take.</p>`, ["Website strategy", "Conversion", "Growth"]),
+  post(2, "A practical homepage structure for a growing business", "practical-homepage-structure-for-growing-business", "A simple framework for clearer messaging and stronger next steps.", "Web Design", "web-design", digitalStrategyImage,
+    `<h2>Lead with clarity</h2><p>The first screen should say who you help, what you solve, and what visitors can do next.</p><h2>Show proof early</h2><p>Use a result, client, project, or specific capability before a long service list. Proof earns attention.</p><h2>Keep the path simple</h2><p>Follow with selected work, focused services, your process, and one clear project CTA.</p>`, ["Homepage design", "UX", "Copywriting"]),
+  post(3, "What makes an e-commerce experience feel trustworthy", "what-makes-ecommerce-experience-trustworthy", "Trust comes from product clarity, familiar payments, and a calm checkout.", "Web Design", "web-design", ecommerceImage,
+    `<h2>Remove uncertainty</h2><p>Customers want to know what they are buying, what it costs, when it arrives, and what happens next.</p><h2>Design for mobile buying</h2><p>Clear product pages, familiar payments, and helpful WhatsApp support can make the difference.</p><h2>Keep checkout focused</h2><p>Repeat the important details: price, delivery, payment, and confirmation. Remove distractions.</p>`, ["E-commerce", "Mobile commerce", "Trust"]),
+  post(4, "Why case studies should explain decisions", "case-studies-should-explain-decisions", "A strong case study shows the problem, decision, work, and change—not only the screens.", "Strategy", "strategy", growthImage,
+    `<h2>Show the problem</h2><p>Screenshots show what was made. A case study explains what changed for the client.</p><h2>Use a clear story</h2><p>Cover the challenge, approach, important work, and result in that order.</p><h2>Be honest with evidence</h2><p>Use real metrics when available. If a project is new, share early signals instead of invented percentages.</p>`, ["Case studies", "Portfolio", "Proof"]),
+  post(5, "Performance is part of the brand experience", "performance-is-part-of-brand-experience", "Fast pages feel more considered. Protect mobile performance as your site grows.", "Growth", "growth", mobileImage,
+    `<h2>Speed shapes trust</h2><p>A slow website can make a capable business feel less reliable.</p><h2>Start with heavy assets</h2><p>Resize hero images, use responsive formats, reserve image space, and avoid loading every asset at once.</p><h2>Measure real users</h2><p>Test on mobile networks and review field data after launch. Real visitors reveal the friction lab tests miss.</p>`, ["Performance", "Mobile", "Core Web Vitals"]),
+  post(6, "The first 30 days after launching a new website", "first-30-days-after-launching-new-website", "Launch is the start of learning. Use the first month to improve the system.", "Growth", "growth", analyticsImage,
+    `<h2>Track useful behaviour</h2><p>Watch enquiries, form starts, calls, WhatsApp clicks, and the pages that help people decide.</p><h2>Listen to questions</h2><p>Repeated sales and support questions show where the site still needs clearer content.</p><h2>Improve in small steps</h2><p>Choose a few high-impact changes each month. The best websites keep learning.</p>`, ["Website growth", "Analytics", "Optimisation"]),
 ];
 
 export const STATIC_POST_BY_SLUG = new Map(STATIC_POSTS.map((item) => [item.slug, item]));

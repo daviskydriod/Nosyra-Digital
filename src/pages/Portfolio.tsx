@@ -115,6 +115,41 @@ const WebProjectRow = ({
   );
 };
 
+const WebMasonryCard = ({
+  project,
+  index,
+}: {
+  project: (typeof projects)[0];
+  index: number;
+}) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const large = index % 5 === 0 || index % 5 === 3;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: (index % 6) * 0.06 }}
+      className={large ? "sm:col-span-2 lg:col-span-7 lg:row-span-3" : "lg:col-span-5 lg:row-span-2"}
+    >
+      <Link to={`/portfolio/${project.slug}`} className="group block h-full">
+        <article className="relative h-full min-h-[260px] overflow-hidden rounded-2xl border border-border/50 bg-card">
+          <img src={project.image} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-5 lg:p-7">
+            <div className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan">{project.category} <span className="text-white/50">·</span> {project.year}</div>
+            <h3 className="max-w-xl text-2xl font-poppins font-bold leading-tight text-white lg:text-3xl">{project.title}</h3>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-white/70 line-clamp-2">{project.description}</p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white transition-all group-hover:gap-3">View case study <ArrowUpRight className="h-4 w-4 text-cyan" /></span>
+          </div>
+        </article>
+      </Link>
+    </motion.div>
+  );
+};
+
 // ── Social Media Card (grid tile) ────────────────────────────────────────────
 const SocialCard = ({
   project,
@@ -351,10 +386,11 @@ const Portfolio = () => {
               {showWeb && webProjects.length > 0 && (
                 <div className="mb-12">
                   {activeCategory === "All" && <WebSectionHeader />}
-                  {webProjects.map((project, index) => (
-                    <WebProjectRow key={project.id} project={project} index={index} />
-                  ))}
-                  <div className="border-t border-border/40" />
+                  <div className="grid auto-rows-[150px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
+                    {webProjects.map((project, index) => (
+                      <WebMasonryCard key={project.id} project={project} index={index} />
+                    ))}
+                  </div>
                 </div>
               )}
 

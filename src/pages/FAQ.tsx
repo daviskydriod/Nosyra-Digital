@@ -7,7 +7,7 @@ import GradientButton from "@/components/ui/GradientButton";
 const faqs: FaqEntry[] = [
   {
     q: "How long does a website take to build?",
-    a: "5 to 10 working days after payment and content submission for standard sites. Larger platforms (e-commerce, custom admin systems) take longer — timeline is confirmed during discovery.",
+    a: "Standard sites take 5–10 working days after payment and content. Larger platforms are scoped during discovery.",
   },
   {
     q: "Can I pay in installments?",
@@ -15,11 +15,11 @@ const faqs: FaqEntry[] = [
   },
   {
     q: "Is this a custom website or a template?",
-    a: "100% custom. Every website is designed and coded from scratch for your business — no Wix, no WordPress page builders.",
+    a: "100% custom. We design and code for your business—no page-builder templates.",
   },
   {
     q: "What do I need to provide to get started?",
-    a: "Your business name, logo (if you have one), photos, services/products, and any content you want on the site. Don't have all of this ready? We'll guide you through it.",
+    a: "Your name, logo, photos, services or products, and any available content. We’ll guide the gaps.",
   },
   {
     q: "Do you handle hosting and domain?",
@@ -27,7 +27,7 @@ const faqs: FaqEntry[] = [
   },
   {
     q: "What if I need changes after delivery?",
-    a: "Every package includes revision rounds after delivery at no extra cost (see the Pricing page for exact rounds per tier). Additional changes after that can be handled under a maintenance plan.",
+    a: "Each package includes defined revision rounds. Extra changes can be handled through support.",
   },
   {
     q: "Do you work with clients outside Nigeria?",
@@ -39,7 +39,7 @@ const faqs: FaqEntry[] = [
   },
   {
     q: "How do we communicate across time zones?",
-    a: "Everything is handled over WhatsApp and email, with async updates throughout the build so you're never waiting on a live call to get an answer. Response time is within 24 hours regardless of time zone.",
+    a: "We use WhatsApp and email with async updates. Replies are within 24 hours.",
   },
 ];
 

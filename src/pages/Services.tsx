@@ -160,7 +160,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            From focused marketing websites to multi-market commerce and client portals, we bring strategy, design, and engineering into one accountable process—so nothing gets lost in handoff.
+            From websites to commerce and client portals, one accountable process from strategy to launch.
           </motion.p>
         </div>
       </section>
