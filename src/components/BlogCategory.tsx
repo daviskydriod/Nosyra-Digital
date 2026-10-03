@@ -3,7 +3,6 @@ import { useParams, Link } from "@/lib/navigation";
 import { motion } from 'framer-motion';
 import { 
   Calendar, 
-  Eye, 
   ArrowLeft,
   Folder
 } from 'lucide-react';
@@ -213,10 +212,6 @@ const BlogCategory: React.FC = () => {
                           <div className="flex items-center gap-2">
                             <Calendar className="w-3 h-3" />
                             {formatDate(post.published_at || post.created_at)}
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Eye className="w-3 h-3" />
-                            {post.views}
                           </div>
                         </div>
                       </div>
