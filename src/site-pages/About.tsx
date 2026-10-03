@@ -1,3 +1,4 @@
+import { imageSrc } from "@/lib/image";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -137,7 +138,7 @@ const About = () => {
                 />
                 <div className="absolute inset-16 glass rounded-3xl flex items-center justify-center p-8">
                   <motion.img
-                    src={nosyraLogo}
+                    src={imageSrc(nosyraLogo)}
                     alt="Nosyra Digital Logo"
                     className="w-full h-full object-contain"
                     animate={{ 
@@ -267,7 +268,7 @@ const About = () => {
               <div className="relative">
                 <div className="aspect-square rounded-3xl overflow-hidden relative">
                   <img
-                    src={founderPhoto}
+                    src={imageSrc(founderPhoto)}
                     alt="Obi Chinonso David - Founder & Lead Developer"
                     className="w-full h-full object-cover"
                   />

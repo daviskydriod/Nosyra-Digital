@@ -1,6 +1,6 @@
 // src/components/admin/Posts.tsx
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "@/lib/navigation";
 import api from '../../lib/api';
 import { useAuth } from './Dashboard';
 
@@ -10,7 +10,7 @@ interface Post {
   slug: string;
   excerpt: string;
   content: string;
-  category_id: number;
+  category_id?: number;
   category_name?: string;
   featured_image?: string;
   views: number;

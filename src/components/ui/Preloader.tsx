@@ -1,3 +1,4 @@
+import { imageSrc } from "@/lib/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import nosyraLogo from "@/assets/nosyra-logo.png";
@@ -30,7 +31,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
           <div className="flex flex-col items-center gap-6">
             {/* Logo */}
             <motion.img
-              src={nosyraLogo}
+              src={imageSrc(nosyraLogo)}
               alt="Nosyra Digital"
               className="w-40 md:w-52"
               initial={{ scale: 0.8, opacity: 0 }}

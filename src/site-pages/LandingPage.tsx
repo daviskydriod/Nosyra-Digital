@@ -1,3 +1,4 @@
+import { imageSrc } from "@/lib/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 
@@ -681,7 +682,7 @@ const LandingPage = () => {
                   style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.3)" }}
                 >
                   <img
-                    src={site.img}
+                    src={imageSrc(site.img)}
                     alt={site.name}
                     className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
@@ -732,7 +733,7 @@ const LandingPage = () => {
                 className="overflow-hidden rounded-2xl border border-blue-600/20 bg-card"
               >
                 <img
-                  src={img}
+                  src={imageSrc(img)}
                   alt={`review-${i + 1}`}
                   className="w-full h-auto object-cover"
                 />

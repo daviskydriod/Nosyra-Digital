@@ -1,4 +1,5 @@
-import { useParams, Link } from "react-router-dom";
+import { imageSrc } from "@/lib/image";
+import { useParams, Link } from "@/lib/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/layout/Layout";
@@ -83,7 +84,7 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
                 <span className="text-xs text-muted-foreground/50 font-mono truncate">{project.link}</span>
               </div>
             </div>
-            <img src={project.image} alt={project.title} className="w-full object-cover max-h-[480px]" />
+            <img src={imageSrc(project.image)} alt={project.title} className="w-full object-cover max-h-[480px]" />
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }}
@@ -177,7 +178,7 @@ const DesignSlide = ({
         style={{ aspectRatio: "1 / 1" }}
       >
         <img
-          src={img}
+          src={imageSrc(img)}
           alt={`${projectTitle} — Design ${index + 1}`}
           className="w-full h-full object-contain"
         />
@@ -228,7 +229,7 @@ const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => 
           className="absolute inset-0 scale-110 origin-top"
         >
           <img
-            src={gallery[0]}
+            src={imageSrc(gallery[0])}
             alt=""
             className="w-full h-full object-cover"
           />

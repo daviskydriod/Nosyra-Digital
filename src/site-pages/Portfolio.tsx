@@ -1,6 +1,7 @@
+import { imageSrc } from "@/lib/image";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/navigation";
 import Layout from "@/components/layout/Layout";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GradientButton from "@/components/ui/GradientButton";
@@ -48,7 +49,7 @@ const WebProjectRow = ({
 
             <div className="relative w-full lg:w-56 xl:w-64 aspect-[16/9] lg:aspect-[4/3] rounded-xl overflow-hidden shrink-0 bg-muted">
               <motion.img
-                src={project.image}
+                src={imageSrc(project.image)}
                 alt={project.title}
                 className="w-full h-full object-cover"
                 animate={{ scale: hovered ? 1.08 : 1 }}
@@ -136,7 +137,7 @@ const WebMasonryCard = ({
     >
       <Link to={`/portfolio/${project.slug}`} className="group block h-full">
         <article className="relative h-full min-h-[260px] overflow-hidden rounded-2xl border border-border/50 bg-card">
-          <img src={project.image} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <img src={imageSrc(project.image)} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-5 lg:p-7">
             <div className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan">{project.category} <span className="text-white/50">·</span> {project.year}</div>
@@ -181,7 +182,7 @@ const SocialCard = ({
             {gallery.slice(0, 3).map((img: string, i: number) => (
               <div key={i} className="relative overflow-hidden bg-muted">
                 <motion.img
-                  src={img}
+                  src={imageSrc(img)}
                   alt=""
                   className="w-full h-full object-cover"
                   animate={{ scale: hovered ? 1.06 : 1 }}

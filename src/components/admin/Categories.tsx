@@ -1,6 +1,6 @@
 // src/components/admin/Categories.tsx
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "@/lib/navigation";
 import api from '../../lib/api';
 import { useAuth } from './Dashboard';
 
@@ -58,20 +58,14 @@ const Categories: React.FC = () => {
       const slug = formData.slug || generateSlug(formData.name);
       
       if (editingCategory) {
-        const response = await api.updateCategory(editingCategory.id, {
-          ...formData,
-          slug
-        });
+        const response = await api.updateCategory(editingCategory.id, formData.name, formData.description);
         if (response.success) {
           setCategories(categories.map(cat => 
             cat.id === editingCategory.id ? response.data : cat
           ));
         }
       } else {
-        const response = await api.createCategory({
-          ...formData,
-          slug
-        });
+        const response = await api.createCategory(formData.name, formData.description);
         if (response.success) {
           setCategories([...categories, response.data]);
         }

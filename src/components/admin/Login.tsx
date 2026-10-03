@@ -1,7 +1,7 @@
 // src/components/admin/Login.tsx (IMPROVED VERSION)
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "@/lib/navigation";
 import { useAuth } from './Dashboard'; // your auth context
 import { api } from '../../lib/api'; // make sure path is correct
 

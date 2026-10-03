@@ -1,3 +1,4 @@
+import { imageSrc } from "@/lib/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -143,7 +144,7 @@ const WebDesignLanding = () => {
       {/* Minimal Header — logo + single CTA only, no full nav */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50">
         <div className="container mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
-          <img src={nosyraLogo} alt="Nosyra Digital" className="h-9 w-auto" />
+          <img src={imageSrc(nosyraLogo)} alt="Nosyra Digital" className="h-9 w-auto" />
           <a href="#quote">
             <GradientButton size="sm">Get a Free Quote</GradientButton>
           </a>
@@ -369,7 +370,7 @@ const WebDesignLanding = () => {
       {/* Minimal Footer */}
       <footer className="py-10 border-t border-border/50">
         <div className="container mx-auto px-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <img src={nosyraLogo} alt="Nosyra Digital" className="h-7 w-auto opacity-80" />
+          <img src={imageSrc(nosyraLogo)} alt="Nosyra Digital" className="h-7 w-auto opacity-80" />
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Nosyra Digital. All rights reserved.
           </p>

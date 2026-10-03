@@ -1,3 +1,4 @@
+import { imageSrc } from "@/lib/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Globe, Briefcase, Zap } from "lucide-react";
 import { useEffect } from "react";
@@ -217,7 +218,7 @@ const HeroSection = () => {
             {/* Image frame */}
             <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden">
               <img
-                src={heroImage}
+                src={imageSrc(heroImage)}
                 alt="Nosyra Digital"
                 className="w-full h-full object-cover"
               />

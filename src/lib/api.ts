@@ -1,5 +1,5 @@
 // src/lib/api.ts (FIXED - with both public and admin methods)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://blog.nosyradigital.com.ng/blog/blog/routes/auth.php';
 
 interface ApiResponse<T = any> {
   success: boolean;
@@ -19,6 +19,7 @@ interface Post {
   category_name?: string;
   category_slug?: string;
   author_name?: string;
+  status?: 'draft' | 'published';
   views: number;
   published_at?: string;
   created_at: string;
@@ -43,6 +44,7 @@ interface Pagination {
   limit: number;
   total: number;
   pages: number;
+  totalPages?: number;
 }
 
 interface PostsResponse {
@@ -56,7 +58,7 @@ class ApiClient {
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.token = localStorage.getItem('auth_token');
+    this.token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
   }
 
   setToken(token: string) {
@@ -106,7 +108,7 @@ class ApiClient {
       try {
         data = text ? JSON.parse(text) : { success: false, message: 'Empty response' };
       } catch (parseError) {
-        if (import.meta.env.DEV) console.error('JSON Parse Error:', parseError);
+        if (process.env.NODE_ENV === 'development') console.error('JSON Parse Error:', parseError);
         return {
           success: false,
           error: 'Invalid response from server',
@@ -120,7 +122,7 @@ class ApiClient {
 
       return data;
     } catch (error: unknown) {
-      if (import.meta.env.DEV) console.error('API Error:', error);
+      if (process.env.NODE_ENV === 'development') console.error('API Error:', error);
       const message = error instanceof Error
         ? (error.name === 'AbortError' ? 'Request timed out' : error.message)
         : 'Network error';

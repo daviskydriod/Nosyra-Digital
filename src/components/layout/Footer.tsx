@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { imageSrc } from "@/lib/image";
+import { Link } from "@/lib/navigation";
 import { motion } from "framer-motion";
 import {
   Facebook,
@@ -139,7 +140,7 @@ const Footer = () => {
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block mb-6">
-              <img src={logo} alt="Nosyra Digital" className="h-12 w-auto" />
+              <img src={imageSrc(logo)} alt="Nosyra Digital" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               A senior-led digital studio from Lagos, building clear, credible

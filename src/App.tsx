@@ -1,31 +1,31 @@
+"use client";
+
 import { lazy, Suspense, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+import { usePathname } from "@/lib/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Preloader from "@/components/ui/Preloader";
 import Dashboard, { AuthProvider, ProtectedRoute } from "./components/admin/Dashboard";
-// Public Pages
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import LandingPage from "./pages/LandingPage";
-import WebDesignLanding from "./pages/WebDesignLanding";
-import Portfolio from "./pages/Portfolio";
-import ProjectDetail from "./pages/ProjectDetail";
-import Contact from "./pages/Contact";
-import Pricing from "./pages/Pricing";
-import FAQ from "./pages/FAQ";
-import Process from "./pages/Process";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsAndConditions from "./pages/TermsAndConditions";
-import NotFound from "./pages/NotFound";
-// Blog and admin code is loaded only when those routes are visited.
-const BlogListing = lazy(() => import("./pages/BlogListing"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
-const BlogCategory = lazy(() => import("./pages/BlogCategory"));
+import Index from "./site-pages/Index";
+import About from "./site-pages/About";
+import Services from "./site-pages/Services";
+import LandingPage from "./site-pages/LandingPage";
+import WebDesignLanding from "./site-pages/WebDesignLanding";
+import Portfolio from "./site-pages/Portfolio";
+import ProjectDetail from "./site-pages/ProjectDetail";
+import Contact from "./site-pages/Contact";
+import Pricing from "./site-pages/Pricing";
+import FAQ from "./site-pages/FAQ";
+import Process from "./site-pages/Process";
+import PrivacyPolicy from "./site-pages/PrivacyPolicy";
+import TermsAndConditions from "./site-pages/TermsAndConditions";
+import NotFound from "./site-pages/NotFound";
+
+const BlogListing = lazy(() => import("./site-pages/BlogListing"));
+const BlogPost = lazy(() => import("./site-pages/BlogPost"));
+const BlogCategory = lazy(() => import("./site-pages/BlogCategory"));
 const Login = lazy(() => import("./components/admin/Login"));
 const Posts = lazy(() => import("./components/admin/Posts"));
 const Categories = lazy(() => import("./components/admin/Categories"));
@@ -33,110 +33,62 @@ const PostEditor = lazy(() => import("./components/admin/PostEditor"));
 
 const queryClient = new QueryClient();
 
+const RouteView = () => {
+  const pathname = usePathname() || "/";
+  const segments = pathname.split("/").filter(Boolean).map((segment) => decodeURIComponent(segment));
+  const [root, second, third] = segments;
+
+  if (pathname === "/") return <Index />;
+  if (pathname === "/about") return <About />;
+  if (pathname === "/services") return <Services />;
+  if (pathname === "/landingpage") return <LandingPage />;
+  if (pathname === "/web-design") return <WebDesignLanding />;
+  if (pathname === "/portfolio") return <Portfolio />;
+  if (root === "portfolio" && second) return <ProjectDetail />;
+  if (pathname === "/pricing") return <Pricing />;
+  if (pathname === "/faq") return <FAQ />;
+  if (pathname === "/process") return <Process />;
+  if (pathname === "/contact") return <Contact />;
+  if (pathname === "/privacy-policy") return <PrivacyPolicy />;
+  if (pathname === "/terms-and-conditions") return <TermsAndConditions />;
+  if (pathname === "/blog") return <BlogListing />;
+  if (root === "blog" && second === "category" && third) return <BlogCategory />;
+  if (root === "blog" && second) return <BlogPost />;
+  if (pathname === "/admin/login") {
+    return <AuthProvider><Login /></AuthProvider>;
+  }
+  if (pathname === "/admin") {
+    return <AuthProvider><ProtectedRoute><Dashboard /></ProtectedRoute></AuthProvider>;
+  }
+  if (pathname === "/admin/posts") {
+    return <AuthProvider><ProtectedRoute><Posts /></ProtectedRoute></AuthProvider>;
+  }
+  if (pathname === "/admin/posts/new") {
+    return <AuthProvider><ProtectedRoute><PostEditor /></ProtectedRoute></AuthProvider>;
+  }
+  if (root === "admin" && second === "posts" && third === "edit") {
+    return <AuthProvider><ProtectedRoute><PostEditor /></ProtectedRoute></AuthProvider>;
+  }
+  if (pathname === "/admin/categories") {
+    return <AuthProvider><ProtectedRoute><Categories /></ProtectedRoute></AuthProvider>;
+  }
+  return <NotFound />;
+};
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          {isLoading && (
-            <Preloader onComplete={() => setIsLoading(false)} />
-          )}
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-              <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">Loading…</div>}>
-                <Routes>
-              {/* PUBLIC */}
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/landingpage" element={<LandingPage />} />
-              {/* Dedicated ad-traffic landing page — no shared Layout/navbar,
-                  single CTA (quote form), built for paid campaigns. */}
-              <Route path="/web-design" element={<WebDesignLanding />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/portfolio/:slug" element={<ProjectDetail />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/process" element={<Process />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-              {/* BLOG */}
-              <Route path="/blog" element={<BlogListing />} />
-              <Route path="/blog/category/:slug" element={<BlogCategory />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              {/* ADMIN — wrapped in AuthProvider + ProtectedRoute so the dashboard
-                  and content tools require a logged-in session. Login itself stays
-                  inside AuthProvider (not ProtectedRoute) so useAuth() works there too. */}
-              <Route
-                path="/admin/login"
-                element={
-                  <AuthProvider>
-                    <Login />
-                  </AuthProvider>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <AuthProvider>
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  </AuthProvider>
-                }
-              />
-              <Route
-                path="/admin/posts"
-                element={
-                  <AuthProvider>
-                    <ProtectedRoute>
-                      <Posts />
-                    </ProtectedRoute>
-                  </AuthProvider>
-                }
-              />
-              <Route
-                path="/admin/posts/new"
-                element={
-                  <AuthProvider>
-                    <ProtectedRoute>
-                      <PostEditor />
-                    </ProtectedRoute>
-                  </AuthProvider>
-                }
-              />
-              <Route
-                path="/admin/posts/edit/:id"
-                element={
-                  <AuthProvider>
-                    <ProtectedRoute>
-                      <PostEditor />
-                    </ProtectedRoute>
-                  </AuthProvider>
-                }
-              />
-              <Route
-                path="/admin/categories"
-                element={
-                  <AuthProvider>
-                    <ProtectedRoute>
-                      <Categories />
-                    </ProtectedRoute>
-                  </AuthProvider>
-                }
-              />
-              {/* 404 */}
-              <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+        <Toaster />
+        <Sonner />
+        <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">Loading…</div>}>
+          <RouteView />
+        </Suspense>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 };
 

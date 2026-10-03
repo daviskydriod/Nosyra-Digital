@@ -12,13 +12,13 @@ export interface Post {
   category_slug?: string;
   author_id?: number;
   author_name?: string;
-  status: 'draft' | 'published';
-  views: number;
+  status?: 'draft' | 'published';
+  views?: number;
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
   published_at?: string;
   tags?: Tag[];
   related_posts?: PostPreview[];
@@ -33,8 +33,8 @@ export interface PostPreview {
   category_name?: string;
   category_slug?: string;
   author_name?: string;
-  published_at: string;
-  views: number;
+  published_at?: string;
+  views?: number;
 }
 
 export interface Category {
@@ -43,7 +43,7 @@ export interface Category {
   slug: string;
   description?: string;
   post_count?: number;
-  created_at: string;
+  created_at?: string;
 }
 
 export interface Tag {
@@ -65,6 +65,7 @@ export interface Pagination {
   limit: number;
   total: number;
   pages: number;
+  totalPages?: number;
 }
 
 export interface PostsResponse {

@@ -1,6 +1,7 @@
+import { imageSrc } from "@/lib/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/navigation";
 import { ArrowRight, ArrowUpRight, Instagram, LayoutGrid } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { projects } from "@/data/projectsData";
@@ -52,7 +53,7 @@ const SocialCard = ({
                 {gallery.slice(0, 3).map((img: string, i: number) => (
                   <div key={i} className="relative overflow-hidden bg-muted">
                     <motion.img
-                      src={img}
+                      src={imageSrc(img)}
                       alt=""
                       className="w-full h-full object-cover"
                       animate={{ scale: hovered ? 1.08 : 1 }}
@@ -158,7 +159,7 @@ const WebRow = ({
 
             <div className="relative w-full sm:w-48 lg:w-52 aspect-[16/9] sm:aspect-[4/3] rounded-xl overflow-hidden shrink-0 bg-muted">
               <motion.img
-                src={project.image}
+                src={imageSrc(project.image)}
                 alt={project.title}
                 className="w-full h-full object-cover"
                 animate={{ scale: hovered ? 1.08 : 1 }}

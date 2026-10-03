@@ -1,3 +1,4 @@
+import { imageSrc, type ImageSource } from "@/lib/image";
 import type { Category, Post } from "@/types/blog";
 import strategyImage from "@/assets/blog/strategy.jpg";
 import ecommerceImage from "@/assets/blog/ecommerce.jpg";
@@ -8,8 +9,8 @@ import digitalStrategyImage from "@/assets/blog/digital-strategy.jpg";
 
 const date = "2026-09-20T09:00:00.000Z";
 
-const post = (id: number, title: string, slug: string, excerpt: string, categoryName: string, categorySlug: string, image: string, content: string, tags: string[]): Post => ({
-  id, title, slug, excerpt, content, featured_image: image, category_id: id, category_name: categoryName, category_slug: categorySlug,
+const post = (id: number, title: string, slug: string, excerpt: string, categoryName: string, categorySlug: string, image: ImageSource, content: string, tags: string[]): Post => ({
+  id, title, slug, excerpt, content, featured_image: imageSrc(image), category_id: id, category_name: categoryName, category_slug: categorySlug,
   author_name: "Nosyra Digital", status: "published", views: 0, meta_title: `${title} | Nosyra Digital`, meta_description: excerpt,
   meta_keywords: tags.join(", "), created_at: date, updated_at: date, published_at: date,
   tags: tags.map((name, index) => ({ id: id * 10 + index, name, slug: name.toLowerCase().replace(/\s+/g, "-") })),

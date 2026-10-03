@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 
 interface GradientButtonProps {

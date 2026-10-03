@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/navigation";
 
 const CTASection = () => (
   <section className="py-24 lg:py-32 px-4 relative overflow-hidden bg-secondary text-secondary-foreground">

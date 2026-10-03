@@ -1,6 +1,6 @@
 // src/components/admin/Dashboard.tsx (FIXED)
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from "@/lib/navigation";
 import api from '../../lib/api';
 
 interface User {
