@@ -34,22 +34,22 @@ const Header = () => {
 
   useEffect(() => setIsMobileMenuOpen(false), [location]);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <motion.div className="fixed top-0 left-0 h-0.5 bg-cyan z-[100] shadow-[0_0_14px_hsl(var(--cyan)/.8)]" style={{ width: `${scrollProgress}%` }} />
-      <motion.header
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.55, ease: "easeOut" }}
-        className={`fixed top-3 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-6xl z-50 rounded-2xl border transition-all duration-300 ${isScrolled ? "bg-white/95 border-border shadow-[0_12px_40px_hsl(222_47%_11%/.10)]" : "bg-white/90 border-border/80 shadow-[0_8px_30px_hsl(222_47%_11%/.06)]"} backdrop-blur-xl`}
-      >
-        <nav className="flex items-center justify-between px-3 py-2.5 md:px-4">
+      <header className={`fixed left-1/2 top-3 z-[60] w-[calc(100%-1.5rem)] max-w-6xl -translate-x-1/2 rounded-2xl border bg-white shadow-[0_10px_35px_hsl(222_47%_11%/.10)] transition-all duration-300 ${isScrolled ? "border-border" : "border-border/80"}`}>
+        <nav className="flex min-h-[64px] items-center justify-between gap-3 px-3 py-2.5 md:px-4">
           <Link to="/" className="group flex items-center gap-2.5 pl-1">
             <img src={imageSrc(logo)} alt="Nosyra Digital" className="h-9 w-auto max-w-[148px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:max-w-[170px]" />
             <span className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.24em] text-muted-foreground/70">Digital studio</span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-1 rounded-full border border-border/60 bg-background/40 p-1">
+          <div className="hidden xl:flex items-center gap-1 rounded-full border border-border/60 bg-background/40 p-1">
             {navItems.map((item) => {
               const active = location.pathname === item.path || (item.path === "/portfolio" && location.pathname.startsWith("/portfolio/"));
               return (
@@ -60,7 +60,7 @@ const Header = () => {
             })}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <Link to="/contact">
               <Button className="group rounded-full bg-cyan px-5 text-xs font-bold text-primary-foreground hover:bg-cyan-glow hover:shadow-[0_0_24px_hsl(var(--cyan)/.35)]">
                 Start a project <ArrowUpRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -68,16 +68,16 @@ const Header = () => {
             </Link>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="rounded-xl border border-border p-2 text-foreground transition-colors hover:bg-muted lg:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-foreground/15 bg-white text-foreground shadow-sm transition-colors hover:border-cyan hover:bg-muted xl:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </nav>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 lg:hidden" id="mobile-navigation" role="dialog" aria-label="Mobile navigation" aria-modal="true">
-            <div className="absolute inset-0 overflow-y-auto bg-white/98 px-6 pb-10 pt-28 backdrop-blur-2xl">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 xl:hidden" id="mobile-navigation" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+            <div className="absolute inset-0 overflow-y-auto bg-white px-6 pb-10 pt-28 backdrop-blur-2xl">
               <div className="editorial-rule mb-8" />
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">Navigate / 01—06</p>
               <div className="mt-6 flex flex-col">
