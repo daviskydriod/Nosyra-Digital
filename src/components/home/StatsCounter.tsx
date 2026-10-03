@@ -44,12 +44,12 @@ const StatItem = ({ stat, index }: { stat: typeof stats[0]; index: number }) => 
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="relative group"
     >
-      <div className="text-center p-8 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-cyan/30 transition-all duration-300">
+      <div className="relative h-full border-b border-border/60 p-6 transition-colors duration-300 hover:bg-muted/40 sm:p-8 lg:border-b-0 lg:border-r lg:last:border-r-0">
         {/* Icon with Glow */}
-        <div className="relative mx-auto w-16 h-16 mb-6">
-          <div className="absolute inset-0 bg-cyan/20 rounded-full blur-xl group-hover:bg-cyan/30 transition-colors" />
-          <div className="relative w-full h-full rounded-full bg-cyan/10 flex items-center justify-center border border-cyan/20">
-            <stat.icon className="w-8 h-8 text-cyan" />
+        <div className="relative mb-8 flex h-12 w-12 items-center justify-center border border-cyan/30 bg-cyan/5">
+          <div className="absolute -right-1 -top-1 h-2 w-2 bg-cyan" />
+          <div className="relative flex h-full w-full items-center justify-center">
+            <stat.icon className="h-5 w-5 text-cyan" />
           </div>
         </div>
 
@@ -64,7 +64,7 @@ const StatItem = ({ stat, index }: { stat: typeof stats[0]; index: number }) => 
 
         {/* Circular Progress Ring */}
         <motion.div
-          className="absolute top-4 right-4 w-8 h-8"
+          className="absolute right-6 top-6 h-8 w-8 sm:right-8 sm:top-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -107,9 +107,9 @@ const StatsCounter = () => {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="relative overflow-hidden border-b border-border/60 py-24 lg:py-32">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card/50" />
+      <div className="absolute inset-0 bg-muted/20" />
       
       {/* Particle Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -137,21 +137,22 @@ const StatsCounter = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-10" ref={containerRef}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-12"
+          className="mb-12 max-w-2xl"
         >
-          <h2 className="text-3xl md:text-4xl font-poppins font-bold text-foreground mb-4">
+          <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">03 / Proof of work</p>
+          <h2 className="mb-4 text-4xl font-semibold leading-[.94] tracking-[-.06em] text-foreground md:text-5xl">
             Proof in the numbers
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="max-w-xl text-muted-foreground">
             A snapshot of the work and trust built so far.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 border-y border-border/60 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <StatItem key={stat.label} stat={stat} index={index} />
           ))}

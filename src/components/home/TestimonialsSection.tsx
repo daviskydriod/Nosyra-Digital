@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
-import GlassCard from "@/components/ui/GlassCard";
-import SectionHeading from "@/components/ui/SectionHeading";
 import { testimonials } from "@/data/testimonials";
 
 const TestimonialsSection = () => {
@@ -19,15 +17,15 @@ const TestimonialsSection = () => {
   const scrollDuration = testimonials.length * 6;
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
+    <section className="relative overflow-hidden border-b border-border/60 py-24 lg:py-32">
+      <div className="absolute inset-0 bg-muted/20" />
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <SectionHeading
-          badge="Proof from the work"
-          title="Built together. Remembered by clients."
-          subtitle="A few words from the people who trusted us with the next stage of their business."
-        />
+      <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-10">
+        <div className="max-w-3xl">
+          <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">04 / Proof from the work</p>
+          <h2 className="max-w-xl text-4xl font-semibold leading-[.94] tracking-[-.06em] text-foreground md:text-5xl">Built together. Remembered by clients.</h2>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">A few words from the people who trusted us with the next stage of their business.</p>
+        </div>
 
         <div className="mt-16 overflow-hidden">
           <motion.div
@@ -49,7 +47,7 @@ const TestimonialsSection = () => {
                 className="flex-shrink-0 w-[350px] md:w-[400px]"
                 whileHover={{ scale: 1.02 }}
               >
-                <GlassCard className="p-6 h-full" hover={false}>
+                <article className="h-full border border-border bg-card p-6 shadow-[0_12px_35px_hsl(222_47%_11%/.05)] transition-colors hover:border-cyan/40">
                   <div className="mb-4">
                     <Quote className="w-10 h-10 text-cyan/30" />
                   </div>
@@ -78,7 +76,7 @@ const TestimonialsSection = () => {
                       </p>
                     </div>
                   </div>
-                </GlassCard>
+                </article>
               </motion.div>
             ))}
           </motion.div>

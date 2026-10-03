@@ -179,10 +179,9 @@ const Services = () => {
                   className={`group ${index === 0 ? "lg:col-span-7" : index === 1 ? "lg:col-span-5" : "lg:col-span-4"}`}
                 >
                   <div className="relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl border border-border/60 bg-card p-7 transition-all duration-300 hover:border-cyan/60 hover:shadow-[0_18px_55px_hsl(var(--cyan)/0.09)] md:p-8">
-                    <div className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br ${service.color} opacity-10 blur-3xl`} />
                     <div className="relative mb-10 flex items-center justify-between">
                       <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color} bg-opacity-10`}>
+                      <div className="flex h-12 w-12 items-center justify-center border border-cyan/30 bg-cyan/5 text-cyan transition-colors group-hover:border-cyan group-hover:bg-cyan/10">
                         <service.icon className="h-6 w-6 text-cyan" />
                       </div>
                     </div>
