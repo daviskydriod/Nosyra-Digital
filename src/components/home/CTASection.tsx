@@ -1,24 +1,5 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Link } from "@/lib/navigation";
 
-const CTASection = () => (
-  <section className="relative overflow-hidden border-b border-border/60 bg-secondary px-5 py-24 text-secondary-foreground lg:py-32 lg:px-10">
-    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_75%_20%,hsl(var(--cyan)/0.65),transparent_35%)]" />
-    <div className="relative z-10 mx-auto max-w-7xl">
-      <div className="max-w-4xl">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan font-semibold mb-6">Start a conversation</p>
-        <h2 className="mb-7 max-w-4xl text-4xl font-semibold leading-[.96] tracking-[-.06em] md:text-6xl lg:text-7xl">
-          Need a clearer digital direction?
-        </h2>
-        <p className="text-lg md:text-xl text-secondary-foreground/70 max-w-2xl leading-relaxed mb-10">
-          Tell us where you are stuck. We will help you choose the right next step.
-        </p>
-        <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-cyan text-primary-foreground font-semibold hover:bg-cyan-glow transition-colors">
-          Talk about your project <ArrowRight className="w-5 h-5" aria-hidden="true" />
-        </Link>
-      </div>
-    </div>
-  </section>
-);
-
+const CTASection = () => <section className="bg-muted/35 px-5 py-24 lg:px-10 lg:py-32"><div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-foreground px-6 py-14 text-white shadow-[0_24px_70px_hsl(222_47%_11%/.18)] sm:px-10 lg:px-16 lg:py-20"><div className="pointer-events-none absolute -right-20 -top-32 h-96 w-96 rounded-full bg-cyan/25 blur-3xl" /><div className="pointer-events-none absolute bottom-0 left-1/3 h-48 w-48 rounded-full bg-indigo-400/20 blur-3xl" /><div className="relative z-10 max-w-3xl"><p className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.24em] text-cyan"><Sparkles className="h-3.5 w-3.5" /> Start a conversation</p><h2 className="text-4xl font-semibold leading-[.95] tracking-[-.07em] sm:text-5xl lg:text-7xl">Need a clearer digital direction?</h2><p className="mt-7 max-w-xl text-base leading-relaxed text-white/65 md:text-lg">Tell us where you are stuck. We will help you choose the right next step.</p><Link to="/contact" className="mt-10 inline-flex items-center gap-3 rounded-full bg-cyan px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-cyan-glow">Talk about your project <ArrowUpRight className="h-4 w-4" /></Link></div></div></section>;
 export default CTASection;

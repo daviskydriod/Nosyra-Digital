@@ -3,69 +3,11 @@ import { ArrowUpRight, Compass, Layers3, TrendingUp } from "lucide-react";
 import { Link } from "@/lib/navigation";
 
 const practiceAreas = [
-  {
-    number: "01",
-    icon: Compass,
-    title: "Positioning & Direction",
-    description: "Clarify what you do, who it is for, and why it matters before we make anything.",
-    deliverables: ["Positioning", "Messaging", "Site structure"],
-  },
-  {
-    number: "02",
-    icon: Layers3,
-    title: "Websites & Digital Systems",
-    description: "Turn attention into action with a site or product that feels easy to use.",
-    deliverables: ["Websites", "E-commerce", "Booking systems"],
-  },
-  {
-    number: "03",
-    icon: TrendingUp,
-    title: "Launch & Improve",
-    description: "Keep the system useful after launch with focused support, SEO, and measurement.",
-    deliverables: ["SEO", "Conversion", "Analytics"],
-  },
+  { number: "01", icon: Compass, title: "Positioning & direction", description: "Clarify what you do, who it is for, and why it matters before we make anything.", deliverables: ["Positioning", "Messaging", "Site structure"] },
+  { number: "02", icon: Layers3, title: "Websites & digital systems", description: "Turn attention into action with a site or product that feels easy to use.", deliverables: ["Websites", "E-commerce", "Booking systems"] },
+  { number: "03", icon: TrendingUp, title: "Launch & improve", description: "Keep the system useful after launch with focused support, SEO, and measurement.", deliverables: ["SEO", "Conversion", "Analytics"] },
 ];
 
-const ServicesPreview = () => (
-  <section className="py-24 lg:py-32 relative overflow-hidden bg-card/30">
-    <div className="container mx-auto px-4 lg:px-8 relative z-10">
-      <div className="max-w-3xl mb-14 lg:mb-20">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan font-semibold mb-5">What we do</p>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-bold leading-[1.05] text-foreground mb-6">
-          A better digital presence starts with clarity.
-        </h2>
-        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-          We plan, design, build, and improve digital experiences that help people understand and trust your business.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 border-y border-border/60">
-        {practiceAreas.map((area, index) => (
-          <motion.article
-            key={area.number}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: index * 0.1 }}
-            className="group relative p-7 lg:p-9 border-b lg:border-b-0 lg:border-r last:border-0 border-border/60 hover:bg-background/70 transition-colors"
-          >
-            <div className="flex items-center justify-between mb-16">
-              <span className="text-sm font-mono text-cyan">{area.number}</span>
-              <area.icon className="w-6 h-6 text-cyan" aria-hidden="true" />
-            </div>
-            <h3 className="text-2xl font-poppins font-bold text-foreground mb-4">{area.title}</h3>
-            <p className="text-muted-foreground leading-relaxed mb-7">{area.description}</p>
-            <ul className="space-y-2 mb-8">
-              {area.deliverables.map((item) => <li key={item} className="text-sm text-foreground/75">{item}</li>)}
-            </ul>
-            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-semibold text-cyan group-hover:gap-3 transition-all">
-              See what we do <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
-          </motion.article>
-        ))}
-      </div>
-    </div>
-  </section>
-);
+const ServicesPreview = () => <section className="relative overflow-hidden bg-muted/35 py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><div className="mb-14 grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-end"><div><p className="mb-5 text-xs font-semibold uppercase tracking-[.24em] text-cyan">What we do</p><h2 className="max-w-2xl text-4xl font-semibold leading-[.95] tracking-[-.06em] md:text-6xl">A better digital presence starts with clarity.</h2></div><p className="max-w-md border-t border-border pt-5 text-base leading-relaxed text-muted-foreground">We plan, design, build, and improve digital experiences that help people understand and trust your business.</p></div><div className="grid gap-4 lg:grid-cols-3">{practiceAreas.map((area, index) => <motion.article key={area.number} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .08 }} className="group rounded-[1.5rem] border border-border bg-white p-7 shadow-[0_12px_40px_hsl(222_47%_11%/.04)] transition duration-300 hover:-translate-y-1 hover:border-cyan/50 hover:shadow-[0_18px_45px_hsl(222_47%_11%/.09)] lg:p-8"><div className="mb-14 flex items-center justify-between"><span className="text-sm font-semibold text-cyan">{area.number}</span><div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan/25 bg-cyan/5 text-cyan"><area.icon className="h-5 w-5" /></div></div><h3 className="text-2xl font-semibold tracking-tight text-foreground">{area.title}</h3><p className="mt-4 leading-relaxed text-muted-foreground">{area.description}</p><ul className="mt-7 space-y-2">{area.deliverables.map((item) => <li key={item} className="text-sm text-foreground/70">{item}</li>)}</ul><Link to="/services" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-foreground transition group-hover:gap-3">See what we do <ArrowUpRight className="h-4 w-4 text-cyan" /></Link></motion.article>)}</div></div></section>;
 
 export default ServicesPreview;
