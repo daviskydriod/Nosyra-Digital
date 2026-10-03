@@ -43,7 +43,7 @@ const packages = [
   {
     name: "Starter",
     price: "$150",
-    description: "Perfect for small businesses getting online for the first time.",
+    description: "A focused starting point for a business getting online with intention.",
     features: [
       "Up to 3 pages",
       "Mobile-responsive design",
@@ -56,7 +56,7 @@ const packages = [
   {
     name: "Business",
     price: "$250",
-    description: "For businesses ready to grow leads and credibility online.",
+    description: "For businesses ready to turn attention into qualified enquiries.",
     features: [
       "Up to 6 pages",
       "Mobile-responsive design",
@@ -70,7 +70,7 @@ const packages = [
   {
     name: "E-commerce",
     price: "$500",
-    description: "A full online store built to sell your products.",
+    description: "A clear storefront built to help people discover and buy your products.",
     features: [
       "Unlimited product pages",
       "Secure payment integration",
@@ -116,7 +116,7 @@ const WebDesignLanding = () => {
         },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
-          subject: "New Free Quote Request — Nosyra Digital",
+          subject: "New project brief — Nosyra Digital",
           name: form.name,
           email: form.email,
           phone: form.phone,
@@ -130,10 +130,10 @@ const WebDesignLanding = () => {
       if (response.ok && result.success) {
         setSubmitted(true);
       } else {
-        setError("Something went wrong sending your request. Please try again or reach us directly.");
+        setError("We could not send the brief. Please try again or contact us directly.");
       }
     } catch {
-      setError("Something went wrong sending your request. Please try again or reach us directly.");
+      setError("We could not send the brief. Please try again or contact us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -146,7 +146,7 @@ const WebDesignLanding = () => {
         <div className="container mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
           <img src={imageSrc(nosyraLogo)} alt="Nosyra Digital" className="h-9 w-auto" />
           <a href="#quote">
-            <GradientButton size="sm">Get a Free Quote</GradientButton>
+            <GradientButton size="sm">Start with a brief</GradientButton>
           </a>
         </div>
       </header>
@@ -161,7 +161,7 @@ const WebDesignLanding = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20"
           >
-            Websites Starting From $150
+            Websites from $150 · clear scope, practical delivery
           </motion.span>
 
           <motion.h1
@@ -193,7 +193,7 @@ const WebDesignLanding = () => {
           >
             <a href="#quote">
               <GradientButton size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-                Get a Free Quote
+                Start with a brief
               </GradientButton>
             </a>
           </motion.div>

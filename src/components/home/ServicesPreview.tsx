@@ -6,22 +6,22 @@ const practiceAreas = [
   {
     number: "01",
     icon: Compass,
-    title: "Strategy & Positioning",
-    description: "Make your offer clear before we design or build.",
+    title: "Positioning & Direction",
+    description: "Clarify what you do, who it is for, and why it matters before we make anything.",
     deliverables: ["Positioning", "Messaging", "Site structure"],
   },
   {
     number: "02",
     icon: Layers3,
-    title: "Websites & Digital Products",
-    description: "Build a fast, clear experience that turns interest into action.",
+    title: "Websites & Digital Systems",
+    description: "Turn attention into action with a site or product that feels easy to use.",
     deliverables: ["Websites", "E-commerce", "Booking systems"],
   },
   {
     number: "03",
     icon: TrendingUp,
-    title: "Growth & Optimisation",
-    description: "Keep improving performance with SEO, analytics, and focused support.",
+    title: "Launch & Improve",
+    description: "Keep the system useful after launch with focused support, SEO, and measurement.",
     deliverables: ["SEO", "Conversion", "Analytics"],
   },
 ];

@@ -18,8 +18,8 @@ const Pricing = () => {
         <div className="container mx-auto relative z-10">
           <SectionHeading
             badge="Pricing"
-            title="Premium digital work, clearly scoped."
-            subtitle="Starting points for websites, commerce, and digital platforms. Final fees follow scope and complexity."
+            title="Clear scope. Serious digital work."
+            subtitle="Starting points for websites, commerce, and digital systems. Final fees follow the problem, the scope, and the level of care required."
           />
 
           {/* Currency toggle */}
@@ -71,7 +71,7 @@ const Pricing = () => {
       {/* Add-ons */}
       <section className="pb-24 px-4">
         <div className="container mx-auto max-w-3xl">
-          <SectionHeading title="Extend the system after launch" align="center" className="mb-10" />
+          <SectionHeading title="Keep the system useful after launch" align="center" className="mb-10" />
           <div className="space-y-3">
             {addOns.map((addon) => (
               <div

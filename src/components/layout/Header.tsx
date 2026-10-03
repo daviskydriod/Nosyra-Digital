@@ -12,6 +12,7 @@ const navItems = [
   { name: "About", path: "/about" },
   { name: "Insights", path: "/blog" },
   { name: "Pricing", path: "/pricing" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Header = () => {
@@ -78,7 +79,7 @@ const Header = () => {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 lg:hidden" id="mobile-navigation" role="dialog" aria-label="Mobile navigation" aria-modal="true">
             <div className="absolute inset-0 bg-background/95 px-6 pt-28 backdrop-blur-2xl">
               <div className="editorial-rule mb-8" />
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">Navigate / 01—05</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">Navigate / 01—06</p>
               <div className="mt-6 flex flex-col">
                 {navItems.map((item, index) => (
                   <motion.div key={item.path} initial={{ opacity: 0, x: -18 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.06 }} className="border-b border-border/60 py-4">

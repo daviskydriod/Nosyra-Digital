@@ -433,9 +433,9 @@ const LandingPage = () => {
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-6xl font-black leading-tight mb-6"
           >
-            Your Competitors Are
-            <span className="text-blue-500"> Stealing Your Customers </span>
-            — Because They Have A Better Website Than You
+            A clearer digital presence
+            <span className="text-blue-500"> makes the next move easier </span>
+            for your customers
           </motion.h1>
 
           <motion.p
@@ -444,8 +444,7 @@ const LandingPage = () => {
             transition={{ delay: 0.3 }}
             className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            While you're losing sales, we'll build you a professional website,
-            brand identity, and marketing assets — all for one unbeatable price.
+            We build the website, identity, and launch assets your business needs to show up with confidence — in one focused package.
           </motion.p>
 
           <motion.div
@@ -454,14 +453,14 @@ const LandingPage = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <WAButton href={WA_OFFER_URL} label="CLAIM THIS OFFER NOW" large />
+            <WAButton href={WA_OFFER_URL} label="START THE CONVERSATION" large />
             <a
               href={PORTFOLIO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-semibold"
             >
-              See Our Work <ExternalLink className="w-4 h-4" />
+              See selected work <ExternalLink className="w-4 h-4" />
             </a>
           </motion.div>
 
@@ -490,21 +489,21 @@ const LandingPage = () => {
           <div className="text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-bold text-sm mb-6">
               <AlertTriangle className="w-4 h-4" />
-              THE BRUTAL TRUTH
+              WHERE THE GAP SHOWS
             </span>
             <h2 className="text-3xl md:text-5xl font-black mb-6">
-              Is This You Right Now?
+              Is your digital presence keeping up?
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             {[
-              "You don't have a website — or the one you have looks outdated and unprofessional",
-              "Customers Google you and find nothing, so they go to your competitor instead",
-              "You're relying 100% on word of mouth and it's not enough to grow",
-              "You tried a freelancer before and got burned — late delivery, poor quality, no support",
-              "Your business looks small even though your service is excellent",
-              "You're in Lagos, Abuja, or Port Harcourt and know your market is online — but you're not there yet",
+              "Your website no longer reflects the quality of your work",
+              "People search for you and find too little reason to choose you",
+              "Referrals are strong, but they cannot carry the whole business",
+              "A previous build left you with delays, compromises, or no support",
+              "Your service is excellent, but the presentation feels behind it",
+              "You know your market is online, but your digital system is not ready yet",
             ].map((pain, i) => (
               <motion.div
                 key={i}
@@ -529,11 +528,10 @@ const LandingPage = () => {
           >
             <TrendingUp className="w-10 h-10 text-blue-500 mx-auto mb-4" />
             <p className="text-xl font-bold text-foreground mb-2">
-              Every day without a professional online presence is money left on the table.
+              Every day without a clear digital presence makes the decision harder for the right customer.
             </p>
             <p className="text-muted-foreground">
-              Your competitors in Lagos, Abuja, and Port Harcourt already know this.
-              The question is — when will you act?
+              The opportunity is already there. The question is what should change first.
             </p>
           </motion.div>
         </div>
@@ -544,17 +542,14 @@ const LandingPage = () => {
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-400 font-bold text-sm mb-6">
             <CheckCircle className="w-4 h-4" />
-            THE SOLUTION
+            A CLEARER SYSTEM
           </span>
           <h2 className="text-3xl md:text-5xl font-black mb-8">
-            We Build Your Entire
-            <span className="text-blue-500"> Online Presence </span>
-            In One Package
+            One focused package for
+            <span className="text-blue-500"> a stronger online presence </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Nosyra Digital is a full-service digital agency based in Lagos. We've helped over 50
-            Nigerian businesses go from invisible online to attracting real customers — fast.
-            Now we're packaging everything you need at a price designed for Nigerian businesses.
+            Nosyra Digital is a founder-led studio from Lagos. We bring the essentials together — a clear website, a coherent identity, and launch-ready content — so your business can show up with confidence.
           </p>
         </div>
       </section>
@@ -565,13 +560,13 @@ const LandingPage = () => {
           <div className="text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-600 font-bold text-sm mb-6">
               <Zap className="w-4 h-4" />
-              THE GODFATHER OFFER
+              THE WORKING PACKAGE
             </span>
             <h2 className="text-3xl md:text-5xl font-black mb-4">
-              Everything You Need To Win Online
+              The essentials to show up well online
             </h2>
             <p className="text-muted-foreground text-lg">
-              Here's exactly what you get — and what each piece is worth:
+              A focused set of deliverables, with the scope and value made clear.
             </p>
           </div>
 
@@ -628,14 +623,14 @@ const LandingPage = () => {
             className="rounded-3xl p-12 text-center border-2 border-blue-600/40 bg-card"
             style={{ boxShadow: "0 0 60px rgba(37,99,235,0.1)" }}
           >
-            <p className="text-muted-foreground mb-2 text-lg">Your Investment Today</p>
+            <p className="text-muted-foreground mb-2 text-lg">Your project investment</p>
             <p className="text-7xl md:text-8xl font-black mb-2 text-blue-500">₦80,000</p>
             <p className="text-muted-foreground mb-8">
               Save over{" "}
               <span className="text-foreground font-bold">₦105,000</span> — but only{" "}
               {SLOTS_LEFT} slots remain
             </p>
-            <WAButton href={WA_OFFER_URL} label="CLAIM MY SLOT NOW" large />
+            <WAButton href={WA_OFFER_URL} label="START MY PROJECT" large />
             <p className="text-sm text-muted-foreground mt-6">
               50% deposit to start · Balance on delivery · Money-back guarantee
             </p>
@@ -654,13 +649,13 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-400 font-bold text-sm mb-6">
-              Our Work
+              Selected work
             </span>
             <h2 className="text-4xl font-black mb-4">
-              Recent Websites We've Built
+              Recent systems we have built
             </h2>
             <p className="text-muted-foreground text-lg">
-              Custom websites built for Nigerian businesses just like yours
+              Websites and digital systems built for ambitious businesses across Nigeria
             </p>
           </div>
 
@@ -706,7 +701,7 @@ const LandingPage = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-blue-600/40 text-blue-400 font-bold hover:bg-blue-600/10 transition-colors"
             >
-              See All Our Work <ExternalLink className="w-4 h-4" />
+              See All Selected work <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>

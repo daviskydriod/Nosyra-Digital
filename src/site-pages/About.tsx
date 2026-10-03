@@ -23,51 +23,51 @@ import nosyraLogo from "@/assets/nosyra-logo.png";
 const timeline = [
   {
     year: "2025",
-    title: "The Beginning",
-    description: "Nosyra Digital was founded with a vision to help businesses establish a powerful online presence.",
+    title: "The studio starts with the problem",
+    description: "Nosyra Digital began with a simple belief: good digital work should make a business easier to understand and easier to choose.",
   },
 ];
 
 const values = [
   {
     icon: Target,
-    title: "Excellence",
-    description: "We strive for perfection in every pixel, every line of code, and every strategy we create.",
+    title: "Craft",
+    description: "We sweat the details that make an experience feel considered, useful, and credible.",
   },
   {
     icon: Heart,
-    title: "Passion",
-    description: "Our love for digital creativity drives us to go above and beyond for every client.",
+    title: "Care",
+    description: "We stay close to the work, the people using it, and the people responsible for it.",
   },
   {
     icon: Lightbulb,
-    title: "Innovation",
-    description: "We stay ahead of trends, bringing fresh ideas and cutting-edge solutions to the table.",
+    title: "Good judgement",
+    description: "We use new tools when they improve the outcome — not because they are new.",
   },
   {
     icon: Users,
-    title: "Collaboration",
-    description: "We work closely with our clients, treating their goals as our own.",
+    title: "Partnership",
+    description: "You work directly with the people shaping and building the project.",
   },
   {
     icon: Zap,
-    title: "Speed",
-    description: "Fast turnaround without compromising quality. Time is money, and we respect both.",
+    title: "Momentum",
+    description: "A clear scope and steady decisions keep projects moving without rushing the important work.",
   },
   {
     icon: Eye,
-    title: "Transparency",
-    description: "Clear communication, honest pricing, and no hidden surprises throughout our partnership.",
+    title: "Straight talk",
+    description: "Clear communication, honest scope, and no surprises hiding in the handoff.",
   },
 ];
 
 const benefits = [
-  "Tailored strategies for your unique business goals",
-  "Direct communication  no middlemen between you and your build",
-  "Cutting-edge technology and modern design trends",
-  "Transparent pricing with no hidden fees",
-  "24/7 support and maintenance services",
-  "Proven track record of success",
+  "A strategy shaped around your actual business goals",
+  "Direct access to the people doing the work",
+  "A modern system chosen for the outcome, not the trend",
+  "A clear scope and transparent pricing",
+  "Support that stays available after launch",
+  "A growing body of work across markets and sectors",
 ];
 
 const About = () => {
@@ -86,7 +86,7 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20"
               >
-                About Us
+                The studio
               </motion.span>
               
               <motion.h1
@@ -163,9 +163,9 @@ const About = () => {
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <SectionHeading
-            badge="Our Journey"
-            title="The Nosyra Story"
-            subtitle="From humble beginnings to becoming a leading digital agency in Nigeria."
+            badge="The studio"
+            title="Independent by design."
+            subtitle="A founder-led studio building clear digital systems from Lagos for teams working anywhere."
           />
 
           <div className="mt-16 relative">
@@ -206,9 +206,9 @@ const About = () => {
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <SectionHeading
-            badge="Our Values"
-            title="What Drives Us"
-            subtitle="The core principles that guide everything we do."
+            badge="How we work"
+            title="Useful over impressive."
+            subtitle="The principles behind every scope, screen, and decision."
           />
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -240,10 +240,10 @@ const About = () => {
                 Why Us
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-6">
-                Why Choose <span className="text-gradient">Nosyra Digital</span>?
+                Why work with <span className="text-cyan">Nosyra Digital</span>?
               </h2>
               <p className="text-muted-foreground text-lg mb-8">
-                Every project is handled end-to-end by an experienced builder.
+                Every project is handled end-to-end by an experienced builder, not passed through layers of account management.
               </p>
 
 
@@ -297,13 +297,13 @@ const About = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-6">
-              Ready to <span className="text-gradient">Transform</span> Your Business?
+              Ready to make the next move?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help you achieve your digital goals.
+              Let’s talk about what needs to become clearer, faster, or more useful.
             </p>
             <GradientButton href="/contact" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-              Get in Touch
+              Start a conversation
             </GradientButton>
           </AnimatedSection>
         </div>
