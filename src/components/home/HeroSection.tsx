@@ -2,39 +2,14 @@ import { imageSrc } from "@/lib/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Globe, Briefcase, Zap } from "lucide-react";
 import { useEffect } from "react";
+import { Link } from "@/lib/navigation";
 import GradientButton from "@/components/ui/GradientButton";
 import heroImage from "@/assets/hero-main.png";
 
-// ─────────────────────────────────────────────────────────────────────────────
-
 const floatingCards = [
-  {
-    id: "projects",
-    icon: Briefcase,
-    value: "50+",
-    label: "Projects Delivered",
-    position: "top-[8%] -left-[10%]",
-    delay: 1.0,
-    floatDuration: 3.8,
-  },
-  {
-    id: "countries",
-    icon: Globe,
-    value: "4",
-    label: "Countries Served",
-    position: "bottom-[22%] -left-[12%]",
-    delay: 1.2,
-    floatDuration: 4.2,
-  },
-  {
-    id: "turnaround",
-    icon: Zap,
-    value: "14-Day",
-    label: "Avg. Turnaround",
-    position: "top-[35%] -right-[8%]",
-    delay: 1.4,
-    floatDuration: 3.5,
-  },
+  { id: "projects", icon: Briefcase, value: "50+", label: "Projects delivered", position: "top-[9%] -left-[10%]", delay: 1.0, floatDuration: 3.8 },
+  { id: "countries", icon: Globe, value: "04", label: "Markets reached", position: "bottom-[18%] -left-[13%]", delay: 1.2, floatDuration: 4.2 },
+  { id: "turnaround", icon: Zap, value: "14 days", label: "Average launch", position: "top-[43%] -right-[11%]", delay: 1.4, floatDuration: 3.5 },
 ];
 
 const HeroSection = () => {
@@ -45,259 +20,54 @@ const HeroSection = () => {
 
   useEffect(() => {
     const handle = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX / innerWidth - 0.5) * 14);
-      mouseY.set((e.clientY / innerHeight - 0.5) * 14);
+      mouseX.set((e.clientX / window.innerWidth - 0.5) * 12);
+      mouseY.set((e.clientY / window.innerHeight - 0.5) * 12);
     };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
-  }, []);
+  }, [mouseX, mouseY]);
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-background">
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-background pt-24 lg:pt-28">
+      <motion.div className="pointer-events-none absolute inset-0 opacity-60" style={{ backgroundImage: "linear-gradient(hsl(var(--cyan)/.035) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--cyan)/.035) 1px, transparent 1px)", backgroundSize: "72px 72px", x: smoothX, y: smoothY }} />
+      <div className="pointer-events-none absolute -left-40 top-24 h-[32rem] w-[32rem] rounded-full bg-cyan/10 blur-[130px]" />
+      <div className="pointer-events-none absolute right-0 top-1/3 h-[30rem] w-[30rem] rounded-full bg-navy/50 blur-[140px]" />
 
-      {/* Top rule */}
-      <motion.div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent z-10"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 0.2, duration: 1.2 }}
-      />
-
-      {/* Grid background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(hsl(var(--cyan)/0.02) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(var(--cyan)/0.02) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-            x: smoothX,
-            y: smoothY,
-          }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_65%_at_50%_50%,transparent_25%,hsl(var(--background))_100%)]" />
-      </div>
-
-      {/* Orb */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[500px] h-[500px] rounded-full bg-cyan/20 blur-[120px]"
-        />
-      </div>
-
-      {/* ── MAIN CONTENT ── */}
-      <div className="relative z-10 flex flex-col flex-1 pt-24 pb-0">
-
-        {/* Split layout */}
-        <div className="flex-1 flex items-center container mx-auto px-6 lg:px-14 gap-8 lg:gap-16">
-
-          {/* LEFT — Text column */}
-          <div className="flex-1 flex flex-col justify-center max-w-xl">
-
-            {/* Eyebrow */}
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.15 }}
-              className="flex items-center gap-2.5 mb-8"
-            >
-              <motion.span
-                className="w-1.5 h-1.5 rounded-full bg-cyan shrink-0"
-                animate={{ opacity: [1, 0.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-              <span className="text-[10px] text-muted-foreground/50 tracking-[0.3em] uppercase font-medium">
-                Digital Studio · Africa + Global
-              </span>
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pb-10 lg:px-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.8fr)] lg:gap-20">
+          <div className="max-w-3xl">
+            <motion.div initial={{ opacity: 0, x: -18 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .15 }} className="mb-8 flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-cyan shadow-[0_0_14px_hsl(var(--cyan))]" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground">Lagos / London / Worldwide</span>
             </motion.div>
-
-            {/* Headline */}
-            {[
-              { text: "Digital that moves", accent: false },
-              { text: "business forward.", accent: true },
-            ].map((line, i) => (
-              <div key={i} className="overflow-hidden">
-                <motion.p
-                  initial={{ y: "105%", opacity: 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
-                  transition={{
-                    delay: 0.3 + i * 0.1,
-                    type: "spring",
-                    stiffness: 70,
-                    damping: 14,
-                  }}
-                  className={`font-poppins font-black tracking-tight leading-[0.92] block
-                    text-[clamp(2.2rem,5.2vw,5.5rem)]
-                    ${line.accent
-                      ? "bg-gradient-to-r from-cyan via-cyan/70 to-cyan/35 bg-clip-text text-transparent"
-                      : "text-foreground"
-                    }`}
-                >
-                  {line.text}
-                </motion.p>
-              </div>
-            ))}
-
-            {/* Divider */}
-            <motion.div
-              className="w-8 h-px bg-cyan mt-8 mb-6"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
-              style={{ originX: 0 }}
-            />
-
-              {/* Core proposition — always rendered as real text for clarity and SEO */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.0 }}
-              className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md"
-            >
-              Strategy, design, and engineering for digital growth.
-            </motion.p>
-
-            {/* International badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.05 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan/10 border border-cyan/20 mb-8 w-fit"
-            >
-              <Globe className="w-3.5 h-3.5 text-cyan" />
-              <span className="text-[11px] text-cyan font-medium tracking-wide">
-                Senior-led delivery · Working worldwide
-              </span>
+            <div className="mb-8 overflow-hidden">
+              <motion.h1 initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: .28, duration: .75, ease: [0.22, 1, .36, 1] }} className="max-w-4xl text-[clamp(3.2rem,8vw,7.8rem)] font-semibold leading-[.88] tracking-[-.07em] text-foreground">
+                Digital that <span className="text-gradient">moves</span><br />business forward.
+              </motion.h1>
+            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .8 }} className="grid max-w-2xl gap-6 border-t border-border/80 pt-6 sm:grid-cols-[1fr_auto] sm:items-end">
+              <p className="max-w-md text-base leading-relaxed text-muted-foreground">Strategy, design, and engineering for ambitious businesses that need more from their digital presence.</p>
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.22em] text-cyan"><span className="h-px w-8 bg-cyan" />Independent by design</div>
             </motion.div>
-
-            {/* CTAs — single set, always visible */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.15 }}
-              className="flex flex-col sm:flex-row gap-3"
-            >
-              <GradientButton
-                href="/contact"
-                size="lg"
-                icon={<ArrowRight className="w-5 h-5" />}
-              >
-                Book a Project Call
-              </GradientButton>
-
-              <motion.a
-                href="/portfolio"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border/35 text-muted-foreground text-sm font-medium hover:border-cyan/40 hover:text-foreground transition-all"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Explore the Work
-                <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <ArrowUpRight className="w-4 h-4 group-hover:text-cyan transition-colors" />
-                </motion.span>
-              </motion.a>
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <GradientButton href="/contact" size="lg" icon={<ArrowRight className="h-5 w-5" />}>Book a project call</GradientButton>
+              <Link to="/portfolio" className="group inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-muted-foreground transition-all hover:border-cyan/50 hover:text-foreground">Explore the work <ArrowUpRight className="h-4 w-4 text-cyan transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </motion.div>
-
           </div>
 
-          {/* RIGHT — Hero image + floating cards (desktop only) */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.6, type: "spring", stiffness: 60, damping: 18 }}
-            className="hidden lg:block relative w-[440px] xl:w-[500px] shrink-0"
-          >
-            {/* Image frame */}
-            <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden">
-              <img
-                src={imageSrc(heroImage)}
-                alt="Nosyra Digital"
-                className="w-full h-full object-cover"
-              />
-              {/* Bottom overlay */}
-              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background/70 to-transparent pointer-events-none" />
+          <motion.div initial={{ opacity: 0, x: 32 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .5, duration: .8, ease: "easeOut" }} className="relative mx-auto w-full max-w-md lg:mr-8">
+            <div className="absolute -right-4 -top-4 z-20 rounded-full border border-cyan/30 bg-background px-4 py-2 font-mono text-[9px] uppercase tracking-[.22em] text-cyan">Signal / 001</div>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border bg-card shadow-[0_30px_80px_hsl(220_65%_4%/.45)]">
+              <img src={imageSrc(heroImage)} alt="Nosyra Digital creative studio" className="h-full w-full object-cover grayscale-[.15] transition-transform duration-700 hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-cyan/5" />
+              <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between border-t border-white/20 pt-4"><span className="font-mono text-[10px] uppercase tracking-[.22em] text-white/70">Build with intent</span><span className="text-2xl text-cyan">↗</span></div>
             </div>
-
-            {/* Floating stat cards */}
-            {floatingCards.map((card) => (
-              <motion.div
-                key={card.id}
-                initial={{ opacity: 0, scale: 0.75, y: 12 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: card.delay, type: "spring", stiffness: 100, damping: 15 }}
-                className={`absolute ${card.position} z-20`}
-              >
-                <motion.div
-                  animate={{ y: [0, -7, 0] }}
-                  transition={{
-                    duration: card.floatDuration,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-card/95 backdrop-blur-md border border-border/60 shadow-2xl shadow-black/30 min-w-[165px]"
-                >
-                  <div className="w-9 h-9 rounded-xl bg-cyan/15 flex items-center justify-center shrink-0 border border-cyan/25">
-                    <card.icon className="text-cyan" style={{ width: 17, height: 17 }} />
-                  </div>
-                  <div>
-                    <p className="text-[15px] font-poppins font-bold text-foreground leading-none">{card.value}</p>
-                    <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{card.label}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-
-            {/* Background glow */}
-            <div className="absolute -inset-10 bg-cyan/5 rounded-full blur-3xl -z-10" />
+            {floatingCards.map((card) => <motion.div key={card.id} initial={{ opacity: 0, scale: .8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: card.delay, type: "spring", stiffness: 100, damping: 15 }} className={`absolute ${card.position} z-20 hidden sm:block`}><motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: card.floatDuration, repeat: Infinity, ease: "easeInOut" }} className="flex min-w-[155px] items-center gap-3 rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-2xl backdrop-blur-md"><div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan/25 bg-cyan/10"><card.icon className="h-4 w-4 text-cyan" /></div><div><p className="font-mono text-sm font-medium text-foreground">{card.value}</p><p className="mt-0.5 text-[10px] leading-tight text-muted-foreground">{card.label}</p></div></motion.div></motion.div>)}
           </motion.div>
         </div>
-
-        {/* Ticker */}
-        <div className="border-t border-border/10 py-3">
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-12 whitespace-nowrap"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            >
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex gap-12">
-                  {[
-                    "NIGERIA",
-                    "GHANA",
-                    "UK",
-                    "CANADA",
-                    "USA",
-                    "WEB DESIGN",
-                    "E-COMMERCE",
-                    "INTERNATIONAL",
-                    "UI/UX DESIGN",
-                    "DIGITAL STUDIO",
-                    "WORLDWIDE",
-                  ].map((text) => (
-                    <span
-                      key={text}
-                      className="text-muted-foreground/18 font-medium text-[10px] tracking-[0.3em] flex items-center gap-12"
-                    >
-                      {text}
-                      <span className="text-cyan/20">·</span>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-
       </div>
+
+      <div className="relative z-10 overflow-hidden border-y border-border/60 py-4"><motion.div className="flex w-max gap-10 whitespace-nowrap" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 32, repeat: Infinity, ease: "linear" }}>{[...Array(2)].map((_, i) => <div key={i} className="flex gap-10">{["WEB DESIGN", "E-COMMERCE", "BRAND SYSTEMS", "DIGITAL PRODUCTS", "NIGERIA", "GHANA", "UK", "WORLDWIDE"].map((text) => <span key={`${i}-${text}`} className="flex items-center gap-10 font-mono text-[10px] tracking-[.25em] text-muted-foreground/70">{text}<span className="text-cyan">✳</span></span>)}</div>)}</motion.div></div>
     </section>
   );
 };

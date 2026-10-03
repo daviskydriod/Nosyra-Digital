@@ -22,42 +22,42 @@ const services = [
   {
     icon: Globe,
     title: "Custom Website Design",
-    description: "Custom-coded websites  no page builders, no templates. Built in React and optimized for speed, mobile, and search from day one.",
+    description: "Fast, custom websites built around your goals, content, and customers.",
     features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Custom CMS"],
     color: "from-cyan to-blue-500",
   },
   {
     icon: ShoppingCart,
     title: "E-Commerce Stores",
-    description: "Full e-commerce builds with local and international payment gateways (Paystack, Moneris) wired in, product and inventory management, and checkout flows tested end-to-end.",
+    description: "Online stores with secure payments, simple product management, and a clear path to checkout.",
     features: ["Payment Integration", "Inventory Management", "Order Tracking", "Analytics Dashboard"],
     color: "from-emerald-400 to-cyan",
   },
   {
     icon: Smartphone,
     title: "Mobile Optimization",
-    description: "Flawless experiences across all devices. We ensure your website looks and works perfectly on smartphones, tablets, and desktops.",
+    description: "Responsive experiences that work beautifully on phones, tablets, and desktops.",
     features: ["Mobile-First Design", "Touch Optimization", "Fast Performance", "Cross-Browser"],
     color: "from-purple-500 to-cyan",
   },
   {
     icon: Megaphone,
     title: "Digital Marketing",
-    description: "Targeted Facebook/Instagram ad strategy and organic content systems  built from real campaign data, not guesswork.",
+    description: "Campaigns and content built around your audience, offer, and real results.",
     features: ["SEO Strategy", "Social Media Ads", "Email Marketing", "Content Strategy"],
     color: "from-orange-400 to-cyan",
   },
   {
     icon: Palette,
     title: "Branding & Identity",
-    description: "Memorable brand identities that tell your story and build trust. Logos, color schemes, typography, and complete brand guidelines.",
+    description: "A clear visual identity with the logo, type, colour, and rules your team needs.",
     features: ["Logo Design", "Brand Guidelines", "Visual Identity", "Brand Strategy"],
     color: "from-pink-500 to-cyan",
   },
   {
     icon: Share2,
     title: "Social Media Design",
-    description: "Eye-catching social content that grows your audience and engagement. Templates, graphics, and complete social media kits.",
+    description: "Useful social content systems your team can use consistently.",
     features: ["Post Templates", "Story Designs", "Profile Graphics", "Content Calendar"],
     color: "from-indigo-500 to-cyan",
   },
@@ -68,25 +68,25 @@ const process = [
     step: 1,
     icon: Search,
     title: "Discovery",
-    description: "We dive deep into understanding your business, goals, and target audience.",
+    description: "We learn your business, audience, and goals.",
   },
   {
     step: 2,
     icon: PenTool,
     title: "Design",
-    description: "I design every visual myself, aligned to your brand from the first draft.",
+    description: "We turn the strategy into a clear visual direction.",
   },
   {
     step: 3,
     icon: Code,
     title: "Development",
-    description: "I build using React/TypeScript and modern deployment pipelines  the same stack used for VSL, Xpola, and THM Wellness.",
+    description: "We build with modern, reliable technology.",
   },
   {
     step: 4,
     icon: Rocket,
     title: "Launch",
-    description: "I deploy, test, and stay reachable for support after launch  not handed off to a separate team.",
+    description: "We launch, test, and stay available after launch.",
   },
 ];
 
@@ -141,7 +141,7 @@ const Services = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-poppins font-bold mb-6 max-w-4xl mx-auto"
           >
-            Digital systems that make your business <span className="text-gradient">easier to choose.</span>
+            Digital experiences that make your business easier to choose.
           </motion.h1>
           
           <motion.p
@@ -150,7 +150,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            From websites to commerce and client portals, one accountable process from strategy to launch.
+            From first conversation to launch, one clear process and one accountable team.
           </motion.p>
         </div>
       </section>
@@ -161,9 +161,9 @@ const Services = () => {
           <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan">What we do</p>
-              <h2 className="max-w-xl text-3xl font-poppins font-bold md:text-4xl">One studio for the whole digital system.</h2>
+              <h2 className="max-w-xl text-3xl font-poppins font-bold md:text-4xl">One studio for the work that matters.</h2>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Choose the capability you need now. We bring the right pieces together as the work grows.</p>
+            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Start with what you need now. Add the right pieces as you grow.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12">

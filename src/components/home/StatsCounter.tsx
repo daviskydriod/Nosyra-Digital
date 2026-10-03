@@ -10,25 +10,25 @@ const stats = [
     icon: Briefcase,
     value: 50,
     suffix: "+",
-    label: "Projects Delivered",
+    label: "Projects delivered",
   },
   {
     icon: Users,
     value: 4,
     suffix: "",
-    label: "Countries Served",
+    label: "Countries reached",
   },
   {
     icon: Clock,
     value: 14,
     suffix: "-Day",
-    label: "Avg. Turnaround",
+    label: "Average launch",
   },
   {
     icon: Award,
     value: 4.7,
     suffix: "★",
-    label: "Google Review Rating",
+    label: "Google rating",
   },
 ];
 
@@ -144,10 +144,10 @@ const StatsCounter = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-poppins font-bold text-foreground mb-4">
-            Numbers That <span className="text-gradient">Speak</span>
+            Proof in the numbers
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our track record of success reflects our commitment to delivering exceptional results for every client.
+            A snapshot of the work and trust built so far.
           </p>
         </motion.div>
 

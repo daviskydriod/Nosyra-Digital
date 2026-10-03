@@ -8,13 +8,13 @@ const CTASection = () => (
       <div className="max-w-4xl">
         <p className="text-xs uppercase tracking-[0.28em] text-cyan font-semibold mb-6">Start a conversation</p>
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-poppins font-bold leading-[1.02] mb-7">
-          Have a complex digital problem?
+          Need a clearer digital direction?
         </h2>
         <p className="text-lg md:text-xl text-secondary-foreground/70 max-w-2xl leading-relaxed mb-10">
-          Tell us what needs to change. We’ll help you identify the right digital next step—not give you a generic sales pitch.
+          Tell us where you are stuck. We will help you choose the right next step.
         </p>
         <Link to="/contact" className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-cyan text-primary-foreground font-semibold hover:bg-cyan-glow transition-colors">
-          Start a project conversation <ArrowRight className="w-5 h-5" aria-hidden="true" />
+          Talk about your project <ArrowRight className="w-5 h-5" aria-hidden="true" />
         </Link>
       </div>
     </div>
