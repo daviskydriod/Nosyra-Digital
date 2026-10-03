@@ -31,8 +31,8 @@
     --input: 214 28% 24%;
     --ring: 188 100% 49%;
     --radius: 0.875rem;
-    --gradient-navy-cyan: linear-gradient(120deg, hsl(var(--navy-deep)), hsl(var(--navy)) 52%, hsl(var(--cyan)));
-    --gradient-mesh: radial-gradient(ellipse at 15% 10%, hsl(var(--cyan) / .12), transparent 35%), radial-gradient(ellipse at 90% 70%, hsl(var(--navy) / .6), transparent 45%);
+    --gradient-navy-cyan: hsl(var(--navy));
+    --gradient-mesh: transparent;
     --shadow-glow: 0 0 60px hsl(var(--cyan) / .14);
     --shadow-card: 0 20px 60px hsl(220 65% 4% / .35);
     --sidebar-background: 218 48% 12%;
@@ -56,8 +56,8 @@
 @layer utilities {
   .font-poppins { font-family: 'Space Grotesk', sans-serif; }
   .font-mono { font-family: 'DM Mono', monospace; }
-  .text-gradient { @apply bg-clip-text text-transparent; background-image: linear-gradient(100deg, hsl(var(--foreground)), hsl(var(--cyan))); }
-  .text-gradient-navy { @apply bg-clip-text text-transparent; background-image: linear-gradient(100deg, hsl(var(--cyan)), hsl(var(--teal))); }
+  .text-gradient { color: hsl(var(--cyan)); }
+  .text-gradient-navy { color: hsl(var(--cyan)); }
   .glow-cyan { box-shadow: 0 0 24px hsl(var(--cyan) / .22); }
   .glow-cyan-lg { box-shadow: 0 0 40px hsl(var(--cyan) / .28), 0 0 100px hsl(var(--cyan) / .12); }
   .text-glow { text-shadow: 0 0 26px hsl(var(--cyan) / .32); }
@@ -70,9 +70,9 @@
 @layer components {
   .glass { @apply bg-card/80 backdrop-blur-xl border border-border/70; box-shadow: var(--shadow-card); }
   .glass-strong { @apply bg-card/95 backdrop-blur-2xl border border-border; box-shadow: var(--shadow-card); }
-  .editorial-rule { height: 1px; background: linear-gradient(90deg, hsl(var(--cyan)), hsl(var(--border)), transparent); }
+  .editorial-rule { height: 1px; background: hsl(var(--border)); }
   .gradient-border { position: relative; background: hsl(var(--card)); border-radius: var(--radius); }
-  .gradient-border::before { content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: calc(var(--radius) + 1px); background: linear-gradient(135deg, hsl(var(--cyan) / .55), transparent 45%, hsl(var(--navy))); }
+  .gradient-border::before { content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: calc(var(--radius) + 1px); background: hsl(var(--border)); }
 }
 
 ::-webkit-scrollbar { width: 8px; }
