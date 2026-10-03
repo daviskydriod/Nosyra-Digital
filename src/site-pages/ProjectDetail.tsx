@@ -1,5 +1,5 @@
 import { imageSrc } from "@/lib/image";
-import { useParams, Link } from "@/lib/navigation";
+import { usePathname, Link } from "@/lib/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/layout/Layout";
@@ -730,7 +730,11 @@ const SharedNav = ({
 // ROOT
 // ─────────────────────────────────────────────────────────────────────────────
 const ProjectDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  // The app is rendered through app/[[...slug]]/page.tsx, so Next's dynamic
+  // params are not passed into this client-side router. Read the final URL
+  // segment directly so /portfolio/:slug works on refresh and deep links.
+  const pathname = usePathname() || "";
+  const slug = pathname.split("/").filter(Boolean).at(-1) || "";
   const projectIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[projectIndex];
   const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
