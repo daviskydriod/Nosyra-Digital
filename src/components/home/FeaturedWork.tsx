@@ -1,261 +1,47 @@
 import { imageSrc } from "@/lib/image";
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Instagram } from "lucide-react";
 import { Link } from "@/lib/navigation";
-import { ArrowRight, ArrowUpRight, Instagram, LayoutGrid } from "lucide-react";
-import SectionHeading from "@/components/ui/SectionHeading";
 import { projects } from "@/data/projectsData";
 
-// Pick 2 web + 1 social for the featured section
-const webFeatured = projects.filter((p) => p.type === "web").slice(0, 2);
-const socialFeatured = projects.filter((p) => p.type === "social").slice(0, 1);
-const featured = [...webFeatured, ...socialFeatured];
-
-// ── Social card ──────────────────────────────────────────────────────────────
-const SocialCard = ({
-  project,
-  index,
-  isInView,
-}: {
-  project: (typeof projects)[0];
-  index: number;
-  isInView: boolean;
-}) => {
-  const [hovered, setHovered] = useState(false);
-  const gallery = (project as any).gallery ?? [project.image];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <Link to={`/portfolio/${project.slug}`}>
-        <div className="relative border-t border-border/40 py-6 lg:py-7 group cursor-pointer">
-          {/* Hover bg — warmer tone for social */}
-          <motion.div
-            className="absolute inset-0 bg-violet-500/[0.04] rounded-2xl pointer-events-none"
-            animate={{ opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 0.25 }}
-          />
-
-          <div className="relative flex flex-col sm:flex-row sm:items-center gap-5 px-2 lg:px-4">
-            {/* Index */}
-            <span className="hidden lg:block text-xs font-mono text-muted-foreground/35 w-7 shrink-0">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-
-            {/* Instagram-style triptych */}
-            <div className="relative w-full sm:w-48 lg:w-52 shrink-0">
-              <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden aspect-[4/3]">
-                {gallery.slice(0, 3).map((img: string, i: number) => (
-                  <div key={i} className="relative overflow-hidden bg-muted">
-                    <motion.img
-                      src={imageSrc(img)}
-                      alt=""
-                      className="w-full h-full object-cover"
-                      animate={{ scale: hovered ? 1.08 : 1 }}
-                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.04 }}
-                    />
-                  </div>
-                ))}
-              </div>
-              {/* Instagram badge */}
-              <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-br from-pink-500 via-rose-500 to-orange-400 flex items-center justify-center shadow-lg">
-                <Instagram className="w-3 h-3 text-white" />
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              {/* Badge */}
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gradient-to-r from-pink-500/20 to-orange-400/20 border border-pink-500/20 text-pink-400 uppercase tracking-wider">
-                  <LayoutGrid className="w-2.5 h-2.5" /> Social Media
-                </span>
-              </div>
-              <motion.h3
-                className="text-xl lg:text-2xl font-poppins font-bold text-foreground leading-tight mb-2"
-                animate={{ x: hovered ? 5 : 0 }}
-                transition={{ duration: 0.25 }}
-              >
-                {project.title}
-              </motion.h3>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-                {project.description}
-              </p>
-              {/* Platform pills */}
-              <div className="flex gap-2 mt-3">
-                {((project as any).platforms ?? []).map((p: string) => (
-                  <span
-                    key={p}
-                    className="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-muted/60 border border-border/50 text-muted-foreground"
-                  >
-                    {p}
-                  </span>
-                ))}
-                {(project as any).postsDelivered && (
-                  <span className="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400">
-                    {(project as any).postsDelivered}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Arrow */}
-            <motion.div
-              className="hidden sm:flex shrink-0 w-9 h-9 rounded-full border border-border items-center justify-center text-muted-foreground"
-              animate={{
-                borderColor: hovered ? "rgb(236 72 153)" : "hsl(var(--border))",
-                color: hovered ? "rgb(236 72 153)" : undefined,
-                rotate: hovered ? 45 : 0,
-                scale: hovered ? 1.1 : 1,
-              }}
-              transition={{ duration: 0.25 }}
-            >
-              <ArrowUpRight className="w-4 h-4" />
-            </motion.div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-};
-
-// ── Web row ──────────────────────────────────────────────────────────────────
-const WebRow = ({
-  project,
-  index,
-  isInView,
-}: {
-  project: (typeof projects)[0];
-  index: number;
-  isInView: boolean;
-}) => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <Link to={`/portfolio/${project.slug}`}>
-        <div className="relative border-t border-border/40 py-6 lg:py-7 group cursor-pointer">
-          <motion.div
-            className="absolute inset-0 bg-cyan/[0.04] rounded-2xl pointer-events-none"
-            animate={{ opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 0.25 }}
-          />
-
-          <div className="relative flex flex-col sm:flex-row sm:items-center gap-5 px-2 lg:px-4">
-            <span className="hidden lg:block text-xs font-mono text-muted-foreground/35 w-7 shrink-0">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-
-            <div className="relative w-full sm:w-48 lg:w-52 aspect-[16/9] sm:aspect-[4/3] rounded-xl overflow-hidden shrink-0 bg-muted">
-              <motion.img
-                src={imageSrc(project.image)}
-                alt={project.title}
-                className="w-full h-full object-cover"
-                animate={{ scale: hovered ? 1.08 : 1 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-cyan/20"
-                animate={{ opacity: hovered ? 1 : 0 }}
-                transition={{ duration: 0.25 }}
-              />
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <span className="text-xs font-medium text-cyan uppercase tracking-widest mb-1.5 block">
-                {project.category}
-              </span>
-              <motion.h3
-                className="text-xl lg:text-2xl font-poppins font-bold text-foreground leading-tight mb-2"
-                animate={{ x: hovered ? 5 : 0 }}
-                transition={{ duration: 0.25 }}
-              >
-                {project.title}
-              </motion.h3>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-                {project.description}
-              </p>
-            </div>
-
-            <motion.div
-              className="hidden sm:flex shrink-0 w-9 h-9 rounded-full border border-border items-center justify-center text-muted-foreground"
-              animate={{
-                borderColor: hovered ? "hsl(var(--cyan))" : "hsl(var(--border))",
-                color: hovered ? "hsl(var(--cyan))" : undefined,
-                rotate: hovered ? 45 : 0,
-                scale: hovered ? 1.1 : 1,
-              }}
-              transition={{ duration: 0.25 }}
-            >
-              <ArrowUpRight className="w-4 h-4" />
-            </motion.div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-};
-
-// ── Main component ───────────────────────────────────────────────────────────
 const FeaturedWork = () => {
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-80px" });
+  const web = projects.filter((p) => p.type === "web").slice(0, 3);
+  const social = projects.filter((p) => p.type === "social").slice(0, 1)[0];
+  const lead = web[0];
+  const secondary = web.slice(1);
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-cyan/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-navy/10 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
-      </div>
-
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <SectionHeading
-          badge="Selected work"
-          title="Digital experiences built to move businesses forward."
-          subtitle="A selection of websites, commerce platforms, and digital systems designed around real business problems."
-        />
-
-        <div ref={containerRef} className="mt-16">
-          <div className="flex flex-col">
-            {featured.map((project, index) =>
-              project.type === "social" ? (
-                <SocialCard key={project.id} project={project} index={index} isInView={isInView} />
-              ) : (
-                <WebRow key={project.id} project={project} index={index} isInView={isInView} />
-              )
-            )}
-            <div className="border-t border-border/40" />
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.55 }}
-            className="mt-10 text-center"
-          >
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-cyan text-primary-foreground rounded-full font-semibold hover:shadow-[0_0_30px_hsl(var(--cyan)/0.4)] hover:scale-105 transition-all duration-300 border-2 border-cyan hover:bg-transparent hover:text-cyan"
-            >
-              View All Projects
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
+    <section className="relative overflow-hidden border-b border-border/60 py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10">
+        <div className="mb-14 grid gap-6 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
+          <div><span className="font-mono text-[10px] uppercase tracking-[.25em] text-cyan">02 / Selected work</span><h2 className="mt-5 max-w-sm text-4xl font-semibold leading-[.94] tracking-[-.06em] text-foreground lg:text-6xl">Work that earns attention.</h2></div>
+          <div className="flex items-end justify-between gap-6 border-t border-border/60 pt-5"><p className="max-w-md text-sm leading-relaxed text-muted-foreground">A few digital systems built around real business problems — not decoration for decoration's sake.</p><Link to="/portfolio" className="hidden shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[.2em] text-cyan transition hover:gap-3 sm:flex">View all work <ArrowUpRight className="h-4 w-4" /></Link></div>
         </div>
+
+        <div className="grid gap-5 lg:grid-cols-12 lg:grid-rows-[auto_auto]">
+          <ProjectCard project={lead} index="01" className="lg:col-span-7 lg:row-span-2" />
+          {secondary.map((project, i) => <ProjectCard key={project.id} project={project} index={`0${i + 2}`} className="lg:col-span-5" compact />)}
+          {social && <SocialCard project={social} />}
+        </div>
+        <Link to="/portfolio" className="mt-8 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.2em] text-cyan sm:hidden">View all work <ArrowUpRight className="h-4 w-4" /></Link>
       </div>
     </section>
   );
+};
+
+const ProjectCard = ({ project, index, className, compact = false }: { project: (typeof projects)[0]; index: string; className?: string; compact?: boolean }) => (
+  <Link to={`/portfolio/${project.slug}`} className={`group ${className ?? ""}`}>
+    <motion.article whileHover={{ y: -5 }} transition={{ duration: .25 }} className={`relative h-full overflow-hidden border border-border bg-card ${compact ? "min-h-[240px]" : "min-h-[460px]"}`}>
+      <img src={imageSrc(project.image)} alt={project.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+      <div className="absolute inset-0 bg-black/55" />
+      <div className="relative flex h-full min-h-[inherit] flex-col justify-between p-5 lg:p-7"><div className="flex items-start justify-between font-mono text-[10px] uppercase tracking-[.2em] text-white/60"><span>{index} / {project.category}</span><ArrowUpRight className="h-4 w-4 text-cyan transition group-hover:translate-x-1 group-hover:-translate-y-1" /></div><div><h3 className={`${compact ? "text-2xl" : "text-4xl lg:text-5xl"} max-w-xl font-semibold leading-[.94] tracking-[-.05em] text-white`}>{project.title}</h3><p className="mt-3 max-w-md text-sm leading-relaxed text-white/65">{project.description}</p><div className="mt-5 flex flex-wrap gap-2">{project.tags.slice(0, 3).map((tag) => <span key={tag} className="border border-white/20 px-2 py-1 text-[10px] uppercase tracking-wider text-white/70">{tag}</span>)}</div></div></div>
+    </motion.article>
+  </Link>
+);
+
+const SocialCard = ({ project }: { project: (typeof projects)[0] }) => {
+  const gallery = (project as any).gallery ?? [project.image];
+  return <Link to={`/portfolio/${project.slug}`} className="group lg:col-span-5"><motion.article whileHover={{ y: -5 }} className="grid h-full min-h-[240px] grid-cols-[1.1fr_.9fr] overflow-hidden border border-border bg-card"><div className="grid grid-cols-2 gap-1 overflow-hidden bg-muted">{gallery.slice(0, 2).map((img: string, i: number) => <img key={i} src={imageSrc(img)} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />)}</div><div className="flex flex-col justify-between p-5"><div className="flex items-center justify-between"><Instagram className="h-4 w-4 text-pink-400" /><ArrowUpRight className="h-4 w-4 text-cyan" /></div><div><span className="font-mono text-[10px] uppercase tracking-[.18em] text-pink-400">Social / Content kit</span><h3 className="mt-2 text-xl font-semibold leading-tight tracking-[-.04em] text-foreground">{project.title}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{project.description}</p></div></div></motion.article></Link>;
 };
 
 export default FeaturedWork;

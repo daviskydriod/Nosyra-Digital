@@ -42,12 +42,6 @@ const GradientButton = ({
         {children}
         {icon}
       </span>
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 hover:opacity-100"
-        initial={{ x: "-100%" }}
-        whileHover={{ x: "100%" }}
-        transition={{ duration: 0.5 }}
-      />
     </>
   );
 
