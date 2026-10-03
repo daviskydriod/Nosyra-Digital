@@ -16,6 +16,7 @@ import africaTomorrowPreview from "@/assets/portfolio-sites/africa-tomorrow-og.p
 import easeGracePreview from "@/assets/portfolio-sites/ease-grace.webp";
 import woodCoffiePreview from "@/assets/portfolio-sites/wood-coffie.webp";
 import samanadePreview from "@/assets/portfolio-sites/samanade-crd.webp";
+import mandariConstructionPreview from "@/assets/portfolio-sites/mandari-construction.webp";
 
 // ── Social Media Assets ──────────────────────────────────────────────────────
 import joyaboSm1 from "@/assets/Joyabo (1).jpeg";
@@ -395,6 +396,26 @@ export const projects = [
     year: "2026",
     duration: "4 weeks",
     services: ["Web Design", "Content Strategy", "Application Management System", "UI/UX Design"],
+  },
+
+  {
+    id: 26,
+    type: "web" as const,
+    slug: "mandari-construction-supplies",
+    title: "Mandari Construction Supplies",
+    category: "Construction Supplies",
+    image: mandariConstructionPreview,
+    link: "https://mandariconstructionsupplies.com/",
+    description: "A Ghana-wide construction supplies platform for materials, chemicals, formworks, and rentals.",
+    fullDescription:
+      "Mandari Construction Supplies is a Ghanaian construction supply partner offering hardware, waterproofing solutions, construction chemicals, concrete admixtures, formworks, and rentals. We shaped the website around a clear product discovery and quote journey, helping contractors and developers find trusted supplies and request pricing with confidence.",
+    tags: ["Construction", "E-Commerce", "Ghana", "Product Catalogue", "Web Design"],
+    challenge: "Make a broad construction supply catalogue easy to browse while building trust with contractors, developers, and procurement teams.",
+    solution: "Created a product-led digital storefront with clear category navigation, featured ISONEM products, quote-focused calls to action, and trust signals for Ghana-wide delivery.",
+    results: ["Clearer route from product discovery to quote request", "Stronger presentation for Mandari's construction supply range"],
+    year: "2026",
+    duration: "5 weeks",
+    services: ["E-Commerce Strategy", "Web Design", "Product Catalogue", "Development"],
   },
 
   {

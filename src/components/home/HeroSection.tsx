@@ -117,9 +117,8 @@ const HeroSection = () => {
 
             {/* Headline */}
             {[
-              { text: "Digital experiences", accent: false },
-              { text: "that move ambitious", accent: false },
-              { text: "businesses forward.", accent: true },
+              { text: "Digital that moves", accent: false },
+              { text: "business forward.", accent: true },
             ].map((line, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.p
@@ -159,7 +158,7 @@ const HeroSection = () => {
               transition={{ delay: 1.0 }}
               className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md"
             >
-              Strategy, design, and engineering for clear, credible digital experiences.
+              Strategy, design, and engineering for digital growth.
             </motion.p>
 
             {/* International badge */}
