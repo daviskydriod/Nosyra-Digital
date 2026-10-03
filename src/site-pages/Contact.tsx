@@ -33,18 +33,18 @@ const contactInfo = [
 const reasons = [
   {
     icon: Zap,
-    title: "Quick Response",
-    description: "We respond to all inquiries within 24 hours, often much sooner."
+    title: "A considered reply",
+    description: "We reply within one working day with a useful next step, not a template."
   },
   {
     icon: Target,
-    title: "Tailored Solutions",
-    description: "Every project gets a customized approach based on your unique needs."
+    title: "Right-sized scope",
+    description: "We recommend the smallest scope that can solve the real problem."
   },
   {
     icon: MessageCircle,
-    title: "Clear Communication",
-    description: "We keep you updated every step of the way with transparent communication."
+    title: "Direct communication",
+    description: "You always know what is happening, what is next, and what we need from you."
   }
 ];
 
@@ -104,7 +104,7 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }} 
             className="inline-block px-3 sm:px-4 py-1.5 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20"
           >
-            Get in Touch
+            Start with the brief
           </motion.span>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }} 
@@ -112,7 +112,7 @@ const Contact = () => {
             transition={{ delay: 0.1 }} 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold mb-4 sm:mb-6 px-2"
           >
-            Let's Build Something <span className="text-gradient">Amazing</span>
+            Let’s make the next move <span className="text-cyan">clear.</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }} 
@@ -120,7 +120,7 @@ const Contact = () => {
             transition={{ delay: 0.2 }} 
             className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4"
           >
-            Ready to transform your digital presence? We'd love to hear from you.
+            Tell us what is changing in the business. We’ll help define the digital work that should follow.
           </motion.p>
         </div>
       </section>
@@ -134,7 +134,7 @@ const Contact = () => {
             <AnimatedSection animation="fadeLeft">
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-2xl sm:text-3xl font-poppins font-bold mb-6 sm:mb-8">
-                  Contact <span className="text-gradient">Information</span>
+                  Ways to reach <span className="text-cyan">the studio</span>
                 </h2>
 
                 {contactInfo.map((info, index) => (
@@ -213,7 +213,7 @@ const Contact = () => {
             <AnimatedSection animation="fadeRight">
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-2xl sm:text-3xl font-poppins font-bold mb-6 sm:mb-8">
-                  Why <span className="text-gradient">Reach Out</span>?
+                  Why start <span className="text-cyan">here</span>?
                 </h2>
                 {reasons.map((reason, index) => (
                   <motion.div
@@ -251,8 +251,8 @@ const Contact = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-10">
             <p className="text-xs uppercase tracking-[0.28em] text-cyan font-semibold mb-4">Start with the brief</p>
-            <h2 className="text-3xl sm:text-4xl font-poppins font-bold mb-4">Tell us what needs to change.</h2>
-            <p className="text-muted-foreground">Share the essentials. We’ll recommend the right next step.</p>
+            <h2 className="text-3xl sm:text-4xl font-poppins font-bold mb-4">Tell us what needs to become clearer.</h2>
+            <p className="text-muted-foreground">Share the essentials. We’ll come back with the right next step and a sensible scope.</p>
           </div>
           <form onSubmit={handleBriefSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl">
             {[
@@ -267,26 +267,26 @@ const Contact = () => {
               </label>
             ))}
             <label className="space-y-2 text-sm font-medium">
-              What do you need help with?
+              What should we work on?
               <select name="need" required className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground">
                 <option value="">Choose one</option><option>Website or redesign</option><option>E-commerce</option><option>Booking or client portal</option><option>Brand and digital strategy</option><option>Growth and optimisation</option>
               </select>
             </label>
             <label className="space-y-2 text-sm font-medium">
-              Desired launch window
+              When would you like to move?
               <select name="timeline" required className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground">
                 <option value="">Choose one</option><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Exploring</option>
               </select>
             </label>
             <label className="space-y-2 text-sm font-medium md:col-span-2">
-              Approximate investment range
+              What range are you working with?
               <select name="budget" required className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground">
                 <option value="">Choose one</option><option>Under $500</option><option>$500–$1,500</option><option>$1,500–$5,000</option><option>$5,000+</option><option>Not sure yet</option>
               </select>
             </label>
             <div className="md:col-span-2 flex items-center justify-between gap-4 flex-wrap">
               <p className="text-xs text-muted-foreground">Your details are used only to respond to this enquiry.</p>
-              <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-3 font-semibold text-primary-foreground hover:bg-cyan-glow transition-colors">Send project brief <ArrowRight className="w-4 h-4" /></button>
+              <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-3 font-semibold text-primary-foreground hover:bg-cyan-glow transition-colors">Send the brief <ArrowRight className="w-4 h-4" /></button>
             </div>
           </form>
         </div>
@@ -345,10 +345,10 @@ const Contact = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-4 sm:mb-6 px-2">
-              Have a <span className="text-gradient">complex digital problem</span>?
+              Have a <span className="text-cyan">clear next move</span>?
             </h2>
             <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Tell us what needs to change. We’ll recommend the right next step for your business.
+              Tell us what needs to become clearer. We’ll recommend the right next step for your business.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <motion.a

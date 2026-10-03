@@ -21,43 +21,43 @@ import {
 const services = [
   {
     icon: Globe,
-    title: "Custom Website Design",
-    description: "Fast, custom websites built around your goals, content, and customers.",
+    title: "Websites with a point of view",
+    description: "Clear, responsive websites built around your offer, your audience, and the action you want people to take.",
     features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Custom CMS"],
     color: "from-cyan to-blue-500",
   },
   {
     icon: ShoppingCart,
-    title: "E-Commerce Stores",
-    description: "Online stores with secure payments, simple product management, and a clear path to checkout.",
+    title: "Commerce that feels simple",
+    description: "Thoughtful storefronts that make products easy to discover, trust, and buy.",
     features: ["Payment Integration", "Inventory Management", "Order Tracking", "Analytics Dashboard"],
     color: "from-emerald-400 to-cyan",
   },
   {
     icon: Smartphone,
-    title: "Mobile Optimization",
-    description: "Responsive experiences that work beautifully on phones, tablets, and desktops.",
+    title: "Performance & responsive design",
+    description: "Fast, usable experiences that hold up across the screens your customers actually use.",
     features: ["Mobile-First Design", "Touch Optimization", "Fast Performance", "Cross-Browser"],
     color: "from-purple-500 to-cyan",
   },
   {
     icon: Megaphone,
-    title: "Digital Marketing",
-    description: "Campaigns and content built around your audience, offer, and real results.",
+    title: "Growth & optimisation",
+    description: "SEO, analytics, and focused improvements tied to the goals that matter.",
     features: ["SEO Strategy", "Social Media Ads", "Email Marketing", "Content Strategy"],
     color: "from-orange-400 to-cyan",
   },
   {
     icon: Palette,
-    title: "Branding & Identity",
-    description: "A clear visual identity with the logo, type, colour, and rules your team needs.",
+    title: "Brand systems",
+    description: "A practical identity system that gives your team a consistent way to show up.",
     features: ["Logo Design", "Brand Guidelines", "Visual Identity", "Brand Strategy"],
     color: "from-pink-500 to-cyan",
   },
   {
     icon: Share2,
-    title: "Social Media Design",
-    description: "Useful social content systems your team can use consistently.",
+    title: "Social content systems",
+    description: "Useful content kits that make regular publishing easier and more recognisable.",
     features: ["Post Templates", "Story Designs", "Profile Graphics", "Content Calendar"],
     color: "from-indigo-500 to-cyan",
   },
@@ -132,7 +132,7 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-cyan bg-cyan/10 rounded-full border border-cyan/20"
           >
-            Our Capabilities
+            What we do
           </motion.span>
           
           <motion.h1
@@ -150,7 +150,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            From first conversation to launch, one clear process and one accountable team.
+            From first brief to launch, one clear process and one accountable team.
           </motion.p>
         </div>
       </section>
@@ -161,9 +161,9 @@ const Services = () => {
           <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan">What we do</p>
-              <h2 className="max-w-xl text-3xl font-poppins font-bold md:text-4xl">One studio for the work that matters.</h2>
+              <h2 className="max-w-xl text-3xl font-poppins font-bold md:text-4xl">One studio for the work that moves the business.</h2>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Start with what you need now. Add the right pieces as you grow.</p>
+            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Start with the problem in front of you. Add the right pieces as the system grows.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12">
@@ -211,8 +211,8 @@ const Services = () => {
           <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
             <div className="lg:sticky lg:top-28 lg:self-start">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-cyan">Our process</p>
-              <h2 className="max-w-md text-4xl font-poppins font-bold leading-tight md:text-5xl">Clarity at every stage.</h2>
-              <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">A calm, accountable path from the first conversation to a digital system your team can use with confidence.</p>
+              <h2 className="max-w-md text-4xl font-poppins font-bold leading-tight md:text-5xl">No black box. No handoff maze.</h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">A focused path from first conversation to a system your team can use with confidence.</p>
               <div className="mt-8 flex items-center gap-3 text-sm font-semibold text-foreground"><span className="h-px w-10 bg-cyan" /> Strategy before screens</div>
             </div>
 
@@ -246,9 +246,9 @@ const Services = () => {
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <SectionHeading
-            badge="Tech Stack"
-            title="The tools serve the outcome"
-            subtitle="The stack stays practical, fast, and fit for the job."
+            badge="Working stack"
+            title="The stack stays in service of the work"
+            subtitle="We choose practical tools that keep the experience fast, maintainable, and ready to grow."
           />
 
           <div className="mt-12 overflow-hidden">
@@ -282,13 +282,13 @@ const Services = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-6">
-              Have a <span className="text-gradient">complex digital problem</span>?
+              Have a <span className="text-cyan">clear next move</span>?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help bring your vision to life.
+              Let’s talk through the problem, the opportunity, and the right scope.
             </p>
             <GradientButton href="/contact" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-              Get a Free Quote
+              Start with a brief
             </GradientButton>
           </AnimatedSection>
         </div>

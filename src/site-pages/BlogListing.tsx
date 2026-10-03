@@ -168,7 +168,7 @@ const BlogListing: React.FC = () => {
             <AnimatedSection>
               <div className="flex items-center gap-2 mb-6">
                 <Sparkles className="w-5 h-5 text-cyan" />
-                <span className="text-sm font-medium text-cyan">Featured Article</span>
+                <span className="text-sm font-medium text-cyan">Featured thinking</span>
               </div>
               
               <Link to={`/blog/${featuredPost.slug}`}>
@@ -222,14 +222,14 @@ const BlogListing: React.FC = () => {
       <section className="py-24 relative">
         <div className="container mx-auto px-4 lg:px-8">
           <SectionHeading
-            badge="Latest Posts"
-            title={searchTerm ? "Search Results" : "Recent Articles"}
-            subtitle={searchTerm ? `Found ${regularPosts.length} articles` : "Ideas for building better digital experiences."}
+            badge="Latest thinking"
+            title={searchTerm ? "Search Results" : "Ideas for the next move"}
+            subtitle={searchTerm ? `Found ${regularPosts.length} articles` : "Practical notes on building clearer digital experiences and stronger businesses."}
           />
 
           {regularPosts.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-muted-foreground text-lg">No articles found. Try adjusting your search or filters.</p>
+              <p className="text-muted-foreground text-lg">No stories match that search yet. Try another phrase.</p>
             </div>
           ) : (
             <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">

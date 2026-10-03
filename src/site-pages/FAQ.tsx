@@ -50,9 +50,9 @@ const FAQ = () => {
         <div className="absolute inset-0 bg-gradient-mesh" />
         <div className="container mx-auto relative z-10">
           <SectionHeading
-            badge="FAQ"
-            title="Your Questions Answered"
-            subtitle="Everything you need to know before getting started."
+            badge="Before we start"
+            title="The useful answers, upfront"
+            subtitle="The practical details behind scope, timing, payment, and working together."
           />
         </div>
       </section>
@@ -62,7 +62,7 @@ const FAQ = () => {
           <FAQAccordion items={faqs} />
 
           <div className="text-center mt-16">
-            <p className="text-muted-foreground mb-6">Still have a question?</p>
+            <p className="text-muted-foreground mb-6">Still deciding what you need?</p>
             <GradientButton href="/contact" size="lg">
               Get in Touch
             </GradientButton>

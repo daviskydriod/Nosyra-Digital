@@ -24,9 +24,9 @@ const TestimonialsSection = () => {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <SectionHeading
-          badge="Client feedback"
-          title="What clients say"
-          subtitle="Clear words from people we have worked with."
+          badge="Proof from the work"
+          title="Built together. Remembered by clients."
+          subtitle="A few words from the people who trusted us with the next stage of their business."
         />
 
         <div className="mt-16 overflow-hidden">

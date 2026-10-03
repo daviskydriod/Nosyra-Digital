@@ -55,9 +55,9 @@ const Process = () => {
         <div className="absolute inset-0 bg-gradient-mesh" />
         <div className="container mx-auto relative z-10">
           <SectionHeading
-            badge="How We Work"
-            title="A Process Built for Clarity"
-            subtitle="No surprises, no missed handoffs — here's exactly what happens at each stage, and what's needed from you."
+            badge="How the work moves"
+            title="A clear path from question to launch"
+            subtitle="No black box and no missed handoffs. Here is what happens at each stage, and what we need from you."
           />
         </div>
       </section>
