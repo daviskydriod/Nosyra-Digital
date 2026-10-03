@@ -1,7 +1,7 @@
 import { imageSrc } from "@/lib/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import nosyraLogo from "@/assets/nosyra-logo.png";
+import nosyraLogo from "@/assets/nosyra-logo-cropped.png";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -33,7 +33,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
             <motion.img
               src={imageSrc(nosyraLogo)}
               alt="Nosyra Digital"
-              className="w-40 md:w-52"
+              className="w-48 md:w-64"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
