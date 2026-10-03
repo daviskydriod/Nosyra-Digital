@@ -9,7 +9,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen bg-background cursor-custom">
+    <div className="min-h-screen bg-background">
       <Header />
       <main>{children}</main>
       <Footer />
