@@ -32,12 +32,20 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => setIsMobileMenuOpen(false), [location]);
+  useEffect(() => setIsMobileMenuOpen(false), [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -68,7 +76,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="col-start-3 inline-flex h-11 w-11 shrink-0 items-center justify-self-end rounded-xl border-2 border-foreground/15 bg-white text-foreground shadow-sm transition-colors hover:border-cyan hover:bg-muted xl:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
+          <button onClick={() => setIsMobileMenuOpen((open) => !open)} className="col-start-3 inline-flex h-11 w-11 shrink-0 items-center justify-self-end rounded-xl border-2 border-foreground/15 bg-white text-foreground shadow-sm transition-colors hover:border-cyan hover:bg-muted xl:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </nav>

@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import CustomCursor from "../ui/CustomCursor";
 import WhatsAppButton from "../ui/WhatsAppButton";
 
 interface LayoutProps {
@@ -10,8 +9,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen bg-background cursor-custom">
-      <CustomCursor />
+    <div className="min-h-screen bg-background">
       <Header />
       <main>{children}</main>
       <Footer />

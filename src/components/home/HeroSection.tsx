@@ -1,53 +1,40 @@
 import { imageSrc } from "@/lib/image";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, CircleDot, MoveUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Sparkles } from "lucide-react";
 import { Link } from "@/lib/navigation";
 import GradientButton from "@/components/ui/GradientButton";
 import heroImage from "@/assets/hero-main.png";
 
-const HeroSection = () => {
-  return (
-    <section className="relative overflow-hidden border-b border-border/60 pt-28 lg:pt-36">
-      <div className="pointer-events-none absolute right-[8%] top-28 h-56 w-56 rounded-full border border-cyan/10" />
-      <div className="relative mx-auto max-w-7xl px-5 pb-16 lg:px-10 lg:pb-24">
-        <div className="mb-10 flex items-center justify-between gap-6 border-b border-border/60 pb-4 font-mono text-[10px] uppercase tracking-[.24em] text-muted-foreground">
-          <span className="flex items-center gap-2 text-cyan"><CircleDot className="h-3 w-3" /> Independent digital studio</span>
-          <span className="hidden sm:block">Lagos · London · Worldwide</span>
-        </div>
-
-        <div className="grid gap-10 lg:grid-cols-[1.08fr_.92fr] lg:items-end lg:gap-20">
-          <div>
-            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              We make complex businesses easier to understand, trust, and choose.
-            </motion.p>
-            <div className="overflow-hidden">
-              <motion.h1 initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: .8, ease: [0.22, 1, .36, 1] }} className="max-w-4xl text-[clamp(3.8rem,9vw,9.5rem)] font-semibold leading-[.82] tracking-[-.08em] text-foreground">
-                Make the next<br /><span className="text-cyan">move obvious.</span>
-              </motion.h1>
-            </div>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .55 }} className="mt-10 flex flex-col gap-5 border-t border-border/60 pt-6 sm:flex-row sm:items-end sm:justify-between">
-              <p className="max-w-md text-base leading-relaxed text-muted-foreground">Strategy, design, and engineering for ambitious businesses that need a sharper digital presence.</p>
-              <span className="font-mono text-[10px] uppercase tracking-[.22em] text-cyan">01 / 04 — Positioning first</span>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .7 }} className="mt-8 flex flex-wrap gap-3">
-              <GradientButton href="/contact" size="lg" icon={<ArrowRight className="h-5 w-5" />}>Start a project</GradientButton>
-              <Link to="/portfolio" className="group inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-muted-foreground transition hover:border-cyan/50 hover:text-foreground">See selected work <ArrowUpRight className="h-4 w-4 text-cyan transition group-hover:translate-x-1 group-hover:-translate-y-1" /></Link>
-            </motion.div>
-          </div>
-
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .35, duration: .8 }} className="relative lg:pb-4">
-            <div className="absolute -left-5 top-8 z-10 hidden w-28 -rotate-6 border border-cyan/30 bg-background/90 p-3 font-mono text-[9px] uppercase tracking-[.16em] text-cyan shadow-xl backdrop-blur sm:block">Built with intent<br /><span className="mt-2 block text-foreground/50">Signal 001</span></div>
-            <div className="relative ml-auto max-w-md overflow-hidden border border-border bg-card shadow-[0_30px_90px_hsl(220_65%_4%/.5)] lg:max-w-none">
-              <div className="aspect-[5/6] overflow-hidden"><img src={imageSrc(heroImage)} alt="Nosyra Digital creative studio" className="h-full w-full object-cover grayscale-[.12] transition duration-700 hover:scale-105" /></div>
-              <div className="grid grid-cols-[1fr_auto] items-center gap-4 border-t border-border/60 px-5 py-4"><span className="font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground">Digital systems / 2026</span><MoveUpRight className="h-5 w-5 text-cyan" /></div>
-            </div>
-            <div className="mt-4 flex items-center justify-between border-b border-border/60 pb-4 font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground"><span>50+ launches</span><span>04 markets</span><span>14-day average</span></div>
-          </motion.div>
-        </div>
+const HeroSection = () => (
+  <section className="relative overflow-hidden bg-white pt-32 lg:pt-40">
+    <div className="pointer-events-none absolute -right-40 top-16 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,hsl(var(--cyan)/.14),transparent_65%)]" />
+    <div className="pointer-events-none absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-[radial-gradient(circle,hsl(250_90%_70%/.10),transparent_68%)]" />
+    <div className="relative mx-auto max-w-7xl px-5 pb-20 lg:px-10 lg:pb-28">
+      <div className="mb-10 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-muted-foreground">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-2 shadow-sm"><Sparkles className="h-3.5 w-3.5 text-cyan" /> Independent digital studio</span>
+        <span>Lagos · London · Worldwide</span>
       </div>
-      <div className="overflow-hidden border-t border-border/60 py-4"><motion.div className="flex w-max gap-12 whitespace-nowrap" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }}>{[...Array(2)].map((_, i) => <div key={i} className="flex gap-12 font-mono text-[10px] uppercase tracking-[.24em] text-muted-foreground/70">{["Brand systems", "Web experiences", "Commerce", "Digital products", "Nigeria", "Worldwide"].map((item) => <span key={`${i}-${item}`} className="flex items-center gap-12">{item}<b className="text-cyan">✳</b></span>)}</div>)}</motion.div></div>
-    </section>
-  );
-};
+      <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
+        <div>
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6 max-w-lg text-lg leading-relaxed text-muted-foreground">We help ambitious businesses turn complicated ideas into clear, credible digital experiences.</motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .1 }} className="max-w-4xl text-[clamp(3.5rem,8vw,7.8rem)] font-semibold leading-[.9] tracking-[-.08em] text-foreground">Make the next <span className="text-cyan">move obvious.</span></motion.h1>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="mt-10 flex flex-wrap gap-3">
+            <GradientButton href="/contact" size="lg" icon={<ArrowRight className="h-5 w-5" />}>Start a project</GradientButton>
+            <Link to="/portfolio" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition hover:border-cyan hover:shadow-md">See selected work <ArrowUpRight className="h-4 w-4 text-cyan" /></Link>
+          </motion.div>
+          <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-border pt-5 text-sm">
+            {[['50+', 'launches'], ['04', 'markets'], ['14-day', 'average']].map(([value, label]) => <div key={label}><p className="text-xl font-semibold tracking-tight text-foreground">{value}</p><p className="mt-1 text-muted-foreground">{label}</p></div>)}
+          </div>
+        </div>
+        <motion.div initial={{ opacity: 0, scale: .96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: .2, duration: .7 }} className="relative mx-auto w-full max-w-[30rem] lg:max-w-none">
+          <div className="absolute -left-4 top-10 z-10 rounded-2xl border border-border bg-white px-4 py-3 text-xs font-semibold text-foreground shadow-xl sm:-left-8"><span className="mb-1 block text-cyan">Signal 001</span>Built with intent</div>
+          <div className="overflow-hidden rounded-[2rem] border border-border bg-white p-2 shadow-[0_30px_80px_hsl(222_47%_11%/.14)]"><div className="overflow-hidden rounded-[1.5rem] bg-muted"><img src={imageSrc(heroImage)} alt="Nosyra Digital creative studio" className="aspect-[4/5] h-full w-full object-cover transition duration-700 hover:scale-105" /></div></div>
+          <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground"><span className="inline-flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-cyan" /> Digital systems / 2026</span><span className="inline-flex items-center gap-1"><Check className="h-3.5 w-3.5 text-cyan" /> Strategy first</span></div>
+        </motion.div>
+      </div>
+    </div>
+    <div className="border-y border-border bg-muted/40 py-4"><div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-x-10 gap-y-2 px-5 text-xs font-medium text-muted-foreground lg:px-10"><span>Brand systems</span><span>Web experiences</span><span>Commerce</span><span>Digital products</span><span>Growth systems</span></div></div>
+  </section>
+);
 
 export default HeroSection;

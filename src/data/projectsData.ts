@@ -12,7 +12,7 @@ import maybeenHero from "@/assets/maybeen-hero.png";
 import handygidiHero from "@/assets/handygidi-hero.png";
 import micdebHero from "@/assets/micdeb-hero.png";
 import joyaboHero from "@/assets/joyabo-hero.png";
-import woodCoffiePreview from "@/assets/portfolio-sites/wood-coffie.webp";
+import woodCoffiePreview from "@/assets/portfolio-sites/wood-coffie-hero.jpg";
 import mandariLive from "@/assets/portfolio-sites/live/mandari-construction-supplies.webp";
 import africaTomorrowLive from "@/assets/portfolio-sites/live/africa-tomorrow.webp";
 import easeGraceLive from "@/assets/portfolio-sites/live/ease-n-grace-autos.webp";
