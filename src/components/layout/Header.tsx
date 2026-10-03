@@ -4,7 +4,7 @@ import { Link, useLocation } from "@/lib/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/nosyra-logo.png";
+import logo from "@/assets/nosyra-logo-cropped.png";
 
 const navItems = [
   { name: "Work", path: "/portfolio" },
@@ -41,11 +41,11 @@ const Header = () => {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.55, ease: "easeOut" }}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl z-50 rounded-full border transition-all duration-300 ${isScrolled ? "bg-card/95 border-cyan/20 shadow-[0_12px_40px_hsl(220_65%_4%/.35)]" : "bg-card/70 border-border/60"} backdrop-blur-xl`}
+        className={`fixed top-3 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-6xl z-50 rounded-2xl border transition-all duration-300 ${isScrolled ? "bg-white/95 border-border shadow-[0_12px_40px_hsl(222_47%_11%/.10)]" : "bg-white/90 border-border/80 shadow-[0_8px_30px_hsl(222_47%_11%/.06)]"} backdrop-blur-xl`}
       >
         <nav className="flex items-center justify-between px-3 py-2.5 md:px-4">
           <Link to="/" className="group flex items-center gap-2.5 pl-1">
-            <img src={imageSrc(logo)} alt="Nosyra Digital" className="h-8 md:h-9 w-auto transition-transform duration-300 group-hover:scale-105" />
+            <img src={imageSrc(logo)} alt="Nosyra Digital" className="h-9 w-auto max-w-[148px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:max-w-[170px]" />
             <span className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.24em] text-muted-foreground/70">Digital studio</span>
           </Link>
 
@@ -68,7 +68,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="rounded-full p-2 text-foreground hover:bg-muted lg:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="rounded-xl border border-border p-2 text-foreground transition-colors hover:bg-muted lg:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </nav>
@@ -77,7 +77,7 @@ const Header = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 lg:hidden" id="mobile-navigation" role="dialog" aria-label="Mobile navigation" aria-modal="true">
-            <div className="absolute inset-0 bg-background/95 px-6 pt-28 backdrop-blur-2xl">
+            <div className="absolute inset-0 overflow-y-auto bg-white/98 px-6 pb-10 pt-28 backdrop-blur-2xl">
               <div className="editorial-rule mb-8" />
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">Navigate / 01—06</p>
               <div className="mt-6 flex flex-col">

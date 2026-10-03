@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
-import logo from "@/assets/nosyra-logo.png";
+import logo from "@/assets/nosyra-logo-cropped.png";
 
 const Footer = () => {
   const { toast } = useToast();
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
 
         <div className="grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div><Link to="/" className="mb-6 inline-block"><img src={imageSrc(logo)} alt="Nosyra Digital" className="h-11 w-auto" /></Link><p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">An independent digital studio from Lagos, building clear, credible systems for businesses moving forward.</p><div className="flex gap-2">{socialLinks.map(({ icon: Icon, href, label }) => <motion.a key={label} href={href} aria-label={label} whileHover={{ y: -3 }} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background/50 text-muted-foreground transition-colors hover:border-cyan hover:text-cyan"><Icon className="h-4 w-4" /></motion.a>)}</div></div>
+          <div><Link to="/" className="mb-6 inline-block"><img src={imageSrc(logo)} alt="Nosyra Digital" className="h-12 w-auto max-w-[190px] object-contain" /></Link><p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">An independent digital studio from Lagos, building clear, credible systems for businesses moving forward.</p><div className="flex gap-2">{socialLinks.map(({ icon: Icon, href, label }) => <motion.a key={label} href={href} aria-label={label} whileHover={{ y: -3 }} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background/50 text-muted-foreground transition-colors hover:border-cyan hover:text-cyan"><Icon className="h-4 w-4" /></motion.a>)}</div></div>
           {Object.entries(footerLinks).map(([title, links]) => <div key={title}><h4 className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-cyan">{title}</h4><ul className="space-y-3">{links.map((link) => <li key={link.name}><Link to={link.path} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{link.name}</Link></li>)}</ul></div>)}
           <div><h4 className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-cyan">Contact</h4><div className="space-y-4 text-sm text-muted-foreground"><div className="flex gap-3"><MapPin className="h-4 w-4 shrink-0 text-cyan" />Lagos, Nigeria</div><div className="flex gap-3"><Phone className="h-4 w-4 shrink-0 text-cyan" />+234 705 846 6586</div><div className="flex gap-3"><Mail className="h-4 w-4 shrink-0 text-cyan" />info@nosyradigital.com.ng</div></div></div>
         </div>

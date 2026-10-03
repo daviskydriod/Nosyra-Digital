@@ -11,30 +11,30 @@
     --cyan: 188 100% 49%;
     --cyan-glow: 188 100% 60%;
     --teal: 175 75% 43%;
-    --background: 220 65% 8%;
-    --foreground: 210 30% 96%;
-    --card: 218 48% 12%;
-    --card-foreground: 210 30% 96%;
-    --popover: 218 48% 12%;
-    --popover-foreground: 210 30% 96%;
-    --primary: 188 100% 49%;
-    --primary-foreground: 220 65% 8%;
-    --secondary: 218 63% 17%;
-    --secondary-foreground: 210 30% 96%;
-    --muted: 219 40% 16%;
-    --muted-foreground: 215 18% 64%;
-    --accent: 188 100% 49%;
-    --accent-foreground: 220 65% 8%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 188 91% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 46%;
+    --accent: 188 91% 38%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 75% 58%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 28% 24%;
-    --input: 214 28% 24%;
-    --ring: 188 100% 49%;
+    --border: 214 32% 89%;
+    --input: 214 32% 89%;
+    --ring: 188 91% 38%;
     --radius: 0.875rem;
     --gradient-navy-cyan: hsl(var(--navy));
     --gradient-mesh: transparent;
     --shadow-glow: 0 0 60px hsl(var(--cyan) / .14);
-    --shadow-card: 0 20px 60px hsl(220 65% 4% / .35);
+    --shadow-card: 0 20px 60px hsl(222 47% 11% / .08);
     --sidebar-background: 218 48% 12%;
     --sidebar-foreground: 210 30% 96%;
     --sidebar-primary: 188 100% 49%;
@@ -47,7 +47,7 @@
 
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
-  body { @apply bg-background text-foreground antialiased; font-family: 'DM Sans', sans-serif; }
+  body { @apply bg-background text-foreground antialiased; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.03em; }
   ::selection { background: hsl(var(--cyan) / .28); color: hsl(var(--foreground)); }
   :focus-visible { outline: 2px solid hsl(var(--cyan)); outline-offset: 4px; }
