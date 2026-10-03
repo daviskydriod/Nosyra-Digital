@@ -43,13 +43,13 @@ const Header = () => {
     <>
       <motion.div className="fixed top-0 left-0 h-0.5 bg-cyan z-[100] shadow-[0_0_14px_hsl(var(--cyan)/.8)]" style={{ width: `${scrollProgress}%` }} />
       <header className={`fixed left-1/2 top-3 z-[60] w-[calc(100%-1.5rem)] max-w-6xl -translate-x-1/2 rounded-2xl border bg-white shadow-[0_10px_35px_hsl(222_47%_11%/.10)] transition-all duration-300 ${isScrolled ? "border-border" : "border-border/80"}`}>
-        <nav className="flex min-h-[64px] items-center justify-between gap-3 px-3 py-2.5 md:px-4">
-          <Link to="/" className="group flex items-center gap-2.5 pl-1">
+        <nav className="grid min-h-[64px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-3 py-2.5 md:px-4">
+          <Link to="/" className="group flex min-w-0 items-center gap-2.5 justify-self-start pl-1">
             <img src={imageSrc(logo)} alt="Nosyra Digital" className="h-9 w-auto max-w-[148px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:max-w-[170px]" />
             <span className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.24em] text-muted-foreground/70">Digital studio</span>
           </Link>
 
-          <div className="hidden xl:flex items-center gap-1 rounded-full border border-border/60 bg-background/40 p-1">
+          <div className="hidden items-center gap-1 rounded-full border border-border/60 bg-background/40 p-1 xl:flex xl:justify-self-center">
             {navItems.map((item) => {
               const active = location.pathname === item.path || (item.path === "/portfolio" && location.pathname.startsWith("/portfolio/"));
               return (
@@ -60,7 +60,7 @@ const Header = () => {
             })}
           </div>
 
-          <div className="hidden xl:block">
+          <div className="hidden xl:block xl:justify-self-end">
             <Link to="/contact">
               <Button className="group rounded-full bg-cyan px-5 text-xs font-bold text-primary-foreground hover:bg-cyan-glow hover:shadow-[0_0_24px_hsl(var(--cyan)/.35)]">
                 Start a project <ArrowUpRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -68,7 +68,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-foreground/15 bg-white text-foreground shadow-sm transition-colors hover:border-cyan hover:bg-muted xl:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="col-start-3 inline-flex h-11 w-11 shrink-0 items-center justify-self-end rounded-xl border-2 border-foreground/15 bg-white text-foreground shadow-sm transition-colors hover:border-cyan hover:bg-muted xl:hidden" type="button" aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </nav>

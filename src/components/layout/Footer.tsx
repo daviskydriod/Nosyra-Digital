@@ -37,7 +37,7 @@ const Footer = () => {
       <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-10">
         <div className="grid gap-10 border-b border-border/70 py-14 lg:grid-cols-[1.3fr_.9fr] lg:items-end">
           <div><p className="mb-3 font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">Stay close to the work</p><h3 className="max-w-xl text-3xl font-semibold leading-tight md:text-5xl">Useful digital thinking, when it is worth your time.</h3></div>
-          <form onSubmit={handleSubscribe} className="flex w-full gap-2"><Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" required className="h-12 rounded-full border-border bg-background/60 px-5 text-foreground" /><Button type="submit" disabled={loading} className="h-12 rounded-full bg-cyan px-5 text-primary-foreground hover:bg-cyan-glow">{loading ? "..." : <Send className="h-4 w-4" />}</Button></form>
+          <form onSubmit={handleSubscribe} className="flex w-full flex-col gap-2 sm:flex-row"><Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" required className="h-12 rounded-full border-border bg-background/60 px-5 text-foreground" /><Button type="submit" disabled={loading} className="h-12 rounded-full bg-cyan px-5 text-primary-foreground hover:bg-cyan-glow">{loading ? "..." : <Send className="h-4 w-4" />}</Button></form>
         </div>
 
         <div className="grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
