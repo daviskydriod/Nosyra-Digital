@@ -1,3 +1,13 @@
+# Editorial-tech redesign update
+
+## Direction
+- **Design movement:** premium editorial-tech studio: dark navy canvas, cyan signal accents, asymmetrical composition, generous negative space, and bento/pill UI language.
+- **Core principles:** clarity over decoration; strong typographic hierarchy; deliberate rhythm; motion used as signal, not spectacle.
+- **Color philosophy:** Nosyra navy creates authority and depth; cyan is reserved for interaction, proof, and moments of momentum.
+- **Typography system:** Space Grotesk for confident editorial headlines, DM Sans for readable body copy, and DM Mono for metadata and system labels.
+- **Brand essence:** a senior-led digital studio that turns business intent into clear, credible digital systems — precise, direct, international.
+- **Signature details:** pill navigation, cyan editorial rules, signal labels, asymmetrical image/stat compositions, and restrained glow.
+
 
 
 # Nosyra Digital - Premium Multi-Page Website

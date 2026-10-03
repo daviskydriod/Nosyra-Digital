@@ -12,11 +12,11 @@ import maybeenHero from "@/assets/maybeen-hero.png";
 import handygidiHero from "@/assets/handygidi-hero.png";
 import micdebHero from "@/assets/micdeb-hero.png";
 import joyaboHero from "@/assets/joyabo-hero.png";
-import africaTomorrowPreview from "@/assets/portfolio-sites/africa-tomorrow-og.png";
-import easeGracePreview from "@/assets/portfolio-sites/ease-grace.webp";
 import woodCoffiePreview from "@/assets/portfolio-sites/wood-coffie.webp";
-import samanadePreview from "@/assets/portfolio-sites/samanade-crd.webp";
-import mandariConstructionPreview from "@/assets/portfolio-sites/mandari-construction.webp";
+import mandariLive from "@/assets/portfolio-sites/live/mandari-construction-supplies.webp";
+import africaTomorrowLive from "@/assets/portfolio-sites/live/africa-tomorrow.webp";
+import easeGraceLive from "@/assets/portfolio-sites/live/ease-n-grace-autos.webp";
+import samanadeLive from "@/assets/portfolio-sites/live/samanade-crd.webp";
 
 // ── Social Media Assets ──────────────────────────────────────────────────────
 import joyaboSm1 from "@/assets/Joyabo (1).jpeg";
@@ -404,7 +404,7 @@ export const projects = [
     slug: "mandari-construction-supplies",
     title: "Mandari Construction Supplies",
     category: "Construction Supplies",
-    image: mandariConstructionPreview,
+    image: mandariLive,
     link: "https://mandariconstructionsupplies.com/",
     description: "A Ghana-wide construction supplies platform for materials, chemicals, formworks, and rentals.",
     fullDescription:
@@ -424,7 +424,7 @@ export const projects = [
     slug: "africa-tomorrow",
     title: "Africa Tomorrow",
     category: "Education & AI",
-    image: africaTomorrowPreview,
+    image: africaTomorrowLive,
     link: "https://africantomorrow.com/",
     description: "A bold learning platform helping Africa’s next generation build practical AI skills.",
     fullDescription: "Africa Tomorrow needed a clear platform for its AI learning mission. We shaped the experience around the learner journey: understand the opportunity, explore the programme, and take the next step.",
@@ -442,7 +442,7 @@ export const projects = [
     slug: "ease-n-grace-autos",
     title: "Ease n Grace Autos",
     category: "Automotive",
-    image: easeGracePreview,
+    image: easeGraceLive,
     link: "https://easengrace.com/",
     description: "A polished Ghanaian mobility platform for reliable car hire and airport transfers.",
     fullDescription: "Ease n Grace Autos needed a simple digital route from travel intent to booking. We positioned the service around reliability, clear vehicle choices, and easy contact.",
@@ -478,7 +478,7 @@ export const projects = [
     slug: "samanade-crd",
     title: "Samanade C.R.D Enterprise",
     category: "Construction & Interiors",
-    image: samanadePreview,
+    image: samanadeLive,
     link: "https://www.samanadecrd.com/",
     description: "A complete construction and fabrication showcase for a growing Ghanaian enterprise.",
     fullDescription: "Samanade C.R.D brings construction, drafting, fabrication, interiors, and rentals together. The website turns that broad capability into a clear route through services, work, and contact.",
