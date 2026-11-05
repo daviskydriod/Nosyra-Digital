@@ -56,8 +56,6 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32 }}
           className="flex flex-wrap items-center gap-3">
-          <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">📅 {project.year}</span>
-          <span className="px-4 py-1.5 bg-muted/60 border border-border/50 rounded-full text-sm text-muted-foreground">⏱ {(project as any).duration}</span>
           {project.tags.map((tag) => (
             <span key={tag} className="px-4 py-1.5 bg-cyan/10 border border-cyan/20 rounded-full text-sm text-cyan">{tag}</span>
           ))}
@@ -100,21 +98,7 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
               </div>
             ))}
             <div className="p-5 rounded-2xl border border-border/50 bg-card">
-              <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">Timeline</span>
-              <div className="flex flex-col gap-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Year</span>
-                  <span className="text-foreground font-medium">{project.year}</span>
-                </div>
-                <div className="w-full h-px bg-border/40" />
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Duration</span>
-                  <span className="text-foreground font-medium">{(project as any).duration}</span>
-                </div>
-              </div>
-            </div>
-            <div className="p-5 rounded-2xl border border-border/50 bg-card">
-              <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">Tech & Stack</span>
+              <span className="text-xs font-mono text-cyan uppercase tracking-[0.18em] mb-3 block">Services</span>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="px-3 py-1 text-xs bg-cyan/10 border border-cyan/20 text-cyan rounded-full">{tag}</span>
@@ -212,7 +196,6 @@ const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => 
   const gallery = rawGallery.slice(0, 3);
 
   const platforms: string[] = (project as any).platforms ?? [];
-  const postsDelivered: string = (project as any).postsDelivered ?? "";
 
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -318,24 +301,6 @@ const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => 
                   <div className="text-white font-poppins font-black text-xl">{gallery.length}</div>
                   <div className="text-white/50 text-[10px] uppercase tracking-wider mt-0.5">Designs</div>
                 </div>
-                {postsDelivered && (
-                  <div
-                    className="px-4 py-2 rounded-xl backdrop-blur-md border text-center"
-                    style={{
-                      background: "hsl(var(--cyan)/0.2)",
-                      borderColor: "hsl(var(--cyan)/0.4)",
-                    }}
-                  >
-                    <div className="font-poppins font-black text-xl" style={{ color: "hsl(var(--cyan))" }}>
-                      {postsDelivered.replace(/[^0-9+]/g, "") || postsDelivered}
-                    </div>
-                    <div className="text-white/60 text-[10px] uppercase tracking-wider mt-0.5">Posts</div>
-                  </div>
-                )}
-                <div className="px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-center">
-                  <div className="text-white font-poppins font-black text-xl">{project.year}</div>
-                  <div className="text-white/50 text-[10px] uppercase tracking-wider mt-0.5">Year</div>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -432,7 +397,6 @@ const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => 
               </div>
             </motion.div>
 
-            {/* Deliverables */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -440,28 +404,10 @@ const SocialProjectDetail = ({ project }: { project: (typeof projects)[0] }) => 
               transition={{ delay: 0.15 }}
               className="p-6 rounded-2xl border border-border/50 bg-card"
             >
-              <span
-                className="text-[10px] font-mono uppercase tracking-[0.2em] block mb-3"
-                style={{ color: "hsl(var(--cyan))" }}
-              >
-                Deliverables
+              <span className="text-[10px] font-mono uppercase tracking-[0.2em] block mb-3" style={{ color: "hsl(var(--cyan))" }}>
+                Content type
               </span>
-              <div className="flex flex-col gap-2 text-sm">
-                {postsDelivered && (
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Posts</span>
-                    <span className="text-foreground font-semibold">{postsDelivered}</span>
-                  </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Year</span>
-                  <span className="text-foreground font-semibold">{project.year}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Engagement</span>
-                  <span className="text-foreground font-semibold">{(project as any).duration}</span>
-                </div>
-              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">Supporting social media content prepared for the selected channels.</p>
             </motion.div>
 
             {/* Services */}
@@ -646,7 +592,7 @@ const SharedBody = ({
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SHARED: Prev / Next + CTA
+// SHARED: Prev / Next project + CTA
 // ─────────────────────────────────────────────────────────────────────────────
 const SharedNav = ({
   prevProject,
@@ -669,7 +615,7 @@ const SharedNav = ({
                   <ArrowLeft className="w-5 h-5" />
                 </motion.span>
                 <div>
-                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest block mb-1">Previous</span>
+                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest block mb-1">Previous project</span>
                   <span className="font-poppins font-bold text-foreground group-hover:text-cyan transition-colors">{prevProject.title}</span>
                 </div>
               </Link>
@@ -681,7 +627,7 @@ const SharedNav = ({
               <Link to={`/portfolio/${nextProject.slug}`}
                 className="group flex-1 flex items-center justify-end gap-4 p-6 rounded-2xl sm:rounded-l-none border border-border/50 hover:border-cyan/30 hover:bg-muted/30 transition-all duration-300 text-right">
                 <div>
-                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest block mb-1">Next</span>
+                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest block mb-1">Next project</span>
                   <span className="font-poppins font-bold text-foreground group-hover:text-cyan transition-colors">{nextProject.title}</span>
                 </div>
                 <motion.span className="text-muted-foreground group-hover:text-cyan transition-colors" whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
@@ -710,14 +656,13 @@ const SharedNav = ({
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-6">
-              Ready to Build Something{" "}
-              <span className="text-gradient">Like This</span>?
+              Have a project that needs clarity?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Let's bring your vision to life with the same care and precision.
+              Let's discuss the business problem, the right scope, and the next practical step.
             </p>
             <GradientButton href="/contact" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-              Start Your Project
+              Discuss Your Project
             </GradientButton>
           </AnimatedSection>
         </div>
@@ -730,7 +675,7 @@ const SharedNav = ({
 // ROOT
 // ─────────────────────────────────────────────────────────────────────────────
 const ProjectDetail = () => {
-  // The app is rendered through app/[[...slug]]/page.tsx, so Next's dynamic
+  // The app is rendered through app/[[...slug]]/page.tsx, so Next project's dynamic
   // params are not passed into this client-side router. Read the final URL
   // segment directly so /portfolio/:slug works on refresh and deep links.
   const pathname = usePathname() || "";

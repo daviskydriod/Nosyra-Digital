@@ -14,7 +14,8 @@ import {
   Zap,
   Target,
   MessageCircle,
-  ArrowRight
+  ArrowRight,
+  ExternalLink
 } from "lucide-react";
 
 // WhatsApp SVG icon component
@@ -65,7 +66,7 @@ const contactMethods = [
   },
   {
     title: "Visit Us",
-    description: "Based in Lagos — working with clients across Nigeria, Ghana, the UK, and Canada",
+    description: "Based in Lagos — working with businesses in Nigeria and Ghana",
     action: "Lagos, Nigeria",
     icon: MapPin,
     color: "from-cyan/15 to-navy/10"
@@ -186,6 +187,10 @@ const Contact = () => {
                 ))}
 
                 {/* Business Hours */}
+                <a href="https://share.google/pXii4O9yL0WrVrZ9m" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-4 rounded-2xl border border-cyan/30 bg-cyan/5 p-4 text-sm font-semibold text-foreground transition hover:border-cyan hover:bg-cyan/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2">
+                  <span><span className="block text-xs font-normal uppercase tracking-[0.18em] text-cyan">Business profile</span>View Our Google Business Profile</span>
+                  <ExternalLink className="h-4 w-4 shrink-0 text-cyan" />
+                </a>
                 <GlassCard className="p-4 sm:p-6">
                   <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan/10 flex items-center justify-center shrink-0">

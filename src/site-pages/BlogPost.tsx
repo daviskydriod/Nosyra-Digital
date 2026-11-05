@@ -295,7 +295,7 @@ const BlogPost: React.FC = () => {
                       {post.author_name || 'Nosyra Digital'}
                     </h3>
                     <p className="text-muted-foreground">
-                      Founder of Nosyra Digital, building websites and digital systems for ambitious businesses worldwide.
+                      Founder of Nosyra Digital, helping businesses in Nigeria and Ghana build clearer websites and practical digital experiences.
                     </p>
                   </div>
                 </div>

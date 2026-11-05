@@ -36,7 +36,7 @@ const benefits = [
   { icon: MessageCircle, text: "Contact form built in" },
   { icon: MessageCircle, text: "WhatsApp integration" },
   { icon: Search, text: "SEO-friendly from day one" },
-  { icon: Clock, text: "Delivered in 14 days" },
+  { icon: Clock, text: "Clear scope and practical delivery" },
 ];
 
 const packages = [
@@ -73,8 +73,8 @@ const packages = [
     description: "A clear storefront built to help people discover and buy your products.",
     features: [
       "Unlimited product pages",
-      "Secure payment integration",
-      "Inventory management",
+      "Product catalogue setup",
+      "Enquiry or checkout flow as scoped",
       "SEO optimization",
       "3 months free support",
     ],
@@ -180,9 +180,7 @@ const WebDesignLanding = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-2xl mx-auto"
           >
-            Custom, mobile-friendly websites designed to build trust and
-            generate more leads — built end-to-end by a founder who's shipped
-            50+ live sites across four countries.
+            Custom, mobile-friendly websites designed to build trust and make the next step clearer — built directly with the founder for businesses in Nigeria and Ghana.
           </motion.p>
 
           <motion.div

@@ -30,7 +30,7 @@ const services = [
     icon: ShoppingCart,
     title: "Commerce that feels simple",
     description: "Thoughtful storefronts that make products easy to discover, trust, and buy.",
-    features: ["Payment Integration", "Inventory Management", "Order Tracking", "Analytics Dashboard"],
+    features: ["Product catalogues", "Product discovery", "Enquiry flows", "Admin tools where needed"],
     color: "from-emerald-400 to-cyan",
   },
   {
@@ -44,7 +44,7 @@ const services = [
     icon: Megaphone,
     title: "Growth & optimisation",
     description: "SEO, analytics, and focused improvements tied to the goals that matter.",
-    features: ["SEO Strategy", "Social Media Ads", "Email Marketing", "Content Strategy"],
+    features: ["SEO foundations", "Content structure", "Analytics setup", "Focused improvements"],
     color: "from-orange-400 to-cyan",
   },
   {
@@ -58,7 +58,7 @@ const services = [
     icon: Share2,
     title: "Social content systems",
     description: "Useful content kits that make regular publishing easier and more recognisable.",
-    features: ["Post Templates", "Story Designs", "Profile Graphics", "Content Calendar"],
+    features: ["Social graphics", "Educational content", "Campaign creatives", "Content kits"],
     color: "from-indigo-500 to-cyan",
   },
 ];
@@ -150,7 +150,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            From first brief to launch, one clear process and one accountable team.
+            From first brief to launch, direct founder involvement and a clear process keep the work focused.
           </motion.p>
         </div>
       </section>

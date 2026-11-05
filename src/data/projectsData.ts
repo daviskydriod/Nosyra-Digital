@@ -51,7 +51,7 @@ import thmSm1 from "@/assets/Thm Wellness Co (1).png";
 import thmSm2 from "@/assets/Thm Wellness Co (2).png";
 import thmSm3 from "@/assets/Thm Wellness Co (3).png";
 
-export const projects = [
+const ALL_PROJECTS = [
   // ── WEB DESIGN PROJECTS ────────────────────────────────────────────────────
   {
     id: 1,
@@ -718,4 +718,45 @@ export const projects = [
   },
 ];
 
-export type Project = (typeof projects)[0];
+const REMOVED_PUBLIC_PROJECTS = new Set(["viktrotech", "handygidi-training-centre", "honters-cruise", "gt-green-petrochemical"]);
+
+type SafeCopy = {
+  category: string;
+  description: string;
+  fullDescription: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  tags: string[];
+  services: string[];
+};
+
+const safeCopyFor = (project: (typeof ALL_PROJECTS)[number]): SafeCopy => {
+  if (project.type === "social") {
+    return {
+      category: "Additional Creative Service",
+      description: `A supporting social media content kit for ${project.title}.`,
+      fullDescription: `We created a supporting social media content kit for ${project.title} to help the business communicate consistently across its selected channels.`,
+      challenge: "The business needed supporting visual content for regular communication.",
+      solution: "We developed a focused set of social media designs and content assets for the agreed communication needs.",
+      results: ["A more consistent visual presence", "Supporting content for selected channels", "A clearer way to communicate business updates"],
+      tags: ["Social Media", "Content Design"],
+      services: ["Social Media Design", "Content Kit"],
+    };
+  }
+  return {
+    category: project.category,
+    description: `A professional digital presence for ${project.title}, focused on clear business, product, or service presentation.`,
+    fullDescription: `We developed a professional website for ${project.title} to present the business, products, or services and provide clear customer contact pathways. This public summary is limited to the functionality verified for the current portfolio update.`,
+    challenge: "The business needed a clearer and more structured digital presence for its offering and customer enquiries.",
+    solution: "We organised the website around clear information, relevant project content, responsive presentation, and direct contact actions.",
+    results: ["A clearer digital presentation", "Structured business, product, or service information", "Direct customer contact options"],
+    tags: [project.category, "Business Website"],
+    services: ["Website Development", "Content Structure", "Contact Flow"],
+  };
+};
+
+export const projects = ALL_PROJECTS
+  .filter((project) => !REMOVED_PUBLIC_PROJECTS.has(project.slug))
+  .map((project) => ({ ...project, ...safeCopyFor(project) }));
+export type Project = (typeof projects)[number];

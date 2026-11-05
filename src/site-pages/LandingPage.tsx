@@ -415,7 +415,7 @@ const LandingPage = () => {
                 <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            50+ Nigerian Businesses Trust Nosyra Digital
+            Founder-led digital work for businesses in Nigeria and Ghana
           </motion.div>
 
           <motion.p

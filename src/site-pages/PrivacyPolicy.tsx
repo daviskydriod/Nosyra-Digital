@@ -12,7 +12,7 @@ const sections = [
     content: [
       {
         subtitle: "Information You Provide",
-        text: "When you contact us, request a quote, or subscribe to our newsletter, we collect information you voluntarily provide — such as your name, email address, phone number, business name, and any project details you share.",
+        text: "When you contact us, request a quote,, we collect information you voluntarily provide — such as your name, email address, phone number, business name, and any project details you share.",
       },
       {
         subtitle: "Information We Collect Automatically",
@@ -31,7 +31,7 @@ const sections = [
       },
       {
         subtitle: "Communications",
-        text: "With your consent, we may send you newsletters, promotional offers, and updates about our services. You can unsubscribe at any time via the link in any email we send.",
+        text: "We use information you provide to respond to enquiries, discuss projects, deliver requested services, and manage our business relationship with you.",
       },
       {
         subtitle: "Improvement & Analytics",
@@ -103,7 +103,7 @@ const sections = [
       },
       {
         subtitle: "Opt-Out",
-        text: "You may opt out of marketing communications at any time by clicking the unsubscribe link in our emails or by contacting us directly at info@nosyradigital.com.ng.",
+        text: "You may contact us at info@nosyradigital.com.ng to ask questions about how your information is used or to request a correction.",
       },
     ],
   },

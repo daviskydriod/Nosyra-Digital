@@ -22,7 +22,7 @@ import nosyraLogo from "@/assets/nosyra-logo.png";
 
 const timeline = [
   {
-    year: "2025",
+    year: "Nov 2025",
     title: "The studio starts with the problem",
     description: "Nosyra Digital began with a simple belief: good digital work should make a business easier to understand and easier to choose.",
   },
@@ -67,7 +67,7 @@ const benefits = [
   "A modern system chosen for the outcome, not the trend",
   "A clear scope and transparent pricing",
   "Support that stays available after launch",
-  "A growing body of work across markets and sectors",
+  "A practical body of work across different business sectors",
 ];
 
 const About = () => {
@@ -104,7 +104,7 @@ const About = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8 leading-relaxed"
               >
-                Founder-led studio building websites and digital systems for ambitious businesses worldwide. You work directly with the person building your project.
+                Nosyra Digital is a founder-led digital agency founded in November 2025. We help businesses in Nigeria and Ghana build stronger digital experiences through website development, branding, and practical digital solutions.
               </motion.p>
 
               <motion.div
@@ -165,7 +165,7 @@ const About = () => {
           <SectionHeading
             badge="The studio"
             title="Independent by design."
-            subtitle="A founder-led studio building clear digital systems from Lagos for teams working anywhere."
+            subtitle="A founder-led digital agency from Lagos, working directly with businesses in Nigeria and Ghana."
           />
 
           <div className="mt-16 relative">
@@ -243,7 +243,7 @@ const About = () => {
                 Why work with <span className="text-cyan">Nosyra Digital</span>?
               </h2>
               <p className="text-muted-foreground text-lg mb-8">
-                Every project is handled end-to-end by an experienced builder, not passed through layers of account management.
+                Every project receives direct strategic oversight from the founder, with clear communication from the first brief through delivery.
               </p>
 
 
