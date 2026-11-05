@@ -3,7 +3,7 @@ import { Compass, MapPin, UserRound } from "lucide-react";
 
 const stats = [
   { icon: UserRound, value: "Founder-led", label: "Direct strategic oversight" },
-  { icon: MapPin, value: "Nigeria + Ghana", label: "Current client markets" },
+  { icon: MapPin, value: "Nigeria + Ghana", label: "Established client markets" },
   { icon: Compass, value: "Web-first", label: "Practical digital experiences" },
 ];
 

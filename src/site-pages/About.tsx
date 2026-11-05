@@ -104,7 +104,7 @@ const About = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8 leading-relaxed"
               >
-                Nosyra Digital is a founder-led digital agency founded in November 2025. We help businesses in Nigeria and Ghana build stronger digital experiences through website development, branding, and practical digital solutions.
+                Nosyra Digital is an independent, founder-led digital studio established in November 2025 and headquartered in Lagos, Nigeria. We work with businesses across Nigeria and Ghana, and are available to collaborate remotely with ambitious teams in the UK, Canada, and other international markets. We combine strategy, design, and development to create websites, e-commerce experiences, product catalogues, and tailored digital solutions.
               </motion.p>
 
               <motion.div
@@ -165,7 +165,7 @@ const About = () => {
           <SectionHeading
             badge="The studio"
             title="Independent by design."
-            subtitle="A founder-led digital agency from Lagos, working directly with businesses in Nigeria and Ghana."
+            subtitle="A founder-led digital studio headquartered in Lagos, with established markets in Nigeria and Ghana and remote availability for international businesses."
           />
 
           <div className="mt-16 relative">

@@ -65,8 +65,8 @@ const contactMethods = [
     color: "from-navy/20 to-navy/5"
   },
   {
-    title: "Visit Us",
-    description: "Based in Lagos — working with businesses in Nigeria and Ghana",
+    title: "Headquarters",
+    description: "Lagos, Nigeria — working remotely with businesses across established and international markets",
     action: "Lagos, Nigeria",
     icon: MapPin,
     color: "from-cyan/15 to-navy/10"
@@ -121,7 +121,7 @@ const Contact = () => {
             transition={{ delay: 0.2 }} 
             className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4"
           >
-            Tell us what is changing in the business. We’ll help define the digital work that should follow.
+            Whether your business is in Nigeria, Ghana, the UK, Canada, or elsewhere, tell us what is changing. We are available to discuss your next digital project remotely.
           </motion.p>
         </div>
       </section>

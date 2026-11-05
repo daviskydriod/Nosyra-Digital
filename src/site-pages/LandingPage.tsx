@@ -300,7 +300,7 @@ const faqs = [
   },
   {
     q: "Do you work with businesses outside Lagos?",
-    a: "Yes. We work with businesses across Nigeria — Lagos, Abuja, Port Harcourt, and beyond — as well as diaspora clients in Canada, UK, and USA.",
+    a: "Yes. Our headquarters are in Lagos, with established client markets in Nigeria and Ghana. We are also available to work remotely with businesses in the UK, Canada, and other international markets.",
   },
 ];
 
@@ -415,7 +415,7 @@ const LandingPage = () => {
                 <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            Founder-led digital work for businesses in Nigeria and Ghana
+            Founder-led digital work from Lagos for businesses across local and international markets
           </motion.div>
 
           <motion.p

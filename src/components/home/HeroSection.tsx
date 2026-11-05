@@ -16,14 +16,14 @@ const HeroSection = () => (
       </div>
       <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
         <div>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6 max-w-lg text-lg leading-relaxed text-muted-foreground">Nosyra Digital is a founder-led digital agency helping businesses in Nigeria and Ghana build clearer websites, catalogues, and practical digital experiences.</motion.p>
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6 max-w-lg text-lg leading-relaxed text-muted-foreground">Nosyra Digital is an independent digital studio headquartered in Lagos, Nigeria, helping ambitious businesses across local and international markets build clear websites, digital experiences, and tailored solutions.</motion.p>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .1 }} className="max-w-4xl text-[clamp(3.5rem,8vw,7.8rem)] font-semibold leading-[.9] tracking-[-.08em] text-foreground">Make the next <span className="text-cyan">move obvious.</span></motion.h1>
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="mt-10 flex flex-wrap gap-3">
             <GradientButton href="/contact" size="lg" icon={<ArrowRight className="h-5 w-5" />}>Start a project</GradientButton>
             <Link to="/portfolio" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition hover:border-cyan hover:shadow-md">See selected work <ArrowUpRight className="h-4 w-4 text-cyan" /></Link>
           </motion.div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-border pt-5 text-sm">
-            {[['Founder-led', 'direct oversight'], ['Nigeria + Ghana', 'current markets'], ['Web-first', 'practical delivery']].map(([value, label]) => <div key={label}><p className="text-xl font-semibold tracking-tight text-foreground">{value}</p><p className="mt-1 text-muted-foreground">{label}</p></div>)}
+            {[['Founder-led', 'direct oversight'], ['Nigeria + Ghana', 'established markets'], ['Web-first', 'practical delivery']].map(([value, label]) => <div key={label}><p className="text-xl font-semibold tracking-tight text-foreground">{value}</p><p className="mt-1 text-muted-foreground">{label}</p></div>)}
           </div>
         </div>
         <motion.div initial={{ opacity: 0, scale: .96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: .2, duration: .7 }} className="relative mx-auto w-full max-w-[30rem] lg:max-w-none">

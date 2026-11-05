@@ -31,7 +31,7 @@ const faqs: FaqEntry[] = [
   },
   {
     q: "Do you work with clients outside Nigeria?",
-    a: "Yes. We work with clients across Nigeria, Ghana, the UK, and Canada. Distance and time zones are never a blocker.",
+    a: "Yes. Our headquarters are in Lagos, and Nigeria and Ghana are established client markets. We are also available to work remotely with businesses in the UK, Canada, and other international markets.",
   },
   {
     q: "What currency do I pay in?",

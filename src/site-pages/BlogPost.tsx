@@ -295,7 +295,7 @@ const BlogPost: React.FC = () => {
                       {post.author_name || 'Nosyra Digital'}
                     </h3>
                     <p className="text-muted-foreground">
-                      Founder of Nosyra Digital, helping businesses in Nigeria and Ghana build clearer websites and practical digital experiences.
+                      Founder of Nosyra Digital, an independent digital studio headquartered in Lagos and available to work with businesses across local and international markets.
                     </p>
                   </div>
                 </div>

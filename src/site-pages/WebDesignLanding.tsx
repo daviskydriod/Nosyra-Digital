@@ -180,7 +180,7 @@ const WebDesignLanding = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-2xl mx-auto"
           >
-            Custom, mobile-friendly websites designed to build trust and make the next step clearer — built directly with the founder for businesses in Nigeria and Ghana.
+            Custom, mobile-friendly websites designed to build trust and make the next step clearer. Work directly with the founder from Lagos, with remote collaboration available for businesses in Nigeria, Ghana, the UK, Canada, and other markets.
           </motion.p>
 
           <motion.div
