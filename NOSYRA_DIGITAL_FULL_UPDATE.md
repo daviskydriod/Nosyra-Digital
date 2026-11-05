@@ -1,11 +1,52 @@
-# Nosyra Digital Website — Full Update
+# Nosyra Digital Website — Full Update History
 
-**Update date:** 3 October 2026  
-**Repository:** [daviskydriod/Nosyra-Digital](https://github.com/daviskydriod/Nosyra-Digital)  
-**Latest commit:** [`9a80f3d`](https://github.com/daviskydriod/Nosyra-Digital/commit/9a80f3d)  
-**Latest commit message:** Merge pull request #9 from `nosyradigital8-gif/feat/white-responsive-redesign`
+**Latest update date:** 5 November 2026
+**Repository:** [daviskydriod/Nosyra-Digital](https://github.com/daviskydriod/Nosyra-Digital)
+**Update branch:** `feat/nosyra-international-portfolio-case-studies`
+**Base commit:** [`cb411ce`](https://github.com/daviskydriod/Nosyra-Digital/commit/cb411ce7572e17fb99523f9c5151e9fb80ec2bc6)
 
-## Overview
+## Latest update: International positioning and portfolio case studies
+
+The latest follow-up clarifies Nosyra Digital’s international availability and replaces generic project summaries with specific, conservative case-study copy for all 15 public website projects.
+
+### What changed
+
+- Clarified the distinction between the Lagos, Nigeria headquarters, established client markets in Nigeria and Ghana, and remote availability for the UK, Canada, and other international markets.
+- Updated homepage, About, Contact, FAQ, service-landing, footer, blog-author, and site metadata copy without claiming overseas offices or unverified international client results.
+- Added project-specific business overviews, challenges, solutions, delivered features, and practical-value summaries for all 15 public web projects.
+- Kept existing project slugs and client-site URLs, and retained the portfolio’s existing filter/navigation architecture.
+- Added unique project-page titles, descriptions, canonical URLs, and social-preview metadata from the centralized project data.
+- Renamed the case-study value section to avoid presenting intended practical value as measured performance results.
+
+### Updated project pages
+
+- [Eko Connect Concierge](https://www.nosyradigital.com.ng/portfolio/eko-connect-concierge)
+- [Liana Flowers](https://www.nosyradigital.com.ng/portfolio/liana-flowers)
+- [Zunanya’s Luxury](https://www.nosyradigital.com.ng/portfolio/zunanyas-luxury)
+- [THM Wellness Company](https://www.nosyradigital.com.ng/portfolio/thm-wellness-company)
+- [Swanilita Studio](https://www.nosyradigital.com.ng/portfolio/swanilita-studio)
+- [Mayben Engineering](https://www.nosyradigital.com.ng/portfolio/mayben-engineering)
+- [MicDeb Global Motors](https://www.nosyradigital.com.ng/portfolio/micdeb-global-motors)
+- [Joyabo Edu Consult](https://www.nosyradigital.com.ng/portfolio/joyabo-edu-consult)
+- [Mandarin Construction Supplies](https://www.nosyradigital.com.ng/portfolio/mandari-construction-supplies)
+- [Africa Tomorrow](https://www.nosyradigital.com.ng/portfolio/africa-tomorrow)
+- [Ease n Grace Autos](https://www.nosyradigital.com.ng/portfolio/ease-n-grace-autos)
+- [Wood Coffie Furniture Works](https://www.nosyradigital.com.ng/portfolio/wood-coffie-furniture-works)
+- [Samanade CRD Enterprise](https://www.nosyradigital.com.ng/portfolio/samanade-crd)
+- [CAT Global](https://www.nosyradigital.com.ng/portfolio/cat-global)
+- [Uruhu Solutions](https://www.nosyradigital.com.ng/portfolio/uruhu-solutions)
+
+### Quality checks
+
+- `npm run build` — passed.
+- `npm test` — passed (1 existing test).
+- `npm run lint` — 0 errors; 17 warnings remain, mostly existing Fast Refresh and hook-dependency warnings.
+- All 15 case-study routes returned HTTP 200 with their project-specific title, description, and canonical URL.
+- All 15 client website links returned HTTP 200 during the link check.
+- A representative case-study page was visually reviewed at 375×812, 768×1024, and 1440×1000; no obvious clipping was seen. This is a responsive smoke check, not a full manual review of every page.
+- `npm ci` reported 24 dependency advisories in the existing dependency tree; dependency manifests were not changed in this update.
+
+## Earlier design and usability update (October 2026)
 
 The latest Nosyra Digital website update delivers a cleaner, more modern, and more consistent digital experience across the homepage, public pages, navigation, services, portfolio, and blog sections.
 
@@ -89,9 +130,9 @@ This change creates a cleaner content-focused experience by emphasizing:
 
 Removing view counts also reduces visual clutter and keeps the blog focused on useful insights rather than popularity metrics.
 
-## Recent GitHub commits included in this update
+## GitHub commits from the earlier October design update
 
-The current release is the result of a series of related design and usability improvements completed on 3 October 2026.
+The earlier visual release was the result of a series of related design and usability improvements completed on 3 October 2026.
 
 ### `9a80f3d` — Merge pull request #9
 
@@ -197,7 +238,7 @@ The project is built with:
 
 The project uses a modern component-based structure, with reusable UI components and separate page-level modules for the main public website sections.
 
-## User and business impact
+## User and business impact of the October visual update
 
 This update improves the website in several important ways:
 
@@ -209,7 +250,7 @@ This update improves the website in several important ways:
 - Blog cards are cleaner and less distracted by secondary metrics.
 - The site presents Nosyra Digital as a more polished and established digital partner.
 
-## Suggested public announcement
+## Earlier public announcement (October visual update)
 
 > We’ve updated the Nosyra Digital website with a cleaner visual identity, improved responsive navigation, and a more polished presentation of our services and portfolio.
 >
@@ -219,7 +260,7 @@ This update improves the website in several important ways:
 
 ## Short summary
 
-Nosyra Digital’s latest website update focuses on visual consistency, responsive usability, and clearer content presentation. The homepage and public pages now use a cleaner modern design, mobile navigation has been improved, the portfolio has been refreshed, and blog cards have been simplified by removing view counts.
+The latest follow-up clarifies Nosyra Digital’s Lagos headquarters, established Nigeria and Ghana client markets, and international remote availability, while replacing generic portfolio copy with accurate case studies for all 15 public web projects and adding unique SEO metadata. Existing project URLs are preserved.
 
 ## Repository reference
 

@@ -82,7 +82,7 @@ const WebProjectDetail = ({ project }: { project: (typeof projects)[0] }) => (
                 <span className="text-xs text-muted-foreground/50 font-mono truncate">{project.link}</span>
               </div>
             </div>
-            <img src={imageSrc(project.image)} alt={project.title} className="w-full object-cover max-h-[480px]" />
+            <img src={imageSrc(project.image)} alt={`${project.title} website preview`} className="w-full object-cover max-h-[480px]" />
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }}
@@ -497,7 +497,7 @@ const SharedBody = ({
                   className={`text-xs font-mono uppercase tracking-[0.2em] mb-4 block ${accent ?? ""}`}
                   style={accentStyle}
                 >
-                  Services Delivered
+                  What We Delivered
                 </span>
                 <ul className="space-y-3">
                   {project.services.map((service, i) => (
@@ -568,9 +568,9 @@ const SharedBody = ({
               className={`text-xs font-mono uppercase tracking-[0.2em] mb-4 block text-center ${accent ?? ""}`}
               style={accentStyle}
             >
-              Results
+              {isSocial ? "Work Highlights" : "Practical Value"}
             </span>
-            <h2 className="text-3xl lg:text-4xl font-poppins font-bold text-foreground mb-12 text-center leading-tight">What We Achieved</h2>
+            <h2 className="text-3xl lg:text-4xl font-poppins font-bold text-foreground mb-12 text-center leading-tight">{isSocial ? "What This Work Supports" : "What the Website Provides"}</h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.results.map((result, i) => (
